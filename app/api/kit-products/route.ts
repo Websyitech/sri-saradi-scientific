@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
 
     if (slug) {
       const kitProduct = await prisma.kitProduct.findFirst({
-        where: { slug: slug.toLowerCase(), isActive: true },
+        where: { id: slug, isActive: true },
       });
       console.log("Fetched kit product with slug:", slug, kitProduct);
       return NextResponse.json(kitProduct);
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     
     // Debug: fetch all without filter
     const allProducts = await prisma.kitProduct.findMany();
-    console.log("ALL kit products in DB (unfiltered):", allProducts.length, allProducts.map(p => ({ id: p.id, title: p.title, slug: p.slug, isActive: p.isActive })));
+    console.log("ALL kit products in DB (unfiltered):", allProducts.length, allProducts.map(p => ({ id: p.id, title: p.title, isActive: p.isActive })));
     
     return NextResponse.json(kitProducts);
   } catch (error) {

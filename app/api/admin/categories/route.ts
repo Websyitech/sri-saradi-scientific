@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
   if (auth instanceof NextResponse) return auth;
 
   try {
-    const { name, slug, description, image, icon, color, sortOrder, isActive, isFeatured, parentId } = await request.json();
+    const { name, slug, description, image, icon, color, sortOrder, isActive, parentId } = await request.json();
     const category = await prisma.category.create({
       data: {
         name,
@@ -62,8 +62,7 @@ export async function POST(request: NextRequest) {
         color: color || "#2D2B7F",
         sortOrder: sortOrder || 0,
         isActive: isActive !== undefined ? isActive : true,
-        isFeatured: isFeatured !== undefined ? isFeatured : false,
-        parentId: parentId || null,
+                parentId: parentId || null,
       },
     });
     return NextResponse.json(category, { status: 201 });
@@ -82,8 +81,7 @@ export async function PUT(request: NextRequest) {
     // Clean up parentId
     if (data.parentId === "") data.parentId = null;
     // Ensure isFeatured is properly set
-    if (data.isFeatured === undefined) data.isFeatured = false;
-    const category = await prisma.category.update({ where: { id }, data });
+        const category = await prisma.category.update({ where: { id }, data });
     return NextResponse.json(category);
   } catch (error) {
     console.error(error);
