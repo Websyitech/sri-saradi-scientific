@@ -68,21 +68,13 @@ export async function POST(request: NextRequest) {
     let createdCount = 0;
     for (const product of kitProducts) {
       try {
-        // Delete if exists
-        await prisma.kitProduct.deleteMany({
-          where: { slug: product.slug },
-        });
-
         const data: any = {
           title: product.title,
-          slug: product.slug,
-          heroTitle: product.heroTitle,
           description: product.description,
           image: product.image,
           href: product.href,
           sortOrder: product.sortOrder,
           isActive: product.isActive,
-          associatedProducts: product.associatedProducts
         };
 
         await prisma.kitProduct.create({ data });

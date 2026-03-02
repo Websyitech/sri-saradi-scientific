@@ -49,7 +49,7 @@ async function main() {
 
     for (const product of kitProducts) {
       const existing = await prisma.kitProduct.findFirst({
-        where: { slug: product.slug },
+        where: { title: product.title },
       });
 
       if (existing) {
@@ -57,8 +57,9 @@ async function main() {
         continue;
       }
 
+      const { slug: _, ...dataWithoutSlug } = product as any;
       const created = await prisma.kitProduct.create({
-        data: product,
+        data: dataWithoutSlug,
       });
 
       console.log(`✓ Created kit product: ${created.title}`);

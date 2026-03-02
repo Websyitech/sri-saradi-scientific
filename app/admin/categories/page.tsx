@@ -30,12 +30,11 @@ interface Category {
   parentId?: string | null;
   sortOrder: number;
   isActive: boolean;
-  isFeatured: boolean;
   _count?: { products: number; children: number };
   children?: Category[];
 }
 
-const emptyForm = { name: "", slug: "", description: "", image: "", icon: "", color: "#2D2B7F", sortOrder: 0, isActive: true, isFeatured: false, parentId: "" };
+const emptyForm = { name: "", slug: "", description: "", image: "", icon: "", color: "#2D2B7F", sortOrder: 0, isActive: true, parentId: "" };
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -97,7 +96,7 @@ export default function AdminCategories() {
       name: item.name, slug: item.slug, description: item.description || "",
       image: item.image || "", icon: item.icon || "",
       color: item.color || "#2D2B7F", sortOrder: item.sortOrder,
-      isActive: item.isActive, isFeatured: item.isFeatured, parentId: item.parentId || "",
+      isActive: item.isActive, parentId: item.parentId || "",
     });
     setModalOpen(true);
   };
@@ -144,7 +143,6 @@ export default function AdminCategories() {
       color: form.color || "#2D2B7F",
       sortOrder: form.sortOrder,
       isActive: form.isActive,
-      isFeatured: form.isFeatured,
       parentId: form.parentId || null,
     };
     await fetch("/api/admin/categories", {
@@ -398,11 +396,6 @@ export default function AdminCategories() {
                 <option value="false">Inactive</option>
               </select>
             </div>
-          </div>
-
-          <div style={{ marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
-            <input type="checkbox" id="isFeatured" checked={form.isFeatured} onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })} style={{ width: "16px", height: "16px", cursor: "pointer" }} />
-            <label htmlFor="isFeatured" style={{ fontSize: "13px", fontWeight: 500, color: "#555", cursor: "pointer", margin: 0 }}>Featured (Display in top 8 categories)</label>
           </div>
 
           <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", paddingTop: "8px" }}>
