@@ -16,6 +16,24 @@ LOCAL_USER="postgres"
 LOCAL_PASSWORD="postgres"
 LOCAL_DBNAME="template1"
 
+# PostgreSQL tool paths
+PG_BIN="/opt/homebrew/Cellar/postgresql@18/18.3/bin"
+if [ ! -f "$PG_BIN/pg_dump" ]; then
+    PG_BIN="/opt/homebrew/Cellar/postgresql@15/15.15_1/bin"
+fi
+if [ ! -f "$PG_BIN/pg_dump" ]; then
+    PG_BIN="/opt/homebrew/Cellar/postgresql@14/14.20/bin"
+fi
+PG_DUMP="$PG_BIN/pg_dump"
+PG_RESTORE="$PG_BIN/pg_restore"
+PSQL="$PG_BIN/psql"
+
+if [ ! -f "$PG_DUMP" ]; then
+    echo "Error: PostgreSQL tools not found. Please install PostgreSQL:"
+    echo "  brew install postgresql"
+    exit 1
+fi
+
 # Check if password is provided
 if [ -z "$1" ]; then
     echo "Error: RDS password is required"
@@ -40,7 +58,7 @@ echo ""
 
 # Step 1: Export data from local database
 echo "[1/4] Exporting data from local database..."
-PGPASSWORD="$LOCAL_PASSWORD" PGSSLMODE=disable pg_dump \
+PGPASSWORD="$LOCAL_PASSWORD" PGSSLMODE=disable "$PG_DUMP" \
   --host=$LOCAL_HOST \
   --port=$LOCAL_PORT \
   --username=$LOCAL_USER \
@@ -62,7 +80,7 @@ echo ""
 
 # Step 2: Create database on RDS if it doesn't exist
 echo "[2/4] Creating database on AWS RDS (if needed)..."
-PGPASSWORD="$RDS_PASSWORD" psql \
+PGPASSWORD="$RDS_PASSWORD" "$PSQL" \
   --host=$RDSHOST \
   --port=$RDS_PORT \
   --username=$RDS_USER \
@@ -74,7 +92,7 @@ echo ""
 # Step 3: Restore database to RDS
 echo "[3/4] Restoring database to AWS RDS..."
 echo "This may take a few minutes depending on database size..."
-PGPASSWORD="$RDS_PASSWORD" pg_restore \
+PGPASSWORD="$RDS_PASSWORD" "$PG_RESTORE" \
   --host=$RDSHOST \
   --port=$RDS_PORT \
   --username=$RDS_USER \
@@ -93,7 +111,7 @@ echo ""
 
 # Step 4: Verify connection
 echo "[4/4] Verifying RDS connection..."
-PGPASSWORD="$RDS_PASSWORD" psql \
+PGPASSWORD="$RDS_PASSWORD" "$PSQL" \
   --host=$RDSHOST \
   --port=$RDS_PORT \
   --username=$RDS_USER \

@@ -60,7 +60,6 @@ model Category {
   parentId    String?
   sortOrder   Int      @default(0)
   isActive    Boolean  @default(true)
-  isFeatured  Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -177,7 +176,7 @@ model HeroSlide {
   description String?
   ctaText     String?
   ctaLink     String?
-  bgImage     String?
+  
   bgGradient  String?
   accentColor String?  @default("#6C63FF")
   sortOrder   Int      @default(0)
@@ -192,18 +191,15 @@ model HeroSlide {
 // KIT PRODUCTS (Homepage section)
 // =====================
 model KitProduct {
-  id                  String   @id @default(cuid())
-  title               String
-  slug                String?  @unique
-  heroTitle           String?
-  description         String?
-  image               String?
-  href                String?
-  sortOrder           Int      @default(0)
-  isActive            Boolean  @default(true)
-  associatedProducts  Json?    @default("[]")  // Store as JSON array
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  image       String?
+  href        String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@map("kit_products")
 }
