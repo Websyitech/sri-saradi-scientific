@@ -53,6 +53,7 @@ export default function ProductsPage() {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategoryName, setSelectedCategoryName] = useState(categoryParam);
+  const [selectedCategoryImage, setSelectedCategoryImage] = useState<string | null>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -93,6 +94,7 @@ export default function ProductsPage() {
             if (found) {
               setSelectedCategoryId(found.id);
               setSelectedCategoryName(found.name);
+              setSelectedCategoryImage(found.image);
             }
           }
         }
@@ -458,7 +460,7 @@ export default function ProductsPage() {
             <div style={{ display: "flex", gap: "40px", alignItems: "flex-start" }}>
               {/* Category Image Placeholder */}
               <img
-                src="/placeholder-product.jpg"
+                src={selectedCategoryImage || "/placeholder-product.jpg"}
                 alt={`${selectedCategoryName || "Solarbio"} product category image`}
                 style={{
                   width: "280px",
