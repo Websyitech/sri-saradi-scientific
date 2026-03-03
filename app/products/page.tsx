@@ -31,6 +31,7 @@ interface Category {
   name: string;
   slug: string;
   image: string | null;
+  description: string | null;
   icon: string | null;
   color: string;
   count: number;
@@ -54,6 +55,7 @@ export default function ProductsPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategoryName, setSelectedCategoryName] = useState(categoryParam);
   const [selectedCategoryImage, setSelectedCategoryImage] = useState<string | null>(null);
+  const [selectedCategoryDescription, setSelectedCategoryDescription] = useState<string | null>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -481,9 +483,7 @@ export default function ProductsPage() {
                   flex: 1,
                 }}
               >
-                Browse our collection of {selectedCategoryName ? `${selectedCategoryName} products` : "Solarbio products"} from Solarbio Life Sciences.
-                Our comprehensive range includes high-quality reagents, antibodies, ELISA kits, and biochemicals designed for research and diagnostic applications.
-                All products are sourced directly from the manufacturer to ensure quality and reliability.
+                {selectedCategoryDescription}
                 {products.length > 0 && (
                   <>
                     {" "}Currently showing <strong>{products.length}</strong> product{products.length !== 1 ? "s" : ""}.

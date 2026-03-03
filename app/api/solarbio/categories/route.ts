@@ -29,6 +29,7 @@ export async function GET() {
       name: child.name,
       slug: child.slug,
       image: child.image,
+      description: child.description,
       icon: child.icon,
       color: child.color || "#2D2B7F",
       count: child._count.products,
