@@ -454,9 +454,9 @@ export default function KitProductDetail() {
 
       <USPBar />
 
-      {slug === 'filtration' && <ProductCatalog />}
+      {slug === 'liquid-handling' && <ProductCatalog />}
 
-      {slug === 'liquid-handling' && (
+      {slug === 'filtration' && (
         <section style={{ padding: '60px 40px', background: '#fff' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1a1a2e', textAlign: 'center', marginBottom: '12px' }}>Complete Liquid Handling & Filtration Solutions</h2>
