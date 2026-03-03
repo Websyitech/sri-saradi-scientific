@@ -7,7 +7,7 @@ import Link from "next/link";
 const leftMenuItems = [
   { label: "Home", href: "/", active: true },
   { label: "Products", href: "/products", hasMegaMenu: true },
-  { label: "Lab Consumables", href: "/lab-consumables", hasMegaMenu: true },
+  { label: "Lab Consumables", href: "/kit-products", hasDropdown: true },
   { label: "Applications", href: "/applications", hasMegaMenu: true },
 ];
 
@@ -32,11 +32,20 @@ interface ApplicationCategory {
   }>;
 }
 
+interface KitProduct {
+  id: string;
+  title: string;
+  slug: string;
+  image: string;
+  href: string;
+}
+
 export default function MenuSection() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showMegaMenu, setShowMegaMenu] = useState<string | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   const [applications, setApplications] = useState<ApplicationCategory[]>([]);
+  const [kitProducts, setKitProducts] = useState<KitProduct[]>([]);
   const [menuTop, setMenuTop] = useState(0);
   const menuContainerRef = useRef<HTMLDivElement>(null);
 
@@ -55,6 +64,15 @@ export default function MenuSection() {
       .then((data) => {
         if (Array.isArray(data)) {
           setApplications(data);
+        }
+      })
+      .catch(() => {});
+
+    fetch("/api/kit-products")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setKitProducts(data);
         }
       })
       .catch(() => {});
@@ -98,12 +116,12 @@ export default function MenuSection() {
               key={item.label}
               className={`menu-item ${item.active ? "menu-item-active" : ""}`}
               style={{ position: "relative" }}
-              onMouseEnter={() => item.hasMegaMenu && handleMouseEnter(item.label)}
-              onMouseLeave={() => item.hasMegaMenu && handleMouseLeave()}
+              onMouseEnter={() => (item.hasMegaMenu || item.hasDropdown) && handleMouseEnter(item.label)}
+              onMouseLeave={() => (item.hasMegaMenu || item.hasDropdown) && handleMouseLeave()}
             >
               <a href={item.href} className="menu-link" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                 {item.label}
-                {item.hasMegaMenu && <FaChevronDown style={{ fontSize: "11px" }} />}
+                {(item.hasMegaMenu || item.hasDropdown) && <FaChevronDown style={{ fontSize: "11px" }} />}
               </a>
 
               {/* Mega Menu Dropdown */}
@@ -258,6 +276,61 @@ export default function MenuSection() {
                   ) : null}
                 </div>
               )}
+
+              {/* Simple Dropdown for Lab Instruments */}
+              {item.hasDropdown && showMegaMenu === item.label && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: 0,
+                    background: "#fff",
+                    border: "1px solid #e0e0e0",
+                    borderRadius: "4px",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    padding: "8px 0",
+                    zIndex: 1000,
+                    animation: "slideDown 0.3s ease-out forwards",
+                    minWidth: "180px",
+                  }}
+                  onAnimationEnd={(e) => {
+                    e.currentTarget.style.animation = "none";
+                  }}
+                >
+                  {kitProducts.length > 0 ? (
+                    kitProducts.map((product) => (
+                      <Link
+                        key={product.id}
+                        href={product.href}
+                        onClick={() => handleMouseLeave()}
+                        style={{
+                          display: "block",
+                          padding: "10px 16px",
+                          fontSize: "13px",
+                          color: "#333",
+                          textDecoration: "none",
+                          transition: "all 0.2s",
+                          cursor: "pointer",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = "#f5f5f5";
+                          e.currentTarget.style.color = "var(--primary)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "transparent";
+                          e.currentTarget.style.color = "#333";
+                        }}
+                      >
+                        {product.title}
+                      </Link>
+                    ))
+                  ) : (
+                    <div style={{ padding: "10px 16px", textAlign: "center", color: "#999", fontSize: "12px" }}>
+                      Loading...
+                    </div>
+                  )}
+                </div>
+              )}
             </li>
           ))}
         </ul>
@@ -313,6 +386,37 @@ export default function MenuSection() {
                             }}
                           >
                             {cat.name}
+                          </Link>
+                        ))
+                      ) : (
+                        <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
+                      )}
+                    </div>
+                  </>
+                ) : item.hasDropdown ? (
+                  <>
+                    <a href={item.href} className="mobile-menu-link" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      {item.label}
+                      <FaChevronDown style={{ fontSize: "11px" }} />
+                    </a>
+                    {/* Mobile Simple Dropdown */}
+                    <div style={{ marginTop: "8px", paddingBottom: "8px" }}>
+                      {kitProducts.length > 0 ? (
+                        kitProducts.map((product) => (
+                          <Link
+                            key={product.id}
+                            href={product.href}
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: "block",
+                              padding: "10px 0",
+                              fontSize: "13px",
+                              color: "#333",
+                              textDecoration: "none",
+                              borderBottom: "1px solid #d0d0d0",
+                            }}
+                          >
+                            {product.title}
                           </Link>
                         ))
                       ) : (

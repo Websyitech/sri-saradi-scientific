@@ -1,16 +1,29 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface SiteSettings {
   site_name?: string;
   site_logo?: string;
 }
 
+interface SearchResult {
+  id: string;
+  name: string;
+  catalogNumber?: string;
+}
+
 export default function Header() {
   const [settings, setSettings] = useState<SiteSettings>({});
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/api/settings")
@@ -23,6 +36,79 @@ export default function Header() {
       })
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowResults(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const fetchSearchResults = async (query: string) => {
+    if (!query.trim()) {
+      setSearchResults([]);
+      setShowResults(false);
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const url = `/api/products?search=${encodeURIComponent(query)}&limit=8`;
+      const response = await fetch(url);
+      const data = await response.json();
+      
+      if (data.products && Array.isArray(data.products)) {
+        const results = data.products.map((product: any) => ({
+          id: product.id,
+          name: product.name,
+          catalogNumber: product.catalogNumber,
+        }));
+        setSearchResults(results);
+        setShowResults(results.length > 0);
+      } else {
+        setSearchResults([]);
+        setShowResults(false);
+      }
+    } catch (error) {
+      console.error("Search error:", error);
+      setSearchResults([]);
+      setShowResults(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+
+    const wordCount = value.trim().split(/\s+/).filter(word => word.length > 0).length;
+    if (wordCount >= 3) {
+      fetchSearchResults(value);
+    } else {
+      setSearchResults([]);
+      setShowResults(false);
+    }
+  };
+
+  const handleSelectResult = (productId: string) => {
+    router.push(`/products?q=${productId}`);
+    setShowResults(false);
+    setSearchQuery("");
+    setSearchResults([]);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setShowResults(false);
+      setSearchQuery("");
+      setSearchResults([]);
+    }
+  };
 
   return (
     <header className="main-header">
@@ -41,16 +127,81 @@ export default function Header() {
         </Link>
 
 {/* Right - Search Bar */}
-        <div className="header-search-section">
-          <div className="header-search-bar">
+        <div className="header-search-section" ref={searchRef}>
+          <div className="header-search-bar" style={{ position: "relative" }}>
             <input
               type="text"
               className="header-search-input"
               placeholder="Type the Product Name , Product id, CAS  N0"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+              onKeyPress={handleKeyPress}
+              autoComplete="off"
             />
-            <button className="header-search-btn" aria-label="Search">
+            <button 
+              className="header-search-btn" 
+              aria-label="Search"
+            >
               <FaSearch />
             </button>
+
+            {/* Search Results Dropdown */}
+            {showResults && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  left: 0,
+                  right: 0,
+                  background: "#fff",
+                  border: "1px solid #e0e0e0",
+                  borderTop: "none",
+                  borderRadius: "0 0 4px 4px",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                  zIndex: 1000,
+                  maxHeight: "400px",
+                  overflowY: "auto",
+                }}
+              >
+                {isLoading ? (
+                  <div style={{ padding: "12px 16px", textAlign: "center", color: "#999", fontSize: "13px" }}>
+                    Loading...
+                  </div>
+                ) : searchResults.length > 0 ? (
+                  searchResults.map((result) => (
+                    <div
+                      key={result.id}
+                      onClick={() => handleSelectResult(result.id)}
+                      style={{
+                        padding: "12px 16px",
+                        borderBottom: "1px solid #f0f0f0",
+                        cursor: "pointer",
+                        transition: "background 0.2s",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "#f5f5f5";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "transparent";
+                      }}
+                    >
+                      <div style={{ fontSize: "13px", fontWeight: 500, color: "#333" }}>
+                        {result.name}
+                      </div>
+                      {result.catalogNumber && (
+                        <div style={{ fontSize: "12px", color: "#999", marginTop: "4px" }}>
+                          {result.catalogNumber}
+                        </div>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ padding: "12px 16px", textAlign: "center", color: "#999", fontSize: "13px" }}>
+                    No results found
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
