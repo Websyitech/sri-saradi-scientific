@@ -1,0 +1,2 @@
+-- Add bgImage to hero_slides
+ALTER TABLE "hero_slides" ADD COLUMN "bgImage" TEXT;

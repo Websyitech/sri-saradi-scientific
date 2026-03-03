@@ -20,40 +20,128 @@ model AdminUser {
   @@map("admin_users")
 }
 
-model User {
-  id        String         @id @default(cuid())
-  email     String         @unique
-  password  String
-  name      String
-  company   String?
-  phone     String?
-  country   String?
-  isActive  Boolean        @default(true)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  quotes    QuoteRequest[]
+model ApplicationCategory {
+  id        String            @id @default(cuid())
+  title     String
+  sortOrder Int               @default(0)
+  isActive  Boolean           @default(true)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  items     ApplicationItem[]
 
-  @@map("users")
+  @@map("application_categories")
+}
+
+model ApplicationItem {
+  id         String              @id @default(cuid())
+  name       String
+  categoryId String
+  sortOrder  Int                 @default(0)
+  isActive   Boolean             @default(true)
+  category   ApplicationCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@map("application_items")
 }
 
 model Category {
-  id          String     @id @default(cuid())
-  name        String
-  slug        String     @unique
+  id        String      @id @default(cuid())
+  name      String
+  slug      String      @unique
   description String?
-  image       String?
-  sortOrder   Int        @default(0)
-  isActive    Boolean    @default(true)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  icon        String?
-  color       String?    @default("#2D2B7F")
-  parentId    String?
-  parent      Category?  @relation("CategoryTree", fields: [parentId], references: [id])
-  children    Category[] @relation("CategoryTree")
-  products    Product[]
+  image     String?
+  sortOrder Int         @default(0)
+  isActive  Boolean     @default(true)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  icon      String?
+  color     String?     @default("#2D2B7F")
+  parentId  String?
+  parent    Category?   @relation("CategoryTree", fields: [parentId], references: [id])
+  children  Category[]  @relation("CategoryTree")
+  products  Product[]
 
   @@map("categories")
+}
+
+model HeroSlide {
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String?
+  description String?
+  ctaText     String?
+  ctaLink     String?
+  bgImage     String?
+  bgGradient  String?
+  accentColor String?  @default("#6C63FF")
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("hero_slides")
+}
+
+model JobOpening {
+  id               String   @id @default(cuid())
+  title            String
+  department       String?
+  location         String?
+  type             String?  @default("Full-Time")
+  description      String?
+  responsibilities String[]
+  requirements     String[]
+  isActive         Boolean  @default(true)
+  postedAt         DateTime @default(now())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("job_openings")
+}
+
+model KitProduct {
+  id                 String   @id @default(cuid())
+  title              String
+  slug               String?
+  description        String?
+  image              String?
+  href               String?
+  heroTitle          String?
+  associatedProducts String?
+  sortOrder          Int      @default(0)
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("kit_products")
+}
+
+model Page {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  title     String
+  subtitle  String?
+  content   Json?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("pages")
+}
+
+model ProductVariant {
+  id        String   @id @default(cuid())
+  productId String
+  sku       String?
+  packSize  String?
+  price     Decimal? @default(0)
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_variants")
 }
 
 model Product {
@@ -110,107 +198,16 @@ model Product {
   @@map("products")
 }
 
-model ProductVariant {
-  id        String   @id @default(cuid())
-  productId String
+model QuoteItem {
+  id        String       @id @default(cuid())
+  quoteId   String
+  productId String?
   sku       String?
-  packSize  String?
-  price     Decimal? @default(0)
-  sortOrder Int      @default(0)
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  name      String
+  quantity  Int          @default(1)
+  quote     QuoteRequest @relation(fields: [quoteId], references: [id], onDelete: Cascade)
 
-  @@index([productId])
-  @@map("product_variants")
-}
-
-model HeroSlide {
-  id          String   @id @default(cuid())
-  title       String
-  subtitle    String?
-  description String?
-  ctaText     String?
-  ctaLink     String?
-  bgGradient  String?
-  accentColor String?  @default("#6C63FF")
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@map("hero_slides")
-}
-
-model KitProduct {
-  id                 String   @id @default(cuid())
-  title              String
-  slug               String?
-  description        String?
-  image              String?
-  href               String?
-  heroTitle          String?
-  associatedProducts String?
-  sortOrder          Int      @default(0)
-  isActive           Boolean  @default(true)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  @@map("kit_products")
-}
-
-model ApplicationCategory {
-  id        String            @id @default(cuid())
-  title     String
-  sortOrder Int               @default(0)
-  isActive  Boolean           @default(true)
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
-  items     ApplicationItem[]
-
-  @@map("application_categories")
-}
-
-model ApplicationItem {
-  id         String              @id @default(cuid())
-  name       String
-  categoryId String
-  sortOrder  Int                 @default(0)
-  isActive   Boolean             @default(true)
-  category   ApplicationCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  @@map("application_items")
-}
-
-model JobOpening {
-  id               String   @id @default(cuid())
-  title            String
-  department       String?
-  location         String?
-  type             String?  @default("Full-Time")
-  description      String?
-  responsibilities String[]
-  requirements     String[]
-  isActive         Boolean  @default(true)
-  postedAt         DateTime @default(now())
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  @@map("job_openings")
-}
-
-model Page {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  title     String
-  subtitle  String?
-  content   Json?
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("pages")
+  @@map("quote_items")
 }
 
 model QuoteRequest {
@@ -231,18 +228,6 @@ model QuoteRequest {
   @@map("quote_requests")
 }
 
-model QuoteItem {
-  id        String       @id @default(cuid())
-  quoteId   String
-  productId String?
-  sku       String?
-  name      String
-  quantity  Int          @default(1)
-  quote     QuoteRequest @relation(fields: [quoteId], references: [id], onDelete: Cascade)
-
-  @@map("quote_items")
-}
-
 model SiteSetting {
   id    String @id @default(cuid())
   key   String @unique
@@ -250,4 +235,20 @@ model SiteSetting {
   type  String @default("text")
 
   @@map("site_settings")
+}
+
+model User {
+  id        String         @id @default(cuid())
+  email     String         @unique
+  password  String
+  name      String
+  company   String?
+  phone     String?
+  country   String?
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  quotes    QuoteRequest[]
+
+  @@map("users")
 }
