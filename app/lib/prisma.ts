@@ -10,10 +10,14 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient() {
+  // Strip sslmode from the connection string so the explicit ssl config takes effect.
+  // Newer pg-connection-string versions treat sslmode=require as verify-full,
+  // which rejects AWS RDS self-signed certs — the explicit ssl object overrides this.
+  const cleanConnectionString = connectionString.replace(/([?&])sslmode=[^&]*/g, "$1").replace(/[?&]$/, "");
   const pool = new pg.Pool({
-    connectionString,
+    connectionString: cleanConnectionString,
     max: 1,
-    ssl: false,
+    ssl: { rejectUnauthorized: false },
     idleTimeoutMillis: 0,
     connectionTimeoutMillis: 10000,
   });
