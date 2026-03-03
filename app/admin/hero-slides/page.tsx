@@ -92,7 +92,7 @@ export default function AdminHeroSlides() {
 
       const data = await res.json();
       if (data.success) {
-        setForm({ ...form, bgImage: data.url });
+        setForm((prev) => ({ ...prev, bgImage: data.url }));
       } else {
         alert(data.error || "Upload failed");
       }
@@ -387,7 +387,7 @@ export default function AdminHeroSlides() {
             </button>
             <button
               type="submit"
-              disabled={saving}
+              disabled={saving || uploading}
               style={{
                 padding: "10px 24px",
                 background: "#2D2B7F",
@@ -397,10 +397,10 @@ export default function AdminHeroSlides() {
                 fontSize: "13px",
                 fontWeight: 600,
                 cursor: "pointer",
-                opacity: saving ? 0.7 : 1,
+                opacity: saving || uploading ? 0.7 : 1,
               }}
             >
-              {saving ? "Saving..." : editing ? "Update" : "Create"}
+              {saving ? "Saving..." : uploading ? "Uploading..." : editing ? "Update" : "Create"}
             </button>
           </div>
         </form>
