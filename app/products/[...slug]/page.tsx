@@ -18,6 +18,7 @@ interface Product {
   description: string | null;
   brand: string | null;
   manufacturer: string | null;
+  image?: string | null;
   primaryCategory?: string;
   applications?: string | null;
   abReactivity?: string | null;
@@ -29,6 +30,8 @@ interface Product {
   category?: {
     slug: string;
     name: string;
+    color?: string;
+    image?: string | null;
   };
 }
 
@@ -218,9 +221,34 @@ export default function ProductDetailPage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      overflow: "hidden",
                     }}
                   >
-                    <div style={{ fontSize: "40px", color: "#ddd" }}>📦</div>
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                          padding: "8px",
+                        }}
+                      />
+                    ) : product.category?.image ? (
+                      <img
+                        src={product.category.image}
+                        alt={product.category.name}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                          padding: "8px",
+                        }}
+                      />
+                    ) : (
+                      <div style={{ fontSize: "40px", color: "#ddd" }}>📦</div>
+                    )}
                   </div>
                   <div>
                     <div style={{ fontSize: "12px", color: "#999", fontWeight: 600, marginBottom: "4px" }}>
@@ -279,7 +307,7 @@ export default function ProductDetailPage() {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "60px", alignItems: "flex-start" }}>
           {/* Left Column - Product Image & Basic Info */}
           <div>
-            {/* Image Placeholder */}
+            {/* Image */}
             <div
               style={{
                 width: "100%",
@@ -291,9 +319,34 @@ export default function ProductDetailPage() {
                 justifyContent: "center",
                 marginBottom: "32px",
                 border: "1px solid #eee",
+                overflow: "hidden",
               }}
             >
-              <div style={{ fontSize: "60px", color: "#ddd" }}>📦</div>
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    padding: "20px",
+                  }}
+                />
+              ) : product.category?.image ? (
+                <img
+                  src={product.category.image}
+                  alt={product.category.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    padding: "20px",
+                  }}
+                />
+              ) : (
+                <div style={{ fontSize: "60px", color: "#ddd" }}>📦</div>
+              )}
             </div>
 
             {/* Product Catalog & Brand */}

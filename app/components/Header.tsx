@@ -50,10 +50,7 @@ export default function Header() {
   }, []);
 
   const fetchSearchResults = async (query: string) => {
-    console.log("🔍 fetchSearchResults called with query:", query);
-    
     if (!query.trim()) {
-      console.log("⚠️ Empty query, clearing results");
       setSearchResults([]);
       setShowResults(false);
       return;
@@ -61,59 +58,43 @@ export default function Header() {
 
     setIsLoading(true);
     setShowResults(true);
-    console.log("📍 setShowResults(true), setIsLoading(true)");
     
     try {
       const url = `/api/products?search=${encodeURIComponent(query)}&limit=8`;
-      console.log("📡 Fetching from URL:", url);
-      
       const response = await fetch(url);
-      console.log("📥 Response status:", response.status);
-      
       const data = await response.json();
-      console.log("📦 Response data:", data);
       
       if (data.products && Array.isArray(data.products)) {
-        console.log("✅ Found products:", data.products.length);
         const results = data.products.map((product: any) => ({
           id: product.id,
           name: product.name,
           catalogNumber: product.catalogNumber,
           slug: product.catalogNumber || product.id,
         }));
-        console.log("📋 Mapped results:", results);
         setSearchResults(results);
       } else {
-        console.log("❌ No products in response");
         setSearchResults([]);
       }
     } catch (error) {
-      console.error("🚨 Search error:", error);
+      console.error("Search error:", error);
       setSearchResults([]);
     } finally {
       setIsLoading(false);
-      console.log("✋ setIsLoading(false)");
     }
   };
 
   const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    console.log("⌨️ Input changed:", value);
     setSearchQuery(value);
 
     const charCount = value.trim().length;
-    console.log("📝 Character count:", charCount);
     
     if (charCount >= 3) {
-      console.log("✨ Triggering search - char count >= 3");
       setShowResults(true);
       fetchSearchResults(value);
     } else if (value.trim() === "") {
-      console.log("🧹 Clearing results - input empty");
       setSearchResults([]);
       setShowResults(false);
-    } else {
-      console.log("⏳ Waiting - char count < 3");
     }
   };
 
