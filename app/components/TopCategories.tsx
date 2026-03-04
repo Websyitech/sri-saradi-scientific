@@ -77,7 +77,7 @@ export default function TopCategories() {
             return (
               <a
                 key={cat.id}
-                href={`/products/Solarbio/${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
+                href={`/products?brand=Solarbio&category=${cat.slug}`}
                 className="top-cat-card"
                 title={cat.name}
               >
