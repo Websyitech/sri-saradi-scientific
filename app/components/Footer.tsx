@@ -9,44 +9,52 @@ interface SiteSettings {
 }
 
 const footerLinks = {
-  navigation: {
-    title: "NAVIGATION",
+  quickLinks: {
+    title: "Quick Links",
     links: [
       { label: "Home", href: "/" },
       { label: "About Us", href: "/about" },
-      { label: "What We Do", href: "/what-we-do" },
-      { label: "To The Power of 10", href: "/power-of-10" },
-      { label: "Donate", href: "/donate" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Certificates", href: "/certificates" },
+      { label: "Careers", href: "/careers" },
     ],
   },
-  whatWeDo: {
-    title: "WHAT WE DO",
+  products1: {
+    title: "Products",
     links: [
-      { label: "Encouraging Testing", href: "/encouraging-testing" },
-      { label: "Strengthening Advocacy", href: "/strengthening-advocacy" },
-      { label: "Sharing Information", href: "/sharing-information" },
-      { label: "Building Leadership", href: "/building-leadership" },
-      { label: "Engaging With Global Fund", href: "/engaging-global-fund" },
-      { label: "Shining a Light", href: "/shining-a-light" },
+      { label: "Antibodies", href: "/products?category=antibodies" },
+      { label: "ELISA Kits", href: "/products?category=elisa-kits" },
+      { label: "Proteins", href: "/products?category=proteins" },
+      { label: "Peptides", href: "/products?category=peptides" },
+      { label: "Enzymes", href: "/products?category=enzymes" },
+    ],
+  },
+  products2: {
+    title: "More Products",
+    links: [
+      { label: "Buffers", href: "/products?category=buffers" },
+      { label: "Amino Acids", href: "/products?category=amino-acids" },
+      { label: "Reagents", href: "/products?category=reagents" },
+      { label: "Standards", href: "/products?category=standards" },
+      { label: "Kits", href: "/products?category=kits" },
+    ],
+  },
+  labConsumables: {
+    title: "Lab Consumables",
+    links: [
+      { label: "Filtration", href: "/lab-consumables?type=filtration" },
+      { label: "Liquid Handling", href: "/lab-consumables?type=liquid-handling" },
+      { label: "PCR Consumables", href: "/lab-consumables?type=pcr-consumables" },
     ],
   },
   legal: {
-    title: "LEGAL",
+    title: "Legal",
     links: [
-      { label: "General Info", href: "/general-info" },
       { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Terms of Service", href: "/terms-of-service" },
-    ],
-  },
-  talkToUs: {
-    title: "TALK TO US",
-    links: [
-      { label: "support@ercom.com", href: "mailto:support@ercom.com" },
-      { label: "+66 2399 1145", href: "tel:+6623991145" },
+      { label: "Terms & Conditions", href: "/terms-conditions" },
       { label: "Contact Us", href: "/contact" },
-      { label: "Facebook", href: "https://facebook.com" },
-      { label: "Linkedin", href: "https://linkedin.com" },
-      { label: "Twitter", href: "https://twitter.com" },
+      { label: "Shipping Info", href: "/shipping-info" },
+      { label: "Returns", href: "/returns" },
     ],
   },
 };
@@ -82,7 +90,7 @@ export default function Footer() {
             margin: "0 auto",
             padding: "0 40px",
             display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
+            gridTemplateColumns: "repeat(5, 1fr)",
             gap: "40px",
           }}
         >
@@ -92,7 +100,7 @@ export default function Footer() {
                 style={{
                   fontSize: "14px",
                   fontWeight: 700,
-                  color: "#1a1a2e",
+                  color: "#171717",
                   margin: "0 0 20px 0",
                   letterSpacing: "0.5px",
                 }}
@@ -115,8 +123,8 @@ export default function Footer() {
                       href={link.href}
                       style={{
                         textDecoration: "none",
-                        color: "#555",
-                        fontSize: "14px",
+                        color: "#666",
+                        fontSize: "13px",
                         transition: "color 0.2s",
                       }}
                       className="footer-link"

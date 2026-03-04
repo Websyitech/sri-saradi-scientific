@@ -64,6 +64,7 @@ export default function ProductsPage() {
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
   const [openFilters, setOpenFilters] = useState<Record<string, boolean>>({});
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+  const [filterSearch, setFilterSearch] = useState<Record<string, string>>({});
   const [viewMode, setViewMode] = useState<"list" | "grid">("list");
   const [keyword, setKeyword] = useState("");
   const [quantities, setQuantities] = useState<Record<string, number>>({});
@@ -115,12 +116,28 @@ export default function ProductsPage() {
           const products = data.products as Record<string, unknown>[];
           
           // Extract distinct values from products
+          const productLines = new Set<string>();
+          const subCategories = new Set<string>();
           const packSizes = new Set<string>();
           const reactivity = new Set<string>();
           const targets = new Set<string>();
           const applications = new Set<string>();
 
           products.forEach((product) => {
+            // Product Line
+            if (product.productLine) productLines.add(String(product.productLine));
+            // Sub Category - split by "/" and add each as separate item
+            if (product.subCategory) {
+              const subCatStr = String(product.subCategory).trim();
+              if (subCatStr.includes("/")) {
+                const subCatItems = subCatStr.split("/").map((item) => item.trim());
+                subCatItems.forEach((item) => {
+                  if (item) subCategories.add(item);
+                });
+              } else {
+                subCategories.add(subCatStr);
+              }
+            }
             // Pack sizes from variants
             if (Array.isArray(product.variants)) {
               (product.variants as Record<string, unknown>[]).forEach((v) => {
@@ -131,11 +148,35 @@ export default function ProductsPage() {
             if (product.abReactivity) reactivity.add(String(product.abReactivity));
             // Target
             if (product.abTarget) targets.add(String(product.abTarget));
-            // Applications
-            if (product.applications) applications.add(String(product.applications));
+            // Applications - split by "/" and add each as separate item
+            if (product.applications) {
+              const appStr = String(product.applications).trim();
+              if (appStr.includes("/")) {
+                const appItems = appStr.split("/").map((item) => item.trim());
+                appItems.forEach((item) => {
+                  if (item) applications.add(item);
+                });
+              } else {
+                applications.add(appStr);
+              }
+            }
           });
 
           const filterList: FilterItem[] = [
+            {
+              title: "Product Line",
+              key: "productLine",
+              options: Array.from(productLines)
+                .sort()
+                .map((label) => ({ label })),
+            },
+            {
+              title: "Sub Category",
+              key: "subCategory",
+              options: Array.from(subCategories)
+                .sort()
+                .map((label) => ({ label })),
+            },
             {
               title: "Pack Size",
               key: "packSize",
@@ -228,6 +269,55 @@ export default function ProductsPage() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [selectedCategoryId, selectedFilters, keyword, pageSize]);
+
+  // Load products for pagination
+  useEffect(() => {
+    setLoading(true);
+    const offset = (currentPage - 1) * pageSize;
+    const params = new URLSearchParams();
+    params.set("limit", pageSize.toString());
+    params.set("offset", offset.toString());
+    params.set("brand", "Solarbio");
+    if (selectedCategoryId) {
+      params.set("category", selectedCategoryId);
+    }
+    if (keyword.trim()) {
+      params.set("search", keyword.trim());
+    }
+
+    // Add filters to params
+    Object.keys(selectedFilters).forEach((filterKey) => {
+      const values = selectedFilters[filterKey];
+      if (values && values.length > 0) {
+        params.append(filterKey, values.join(","));
+      }
+    });
+
+    fetch(`/api/products?${params.toString()}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.products && Array.isArray(data.products)) {
+          setProducts(
+            data.products.map((p: Record<string, unknown>) => ({
+              ...p,
+              variants: Array.isArray(p.variants)
+                ? (p.variants as Record<string, unknown>[]).map((v) => ({
+                    ...v,
+                    price:
+                      typeof v.price === "number" && v.price > 0
+                        ? `₹${Number(v.price).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`
+                        : typeof v.price === "string" && Number(v.price) > 0
+                          ? `₹${Number(v.price).toLocaleString("en-IN", { minimumFractionDigits: 2 })}`
+                          : null,
+                  }))
+                : [],
+            }))
+          );
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [currentPage, selectedCategoryId, selectedFilters, keyword, pageSize]);
 
   // Check if user is logged in
   useEffect(() => {
@@ -445,22 +535,23 @@ export default function ProductsPage() {
         <>
           <section
             style={{
-              maxWidth: "1400px",
-              margin: "0 auto",
-              padding: "0 40px 30px",
+              width: "100%",
+              padding: "30px 40px",
+              background: "#f5f5f5",
             }}
           >
-            <h1
-              style={{
-                fontSize: "32px",
-                fontWeight: 800,
-                color: "#171717",
-                margin: "0 0 24px 0",
-              }}
-            >
-              {selectedCategoryName || "Solarbio Products"}
-            </h1>
-            <div style={{ display: "flex", gap: "40px", alignItems: "flex-start" }}>
+            <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
+              <h1
+                style={{
+                  fontSize: "32px",
+                  fontWeight: 800,
+                  color: "#171717",
+                  margin: "0 0 24px 0",
+                }}
+              >
+                {selectedCategoryName || "Solarbio Products"}
+              </h1>
+              <div style={{ display: "flex", gap: "40px", alignItems: "flex-start" }}>
               {/* Category Image Placeholder */}
               <img
                 src={selectedCategoryImage || "/placeholder-product.jpg"}
@@ -487,6 +578,7 @@ export default function ProductsPage() {
                 {selectedCategoryDescription}
                
               </p>
+              </div>
             </div>
           </section>
 
@@ -624,7 +716,12 @@ export default function ProductsPage() {
             )}
           </div>
 
-          {filters.map((filter) => (
+          {filters.map((filter) => {
+            const isAntibodyCategory = selectedCategoryName?.toLowerCase().includes("antibod");
+            const antibodyFilters = ["abReactivity", "abTarget", "applications"];
+            const shouldShowFilter = isAntibodyCategory || !antibodyFilters.includes(filter.key);
+
+            return shouldShowFilter ? (
             <div
               key={filter.key}
               style={{
@@ -659,6 +756,26 @@ export default function ProductsPage() {
                 )}
               </button>
 
+              {/* Filter Search Input - for all filters with more than 5 options */}
+              {openFilters[filter.key] && filter.options.length > 5 && (
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={filterSearch[filter.key] || ""}
+                  onChange={(e) =>
+                    setFilterSearch((prev) => ({ ...prev, [filter.key]: e.target.value }))
+                  }
+                  style={{
+                    width: "100%",
+                    padding: "8px",
+                    border: "1px solid #ddd",
+                    borderRadius: "4px",
+                    fontSize: "13px",
+                    marginBottom: "8px",
+                  }}
+                />
+              )}
+
               {/* Filter Options */}
               {openFilters[filter.key] && filter.options.length > 0 && (
                 <div
@@ -671,7 +788,12 @@ export default function ProductsPage() {
                     paddingRight: filter.options.length > 5 ? "8px" : "0",
                   }}
                 >
-                  {filter.options.map((opt) => (
+                  {filter.options
+                    .filter((opt) => {
+                      const searchTerm = filterSearch[filter.key] || "";
+                      return searchTerm === "" || opt.label.toLowerCase().includes(searchTerm.toLowerCase());
+                    })
+                    .map((opt) => (
                     <label
                       key={opt.label}
                       style={{
@@ -696,11 +818,12 @@ export default function ProductsPage() {
                       />
                       {opt.label}
                     </label>
-                  ))}
+                    ))}
                 </div>
               )}
             </div>
-          ))}
+            ) : null;
+          })}
         </aside>
 
         {/* Product Listing */}
@@ -763,80 +886,39 @@ export default function ProductsPage() {
               </button>
             </div>
 
-            {/* Sort */}
-            <select
-              style={{
-                height: "40px",
-                padding: "0 36px 0 14px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                fontSize: "14px",
-                color: "#333",
-                background: "#fff",
-                cursor: "pointer",
-                appearance: "auto",
-              }}
-            >
-              <option>Sort by Relevance</option>
-              <option>Sort by Price: Low to High</option>
-              <option>Sort by Price: High to Low</option>
-              <option>Sort by Name</option>
-            </select>
+            {/* Clear Filters Button */}
+            {Object.keys(selectedFilters).some((key) => selectedFilters[key].length > 0) && (
+              <button
+                onClick={() => setSelectedFilters({})}
+                style={{
+                  height: "40px",
+                  padding: "0 14px",
+                  border: "1px solid #ddd",
+                  borderRadius: "4px",
+                  fontSize: "14px",
+                  color: "var(--primary)",
+                  background: "#fff",
+                  cursor: "pointer",
+                  fontWeight: 600,
+                }}
+              >
+                Clear Filters
+              </button>
+            )}
 
-            {/* Count */}
-            <span style={{ fontSize: "14px", color: "#666", marginLeft: "8px" }}>
+            {/* Count - Right aligned */}
+            <span style={{ fontSize: "14px", color: "#666", marginLeft: "auto" }}>
               Showing {totalProducts > 0 ? startItem : 0}-{endItem} of {totalProducts}
             </span>
-
-            {/* View Toggle */}
-            <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "6px" }}>
-              <span style={{ fontSize: "13px", color: "#666" }}>Change View</span>
-              <button
-                onClick={() => setViewMode("list")}
-                style={{
-                  width: "36px",
-                  height: "36px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  background: viewMode === "list" ? "var(--primary)" : "#fff",
-                  color: viewMode === "list" ? "#fff" : "#666",
-                  cursor: "pointer",
-                  fontSize: "16px",
-                  padding: 0,
-                }}
-              >
-                <FaThList />
-              </button>
-              <button
-                onClick={() => setViewMode("grid")}
-                style={{
-                  width: "36px",
-                  height: "36px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  background: viewMode === "grid" ? "var(--primary)" : "#fff",
-                  color: viewMode === "grid" ? "#fff" : "#666",
-                  cursor: "pointer",
-                  fontSize: "16px",
-                  padding: 0,
-                }}
-              >
-                <FaTh />
-              </button>
-            </div>
           </div>
 
           {/* Table Header */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "50px 100px 120px 100px 120px 100px 100px 1fr",
+              gridTemplateColumns: selectedCategoryName?.toLowerCase().includes("antibod") 
+                ? "100px 120px 100px 140px 70px 180px 150px 1fr"
+                : "100px 120px 100px 140px 70px 180px 1fr",
               borderBottom: "2px solid var(--primary)",
               padding: "12px 8px",
               fontSize: "12px",
@@ -846,14 +928,19 @@ export default function ProductsPage() {
             }}
             role="row"
           >
-            <div role="columnheader">
-              <input type="checkbox" aria-label="Select all products" title="Select all" />
-            </div>
             <div role="columnheader">Catalog No</div>
+            <div role="columnheader">Product Name</div>
+            {!selectedCategoryName?.toLowerCase().includes("antibod") && (
+              <div role="columnheader">Brand</div>
+            )}
+            <div role="columnheader">Applications</div>
             <div role="columnheader">Pack Size</div>
-            <div role="columnheader">Reactivity</div>
-            <div role="columnheader">Target</div>
-            <div role="columnheader">Application</div>
+            {selectedCategoryName?.toLowerCase().includes("antibod") && (
+              <>
+                <div role="columnheader">Reactivity</div>
+                <div role="columnheader">Target</div>
+              </>
+            )}
             <div role="columnheader" style={{ textAlign: "center" }}>Quantity</div>
             <div role="columnheader" style={{ textAlign: "center" }}>Action</div>
           </div>
@@ -889,49 +976,56 @@ export default function ProductsPage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "50px 100px 120px 100px 120px 100px 100px 1fr",
+                  gridTemplateColumns: selectedCategoryName?.toLowerCase().includes("antibod") 
+                    ? "100px 120px 100px 140px 70px 180px 150px 1fr"
+                    : "100px 120px 100px 140px 70px 180px 1fr",
                   padding: "12px 8px",
-                  alignItems: "center",
+                  alignItems: "left",
                   fontSize: "13px",
                   gap: "8px",
                 }}
               >
-                <div style={{ display: "flex", justifyContent: "center" }} role="cell">
-                  <input
-                    type="checkbox"
-                    aria-label={`Select ${product.name}`}
-                    style={{ width: "16px", height: "16px", cursor: "pointer" }}
-                  />
-                </div>
                 <div style={{ color: "#444", fontWeight: 600 }} role="cell">
                   {product.catalogNumber}
+                </div>
+                <div style={{ color: "#555", fontSize: "12px" }} role="cell">
+                  {product.name || "-"}
+                </div>
+                {!selectedCategoryName?.toLowerCase().includes("antibod") && (
+                  <div style={{ color: "#555", fontSize: "12px" }} role="cell">
+                    {product.brand || "-"}
+                  </div>
+                )}
+                <div style={{ color: "#555", fontSize: "12px" }} role="cell">
+                  {product.applications ? product.applications.substring(0, 30) + (product.applications.length > 30 ? "..." : "") : "-"}
                 </div>
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
                   {product.variants && product.variants.length > 0
                     ? product.variants[0].packSize || "-"
                     : "-"}
                 </div>
-                <div style={{ color: "#555", fontSize: "12px" }} role="cell">
-                  {product.abReactivity || "-"}
-                </div>
-                <div style={{ color: "#555", fontSize: "12px" }} role="cell">
-                  {product.abTarget || "-"}
-                </div>
-                <div style={{ color: "#555", fontSize: "12px" }} role="cell">
-                  {product.applications ? product.applications.substring(0, 50) + (product.applications.length > 50 ? "..." : "") : "-"}
-                </div>
+                {selectedCategoryName?.toLowerCase().includes("antibod") && (
+                  <>
+                    <div style={{ color: "#555", fontSize: "12px", wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "normal" }} role="cell">
+                      {product.abReactivity || "-"}
+                    </div>
+                    <div style={{ color: "#555", fontSize: "12px", wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "normal" }} role="cell">
+                      {product.abTarget || "-"}
+                    </div>
+                  </>
+                )}
                 <div style={{ textAlign: "center", width: "100%" }} role="cell">
                   <div
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
+                      alignItems: "left",
+                      justifyContent: "left",
                       gap: "0",
                       border: "1px solid #ddd",
                       borderRadius: "4px",
                       overflow: "hidden",
                       height: "32px",
-                      width: "90px",
+                      width: "70px",
                       margin: "0 auto",
                     }}
                   >
@@ -1004,22 +1098,23 @@ export default function ProductsPage() {
                     </button>
                   </div>
                 </div>
-                <div style={{ display: "flex", gap: "4px", justifyContent: "center" }}>
+                <div style={{ display: "flex", gap: "3px", justifyContent: "center" }}>
                   <a
                     href={`/products/${product.catalogNumber}`}
                     style={{
                       background: "#f0f0f0",
                       color: "var(--primary)",
                       border: "1px solid #ddd",
-                      padding: "6px 10px",
-                      borderRadius: "4px",
-                      fontSize: "11px",
+                      padding: "4px 6px",
+                      borderRadius: "3px",
+                      fontSize: "10px",
                       fontWeight: 600,
                       cursor: "pointer",
                       textDecoration: "none",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     Details
@@ -1030,11 +1125,12 @@ export default function ProductsPage() {
                       background: "var(--primary)",
                       color: "#fff",
                       border: "none",
-                      padding: "6px 12px",
-                      borderRadius: "4px",
-                      fontSize: "12px",
+                      padding: "4px 8px",
+                      borderRadius: "3px",
+                      fontSize: "10px",
                       fontWeight: 600,
                       cursor: "pointer",
+                      whiteSpace: "nowrap",
                     }}
                   >
                     Quote
