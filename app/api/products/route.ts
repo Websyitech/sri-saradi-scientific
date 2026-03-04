@@ -18,13 +18,25 @@ export async function GET(request: NextRequest) {
     const andConditions: Record<string, unknown>[] = [];
 
     if (search) {
-      andConditions.push({
-        OR: [
-          { name: { contains: search, mode: "insensitive" } },
-          { catalogNumber: { contains: search, mode: "insensitive" } },
-          { description: { contains: search, mode: "insensitive" } },
-        ],
-      });
+      const searchTerms = search.trim().split(/\s+/).filter(term => term.length > 0);
+      
+      if (searchTerms.length > 0) {
+        const orConditions = [];
+        
+        for (const term of searchTerms) {
+          orConditions.push({
+            OR: [
+              { name: { contains: term, mode: "insensitive" } },
+              { catalogNumber: { contains: term, mode: "insensitive" } },
+              { description: { contains: term, mode: "insensitive" } },
+            ],
+          });
+        }
+        
+        andConditions.push({
+          AND: orConditions,
+        });
+      }
     }
 
     if (category) {
