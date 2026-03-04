@@ -7,6 +7,11 @@ interface FeaturedProduct {
   catalogNumber: string;
   name: string;
   image: string | null;
+  category?: {
+    id: string;
+    name: string;
+    image: string | null;
+  } | null;
 }
 
 const fallbackProducts: FeaturedProduct[] = [
@@ -23,11 +28,22 @@ export default function FeaturedProducts() {
 
   useEffect(() => {
     fetch("/api/featured-products")
-      .then((res) => res.json())
-      .then((data: FeaturedProduct[]) => {
-        if (data && data.length > 0) setProducts(data);
+      .then((res) => {
+        console.log("Featured products response status:", res.status);
+        return res.json();
       })
-      .catch(() => {});
+      .then((data: FeaturedProduct[]) => {
+        console.log("Featured products data:", data);
+        if (data && data.length > 0) {
+          console.log("Setting featured products:", data);
+          setProducts(data);
+        } else {
+          console.log("No featured products found, using fallback");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching featured products:", error);
+      });
   }, []);
 
   return (
@@ -86,6 +102,12 @@ export default function FeaturedProducts() {
                   <img
                     src={product.image}
                     alt={product.name}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                ) : product.category?.image ? (
+                  <img
+                    src={product.category.image}
+                    alt={product.category.name}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 ) : (

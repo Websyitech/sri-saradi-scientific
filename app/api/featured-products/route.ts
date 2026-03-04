@@ -9,6 +9,7 @@ export async function GET() {
       take: 6,
       include: {
         variants: { orderBy: { sortOrder: "asc" }, where: { isActive: true } },
+        category: true,
       },
     });
     return NextResponse.json(products);
