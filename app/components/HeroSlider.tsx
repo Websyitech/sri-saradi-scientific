@@ -15,47 +15,8 @@ interface Slide {
   accentColor: string | null;
 }
 
-const fallbackSlides: Slide[] = [
-  {
-    id: "1",
-    title: "Scientific & Laboratory Equipment",
-    subtitle: "Your Trusted Partner in Science",
-    description:
-      "We supply high-quality laboratory instruments, chemicals, and glassware for research institutions, universities, and industries across India.",
-    ctaText: "Explore Products",
-    ctaLink: "/products",
-    bgImage: null,
-    bgGradient: "linear-gradient(135deg, #2D2B7F 0%, #1a1a2e 60%, #0d0d1a 100%)",
-    accentColor: "#6C63FF",
-  },
-  {
-    id: "2",
-    title: "Solarbio Research Products",
-    subtitle: "Premium Quality Reagents & Chemicals",
-    description:
-      "Authorized distributors of Solarbio life science products. Browse our extensive catalog of biochemicals, antibodies, and molecular biology reagents.",
-    ctaText: "View Solarbio",
-    ctaLink: "/products?brand=Solarbio",
-    bgImage: null,
-    bgGradient: "linear-gradient(135deg, #1B5E20 0%, #0d3311 60%, #091f0b 100%)",
-    accentColor: "#66BB6A",
-  },
-  {
-    id: "3",
-    title: "Applications & Solutions",
-    subtitle: "Industry-Leading Support",
-    description:
-      "From pharmaceuticals to food testing, we provide complete laboratory solutions tailored to your specific research and quality control needs.",
-    ctaText: "Our Applications",
-    ctaLink: "/applications",
-    bgImage: null,
-    bgGradient: "linear-gradient(135deg, #B71C1C 0%, #7f1313 60%, #4a0b0b 100%)",
-    accentColor: "#EF5350",
-  },
-];
-
 export default function HeroSlider() {
-  const [slides, setSlides] = useState<Slide[]>(fallbackSlides);
+  const [slides, setSlides] = useState<Slide[]>([]);
   const [current, setCurrent] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 

@@ -456,6 +456,10 @@ export default function KitProductDetail() {
 
       {slug === 'liquid-handling' && <ProductCatalog />}
 
+      {slug === 'pcr-consumables' && (
+        <ProductCatalog initialTab="molecular" showSeries={['molecular', 'immunoassay', 'sealing']} />
+      )}
+
       {slug === 'filtration' && (
         <section style={{ padding: '60px 40px', background: '#fff' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>

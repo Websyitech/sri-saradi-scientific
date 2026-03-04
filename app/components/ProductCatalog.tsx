@@ -248,8 +248,13 @@ const PRODUCT_CATEGORIES: ProductCategory[] = [
   }
 ];
 
-export default function ProductCatalog() {
-  const [activeTab, setActiveTab] = useState('liquid-handling');
+interface ProductCatalogProps {
+  initialTab?: string;
+  showSeries?: string[];
+}
+
+export default function ProductCatalog({ initialTab = 'liquid-handling', showSeries }: ProductCatalogProps) {
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -260,7 +265,11 @@ export default function ProductCatalog() {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const activeCategory = PRODUCT_CATEGORIES.find(cat => cat.id === activeTab);
+  const categoriesToShow = showSeries && showSeries.length > 0 
+    ? PRODUCT_CATEGORIES.filter(cat => showSeries.includes(cat.id))
+    : PRODUCT_CATEGORIES.filter(cat => !['molecular', 'immunoassay', 'sealing'].includes(cat.id));
+  
+  const activeCategory = categoriesToShow.find(cat => cat.id === activeTab);
 
   const handleRequestQuote = (product: Product) => {
     setSelectedProduct(product);
@@ -307,7 +316,7 @@ export default function ProductCatalog() {
 
         {/* Tab Navigation */}
         <div style={{ display: 'flex', gap: '8px', marginBottom: '32px', flexWrap: 'nowrap', justifyContent: 'center', overflowX: 'auto', paddingBottom: '8px', position: 'sticky', top: '50px', background: '#f8f9fc', zIndex: 100, paddingTop: '8px' }}>
-          {PRODUCT_CATEGORIES.map(category => (
+          {categoriesToShow.map(category => (
             <button
               key={category.id}
               onClick={() => setActiveTab(category.id)}
