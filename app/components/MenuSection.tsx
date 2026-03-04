@@ -7,7 +7,7 @@ import Link from "next/link";
 const leftMenuItems = [
   { label: "Home", href: "/", active: true },
   { label: "Products", href: "/products", hasMegaMenu: true },
-  { label: "Lab Consumables", href: "/kit-products", hasDropdown: true },
+  { label: "Lab Consumables", href: "#", hasDropdown: true },
 ];
 
 const rightMenuItems = [
@@ -301,7 +301,7 @@ export default function MenuSection() {
                     kitProducts.map((product) => (
                       <Link
                         key={product.id}
-                        href={product.href}
+                        href={`/kit-products/${product.slug}`}
                         onClick={() => handleMouseLeave()}
                         style={{
                           display: "block",
@@ -405,7 +405,7 @@ export default function MenuSection() {
                         kitProducts.map((product) => (
                           <Link
                             key={product.id}
-                            href={product.href}
+                            href={`/lab-consumables/${product.slug}`}
                             onClick={() => setMobileOpen(false)}
                             style={{
                               display: "block",

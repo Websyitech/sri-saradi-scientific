@@ -62,6 +62,25 @@ export async function POST(request: NextRequest) {
             details: ["-196°C to +90°C range", "Leak-proof design", "500pcs per bag"]
           }
         ])
+      },
+      {
+        title: "PCR Consumables",
+        slug: "pcr-consumables",
+        heroTitle: "PCR & Molecular Biology Consumables",
+        description: "Complete range of PCR plates, tubes, and molecular biology supplies including Molecular Series, Immunoassay Series, and Sealing Series products.",
+        image: "https://via.placeholder.com/400x300?text=PCR+Consumables",
+        href: "/kit-products/pcr-consumables",
+        sortOrder: 4,
+        isActive: true,
+        associatedProducts: JSON.stringify([
+          {
+            productTitle: "PCR Plates 0.2mL 96-well",
+            categoryId: "molecular",
+            image: "https://via.placeholder.com/200x200?text=PCR+Plates",
+            description: "Standard PCR plates for qPCR and conventional PCR applications",
+            details: ["0.2mL capacity", "96-well format", "Full skirt available", "ABI compatible"]
+          }
+        ])
       }
     ];
 
@@ -70,11 +89,14 @@ export async function POST(request: NextRequest) {
       try {
         const data: any = {
           title: product.title,
+          slug: product.slug,
+          heroTitle: product.heroTitle,
           description: product.description,
           image: product.image,
           href: product.href,
           sortOrder: product.sortOrder,
           isActive: product.isActive,
+          associatedProducts: product.associatedProducts,
         };
 
         await prisma.kitProduct.create({ data });

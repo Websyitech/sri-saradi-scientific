@@ -117,14 +117,7 @@ export default function TopCategories() {
         </div>
 
         {/* ── View All ── */}
-        <div style={{ textAlign: "center", marginTop: "40px" }}>
-          <a href="/products?brand=Solarbio" className="top-cat-view-all">
-            View All Solarbio Products
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </a>
-        </div>
+     
 
       </div>
     </section>

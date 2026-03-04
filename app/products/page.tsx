@@ -512,7 +512,7 @@ export default function ProductsPage() {
             {categories.map((cat) => (
               <a
                 key={cat.name}
-                href={`/products/Solarbio/${cat.name.toLowerCase().replace(/\s+/g, "-")}`}
+                href={`/products?brand=Solarbio&category=${cat.slug}`}
                 aria-current={selectedCategoryName === cat.name ? "page" : undefined}
                 style={{
                   display: "block",
@@ -539,11 +539,36 @@ export default function ProductsPage() {
                 }}
               >
                 {/* Card Header */}
-                <div style={{ background: "linear-gradient(135deg, #2D2B7F 0%, #3d3b9f 100%)", padding: "24px", textAlign: "center" }}>
-                  <div style={{ fontSize: "40px", marginBottom: "12px" }}>🔬</div>
-                  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0 }}>
-                    {cat.name}
-                  </h3>
+                <div style={{ 
+                  background: cat.image ? `url(${cat.image}) center/cover no-repeat` : "linear-gradient(135deg, #2D2B7F 0%, #3d3b9f 100%)", 
+                  padding: "24px", 
+                  textAlign: "center",
+                  minHeight: "180px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "relative"
+                }}>
+                  {!cat.image && <div style={{ fontSize: "40px", marginBottom: "12px" }}>🔬</div>}
+                  {cat.image && (
+                    <div style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "rgba(0, 0, 0, 0.3)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
+                    }}>
+                      <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0, textAlign: "center", maxWidth: "80%" }}>
+                        {cat.name}
+                      </h3>
+                    </div>
+                  )}
+                  {!cat.image && (
+                    <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0 }}>
+                      {cat.name}
+                    </h3>
+                  )}
                 </div>
 
                 {/* Card Body */}

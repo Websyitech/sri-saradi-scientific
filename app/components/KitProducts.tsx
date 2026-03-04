@@ -50,7 +50,7 @@ export default function KitProducts() {
   }, []);
 
   return (
-    <section style={{ padding: "60px 0", background: "#f9f9f9" }}>
+    <section style={{ padding: "0px 0", background: "#f9f9f9" }}>
       <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 40px" }}>
         {/* Section Title */}
         <div style={{ textAlign: "center", marginBottom: "40px" }}>
@@ -64,7 +64,7 @@ export default function KitProducts() {
           >
             <span style={{ color: "var(--primary)" }}>Lab</span> Consumables
           </h2>
-          <p
+          {/* <p
             style={{
               fontSize: "16px",
               color: "#666",
@@ -73,11 +73,11 @@ export default function KitProducts() {
             }}
           >
             Advanced Research Solutions
-          </p>
+          </p> */}
         </div>
 
         {/* View All Link */}
-        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "24px" }}>
+        {/* <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "24px" }}>
           <a
             href="/kit-products"
             style={{
@@ -101,7 +101,7 @@ export default function KitProducts() {
           >
             View All Products →
           </a>
-        </div>
+        </div> */}
 
         {/* Product Cards */}
         <div
