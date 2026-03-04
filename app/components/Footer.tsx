@@ -1,6 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+
+interface SiteSettings {
+  site_name?: string;
+  site_logo?: string;
+}
 
 const footerLinks = {
   navigation: {
