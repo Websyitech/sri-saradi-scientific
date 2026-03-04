@@ -811,7 +811,7 @@ export default function ProductsPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "50px 100px 120px 100px 120px 100px 150px 100px 100px",
+              gridTemplateColumns: "50px 100px 120px 100px 120px 100px 100px 1fr",
               borderBottom: "2px solid var(--primary)",
               padding: "12px 8px",
               fontSize: "12px",
@@ -829,9 +829,8 @@ export default function ProductsPage() {
             <div role="columnheader">Reactivity</div>
             <div role="columnheader">Target</div>
             <div role="columnheader">Application</div>
-            <div role="columnheader">Description</div>
             <div role="columnheader" style={{ textAlign: "center" }}>Quantity</div>
-            <div role="columnheader" style={{ textAlign: "right" }}>Action</div>
+            <div role="columnheader" style={{ textAlign: "center" }}>Action</div>
           </div>
 
           {/* Loading State */}
@@ -865,7 +864,7 @@ export default function ProductsPage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "50px 100px 120px 100px 120px 100px 150px 100px 100px",
+                  gridTemplateColumns: "50px 100px 120px 100px 120px 100px 100px 1fr",
                   padding: "12px 8px",
                   alignItems: "center",
                   fontSize: "13px",
@@ -896,10 +895,7 @@ export default function ProductsPage() {
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
                   {product.applications ? product.applications.substring(0, 50) + (product.applications.length > 50 ? "..." : "") : "-"}
                 </div>
-                <div style={{ color: "#555", fontSize: "12px", lineHeight: 1.4 }} role="cell">
-                  {product.description ? product.description.substring(0, 80) + (product.description.length > 80 ? "..." : "") : "-"}
-                </div>
-                <div style={{ textAlign: "center" }} role="cell">
+                <div style={{ textAlign: "center", width: "100%" }} role="cell">
                   <div
                     style={{
                       display: "flex",
@@ -983,7 +979,7 @@ export default function ProductsPage() {
                     </button>
                   </div>
                 </div>
-                <div style={{ display: "flex", gap: "4px", justifyContent: "flex-end" }}>
+                <div style={{ display: "flex", gap: "4px", justifyContent: "center" }}>
                   <a
                     href={`/products/${product.catalogNumber}`}
                     style={{
