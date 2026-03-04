@@ -364,6 +364,42 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
   }
 ];
 
+function getUSPItems(slug: string | string[] | undefined) {
+  const slugStr = Array.isArray(slug) ? slug[0] : slug || '';
+
+  const uspConfig: Record<string, Array<{ icon: string; text: string }>> = {
+    'liquid-handling': [
+      { icon: '💧', text: 'Universal Compatibility' },
+      { icon: '🔬', text: 'Precision & Accuracy' },
+      { icon: '✔️', text: 'Sterile & Pyrogen-Free' },
+      { icon: '🏆', text: 'ISO 13485 Certified' },
+      { icon: '⚙️', text: 'Automated Platform Compatible' }
+    ],
+    'pcr-consumables': [
+      { icon: '🧬', text: 'High Thermal Stability' },
+      { icon: '✔️', text: 'DNase/RNase Free' },
+      { icon: '🔒', text: 'Contamination Prevention' },
+      { icon: '📊', text: 'Optimal qPCR Performance' },
+      { icon: '🏥', text: 'Clinical Grade Materials' }
+    ],
+    'filtration': [
+      { icon: '🔍', text: 'High Filtration Efficiency' },
+      { icon: '✔️', text: 'Sterile & Endotoxin-Free' },
+      { icon: '💨', text: 'Low Pressure Drop' },
+      { icon: '🌍', text: 'Wide Chemical Compatibility' },
+      { icon: '♻️', text: 'Sustainable Manufacturing' }
+    ]
+  };
+
+  return uspConfig[slugStr] || [
+    { icon: '✔️', text: 'DNase / RNase Free' },
+    { icon: '✔️', text: 'Pyrogen & Endotoxin Free' },
+    { icon: '✔️', text: 'Sterile Packaging' },
+    { icon: '✔️', text: 'ISO 13485 Certified Facility' },
+    { icon: '✔️', text: 'Compatible with Major Automation Platforms' }
+  ];
+}
+
 export default function KitProductDetail() {
   const params = useParams();
   const slug = Array.isArray(params?.slug) ? params.slug[0] : params?.slug;
@@ -452,7 +488,7 @@ export default function KitProductDetail() {
 
       <SampleKitModal isOpen={showSampleModal} onClose={() => setShowSampleModal(false)} />
 
-      <USPBar />
+      <USPBar items={getUSPItems(slug)} />
 
       {slug === 'liquid-handling' && <ProductCatalog />}
 
