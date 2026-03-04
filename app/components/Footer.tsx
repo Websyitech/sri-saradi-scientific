@@ -139,6 +139,36 @@ export default function Footer() {
         </div>
       </div>
 
+      {/* Disclaimer Section */}
+      <div
+        style={{
+          background: "#fafafa",
+          borderTop: "1px solid #e0e0e0",
+          padding: "24px 0",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
+            padding: "0 40px",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "12px",
+              color: "#777",
+              margin: 0,
+              lineHeight: 1.6,
+            }}
+          >
+            <strong>Disclaimer:</strong> The information provided on this website is for informational purposes only and is not intended as medical advice, diagnosis, or treatment. 
+            All products are for research and laboratory use only. Please consult with a qualified professional before using any products for clinical or therapeutic purposes. 
+            Sri Saradi Scientific does not guarantee the accuracy, completeness, or reliability of any information on this website.
+          </p>
+        </div>
+      </div>
+
       {/* Bottom Bar */}
       <div
         style={{
