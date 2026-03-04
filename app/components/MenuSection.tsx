@@ -13,6 +13,7 @@ const leftMenuItems = [
 const rightMenuItems = [
   { label: "About us", href: "/about" },
   { label: "Carrers", href: "/careers" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 interface Category {
