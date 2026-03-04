@@ -13,6 +13,8 @@ export async function GET(request: NextRequest) {
     const abReactivity = searchParams.get("abReactivity") || "";
     const abTarget = searchParams.get("abTarget") || "";
     const applications = searchParams.get("applications") || "";
+    const productLine = searchParams.get("productLine") || "";
+    const subCategory = searchParams.get("subCategory") || "";
 
     const where: Record<string, unknown> = { isActive: true };
     const andConditions: Record<string, unknown>[] = [];
@@ -70,6 +72,20 @@ export async function GET(request: NextRequest) {
       const values = applications.split(",").map((v) => v.trim());
       andConditions.push({
         applications: { in: values },
+      });
+    }
+
+    if (productLine) {
+      const values = productLine.split(",").map((v) => v.trim());
+      andConditions.push({
+        productLine: { in: values },
+      });
+    }
+
+    if (subCategory) {
+      const values = subCategory.split(",").map((v) => v.trim());
+      andConditions.push({
+        subCategory: { in: values },
       });
     }
 

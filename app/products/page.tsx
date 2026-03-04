@@ -23,6 +23,8 @@ interface Product {
   applications?: string | null;
   abReactivity?: string | null;
   abTarget?: string | null;
+  productLine?: string | null;
+  subCategory?: string | null;
   variants?: ProductVariant[];
 }
 
@@ -109,14 +111,33 @@ export default function ProductsPage() {
   // Load filters dynamically from products
   useEffect(() => {
     setFiltersLoading(true);
-    fetch("/api/products?brand=Solarbio&limit=1000")
+    const params = new URLSearchParams();
+    params.set("brand", "Solarbio");
+    params.set("limit", "1000");
+    if (selectedCategoryId) {
+      params.set("category", selectedCategoryId);
+    }
+    if (keyword.trim()) {
+      params.set("search", keyword.trim());
+    }
+    
+    // Add filters to params but EXCLUDE subCategory to get all available values
+    Object.keys(selectedFilters).forEach((filterKey) => {
+      if (filterKey !== "subCategory") {
+        const values = selectedFilters[filterKey];
+        if (values && values.length > 0) {
+          params.append(filterKey, values.join(","));
+        }
+      }
+    });
+    
+    fetch(`/api/products?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.products && Array.isArray(data.products)) {
           const products = data.products as Record<string, unknown>[];
           
           // Extract distinct values from products
-          const productLines = new Set<string>();
           const subCategories = new Set<string>();
           const packSizes = new Set<string>();
           const reactivity = new Set<string>();
@@ -124,8 +145,6 @@ export default function ProductsPage() {
           const applications = new Set<string>();
 
           products.forEach((product) => {
-            // Product Line
-            if (product.productLine) productLines.add(String(product.productLine));
             // Sub Category - split by "/" and add each as separate item
             if (product.subCategory) {
               const subCatStr = String(product.subCategory).trim();
@@ -163,13 +182,6 @@ export default function ProductsPage() {
           });
 
           const filterList: FilterItem[] = [
-            {
-              title: "Product Line",
-              key: "productLine",
-              options: Array.from(productLines)
-                .sort()
-                .map((label) => ({ label })),
-            },
             {
               title: "Sub Category",
               key: "subCategory",
@@ -218,7 +230,7 @@ export default function ProductsPage() {
       })
       .catch(() => {})
       .finally(() => setFiltersLoading(false));
-  }, []);
+  }, [selectedCategoryId, keyword, JSON.stringify(selectedFilters)]);
 
   // Load products based on selected category ID, search, pagination, and filters
   useEffect(() => {
@@ -917,8 +929,8 @@ export default function ProductsPage() {
             style={{
               display: "grid",
               gridTemplateColumns: selectedCategoryName?.toLowerCase().includes("antibod") 
-                ? "100px 120px 100px 140px 70px 180px 150px 1fr"
-                : "100px 120px 100px 140px 70px 180px 1fr",
+                ? "100px 120px 90px 100px 140px 70px 180px 150px 1fr"
+                : "100px 120px 90px 100px 140px 70px 180px 1fr",
               borderBottom: "2px solid var(--primary)",
               padding: "12px 8px",
               fontSize: "12px",
@@ -930,6 +942,7 @@ export default function ProductsPage() {
           >
             <div role="columnheader">Catalog No</div>
             <div role="columnheader">Product Name</div>
+            <div role="columnheader">Product Line</div>
             {!selectedCategoryName?.toLowerCase().includes("antibod") && (
               <div role="columnheader">Brand</div>
             )}
@@ -977,8 +990,8 @@ export default function ProductsPage() {
                 style={{
                   display: "grid",
                   gridTemplateColumns: selectedCategoryName?.toLowerCase().includes("antibod") 
-                    ? "100px 120px 100px 140px 70px 180px 150px 1fr"
-                    : "100px 120px 100px 140px 70px 180px 1fr",
+                    ? "100px 120px 90px 100px 140px 70px 180px 150px 1fr"
+                    : "100px 120px 90px 100px 140px 70px 180px 1fr",
                   padding: "12px 8px",
                   alignItems: "left",
                   fontSize: "13px",
@@ -990,6 +1003,9 @@ export default function ProductsPage() {
                 </div>
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
                   {product.name || "-"}
+                </div>
+                <div style={{ color: "#555", fontSize: "12px" }} role="cell">
+                  {product.productLine || "-"}
                 </div>
                 {!selectedCategoryName?.toLowerCase().includes("antibod") && (
                   <div style={{ color: "#555", fontSize: "12px" }} role="cell">
