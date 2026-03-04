@@ -103,6 +103,15 @@ export default function FeaturedProducts() {
                     src={product.image}
                     alt={product.name}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.onerror = null;
+                      if (product.category?.image) {
+                        target.src = product.category.image;
+                      } else {
+                        target.style.display = "none";
+                      }
+                    }}
                   />
                 ) : product.category?.image ? (
                   <img
