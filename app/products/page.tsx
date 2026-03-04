@@ -97,6 +97,7 @@ export default function ProductsPage() {
               setSelectedCategoryId(found.id);
               setSelectedCategoryName(found.name);
               setSelectedCategoryImage(found.image);
+              setSelectedCategoryDescription(found.description);
             }
           }
         }
@@ -484,11 +485,7 @@ export default function ProductsPage() {
                 }}
               >
                 {selectedCategoryDescription}
-                {products.length > 0 && (
-                  <>
-                    {" "}Currently showing <strong>{products.length}</strong> product{products.length !== 1 ? "s" : ""}.
-                  </>
-                )}
+               
               </p>
             </div>
           </section>

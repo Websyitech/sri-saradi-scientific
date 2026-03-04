@@ -8,7 +8,6 @@ const leftMenuItems = [
   { label: "Home", href: "/", active: true },
   { label: "Products", href: "/products", hasMegaMenu: true },
   { label: "Lab Consumables", href: "/kit-products", hasDropdown: true },
-  { label: "Applications", href: "/applications", hasMegaMenu: true },
 ];
 
 const rightMenuItems = [
