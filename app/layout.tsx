@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import MenuSection from "./components/MenuSection";
 import Footer from "./components/Footer";
 import CookiesPopup from "./components/CookiesPopup";
+import DisclaimerModal from "./components/DisclaimerModal";
 import prisma from "@/app/lib/prisma";
 
 const geistSans = Geist({
@@ -86,6 +87,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <CookiesPopup />
+        <DisclaimerModal />
       </body>
     </html>
   );

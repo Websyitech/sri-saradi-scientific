@@ -52,6 +52,20 @@ const footerLinks = {
 };
 
 export default function Footer() {
+  const [settings, setSettings] = useState<SiteSettings>({});
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((r) => r.json())
+      .then((data) => {
+        setSettings({
+          site_name: data.site_name || "",
+          site_logo: data.site_logo || "",
+        });
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <footer>
       {/* Main Footer */}
@@ -137,39 +151,49 @@ export default function Footer() {
         >
           {/* Logo */}
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <svg
-              width="36"
-              height="44"
-              viewBox="0 0 50 60"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M25 5C18 5 12 10 12 18C12 26 20 28 25 30C30 32 38 34 38 42C38 50 32 55 25 55"
-                stroke="#2D2B7F"
-                strokeWidth="4"
-                strokeLinecap="round"
+            {settings.site_logo ? (
+              <img
+                src={settings.site_logo}
+                alt={settings.site_name || "Logo"}
+                style={{ height: "44px", maxWidth: "200px", objectFit: "contain" }}
               />
-              <circle cx="25" cy="12" r="4" fill="#4CAF50" />
-              <circle cx="20" cy="20" r="3" fill="#2196F3" />
-              <circle cx="30" cy="40" r="3" fill="#2D2B7F" />
-              <path
-                d="M15 45C15 45 20 52 25 55"
-                stroke="#4CAF50"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-            <span
-              style={{
-                fontSize: "18px",
-                fontWeight: 700,
-                color: "var(--primary)",
-                fontStyle: "italic",
-              }}
-            >
-              Sri Saradi Scientific
-            </span>
+            ) : (
+              <>
+                <svg
+                  width="36"
+                  height="44"
+                  viewBox="0 0 50 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M25 5C18 5 12 10 12 18C12 26 20 28 25 30C30 32 38 34 38 42C38 50 32 55 25 55"
+                    stroke="#2D2B7F"
+                    strokeWidth="4"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="25" cy="12" r="4" fill="#4CAF50" />
+                  <circle cx="20" cy="20" r="3" fill="#2196F3" />
+                  <circle cx="30" cy="40" r="3" fill="#2D2B7F" />
+                  <path
+                    d="M15 45C15 45 20 52 25 55"
+                    stroke="#4CAF50"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <span
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    color: "var(--primary)",
+                    fontStyle: "italic",
+                  }}
+                >
+                  Sri Saradi Scientific
+                </span>
+              </>
+            )}
           </div>
 
           {/* Copyright */}
