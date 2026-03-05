@@ -223,6 +223,53 @@ export default function AdminProducts() {
     load();
   };
 
+  const downloadCSVSample = () => {
+    const sampleData = [
+      ["catalogNumber", "name", "description", "brand", "productLine", "manufacturer", "categoryId", "primaryCategory", "subCategory", "applications", "casNumber", "purity", "storage", "image", "material", "volume", "needleShape", "size", "section", "abType", "abHost", "abReactivity", "abTarget", "abCloneType", "abIsotype", "abImmunogen", "abCalculatedMw", "abPurification", "abStorageBuffer", "abGeneId", "abSubcellularLocation", "abSwissProt", "abDilutionRatio", "abApplicationType", "elisaDetectionRange", "elisaSensitivity", "elisaReactivity", "elisaSampleType", "elisaChineseName", "mediaExpiry", "histoPrimaryCategory", "isFeatured", "isActive", "sortOrder"],
+      ["CAT-001", "Anti-Beta Actin Antibody", "High-quality primary antibody for detection", "Solarbio", "Antibodies", "Solarbio Inc", "", "Antibodies", "Primary Antibodies", "Western Blot/ELISA", "", "≥95%", "-20°C", "", "", "100ul", "", "", "", "Primary", "Rabbit", "Human/Mouse", "Beta Actin", "Monoclonal", "IgG", "Beta Actin protein", "42kDa", "Affinity purification", "PBS with 0.05% Azide", "1234", "Cytoplasm", "P60709", "1:1000", "Detection", "", "", "", "", "", "", "", "true", "true", "1"],
+      ["CAT-002", "PCR Master Mix", "Ready-to-use PCR master mix", "Solarbio", "Reagents", "Solarbio Inc", "", "Reagents", "PCR Reagents", "PCR/qPCR", "64339-29-5", "", "2-8°C", "", "", "50ml", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "false", "true", "2"],
+    ];
+
+    const csv = sampleData.map((row) => row.map((cell) => `"${cell}"`).join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "products_sample.csv";
+    link.click();
+    window.URL.revokeObjectURL(url);
+  };
+
+  const handleCSVFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      setImportStatus("⏳ Parsing CSV file...");
+      const response = await fetch("/api/admin/upload-csv", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        setImportStatus(`❌ ${data.error || "Upload failed"}`);
+        return;
+      }
+
+      setImportStatus(`✅ CSV uploaded: ${data.recordCount || 0} records imported successfully`);
+
+      // Reset file input
+      e.target.value = "";
+    } catch (error) {
+      setImportStatus(`❌ Error: ${String(error)}`);
+    }
+  };
+
   const handleImport = async () => {
     if (!confirm("This will DELETE all existing products and re-import from the CSV catalog.\n\n55,000+ products will be imported. This may take a few minutes.\n\nContinue?")) return;
     setImporting(true);
@@ -413,13 +460,25 @@ export default function AdminProducts() {
           <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: 0 }}>Products</h1>
           <p style={{ color: "#888", fontSize: "14px", margin: "4px 0 0" }}>{total} products total</p>
         </div>
-        <div style={{ display: "flex", gap: "10px" }}>
-          <button onClick={handleImport} disabled={importing} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: importing ? "#999" : "#16a34a", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: importing ? "not-allowed" : "pointer" }}>
-            <FaFileImport /> {importing ? "Importing..." : "Import CSV"}
+        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <button onClick={downloadCSVSample} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#6366f1", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
+            <FaFileImport /> Sample CSV
           </button>
-          <button onClick={handleResumeImport} disabled={importing} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: importing ? "#999" : "#f59e0b", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: importing ? "not-allowed" : "pointer" }}>
-            <FaFileImport /> Resume Import
-          </button>
+          <div style={{ position: "relative" }}>
+            <input
+              type="file"
+              accept=".csv"
+              id="csv-file-input"
+              onChange={handleCSVFileUpload}
+              style={{ display: "none" }}
+            />
+            <label
+              htmlFor="csv-file-input"
+              style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
+            >
+              <FaFileImport /> Upload CSV
+            </label>
+          </div>
           <button onClick={openCreate} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
             <FaPlus /> Add Product
           </button>

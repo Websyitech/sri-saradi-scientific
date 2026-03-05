@@ -581,7 +581,7 @@ export default function KitProductDetail() {
       )}
 
       {/* Associated Products */}
-      {product.associatedProducts && product.associatedProducts.length > 0 && (
+      {Array.isArray(product.associatedProducts) && product.associatedProducts.length > 0 && (
         <section style={{ padding: '60px 40px', background: '#f8f9fc' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1a1a2e', textAlign: 'center', marginBottom: '12px' }}>
