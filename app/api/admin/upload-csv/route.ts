@@ -40,13 +40,16 @@ export async function POST(request: NextRequest) {
       records.push(record);
     }
 
-    const importedCount = await importProductsFromCSV(records);
+    importProductsFromCSV(records).catch((err) => {
+      console.error("Background CSV import failed:", err);
+    });
 
     return NextResponse.json({
       success: true,
       recordCount: records.length,
-      importedCount,
+      importedCount: 0,
       headers,
+      message: "CSV is being processed in the background. Check back later for updates.",
     });
   } catch (error) {
     console.error("CSV upload failed:", error);

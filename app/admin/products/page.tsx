@@ -223,6 +223,33 @@ export default function AdminProducts() {
     load();
   };
 
+  const handleDeleteAllProducts = async () => {
+    if (!confirm("⚠️ Delete ALL products and variants? This action CANNOT be undone.")) return;
+    if (!confirm("🚨 Are you absolutely sure? This will permanently delete all products.")) return;
+
+    try {
+      setSaving(true);
+      const response = await fetch("/api/admin/products", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ deleteAll: true }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setImportStatus(`✅ Deleted ${data.deletedProducts} products and ${data.deletedVariants} variants`);
+        load();
+      } else {
+        setImportStatus(`❌ ${data.error || "Failed to delete products"}`);
+      }
+    } catch (error) {
+      setImportStatus(`❌ Error: ${String(error)}`);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const downloadCSVSample = () => {
     const sampleData = [
       ["catalogNumber", "name", "description", "brand", "productLine", "manufacturer", "categoryId", "primaryCategory", "subCategory", "applications", "casNumber", "purity", "storage", "image", "material", "volume", "needleShape", "size", "section", "abType", "abHost", "abReactivity", "abTarget", "abCloneType", "abIsotype", "abImmunogen", "abCalculatedMw", "abPurification", "abStorageBuffer", "abGeneId", "abSubcellularLocation", "abSwissProt", "abDilutionRatio", "abApplicationType", "elisaDetectionRange", "elisaSensitivity", "elisaReactivity", "elisaSampleType", "elisaChineseName", "mediaExpiry", "histoPrimaryCategory", "isFeatured", "isActive", "sortOrder"],
@@ -248,7 +275,7 @@ export default function AdminProducts() {
     formData.append("file", file);
 
     try {
-      setImportStatus("⏳ Parsing CSV file...");
+      setImportStatus("⏳ Uploading CSV file...");
       const response = await fetch("/api/admin/upload-csv", {
         method: "POST",
         body: formData,
@@ -261,9 +288,8 @@ export default function AdminProducts() {
         return;
       }
 
-      setImportStatus(`✅ CSV uploaded: ${data.recordCount || 0} records imported successfully`);
+      setImportStatus(`✅ CSV uploaded: ${data.recordCount || 0} records queued. Processing in background...`);
 
-      // Reset file input
       e.target.value = "";
     } catch (error) {
       setImportStatus(`❌ Error: ${String(error)}`);
@@ -481,6 +507,9 @@ export default function AdminProducts() {
           </div>
           <button onClick={openCreate} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
             <FaPlus /> Add Product
+          </button>
+          <button onClick={handleDeleteAllProducts} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#dc2626", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
+            <FaTrash /> Delete All
           </button>
         </div>
       </div>

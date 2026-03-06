@@ -104,9 +104,25 @@ export async function DELETE(request: NextRequest) {
   if (auth instanceof NextResponse) return auth;
 
   try {
-    const { id } = await request.json();
-    await prisma.product.delete({ where: { id } });
-    return NextResponse.json({ success: true });
+    const body = await request.json();
+    const { id, deleteAll } = body;
+
+    if (deleteAll) {
+      const deletedVariants = await prisma.productVariant.deleteMany({});
+      const deletedProducts = await prisma.product.deleteMany({});
+      return NextResponse.json({
+        success: true,
+        deletedProducts: deletedProducts.count,
+        deletedVariants: deletedVariants.count,
+      });
+    }
+
+    if (id) {
+      await prisma.product.delete({ where: { id } });
+      return NextResponse.json({ success: true });
+    }
+
+    return NextResponse.json({ error: "Either id or deleteAll must be provided" }, { status: 400 });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
