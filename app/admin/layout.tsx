@@ -15,6 +15,7 @@ const sidebarLinks = [
   { label: "Hero Slides", href: "/admin/hero-slides", icon: <FaImages /> },
   { label: "Kit Products", href: "/admin/kit-products", icon: <FaFlask /> },
   { label: "CRO Services", href: "/admin/cro-services", icon: <FaVial /> },
+  { label: "Signaling Pathways", href: "/admin/signaling-pathways", icon: <FaVial /> },
   { label: "Careers", href: "/admin/careers", icon: <FaBriefcase /> },
   { label: "Quotes", href: "/admin/quotes", icon: <FaClipboardList /> },
   { label: "Pages", href: "/admin/pages", icon: <FaFileAlt /> },

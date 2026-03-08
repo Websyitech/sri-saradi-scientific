@@ -9,6 +9,7 @@ const leftMenuItems = [
   { label: "Products", href: "/products", hasMegaMenu: true },
   { label: "Lab Consumables", href: "#", hasDropdown: true },
   { label: "CRO Services", href: "/cro-services", hasDropdown: true },
+  { label: "Signaling Pathways", href: "/signaling-pathways", hasDropdown: true },
 ];
 
 const rightMenuItems = [
