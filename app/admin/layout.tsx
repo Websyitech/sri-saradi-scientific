@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   FaTachometerAlt, FaBoxes, FaFolderOpen, FaImages, FaFlask,
   FaBriefcase, FaClipboardList, FaCog, FaSignOutAlt, FaBars,
-  FaTimes, FaFileAlt,
+  FaTimes, FaFileAlt, FaVial,
 } from "react-icons/fa";
 
 const sidebarLinks = [
@@ -14,6 +14,7 @@ const sidebarLinks = [
   { label: "Categories", href: "/admin/categories", icon: <FaFolderOpen /> },
   { label: "Hero Slides", href: "/admin/hero-slides", icon: <FaImages /> },
   { label: "Kit Products", href: "/admin/kit-products", icon: <FaFlask /> },
+  { label: "CRO Services", href: "/admin/cro-services", icon: <FaVial /> },
   { label: "Careers", href: "/admin/careers", icon: <FaBriefcase /> },
   { label: "Quotes", href: "/admin/quotes", icon: <FaClipboardList /> },
   { label: "Pages", href: "/admin/pages", icon: <FaFileAlt /> },

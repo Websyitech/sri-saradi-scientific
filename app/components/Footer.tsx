@@ -14,6 +14,7 @@ const footerLinks = {
     links: [
       { label: "Home", href: "/" },
       { label: "About Us", href: "/about" },
+      { label: "CRO Services", href: "/cro-services" },
       { label: "FAQ", href: "/faq" },
       { label: "Certificates", href: "/certificates" },
       { label: "Careers", href: "/careers" },

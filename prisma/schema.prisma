@@ -296,3 +296,19 @@ model User {
 
   @@map("users")
 }
+
+model CROService {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  heading     String?
+  subheading  String?
+  banner      String?
+  content     String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("cro_services")
+}

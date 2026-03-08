@@ -8,6 +8,7 @@ const leftMenuItems = [
   { label: "Home", href: "/", active: true },
   { label: "Products", href: "/products", hasMegaMenu: true },
   { label: "Lab Consumables", href: "#", hasDropdown: true },
+  { label: "CRO Services", href: "/cro-services", hasDropdown: true },
 ];
 
 const rightMenuItems = [
@@ -57,6 +58,13 @@ interface KitProduct {
   href: string;
 }
 
+interface CROService {
+  id: string;
+  slug: string;
+  title: string;
+  heading?: string;
+}
+
 export default function MenuSection() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showMegaMenu, setShowMegaMenu] = useState<string | null>(null);
@@ -65,6 +73,7 @@ export default function MenuSection() {
   const [categories, setCategories] = useState<Level2Category[]>([]);
   const [applications, setApplications] = useState<ApplicationCategory[]>([]);
   const [kitProducts, setKitProducts] = useState<KitProduct[]>([]);
+  const [croServices, setCroServices] = useState<CROService[]>([]);
   const [menuTop, setMenuTop] = useState(0);
   const menuContainerRef = useRef<HTMLDivElement>(null);
 
@@ -92,6 +101,15 @@ export default function MenuSection() {
       .then((data) => {
         if (Array.isArray(data)) {
           setKitProducts(data);
+        }
+      })
+      .catch(() => {});
+
+    fetch("/api/cro-services")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setCroServices(data);
         }
       })
       .catch(() => {});
@@ -385,7 +403,7 @@ export default function MenuSection() {
                 </div>
               )}
 
-              {/* Simple Dropdown for Lab Instruments */}
+              {/* Simple Dropdown for Lab Consumables/CRO Services */}
               {item.hasDropdown && showMegaMenu === item.label && (
                 <div
                   style={{
@@ -405,37 +423,72 @@ export default function MenuSection() {
                     e.currentTarget.style.animation = "none";
                   }}
                 >
-                  {kitProducts.length > 0 ? (
-                    kitProducts.map((product) => (
-                      <Link
-                        key={product.id}
-                        href={`/kit-products/${product.slug}`}
-                        onClick={() => handleMouseLeave()}
-                        style={{
-                          display: "block",
-                          padding: "10px 16px",
-                          fontSize: "13px",
-                          color: "#333",
-                          textDecoration: "none",
-                          transition: "all 0.2s",
-                          cursor: "pointer",
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.background = "#f5f5f5";
-                          e.currentTarget.style.color = "var(--primary)";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.background = "transparent";
-                          e.currentTarget.style.color = "#333";
-                        }}
-                      >
-                        {product.title}
-                      </Link>
-                    ))
+                  {item.label === "CRO Services" ? (
+                    croServices.length > 0 ? (
+                      croServices.map((service) => (
+                        <Link
+                          key={service.id}
+                          href={`/cro-services/${service.slug}`}
+                          onClick={() => handleMouseLeave()}
+                          style={{
+                            display: "block",
+                            padding: "10px 16px",
+                            fontSize: "13px",
+                            color: "#333",
+                            textDecoration: "none",
+                            transition: "all 0.2s",
+                            cursor: "pointer",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "#f5f5f5";
+                            e.currentTarget.style.color = "var(--primary)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "transparent";
+                            e.currentTarget.style.color = "#333";
+                          }}
+                        >
+                          {service.title}
+                        </Link>
+                      ))
+                    ) : (
+                      <div style={{ padding: "10px 16px", textAlign: "center", color: "#999", fontSize: "12px" }}>
+                        Loading...
+                      </div>
+                    )
                   ) : (
-                    <div style={{ padding: "10px 16px", textAlign: "center", color: "#999", fontSize: "12px" }}>
-                      Loading...
-                    </div>
+                    kitProducts.length > 0 ? (
+                      kitProducts.map((product) => (
+                        <Link
+                          key={product.id}
+                          href={`/kit-products/${product.slug}`}
+                          onClick={() => handleMouseLeave()}
+                          style={{
+                            display: "block",
+                            padding: "10px 16px",
+                            fontSize: "13px",
+                            color: "#333",
+                            textDecoration: "none",
+                            transition: "all 0.2s",
+                            cursor: "pointer",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "#f5f5f5";
+                            e.currentTarget.style.color = "var(--primary)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "transparent";
+                            e.currentTarget.style.color = "#333";
+                          }}
+                        >
+                          {product.title}
+                        </Link>
+                      ))
+                    ) : (
+                      <div style={{ padding: "10px 16px", textAlign: "center", color: "#999", fontSize: "12px" }}>
+                        Loading...
+                      </div>
+                    )
                   )}
                 </div>
               )}
@@ -537,26 +590,50 @@ export default function MenuSection() {
                     </a>
                     {/* Mobile Simple Dropdown */}
                     <div style={{ marginTop: "8px", paddingBottom: "8px" }}>
-                      {kitProducts.length > 0 ? (
-                        kitProducts.map((product) => (
-                          <Link
-                            key={product.id}
-                            href={`/lab-consumables/${product.slug}`}
-                            onClick={() => setMobileOpen(false)}
-                            style={{
-                              display: "block",
-                              padding: "10px 0",
-                              fontSize: "13px",
-                              color: "#333",
-                              textDecoration: "none",
-                              borderBottom: "1px solid #d0d0d0",
-                            }}
-                          >
-                            {product.title}
-                          </Link>
-                        ))
+                      {item.label === "CRO Services" ? (
+                        croServices.length > 0 ? (
+                          croServices.map((service) => (
+                            <Link
+                              key={service.id}
+                              href={`/cro-services/${service.slug}`}
+                              onClick={() => setMobileOpen(false)}
+                              style={{
+                                display: "block",
+                                padding: "10px 0",
+                                fontSize: "13px",
+                                color: "#333",
+                                textDecoration: "none",
+                                borderBottom: "1px solid #d0d0d0",
+                              }}
+                            >
+                              {service.title}
+                            </Link>
+                          ))
+                        ) : (
+                          <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
+                        )
                       ) : (
-                        <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
+                        kitProducts.length > 0 ? (
+                          kitProducts.map((product) => (
+                            <Link
+                              key={product.id}
+                              href={`/lab-consumables/${product.slug}`}
+                              onClick={() => setMobileOpen(false)}
+                              style={{
+                                display: "block",
+                                padding: "10px 0",
+                                fontSize: "13px",
+                                color: "#333",
+                                textDecoration: "none",
+                                borderBottom: "1px solid #d0d0d0",
+                              }}
+                            >
+                              {product.title}
+                            </Link>
+                          ))
+                        ) : (
+                          <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
+                        )
                       )}
                     </div>
                   </>
