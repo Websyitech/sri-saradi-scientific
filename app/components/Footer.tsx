@@ -162,10 +162,13 @@ export default function Footer() {
               lineHeight: 1.6,
             }}
           >
-            <strong>Disclaimer:</strong> The information provided on this website is for informational purposes only and is not intended as medical advice, diagnosis, or treatment. 
-            All products are for research and laboratory use only. Please consult with a qualified professional before using any products for clinical or therapeutic purposes. 
-            Sri Saradi Scientific does not guarantee the accuracy, completeness, or reliability of any information on this website.
-          </p>
+            <strong>Disclaimer:</strong> Sri Saradi Scientific Private Limited supplies research reagents, laboratory equipment, and consumables for use in academic, pharmaceutical, and diagnostic settings. All products are sold for research and laboratory use only (RUO/IVD as applicable) and are not approved for therapeutic or clinical use unless explicitly stated.
+Product images shown on this website are for reference and illustration purposes only. Actual product appearance, packaging, and labelling may vary depending on the manufacturer, batch, or updates made by the principal company.
+We make every effort to present accurate product information, including specifications, catalogue numbers, and pricing, but these are subject to change without prior notice at the discretion of the respective manufacturers. Customers are advised to confirm specifications, pricing, lead times, and regulatory classifications directly with our team before placing orders.
+Minimum order quantities, import lead times, and product availability may vary as we source products from international manufacturers. All orders are subject to our standard terms and conditions of sale.
+It is the buyer's responsibility to ensure that products are used in compliance with applicable local, state, and national regulations, including but not limited to CDSCO, BIS, and FSSAI guidelines where applicable. Proper handling, storage, and disposal of all products must follow the manufacturer's instructions and relevant safety data sheets (SDS/MSDS).
+Nothing on this website constitutes medical, diagnostic, or therapeutic advice. Sri Saradi Scientific Private Limited shall not be held liable for any misuse of products or reliance on information presented on this website.
+For product-specific documentation, certificates of analysis, safety data sheets, or technical guidance, please contact us directly.</p>
         </div>
       </div>
 
