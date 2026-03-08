@@ -42,7 +42,38 @@ export async function GET(request: NextRequest) {
     }
 
     if (category) {
-      andConditions.push({ categoryId: category });
+      // Handle single or multiple categories (comma-separated)
+      const categoryValues = category.split(",").map((c) => c.trim()).filter(Boolean);
+      
+      if (categoryValues.length > 0) {
+        // Try to find categories by slug first
+        const foundCategories = await prisma.category.findMany({
+          where: { slug: { in: categoryValues } },
+          select: { id: true, children: { select: { id: true } } }
+        });
+        
+        let categoryIds: string[] = [];
+        
+        // For each found category, include its ID and all child IDs
+        foundCategories.forEach((cat) => {
+          categoryIds.push(cat.id);
+          categoryIds.push(...cat.children.map((child) => child.id));
+        });
+        
+        // Add any IDs that were passed directly (for backward compatibility)
+        categoryValues.forEach((val) => {
+          if (!categoryIds.includes(val)) {
+            categoryIds.push(val);
+          }
+        });
+        
+        // Remove duplicates
+        categoryIds = [...new Set(categoryIds)];
+        
+        if (categoryIds.length > 0) {
+          andConditions.push({ categoryId: { in: categoryIds } });
+        }
+      }
     }
 
     if (brand) {

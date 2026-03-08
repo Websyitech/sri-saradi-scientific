@@ -114,8 +114,9 @@ export default function ProductsPage() {
     const params = new URLSearchParams();
     params.set("brand", "Solarbio");
     params.set("limit", "1000");
-    if (selectedCategoryId) {
-      params.set("category", selectedCategoryId);
+    // Use category slug/param directly instead of ID since it supports both slugs and IDs
+    if (categoryParam) {
+      params.set("category", categoryParam);
     }
     if (keyword.trim()) {
       params.set("search", keyword.trim());
@@ -230,9 +231,9 @@ export default function ProductsPage() {
       })
       .catch(() => {})
       .finally(() => setFiltersLoading(false));
-  }, [selectedCategoryId, keyword, JSON.stringify(selectedFilters)]);
+  }, [categoryParam, keyword, JSON.stringify(selectedFilters)]);
 
-  // Load products based on selected category ID, search, pagination, and filters
+  // Load products based on selected category slug, search, pagination, and filters
   useEffect(() => {
     setLoading(true);
     setCurrentPage(1);
@@ -240,8 +241,8 @@ export default function ProductsPage() {
     params.set("limit", pageSize.toString());
     params.set("offset", "0");
     params.set("brand", "Solarbio");
-    if (selectedCategoryId) {
-      params.set("category", selectedCategoryId);
+    if (categoryParam) {
+      params.set("category", categoryParam);
     }
     if (keyword.trim()) {
       params.set("search", keyword.trim());
@@ -280,7 +281,7 @@ export default function ProductsPage() {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [selectedCategoryId, selectedFilters, keyword, pageSize]);
+  }, [categoryParam, selectedFilters, keyword, pageSize]);
 
   // Load products for pagination
   useEffect(() => {
@@ -290,8 +291,8 @@ export default function ProductsPage() {
     params.set("limit", pageSize.toString());
     params.set("offset", offset.toString());
     params.set("brand", "Solarbio");
-    if (selectedCategoryId) {
-      params.set("category", selectedCategoryId);
+    if (categoryParam) {
+      params.set("category", categoryParam);
     }
     if (keyword.trim()) {
       params.set("search", keyword.trim());
@@ -329,7 +330,7 @@ export default function ProductsPage() {
       })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [currentPage, selectedCategoryId, selectedFilters, keyword, pageSize]);
+  }, [currentPage, categoryParam, selectedFilters, keyword, pageSize]);
 
   // Check if user is logged in
   useEffect(() => {

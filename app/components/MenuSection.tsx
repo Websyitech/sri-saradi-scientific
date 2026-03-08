@@ -16,6 +16,23 @@ const rightMenuItems = [
   { label: "Contact Us", href: "/contact" },
 ];
 
+interface Level3Category {
+  id: string;
+  name: string;
+  slug: string;
+  color: string;
+  image: string | null;
+}
+
+interface Level2Category {
+  id: string;
+  name: string;
+  slug: string;
+  color: string;
+  image: string | null;
+  children: Level3Category[];
+}
+
 interface Category {
   id: string;
   name: string;
@@ -43,14 +60,16 @@ interface KitProduct {
 export default function MenuSection() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showMegaMenu, setShowMegaMenu] = useState<string | null>(null);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+  const [categories, setCategories] = useState<Level2Category[]>([]);
   const [applications, setApplications] = useState<ApplicationCategory[]>([]);
   const [kitProducts, setKitProducts] = useState<KitProduct[]>([]);
   const [menuTop, setMenuTop] = useState(0);
   const menuContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch("/api/solarbio/categories")
+    fetch("/api/solarbio/categories-hierarchical")
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -150,50 +169,139 @@ export default function MenuSection() {
                       <h4 style={{ margin: "0 0 14px 0", fontSize: "12px", fontWeight: 700, color: "#666", textTransform: "uppercase", letterSpacing: "0.5px" }}>
                         Solarbio Categories
                       </h4>
-                      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))", gap: "12px" }}>
-                        {categories.length > 0 ? (
-                          categories.map((cat) => (
-                            <Link
-                              key={cat.id}
-                              href={`/products?brand=Solarbio&category=${cat.slug}`}
-                              onClick={() => handleMouseLeave()}
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "10px",
-                                padding: "10px 12px",
-                                borderRadius: "0",
-                                background: "transparent",
-                                border: `1px solid #d0d0d0`,
-                                textDecoration: "none",
-                                transition: "all 0.2s",
-                                cursor: "pointer",
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.background = "#f5f5f5";
-                                e.currentTarget.style.transform = "translateX(3px)";
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.background = "transparent";
-                                e.currentTarget.style.transform = "translateX(0)";
-                              }}
-                            >
+                      <div 
+                        style={{ display: "flex", gap: "30px", maxHeight: "400px", overflowY: "auto" }}
+                        onMouseLeave={() => setActiveSubmenu(null)}
+                      >
+                        {/* Left Vertical List - Level 2 Categories */}
+                        <div style={{ width: "200px", flex: "0 0 auto", overflowY: "auto" }}>
+                          {categories.length > 0 ? (
+                            categories.map((level2) => (
                               <div
+                                key={level2.id}
+                                onMouseEnter={() => setActiveSubmenu(level2.id)}
                                 style={{
-                                  width: "3px",
-                                  height: "16px",
-                                  background: cat.color,
-                                  borderRadius: "0",
+                                  position: "relative",
+                                  marginBottom: "0",
                                 }}
-                              />
-                              <span style={{ fontSize: "12px", fontWeight: 600, color: "#333" }}>
-                                {cat.name}
-                              </span>
-                            </Link>
-                          ))
-                        ) : (
-                          <div style={{ padding: "16px", textAlign: "center", color: "#999", fontSize: "13px", gridColumn: "1 / -1" }}>
-                            Loading...
+                              >
+                                <Link
+                                  href={`/products?brand=Solarbio&category=${level2.slug}`}
+                                  onClick={() => handleMouseLeave()}
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                    padding: "12px 12px",
+                                    borderRadius: "0",
+                                    background: activeSubmenu === level2.id ? "#f5f5f5" : "transparent",
+                                    borderLeft: activeSubmenu === level2.id ? `3px solid ${level2.color}` : "3px solid transparent",
+                                    textDecoration: "none",
+                                    transition: "all 0.2s",
+                                    cursor: "pointer",
+                                    fontSize: "13px",
+                                    fontWeight: 500,
+                                    color: "#333",
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = "#f5f5f5";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = activeSubmenu === level2.id ? "#f5f5f5" : "transparent";
+                                  }}
+                                >
+                                  <span style={{ flex: 1 }}>
+                                    {level2.name}
+                                  </span>
+                                  {level2.children.length > 0 && (
+                                    <span style={{ fontSize: "10px", color: "#999" }}>▶</span>
+                                  )}
+                                </Link>
+                              </div>
+                            ))
+                          ) : (
+                            <div style={{ padding: "16px", textAlign: "center", color: "#999", fontSize: "13px" }}>
+                              Loading...
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Right Grid - Level 3 Categories (appears on hover) */}
+                        {activeSubmenu && (categories.find(c => c.id === activeSubmenu)?.children?.length ?? 0) > 0 && (
+                          <div style={{ flex: 1, minWidth: "400px" }}>
+                            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: "16px" }}>
+                              {categories
+                                .find(c => c.id === activeSubmenu)
+                                ?.children?.map((level3) => (
+                                  <Link
+                                    key={level3.id}
+                                    href={`/products?brand=Solarbio&category=${level3.slug}`}
+                                    onClick={() => handleMouseLeave()}
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "column",
+                                      alignItems: "flex-start",
+                                      gap: "0",
+                                      padding: "0",
+                                      background: "#f9f9f9",
+                                      border: `1px solid #e0e0e0`,
+                                      borderRadius: "6px",
+                                      textDecoration: "none",
+                                      transition: "all 0.2s",
+                                      fontSize: "12px",
+                                      color: "#555",
+                                      overflow: "hidden",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.background = "#fff";
+                                      e.currentTarget.style.borderColor = "var(--primary)";
+                                      e.currentTarget.style.color = "var(--primary)";
+                                      e.currentTarget.style.boxShadow = "0 2px 8px rgba(45, 43, 127, 0.1)";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.background = "#f9f9f9";
+                                      e.currentTarget.style.borderColor = "#e0e0e0";
+                                      e.currentTarget.style.color = "#555";
+                                      e.currentTarget.style.boxShadow = "none";
+                                    }}
+                                  >
+                                    {/* Image Area */}
+                                    <div
+                                      style={{
+                                        width: "100%",
+                                        aspectRatio: "1/1",
+                                        background: level3.color ? `${level3.color}15` : "#e0e0e0",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        overflow: "hidden",
+                                        borderBottom: `2px solid ${level3.color}`,
+                                      }}
+                                    >
+                                      {level3.image ? (
+                                        <img
+                                          src={level3.image}
+                                          alt={level3.name}
+                                          style={{
+                                            width: "100%",
+                                            height: "100%",
+                                            objectFit: "cover",
+                                          }}
+                                        />
+                                      ) : (
+                                        <span style={{ fontSize: "10px", color: "#999", textAlign: "center", padding: "8px" }}>
+                                          No image
+                                        </span>
+                                      )}
+                                    </div>
+                                    
+                                    {/* Text Area */}
+                                    <div style={{ padding: "10px 12px", width: "100%" }}>
+                                      {level3.name}
+                                    </div>
+                                  </Link>
+                                ))}
+                            </div>
                           </div>
                         )}
                       </div>
@@ -371,22 +479,50 @@ export default function MenuSection() {
                     {/* Mobile Mega Menu */}
                     <div style={{ marginTop: "8px", paddingBottom: "8px" }}>
                       {categories.length > 0 ? (
-                        categories.map((cat) => (
-                          <Link
-                            key={cat.id}
-                            href={`/products?brand=Solarbio&category=${cat.slug}`}
-                            onClick={() => setMobileOpen(false)}
-                            style={{
-                              display: "block",
-                              padding: "10px 0",
-                              fontSize: "13px",
-                              color: "#333",
-                              textDecoration: "none",
-                              borderBottom: "1px solid #d0d0d0",
-                            }}
-                          >
-                            {cat.name}
-                          </Link>
+                        categories.map((level2) => (
+                          <div key={level2.id}>
+                            <div
+                              onClick={() => setMobileSubmenu(mobileSubmenu === level2.id ? null : level2.id)}
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                padding: "10px 0",
+                                fontSize: "13px",
+                                color: "#333",
+                                borderBottom: "1px solid #d0d0d0",
+                                cursor: "pointer",
+                              }}
+                            >
+                              <span>{level2.name}</span>
+                              {level2.children.length > 0 && (
+                                <span style={{ fontSize: "10px" }}>
+                                  {mobileSubmenu === level2.id ? "▼" : "▶"}
+                                </span>
+                              )}
+                            </div>
+                            {mobileSubmenu === level2.id && level2.children.length > 0 && (
+                              <div style={{ marginLeft: "16px", backgroundColor: "#f9f9f9" }}>
+                                {level2.children.map((level3) => (
+                                  <Link
+                                    key={level3.id}
+                                    href={`/products?brand=Solarbio&category=${level3.slug}`}
+                                    onClick={() => setMobileOpen(false)}
+                                    style={{
+                                      display: "block",
+                                      padding: "8px 0",
+                                      fontSize: "12px",
+                                      color: "#666",
+                                      textDecoration: "none",
+                                      borderBottom: "1px solid #e0e0e0",
+                                    }}
+                                  >
+                                    {level3.name}
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                          </div>
                         ))
                       ) : (
                         <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
