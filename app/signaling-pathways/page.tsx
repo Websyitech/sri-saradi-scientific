@@ -107,7 +107,8 @@ export default function SignalingPathwaysPage() {
                       style={{
                         width: "100%",
                         height: "200px",
-                        objectFit: "cover",
+                        objectFit: "contain",
+                        background: "#f5f5f5",
                       }}
                     />
                   )}

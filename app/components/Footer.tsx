@@ -19,6 +19,7 @@ const footerLinks = {
       { label: "FAQ", href: "/faq" },
       { label: "Certificates", href: "/certificates" },
       { label: "Careers", href: "/careers" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   products1: {

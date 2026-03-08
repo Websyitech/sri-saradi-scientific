@@ -9,7 +9,7 @@ const leftMenuItems = [
   { label: "Products", href: "/products", hasMegaMenu: true },
   { label: "Lab Consumables", href: "#", hasDropdown: true },
   { label: "CRO Services", href: "/cro-services", hasDropdown: true },
-  { label: "Signaling Pathways", href: "/signaling-pathways", hasDropdown: true },
+  { label: "Resources", href: "/resources", hasDropdown: true },
 ];
 
 const rightMenuItems = [
@@ -73,6 +73,13 @@ interface SignalingPathway {
   heading?: string;
 }
 
+interface FAQ {
+  id: string;
+  slug: string;
+  title: string;
+  heading?: string;
+}
+
 export default function MenuSection() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showMegaMenu, setShowMegaMenu] = useState<string | null>(null);
@@ -83,6 +90,7 @@ export default function MenuSection() {
   const [kitProducts, setKitProducts] = useState<KitProduct[]>([]);
   const [croServices, setCroServices] = useState<CROService[]>([]);
   const [signalingPathways, setSignalingPathways] = useState<SignalingPathway[]>([]);
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [menuTop, setMenuTop] = useState(0);
   const menuContainerRef = useRef<HTMLDivElement>(null);
 
@@ -128,6 +136,15 @@ export default function MenuSection() {
       .then((data) => {
         if (Array.isArray(data)) {
           setSignalingPathways(data);
+        }
+      })
+      .catch(() => {});
+
+    fetch("/api/faqs")
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setFaqs(data);
         }
       })
       .catch(() => {});
@@ -474,39 +491,78 @@ export default function MenuSection() {
                         Loading...
                       </div>
                     )
-                  ) : item.label === "Signaling Pathways" ? (
-                    signalingPathways.length > 0 ? (
-                      signalingPathways.map((pathway) => (
-                        <Link
-                          key={pathway.id}
-                          href={`/signaling-pathways/${pathway.slug}`}
-                          onClick={() => handleMouseLeave()}
-                          style={{
-                            display: "block",
-                            padding: "10px 16px",
-                            fontSize: "13px",
-                            color: "#333",
-                            textDecoration: "none",
-                            transition: "all 0.2s",
-                            cursor: "pointer",
-                          }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.background = "#f5f5f5";
-                            e.currentTarget.style.color = "var(--primary)";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.background = "transparent";
-                            e.currentTarget.style.color = "#333";
-                          }}
-                        >
-                          {pathway.title}
-                        </Link>
-                      ))
-                    ) : (
-                      <div style={{ padding: "10px 16px", textAlign: "center", color: "#999", fontSize: "12px" }}>
-                        Loading...
-                      </div>
-                    )
+                  ) : item.label === "Resources" ? (
+                    <>
+                      <Link
+                        href="/signaling-pathways"
+                        onClick={() => handleMouseLeave()}
+                        style={{
+                          display: "block",
+                          padding: "10px 16px",
+                          fontSize: "13px",
+                          color: "#333",
+                          textDecoration: "none",
+                          transition: "all 0.2s",
+                          cursor: "pointer",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = "#f5f5f5";
+                          e.currentTarget.style.color = "var(--primary)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "transparent";
+                          e.currentTarget.style.color = "#333";
+                        }}
+                      >
+                        Signaling Pathways
+                      </Link>
+                      <Link
+                        href="/publications"
+                        onClick={() => handleMouseLeave()}
+                        style={{
+                          display: "block",
+                          padding: "10px 16px",
+                          fontSize: "13px",
+                          color: "#333",
+                          textDecoration: "none",
+                          transition: "all 0.2s",
+                          cursor: "pointer",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = "#f5f5f5";
+                          e.currentTarget.style.color = "var(--primary)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "transparent";
+                          e.currentTarget.style.color = "#333";
+                        }}
+                      >
+                        Publications
+                      </Link>
+                      <Link
+                        href="/faq"
+                        onClick={() => handleMouseLeave()}
+                        style={{
+                          display: "block",
+                          padding: "10px 16px",
+                          fontSize: "13px",
+                          color: "#333",
+                          textDecoration: "none",
+                          transition: "all 0.2s",
+                          cursor: "pointer",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = "#f5f5f5";
+                          e.currentTarget.style.color = "var(--primary)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "transparent";
+                          e.currentTarget.style.color = "#333";
+                        }}
+                      >
+                        FAQ
+                      </Link>
+                    </>
                   ) : (
                     kitProducts.length > 0 ? (
                       kitProducts.map((product) => (
@@ -663,28 +719,51 @@ export default function MenuSection() {
                         ) : (
                           <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
                         )
-                      ) : item.label === "Signaling Pathways" ? (
-                        signalingPathways.length > 0 ? (
-                          signalingPathways.map((pathway) => (
-                            <Link
-                              key={pathway.id}
-                              href={`/signaling-pathways/${pathway.slug}`}
-                              onClick={() => setMobileOpen(false)}
-                              style={{
-                                display: "block",
-                                padding: "10px 0",
-                                fontSize: "13px",
-                                color: "#333",
-                                textDecoration: "none",
-                                borderBottom: "1px solid #d0d0d0",
-                              }}
-                            >
-                              {pathway.title}
-                            </Link>
-                          ))
-                        ) : (
-                          <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
-                        )
+                      ) : item.label === "Resources" ? (
+                        <>
+                          <Link
+                            href="/signaling-pathways"
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: "block",
+                              padding: "10px 0",
+                              fontSize: "13px",
+                              color: "#333",
+                              textDecoration: "none",
+                              borderBottom: "1px solid #d0d0d0",
+                            }}
+                          >
+                            Signaling Pathways
+                          </Link>
+                          <Link
+                            href="/publications"
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: "block",
+                              padding: "10px 0",
+                              fontSize: "13px",
+                              color: "#333",
+                              textDecoration: "none",
+                              borderBottom: "1px solid #d0d0d0",
+                            }}
+                          >
+                            Publications
+                          </Link>
+                          <Link
+                            href="/faq"
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: "block",
+                              padding: "10px 0",
+                              fontSize: "13px",
+                              color: "#333",
+                              textDecoration: "none",
+                              borderBottom: "1px solid #d0d0d0",
+                            }}
+                          >
+                            FAQ
+                          </Link>
+                        </>
                       ) : (
                         kitProducts.length > 0 ? (
                           kitProducts.map((product) => (
