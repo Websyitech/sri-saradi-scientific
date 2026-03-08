@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { FaPlus, FaEdit, FaTrash, FaSearch, FaChevronLeft, FaChevronRight, FaBoxes, FaChevronDown, FaChevronUp, FaFileImport } from "react-icons/fa";
 import AdminModal from "../components/AdminModal";
+import Link from "next/link";
 
 interface Variant {
   id?: string;
@@ -487,24 +488,9 @@ export default function AdminProducts() {
           <p style={{ color: "#888", fontSize: "14px", margin: "4px 0 0" }}>{total} products total</p>
         </div>
         <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          <button onClick={downloadCSVSample} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#6366f1", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
-            <FaFileImport /> Sample CSV
-          </button>
-          <div style={{ position: "relative" }}>
-            <input
-              type="file"
-              accept=".csv"
-              id="csv-file-input"
-              onChange={handleCSVFileUpload}
-              style={{ display: "none" }}
-            />
-            <label
-              htmlFor="csv-file-input"
-              style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}
-            >
-              <FaFileImport /> Upload CSV
-            </label>
-          </div>
+          <Link href="/admin/import-products" style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#16a34a", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
+            <FaFileImport /> Bulk Import
+          </Link>
           <button onClick={openCreate} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
             <FaPlus /> Add Product
           </button>

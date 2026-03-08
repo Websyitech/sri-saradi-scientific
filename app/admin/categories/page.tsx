@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { FaPlus, FaEdit, FaTrash, FaChevronDown, FaChevronRight, FaFlask, FaSyringe, FaAtom, FaVials, FaMicroscope, FaDna, FaFilter, FaShieldAlt, FaTimes } from "react-icons/fa";
+import { FaPlus, FaEdit, FaTrash, FaChevronDown, FaChevronRight, FaFlask, FaSyringe, FaAtom, FaVials, FaMicroscope, FaDna, FaFilter, FaShieldAlt, FaTimes, FaDownload } from "react-icons/fa";
 import { GiChemicalDrop, GiMolecule } from "react-icons/gi";
 import AdminModal from "../components/AdminModal";
+import Link from "next/link";
 
 /* ── Icon map: DB icon string → React component ── */
 const iconMap: Record<string, React.ReactNode> = {
@@ -172,6 +173,13 @@ export default function AdminCategories() {
     return cats.reduce((sum, c) => sum + 1 + countAll(c.children || []), 0);
   };
 
+  const formatCUID = (id: string): string => {
+    if (!id || id.length < 7) return id;
+    const lastSix = id.slice(-6);
+    const firstPart = id.slice(0, 3);
+    return `${firstPart}...${lastSix}`;
+  };
+
   const inputStyle: React.CSSProperties = { width: "100%", padding: "10px 12px", border: "1px solid #ddd", borderRadius: "8px", fontSize: "14px", outline: "none", boxSizing: "border-box" };
 
   if (loading) {
@@ -217,6 +225,8 @@ export default function AdminCategories() {
               )}
             </div>
           </td>
+          <td style={{ padding: "10px 12px", color: "#999", fontFamily: "monospace", fontSize: "11px" }} title={cat.id}>{formatCUID(cat.id)}</td>
+          <td style={{ padding: "10px 12px", color: "#999", fontFamily: "monospace", fontSize: "11px" }} title={cat.parentId || "—"}>{cat.parentId ? formatCUID(cat.parentId) : "—"}</td>
           <td style={{ padding: "10px 12px", color: "#888", fontFamily: "monospace", fontSize: "12px" }}>{cat.slug}</td>
           <td style={{ padding: "10px 12px", textAlign: "center" }}>
             {cat.color && cat.color !== "#2D2B7F" ? (
@@ -275,6 +285,9 @@ export default function AdminCategories() {
           <button onClick={collapseAll} style={{ padding: "8px 14px", border: "1px solid #ddd", borderRadius: "8px", fontSize: "12px", background: "#fff", cursor: "pointer", color: "#555" }}>
             Collapse All
           </button>
+          <Link href="/admin/import-categories" style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#16a34a", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
+            <FaDownload /> Bulk Import
+          </Link>
           <button onClick={() => openCreate()} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>
             <FaPlus /> Add Category
           </button>
@@ -287,6 +300,8 @@ export default function AdminCategories() {
             <tr style={{ background: "#fafafa" }}>
               <th style={{ padding: "12px 12px", textAlign: "left", fontWeight: 600, color: "#666", width: "40px" }}></th>
               <th style={{ padding: "12px 12px", textAlign: "left", fontWeight: 600, color: "#666" }}>Name</th>
+              <th style={{ padding: "12px 12px", textAlign: "left", fontWeight: 600, color: "#666" }}>ID</th>
+              <th style={{ padding: "12px 12px", textAlign: "left", fontWeight: 600, color: "#666" }}>Parent ID</th>
               <th style={{ padding: "12px 12px", textAlign: "left", fontWeight: 600, color: "#666" }}>Slug</th>
               <th style={{ padding: "12px 12px", textAlign: "center", fontWeight: 600, color: "#666" }}>Color</th>
               <th style={{ padding: "12px 12px", textAlign: "center", fontWeight: 600, color: "#666" }}>Products</th>
@@ -298,7 +313,7 @@ export default function AdminCategories() {
           <tbody>
             {categories.map((cat) => renderCategoryRow(cat, 0))}
             {categories.length === 0 && (
-              <tr><td colSpan={8} style={{ padding: "40px", textAlign: "center", color: "#999" }}>No categories yet</td></tr>
+              <tr><td colSpan={10} style={{ padding: "40px", textAlign: "center", color: "#999" }}>No categories yet</td></tr>
             )}
           </tbody>
         </table>

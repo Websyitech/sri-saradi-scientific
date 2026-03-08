@@ -94,7 +94,14 @@ export async function DELETE(request: NextRequest) {
   if (auth instanceof NextResponse) return auth;
 
   try {
-    const { id } = await request.json();
+    const body = await request.json();
+    const { id, deleteAll } = body;
+    
+    if (deleteAll) {
+      await prisma.category.deleteMany({});
+      return NextResponse.json({ success: true, message: "All categories deleted" });
+    }
+    
     // Delete children first (cascade manually for safety)
     await prisma.category.deleteMany({ where: { parentId: id } });
     await prisma.category.delete({ where: { id } });

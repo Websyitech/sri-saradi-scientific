@@ -108,13 +108,28 @@ export async function DELETE(request: NextRequest) {
     const { id, deleteAll } = body;
 
     if (deleteAll) {
-      const deletedVariants = await prisma.productVariant.deleteMany({});
-      const deletedProducts = await prisma.product.deleteMany({});
-      return NextResponse.json({
-        success: true,
-        deletedProducts: deletedProducts.count,
-        deletedVariants: deletedVariants.count,
-      });
+      try {
+        const result = await prisma.$transaction(async (tx) => {
+          const deletedVariants = await tx.productVariant.deleteMany({});
+          console.log(`Deleted ${deletedVariants.count} variants`);
+          
+          const deletedProducts = await tx.product.deleteMany({});
+          console.log(`Deleted ${deletedProducts.count} products`);
+          
+          return {
+            deletedProducts: deletedProducts.count,
+            deletedVariants: deletedVariants.count,
+          };
+        });
+        
+        return NextResponse.json({
+          success: true,
+          ...result,
+        });
+      } catch (txError) {
+        console.error("Transaction error during deleteAll:", txError);
+        throw txError;
+      }
     }
 
     if (id) {
