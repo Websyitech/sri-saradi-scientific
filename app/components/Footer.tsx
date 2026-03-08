@@ -15,6 +15,7 @@ const footerLinks = {
       { label: "Home", href: "/" },
       { label: "About Us", href: "/about" },
       { label: "CRO Services", href: "/cro-services" },
+      { label: "Signaling Pathways", href: "/signaling-pathways" },
       { label: "FAQ", href: "/faq" },
       { label: "Certificates", href: "/certificates" },
       { label: "Careers", href: "/careers" },
