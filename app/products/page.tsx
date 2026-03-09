@@ -53,6 +53,7 @@ interface FilterItem {
 export default function ProductsPage() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams?.get("category") || "";
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || "";
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategoryName, setSelectedCategoryName] = useState(categoryParam);
@@ -73,6 +74,7 @@ export default function ProductsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
   const pageSize = 20;
+  const [categoryImageErrors, setCategoryImageErrors] = useState<Record<string, boolean>>({});
 
   // Auth & Quote state
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -567,8 +569,11 @@ export default function ProductsPage() {
               <div style={{ display: "flex", gap: "40px", alignItems: "flex-start" }}>
               {/* Category Image Placeholder */}
               <img
-                src={selectedCategoryImage || "/placeholder-product.jpg"}
+                src={selectedCategoryImage ? `${serverUrl}${selectedCategoryImage}` : "/placeholder-product.svg"}
                 alt={`${selectedCategoryName || "Solarbio"} product category image`}
+                onError={(e) => {
+                  e.currentTarget.src = "/placeholder-product.svg";
+                }}
                 style={{
                   width: "280px",
                   height: "260px",
@@ -645,34 +650,50 @@ export default function ProductsPage() {
               >
                 {/* Card Header */}
                 <div style={{ 
-                  background: cat.image ? `url(${cat.image}) center/cover no-repeat` : "linear-gradient(135deg, #2D2B7F 0%, #3d3b9f 100%)", 
-                  padding: "24px", 
+                  background: "linear-gradient(135deg, #2D2B7F 0%, #3d3b9f 100%)", 
+                  padding: "0", 
                   textAlign: "center",
                   minHeight: "180px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  position: "relative"
+                  position: "relative",
+                  overflow: "hidden"
                 }}>
-                  {!cat.image && <div style={{ fontSize: "40px", marginBottom: "12px" }}>🔬</div>}
-                  {cat.image && (
-                    <div style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "rgba(0, 0, 0, 0.3)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center"
-                    }}>
+                  {cat.image && !categoryImageErrors[cat.id] ? (
+                    <>
+                      <img
+                        src={`${serverUrl}${cat.image}`}
+                        alt={cat.name}
+                        onError={() => setCategoryImageErrors(prev => ({ ...prev, [cat.id]: true }))}
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover"
+                        }}
+                      />
+                      <div style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: "rgba(0, 0, 0, 0.3)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center"
+                      }}>
+                        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0, textAlign: "center", maxWidth: "80%" }}>
+                          {cat.name}
+                        </h3>
+                      </div>
+                    </>
+                  ) : (
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", position: "relative", zIndex: 1 }}>
+                      <div style={{ fontSize: "40px", marginBottom: "12px" }}>🔬</div>
                       <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0, textAlign: "center", maxWidth: "80%" }}>
                         {cat.name}
                       </h3>
                     </div>
-                  )}
-                  {!cat.image && (
-                    <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0 }}>
-                      {cat.name}
-                    </h3>
                   )}
                 </div>
 
