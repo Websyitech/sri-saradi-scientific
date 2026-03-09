@@ -648,12 +648,12 @@ export default function ProductsPage() {
                   }
                 }}
               >
-                {/* Card Header */}
+                {/* Card Image - Top */}
                 <div style={{ 
                   background: "linear-gradient(135deg, #2D2B7F 0%, #3d3b9f 100%)", 
                   padding: "0", 
                   textAlign: "center",
-                  minHeight: "180px",
+                  minHeight: "160px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -661,47 +661,41 @@ export default function ProductsPage() {
                   overflow: "hidden"
                 }}>
                   {cat.image && !categoryImageErrors[cat.id] ? (
-                    <>
-                      <img
-                        src={`${serverUrl}${cat.image}`}
-                        alt={cat.name}
-                        onError={() => setCategoryImageErrors(prev => ({ ...prev, [cat.id]: true }))}
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover"
-                        }}
-                      />
-                      <div style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: "rgba(0, 0, 0, 0.3)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center"
-                      }}>
-                        <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0, textAlign: "center", maxWidth: "80%" }}>
-                          {cat.name}
-                        </h3>
-                      </div>
-                    </>
+                    <img
+                      src={`${serverUrl}${cat.image}`}
+                      alt={cat.name}
+                      onError={() => setCategoryImageErrors(prev => ({ ...prev, [cat.id]: true }))}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover"
+                      }}
+                    />
                   ) : (
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", position: "relative", zIndex: 1 }}>
-                      <div style={{ fontSize: "40px", marginBottom: "12px" }}>🔬</div>
-                      <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#fff", margin: 0, textAlign: "center", maxWidth: "80%" }}>
-                        {cat.name}
-                      </h3>
-                    </div>
+                    <div style={{ fontSize: "40px" }}>🔬</div>
                   )}
                 </div>
 
-                {/* Card Body */}
-                <div style={{ padding: "20px", textAlign: "center" }}>
-                  <p style={{ fontSize: "13px", color: "#666", margin: "0 0 16px 0", lineHeight: 1.5 }}>
+                {/* Card Header - Title */}
+                <div style={{ 
+                  padding: "16px 20px", 
+                  textAlign: "center",
+                  borderBottom: "1px solid #e0e0e0"
+                }}>
+                  <h3 style={{ fontSize: "16px", fontWeight: 700, color: "#171717", margin: 0 }}>
+                    {cat.name}
+                  </h3>
+                </div>
+
+                {/* Card Body - Description */}
+                <div style={{ padding: "16px 20px", textAlign: "center", flex: 1 }}>
+                  <p style={{ fontSize: "13px", color: "#666", margin: 0, lineHeight: 1.5 }}>
                     Browse all {cat.name} products from Solarbio Life Sciences
                   </p>
+                </div>
+
+                {/* Card Footer - CTA */}
+                <div style={{ padding: "12px 20px", textAlign: "center", borderTop: "1px solid #e0e0e0" }}>
                   <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
                     View Category →
                   </div>
