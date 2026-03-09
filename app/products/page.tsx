@@ -5,6 +5,26 @@ import { useSearchParams } from "next/navigation";
 import { FaChevronDown, FaChevronUp, FaSearch, FaThList, FaTh, FaCheckCircle } from "react-icons/fa";
 import AuthModal from "@/app/components/AuthModal";
 
+const cleanText = (text: string | null | undefined): string => {
+  if (!text) return "";
+  
+  // Replace mojibake characters commonly caused by encoding issues
+  let cleaned = text
+    .replace(/Äô/g, "'")      // ' encoded as mojibake
+    .replace(/Ã¡/g, "á")      // á encoded as mojibake
+    .replace(/Ã©/g, "é")      // é encoded as mojibake
+    .replace(/Ã­/g, "í")      // í encoded as mojibake
+    .replace(/Ã³/g, "ó")      // ó encoded as mojibake
+    .replace(/Ã¹/g, "ù")      // ù encoded as mojibake
+    .replace(/Ã /g, "à")      // à encoded as mojibake
+    .replace(/Ã§/g, "ç")      // ç encoded as mojibake
+    .replace(/Â/g, "")        // Remove stray Â characters
+    .replace(/\s+/g, " ")     // Normalize whitespace
+    .trim();
+  
+  return cleaned;
+};
+
 interface ProductVariant {
   id: string;
   sku: string | null;
@@ -1041,7 +1061,7 @@ export default function ProductsPage() {
                   {product.catalogNumber}
                 </div>
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
-                  {product.name || "-"}
+                  {cleanText(product.name) || "-"}
                 </div>
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
                   {product.productLine || "-"}
