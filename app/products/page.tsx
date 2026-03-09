@@ -103,6 +103,29 @@ export default function ProductsPage() {
               setSelectedCategoryName(found.name);
               setSelectedCategoryImage(found.image);
               setSelectedCategoryDescription(found.description);
+            } else {
+              // Category not found in top-level list (may be a sub-subcategory)
+              // Fetch from full category tree
+              fetch("/api/categories")
+                .then((res) => res.json())
+                .then((allCats) => {
+                  const findBySlug = (cats: Category[]): Category | undefined => {
+                    for (const cat of cats) {
+                      if (cat.slug === categoryParam) return cat;
+                      const found = findBySlug((cat as Category & { children?: Category[] }).children || []);
+                      if (found) return found;
+                    }
+                    return undefined;
+                  };
+                  const deepFound = findBySlug(allCats);
+                  if (deepFound) {
+                    setSelectedCategoryId(deepFound.id);
+                    setSelectedCategoryName(deepFound.name);
+                    setSelectedCategoryImage(deepFound.image);
+                    setSelectedCategoryDescription(deepFound.description);
+                  }
+                })
+                .catch(() => {});
             }
           }
         }
