@@ -48,6 +48,7 @@ export default function AdminHeroSlides() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const pdfInputRef = useRef<HTMLInputElement>(null);
 
   const load = () => {
     fetch("/api/admin/hero-slides")
@@ -105,6 +106,30 @@ export default function AdminHeroSlides() {
       const data = await res.json();
       if (data.success) {
         setForm((prev) => ({ ...prev, bgImage: data.url }));
+      } else {
+        alert(data.error || "Upload failed");
+      }
+    } catch {
+      alert("Upload failed");
+    }
+    setUploading(false);
+  };
+
+  const handlePdfUpload = async (file: File) => {
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("type", `hero_pdf_${Date.now()}`);
+
+      const res = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setForm((prev) => ({ ...prev, pdfUrl: data.url }));
       } else {
         alert(data.error || "Upload failed");
       }
@@ -375,14 +400,76 @@ export default function AdminHeroSlides() {
               </div>
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
-              <div>
+            <div style={{ marginBottom: "16px" }}>
+              <div style={{ marginBottom: "16px" }}>
                 <label style={labelStyle}>PDF Label</label>
                 <input value={form.pdfLabel} onChange={(e) => setForm({ ...form, pdfLabel: e.target.value })} style={inputStyle} placeholder="e.g. Download Catalog" />
               </div>
               <div>
-                <label style={labelStyle}>PDF URL</label>
-                <input value={form.pdfUrl} onChange={(e) => setForm({ ...form, pdfUrl: e.target.value })} style={inputStyle} placeholder="e.g. /files/catalog.pdf" />
+                <label style={labelStyle}>Upload PDF File</label>
+                <input
+                  type="file"
+                  ref={pdfInputRef}
+                  accept=".pdf"
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handlePdfUpload(file);
+                  }}
+                />
+                <div
+                  onClick={() => !uploading && pdfInputRef.current?.click()}
+                  style={{
+                    border: "2px dashed #ddd",
+                    borderRadius: "8px",
+                    padding: "24px",
+                    textAlign: "center",
+                    cursor: uploading ? "wait" : "pointer",
+                    background: form.pdfUrl ? "#f0f7ff" : "#fafafa",
+                    transition: "border-color 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#2D2B7F")}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#ddd")}
+                >
+                  {uploading ? (
+                    <div style={{ color: "#666" }}>
+                      <FaSpinner style={{ animation: "spin 1s linear infinite", fontSize: "28px" }} />
+                      <p style={{ margin: "8px 0 0", fontSize: "14px" }}>Uploading...</p>
+                    </div>
+                  ) : form.pdfUrl ? (
+                    <div style={{ color: "#2D2B7F" }}>
+                      <p style={{ margin: "0 0 8px", fontSize: "14px", fontWeight: 600 }}>✓ PDF Uploaded</p>
+                      <p style={{ margin: "0", fontSize: "12px", color: "#666" }}>Click to replace</p>
+                    </div>
+                  ) : (
+                    <div style={{ color: "#888" }}>
+                      <FaUpload style={{ fontSize: "32px" }} />
+                      <p style={{ margin: "10px 0 0", fontSize: "14px" }}>Click to upload PDF file</p>
+                      <p style={{ margin: "4px 0 0", fontSize: "12px", color: "#aaa" }}>PDF only</p>
+                    </div>
+                  )}
+                </div>
+                {form.pdfUrl && (
+                  <button
+                    type="button"
+                    onClick={() => setForm({ ...form, pdfUrl: "" })}
+                    style={{
+                      marginTop: "8px",
+                      padding: "6px 12px",
+                      background: "#fef2f2",
+                      color: "#dc2626",
+                      border: "1px solid #fecaca",
+                      borderRadius: "6px",
+                      fontSize: "12px",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "6px",
+                    }}
+                  >
+                    <FaTrash /> Remove PDF
+                  </button>
+                )}
               </div>
             </div>
           )}
