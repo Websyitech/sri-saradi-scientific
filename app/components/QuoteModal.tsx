@@ -210,36 +210,38 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
         )}
 
         {/* Items Summary */}
-        <div style={{ background: "#f9fbff", padding: "16px", borderRadius: "8px", marginBottom: "24px" }}>
-          <p style={{ fontSize: "12px", fontWeight: 600, color: "#999", margin: "0 0 12px", textTransform: "uppercase" }}>
-            Items ({items.length})
-          </p>
-          {items.map((item, idx) => (
-            <div
-              key={idx}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingBottom: "8px",
-                borderBottom: idx < items.length - 1 ? "1px solid #e0e0e0" : "none",
-                marginBottom: "8px",
-              }}
-            >
-              <div>
-                <p style={{ fontSize: "13px", fontWeight: 600, color: "#171717", margin: 0 }}>
-                  {item.name}
-                </p>
-                <p style={{ fontSize: "12px", color: "#999", margin: "4px 0 0" }}>
-                  SKU: {item.sku}
-                </p>
+        {items.length > 0 && (
+          <div style={{ background: "#f9fbff", padding: "16px", borderRadius: "8px", marginBottom: "24px" }}>
+            <p style={{ fontSize: "12px", fontWeight: 600, color: "#999", margin: "0 0 12px", textTransform: "uppercase" }}>
+              Items ({items.length})
+            </p>
+            {items.map((item, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingBottom: "8px",
+                  borderBottom: idx < items.length - 1 ? "1px solid #e0e0e0" : "none",
+                  marginBottom: "8px",
+                }}
+              >
+                <div>
+                  <p style={{ fontSize: "13px", fontWeight: 600, color: "#171717", margin: 0 }}>
+                    {item.name}
+                  </p>
+                  <p style={{ fontSize: "12px", color: "#999", margin: "4px 0 0" }}>
+                    SKU: {item.sku}
+                  </p>
+                </div>
+                <span style={{ fontSize: "13px", fontWeight: 600, color: "#2D2B7F" }}>
+                  Qty: {item.quantity}
+                </span>
               </div>
-              <span style={{ fontSize: "13px", fontWeight: 600, color: "#2D2B7F" }}>
-                Qty: {item.quantity}
-              </span>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
