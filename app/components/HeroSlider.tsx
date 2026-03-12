@@ -10,6 +10,10 @@ interface Slide {
   description: string | null;
   ctaText: string | null;
   ctaLink: string | null;
+  ctaType: string | null;
+  pdfUrl: string | null;
+  pdfLabel: string | null;
+  quoteCtaLabel: string | null;
   bgImage: string | null;
   bgGradient: string | null;
   accentColor: string | null;
@@ -174,16 +178,29 @@ export default function HeroSlider() {
                 <h2 className="hero-slide-title">{slide.title}</h2>
                 <p className="hero-slide-description">{slide.description}</p>
                 <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-                  <a
-                    href={slide.ctaLink || "/products"}
-                    className="hero-btn-primary"
-                    style={{ background: slide.accentColor || "#6C63FF" }}
-                  >
-                    {slide.ctaText || "Learn More"}
-                  </a>
-                  <a href="/contact" className="hero-btn-secondary">
-                    Contact Us
-                  </a>
+                  {slide.ctaType === "pdf" && slide.pdfUrl && slide.pdfLabel ? (
+                    <a
+                      href={slide.pdfUrl}
+                      download
+                      className="hero-btn-primary"
+                      style={{ background: slide.accentColor || "#6C63FF" }}
+                    >
+                      {slide.pdfLabel}
+                    </a>
+                  ) : slide.ctaType === "link" && slide.ctaText && slide.ctaLink ? (
+                    <a
+                      href={slide.ctaLink}
+                      className="hero-btn-primary"
+                      style={{ background: slide.accentColor || "#6C63FF" }}
+                    >
+                      {slide.ctaText}
+                    </a>
+                  ) : null}
+                  {slide.quoteCtaLabel && (
+                    <a href="/contact" className="hero-btn-secondary">
+                      {slide.quoteCtaLabel}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

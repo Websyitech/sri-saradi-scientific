@@ -75,7 +75,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: 50,
+        zIndex: 9999,
       }}
       onClick={onClose}
     >

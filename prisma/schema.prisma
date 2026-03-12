@@ -64,19 +64,23 @@ model Category {
 }
 
 model HeroSlide {
-  id          String   @id @default(cuid())
-  title       String
-  subtitle    String?
-  description String?
-  ctaText     String?
-  ctaLink     String?
-  bgImage     String?
-  bgGradient  String?
-  accentColor String?  @default("#6C63FF")
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String   @id @default(cuid())
+  title          String
+  subtitle       String?
+  description    String?
+  ctaText        String?
+  ctaLink        String?
+  ctaType        String?  @default("link")
+  pdfUrl         String?
+  pdfLabel       String?
+  quoteCtaLabel  String?
+  bgImage        String?
+  bgGradient     String?
+  accentColor    String?  @default("#6C63FF")
+  sortOrder      Int      @default(0)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@map("hero_slides")
 }

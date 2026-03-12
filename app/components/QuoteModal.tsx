@@ -88,7 +88,7 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          zIndex: 50,
+          zIndex: 9999,
         }}
         onClick={onClose}
       >
@@ -156,7 +156,7 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        zIndex: 50,
+        zIndex: 9999,
       }}
       onClick={onClose}
     >

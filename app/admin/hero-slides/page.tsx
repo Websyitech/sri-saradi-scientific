@@ -11,6 +11,10 @@ interface HeroSlide {
   description?: string;
   ctaText?: string;
   ctaLink?: string;
+  ctaType?: string;
+  pdfUrl?: string;
+  pdfLabel?: string;
+  quoteCtaLabel?: string;
   bgImage?: string;
   bgGradient?: string;
   accentColor?: string;
@@ -22,8 +26,12 @@ const emptyForm = {
   title: "",
   subtitle: "",
   description: "",
+  ctaType: "link",
   ctaText: "",
   ctaLink: "",
+  pdfUrl: "",
+  pdfLabel: "",
+  quoteCtaLabel: "",
   bgImage: "",
   bgGradient: "",
   accentColor: "#6C63FF",
@@ -67,8 +75,12 @@ export default function AdminHeroSlides() {
       title: item.title,
       subtitle: item.subtitle || "",
       description: item.description || "",
+      ctaType: item.ctaType || "link",
       ctaText: item.ctaText || "",
       ctaLink: item.ctaLink || "",
+      pdfUrl: item.pdfUrl || "",
+      pdfLabel: item.pdfLabel || "",
+      quoteCtaLabel: item.quoteCtaLabel || "",
       bgImage: item.bgImage || "",
       bgGradient: item.bgGradient || "",
       accentColor: item.accentColor || "#6C63FF",
@@ -342,15 +354,42 @@ export default function AdminHeroSlides() {
             <label style={labelStyle}>Description</label>
             <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={3} style={{ ...inputStyle, resize: "vertical" }} />
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
-            <div>
-              <label style={labelStyle}>CTA Text</label>
-              <input value={form.ctaText} onChange={(e) => setForm({ ...form, ctaText: e.target.value })} style={inputStyle} placeholder="e.g. Shop Now" />
+
+          <div style={{ marginBottom: "16px" }}>
+            <label style={labelStyle}>CTA Type</label>
+            <select value={form.ctaType} onChange={(e) => setForm({ ...form, ctaType: e.target.value })} style={inputStyle}>
+              <option value="link">Link</option>
+              <option value="pdf">PDF Download</option>
+            </select>
+          </div>
+
+          {form.ctaType === "link" ? (
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
+              <div>
+                <label style={labelStyle}>CTA Text</label>
+                <input value={form.ctaText} onChange={(e) => setForm({ ...form, ctaText: e.target.value })} style={inputStyle} placeholder="e.g. Shop Now" />
+              </div>
+              <div>
+                <label style={labelStyle}>CTA Link</label>
+                <input value={form.ctaLink} onChange={(e) => setForm({ ...form, ctaLink: e.target.value })} style={inputStyle} placeholder="e.g. /products" />
+              </div>
             </div>
-            <div>
-              <label style={labelStyle}>CTA Link</label>
-              <input value={form.ctaLink} onChange={(e) => setForm({ ...form, ctaLink: e.target.value })} style={inputStyle} placeholder="e.g. /products" />
+          ) : (
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
+              <div>
+                <label style={labelStyle}>PDF Label</label>
+                <input value={form.pdfLabel} onChange={(e) => setForm({ ...form, pdfLabel: e.target.value })} style={inputStyle} placeholder="e.g. Download Catalog" />
+              </div>
+              <div>
+                <label style={labelStyle}>PDF URL</label>
+                <input value={form.pdfUrl} onChange={(e) => setForm({ ...form, pdfUrl: e.target.value })} style={inputStyle} placeholder="e.g. /files/catalog.pdf" />
+              </div>
             </div>
+          )}
+
+          <div style={{ marginBottom: "16px" }}>
+            <label style={labelStyle}>Quote Request Button Label</label>
+            <input value={form.quoteCtaLabel} onChange={(e) => setForm({ ...form, quoteCtaLabel: e.target.value })} style={inputStyle} placeholder="e.g. Request Quote" />
           </div>
           <div style={{ marginBottom: "16px" }}>
             <label style={labelStyle}>Fallback Gradient (if no image)</label>
