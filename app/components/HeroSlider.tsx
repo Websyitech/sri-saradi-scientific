@@ -198,15 +198,13 @@ export default function HeroSlider() {
                       {slide.ctaText}
                     </a>
                   ) : null}
-                  {slide.quoteCtaLabel && (
-                    <button
-                      onClick={() => setShowQuoteModal(true)}
-                      className="hero-btn-secondary"
-                      style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
-                    >
-                      {slide.quoteCtaLabel}
-                    </button>
-                  )}
+                  <button
+                    onClick={() => setShowQuoteModal(true)}
+                    className="hero-btn-secondary"
+                    style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                  >
+                    {slide.quoteCtaLabel || "Request a Quote"}
+                  </button>
                 </div>
               </div>
             </div>
