@@ -31,7 +31,7 @@ const emptyForm = {
   ctaLink: "",
   pdfUrl: "",
   pdfLabel: "",
-  quoteCtaLabel: "",
+  quoteCtaLabel: "Request a Quote",
   bgImage: "",
   bgGradient: "",
   accentColor: "#6C63FF",
@@ -475,8 +475,8 @@ export default function AdminHeroSlides() {
           )}
 
           <div style={{ marginBottom: "16px" }}>
-            <label style={labelStyle}>Quote Request Button Label</label>
-            <input value={form.quoteCtaLabel} onChange={(e) => setForm({ ...form, quoteCtaLabel: e.target.value })} style={inputStyle} placeholder="e.g. Request Quote" />
+            <label style={labelStyle}>Quote Request Button Label *</label>
+            <input value={form.quoteCtaLabel} onChange={(e) => setForm({ ...form, quoteCtaLabel: e.target.value })} required style={inputStyle} placeholder="e.g. Request a Quote" />
           </div>
           <div style={{ marginBottom: "16px" }}>
             <label style={labelStyle}>Fallback Gradient (if no image)</label>
