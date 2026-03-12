@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import QuoteModal from "./QuoteModal";
 
 interface Slide {
   id: string;
@@ -23,6 +24,7 @@ export default function HeroSlider() {
   const [slides, setSlides] = useState<Slide[]>([]);
   const [current, setCurrent] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
 
   useEffect(() => {
     fetch("/api/hero-slides")
@@ -197,9 +199,13 @@ export default function HeroSlider() {
                     </a>
                   ) : null}
                   {slide.quoteCtaLabel && (
-                    <a href="/contact" className="hero-btn-secondary">
+                    <button
+                      onClick={() => setShowQuoteModal(true)}
+                      className="hero-btn-secondary"
+                      style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}
+                    >
                       {slide.quoteCtaLabel}
-                    </a>
+                    </button>
                   )}
                 </div>
               </div>
@@ -280,6 +286,8 @@ export default function HeroSlider() {
           }}
         />
       </div>
+
+      <QuoteModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} items={[]} />
     </section>
   );
 }
