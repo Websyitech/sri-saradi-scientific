@@ -621,7 +621,7 @@ export default function KitProductDetail() {
                 >
                   {prod.image && (
                     <div style={{ width: '100%', height: '180px', background: '#fafafa', borderRadius: '8px', marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                      <img src={prod.image} alt={prod.productTitle} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }} />
+                      <img src={prod.image} alt={prod.productTitle} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                   )}
                   <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a1a2e', margin: '0 0 8px 0' }}>
