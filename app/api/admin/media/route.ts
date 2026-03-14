@@ -84,7 +84,7 @@ async function getMediaFiles() {
   const fs = await import("fs/promises");
   const files = await fs.readdir(UPLOADS_DIR);
 
-  return files.map((filename) => {
+  const fileList = files.map((filename) => {
     const filepath = join(UPLOADS_DIR, filename);
     const stats = require("fs").statSync(filepath);
 
@@ -97,4 +97,7 @@ async function getMediaFiles() {
       uploadedAt: stats.birthtime.toISOString(),
     };
   });
+
+  // Sort by uploadedAt date in descending order (newest first)
+  return fileList.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
 }
