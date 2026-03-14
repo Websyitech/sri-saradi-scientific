@@ -199,7 +199,7 @@ export default function LabConsumablesPage() {
             paddingRight: "24px",
           }}
         >
-          {/* Kit Products Section */}
+          {/* Lab Consumables Section */}
           <details
             style={{
               marginBottom: "32px",
@@ -218,7 +218,7 @@ export default function LabConsumablesPage() {
                 marginBottom: "12px",
               }}
             >
-              📦 Kit Products
+              📦 Lab Consumables
             </summary>
             <ul style={{ listStyle: "none", margin: "12px 0 0 0", padding: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
               {kitProducts.map((kit) => (

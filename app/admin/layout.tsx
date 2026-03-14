@@ -13,7 +13,7 @@ const sidebarLinks = [
   { label: "Products", href: "/admin/products", icon: <FaBoxes /> },
   { label: "Categories", href: "/admin/categories", icon: <FaFolderOpen /> },
   { label: "Hero Slides", href: "/admin/hero-slides", icon: <FaImages /> },
-  { label: "Kit Products", href: "/admin/kit-products", icon: <FaFlask /> },
+  { label: "Lab Consumables", href: "/admin/kit-products", icon: <FaFlask /> },
   { label: "CRO Services", href: "/admin/cro-services", icon: <FaVial /> },
   { label: "Signaling Pathways", href: "/admin/signaling-pathways", icon: <FaVial /> },
   { label: "FAQ", href: "/admin/faqs", icon: <FaClipboardList /> },

@@ -18,6 +18,7 @@ const cleanText = (text: string | null | undefined): string => {
     .replace(/Ã¹/g, "ù")      // ù encoded as mojibake
     .replace(/Ã /g, "à")      // à encoded as mojibake
     .replace(/Ã§/g, "ç")      // ç encoded as mojibake
+    .replace(/Œº/g, "μ")      // μ (micro) encoded as mojibake
     .replace(/Â/g, "")        // Remove stray Â characters
     .replace(/\s+/g, " ")     // Normalize whitespace
     .trim();

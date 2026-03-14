@@ -59,11 +59,11 @@ export default function AdminKitProducts() {
     <div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
         <div>
-          <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: 0 }}>Kit Products</h1>
-          <p style={{ color: "#888", fontSize: "14px", margin: "4px 0 0" }}>{items.length} kit products (homepage section)</p>
+          <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: 0 }}>Lab Consumables</h1>
+          <p style={{ color: "#888", fontSize: "14px", margin: "4px 0 0" }}>{items.length} lab consumables (homepage section)</p>
         </div>
         <Link href="/admin/kit-products/new" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer", textDecoration: "none" }}>
-          <FaPlus /> Add Kit Product
+          <FaPlus /> Add Lab Consumable
         </Link>
       </div>
 
@@ -95,7 +95,7 @@ export default function AdminKitProducts() {
           </div>
         ))}
         {items.length === 0 && (
-          <div style={{ gridColumn: "1/-1", padding: "60px", textAlign: "center", color: "#999", background: "#fff", borderRadius: "12px" }}>No kit products yet</div>
+          <div style={{ gridColumn: "1/-1", padding: "60px", textAlign: "center", color: "#999", background: "#fff", borderRadius: "12px" }}>No lab consumables yet</div>
         )}
       </div>
     </div>
