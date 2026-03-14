@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { FaPlus, FaEdit, FaTrash, FaSearch, FaChevronLeft, FaChevronRight, FaBoxes, FaChevronDown, FaChevronUp, FaFileImport } from "react-icons/fa";
 import AdminModal from "../components/AdminModal";
 import Link from "next/link";
+import { cleanProductName } from "@/app/lib/textUtils";
 
 interface Variant {
   id?: string;
@@ -146,7 +147,7 @@ export default function AdminProducts() {
   const openEdit = (p: Product) => {
     setEditing(p);
     setForm({
-      catalogNumber: p.catalogNumber, name: p.name, description: p.description || "",
+      catalogNumber: p.catalogNumber, name: cleanProductName(p.name), description: p.description || "",
       brand: p.brand || "", manufacturer: p.manufacturer || "", productLine: p.productLine || "",
       categoryId: p.categoryId || "", primaryCategory: p.primaryCategory || "",
       subCategory: p.subCategory || "", applications: p.applications || "",
@@ -556,7 +557,7 @@ export default function AdminProducts() {
               {products.map((p) => (
                 <tr key={p.id} style={{ borderBottom: "1px solid #f5f5f5" }}>
                   <td style={{ padding: "12px 16px", fontFamily: "monospace", fontSize: "12px", color: "#2D2B7F", fontWeight: 500 }}>{p.catalogNumber}</td>
-                  <td style={{ padding: "12px 16px", fontWeight: 500, color: "#333", maxWidth: "250px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{p.name}</td>
+                  <td style={{ padding: "12px 16px", fontWeight: 500, color: "#333", maxWidth: "250px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{cleanProductName(p.name)}</td>
                   <td style={{ padding: "12px 16px", color: "#666" }}>
                     {p.brand ? <span style={{ padding: "2px 8px", borderRadius: "10px", fontSize: "11px", fontWeight: 600, background: p.brand === "Solarbio" ? "#e0f2fe" : "#f3f4f6", color: p.brand === "Solarbio" ? "#0369a1" : "#555" }}>{p.brand}</span> : "—"}
                   </td>
