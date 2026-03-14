@@ -490,7 +490,7 @@ export default function KitProductDetail() {
 
       <USPBar items={getUSPItems(slug)} />
 
-      {slug === 'liquid-handling' && <ProductCatalog />}
+      {slug === 'genfollower-products' && <ProductCatalog />}
 
       {slug === 'pcr-consumables' && (
         <ProductCatalog initialTab="molecular" showSeries={['molecular', 'immunoassay', 'sealing']} />
