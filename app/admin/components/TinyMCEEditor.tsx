@@ -23,7 +23,7 @@ export default function TinyMCEEditor({
   return (
     <Editor
       apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-      onInit={(evt, editor) => editorRef.current = editor}
+      onInit={(_evt, editor) => editorRef.current = editor}
       value={value}
       onEditorChange={onChange}
       init={{
@@ -40,13 +40,12 @@ export default function TinyMCEEditor({
           'removeformat | help',
         content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size:14px }',
         placeholder,
-        readonly: disabled,
         branding: false,
         promotion: false,
         resize: true,
         elementpath: false,
         statusbar: false,
-        setup: (editor) => {
+        setup: (editor: any) => {
           editor.on('init', () => {
             if (disabled) {
               editor.mode.set('readonly');
