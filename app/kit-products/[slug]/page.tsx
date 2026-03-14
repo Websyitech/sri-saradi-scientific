@@ -295,7 +295,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     ],
     applications: ['Water Treatment', 'Desalination', 'Industrial', 'Heavy Particle Load'],
     features: ['Max wound process (30% more material)', 'Wide chemical compatibility', 'Special connector options', 'High temperature capability (80-120°C)']
-  },
+  }, 
   {
     id: 'aquaflux-multilayer',
     category: 'Process Filtration - Specialty',
