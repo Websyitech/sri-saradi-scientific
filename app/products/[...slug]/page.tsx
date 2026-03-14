@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { FaArrowLeft, FaCheckCircle, FaShoppingCart } from "react-icons/fa";
+import { cleanText } from "../page";
 
 interface ProductVariant {
   id: string;
@@ -373,7 +374,7 @@ export default function ProductDetailPage() {
           {/* Right Column - Details */}
           <div>
             {/* Product Name */}
-            <h1 style={{ fontSize: "32px", fontWeight: 800, color: "#171717", margin: "0 0 24px 0" }}>{product.name}</h1>
+            <h1 style={{ fontSize: "32px", fontWeight: 800, color: "#171717", margin: "0 0 24px 0" }}>{cleanText(product.name)}</h1>
 
             {/* Description */}
             {product.description && (
@@ -423,7 +424,7 @@ export default function ProductDetailPage() {
               {product.applications && (
                 <div>
                   <div style={{ fontSize: "12px", color: "#999", fontWeight: 600, marginBottom: "6px" }}>APPLICATIONS</div>
-                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#444" }}>{product.applications}</div>
+                  <div style={{ fontSize: "14px", fontWeight: 600, color: "#444" }}>{cleanText(product.applications)}</div>
                 </div>
               )}
             </div>

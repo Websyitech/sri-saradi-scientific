@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
+import { cleanText } from "../products/page";
 
 const leftMenuItems = [
   { label: "Home", href: "/", active: true },
@@ -192,7 +193,7 @@ export default function MenuSection() {
               onMouseLeave={() => (item.hasMegaMenu || item.hasDropdown) && handleMouseLeave()}
             >
               <a href={item.href} className="menu-link" style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                {item.label}
+                {cleanText(item.label)}
                 {(item.hasMegaMenu || item.hasDropdown) && <FaChevronDown style={{ fontSize: "11px" }} />}
               </a>
 
@@ -264,7 +265,7 @@ export default function MenuSection() {
                                   }}
                                 >
                                   <span style={{ flex: 1 }}>
-                                    {level2.name}
+                                    {cleanText(level2.name)}
                                   </span>
                                   {level2.children.length > 0 && (
                                     <span style={{ fontSize: "10px", color: "#999" }}>▶</span>
@@ -334,7 +335,7 @@ export default function MenuSection() {
                                       {level3.image ? (
                                         <img
                                           src={level3.image}
-                                          alt={level3.name}
+                                          alt={cleanText(level3.name)}
                                           style={{
                                             width: "100%",
                                             height: "100%",
@@ -350,7 +351,7 @@ export default function MenuSection() {
                                     
                                     {/* Text Area */}
                                     <div style={{ padding: "10px 12px", width: "100%" }}>
-                                      {level3.name}
+                                      {cleanText(level3.name)}
                                     </div>
                                   </Link>
                                 ))}
@@ -386,7 +387,7 @@ export default function MenuSection() {
                           applications.map((appCat) => (
                             <div key={appCat.id}>
                               <div style={{ fontSize: "12px", fontWeight: 700, color: "#333", marginBottom: "8px" }}>
-                                {appCat.title}
+                                {cleanText(appCat.title)}
                               </div>
                               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "4px" }}>
                                 {appCat.items.map((item) => (
@@ -403,7 +404,7 @@ export default function MenuSection() {
                                       onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
                                       onMouseLeave={(e) => (e.currentTarget.style.color = "#555")}
                                     >
-                                      {item.name}
+                                      {cleanText(item.name)}
                                     </a>
                                   </li>
                                 ))}
@@ -483,7 +484,7 @@ export default function MenuSection() {
                             e.currentTarget.style.color = "#333";
                           }}
                         >
-                          {service.title}
+                          {cleanText(service.title)}
                         </Link>
                       ))
                     ) : (
@@ -588,7 +589,7 @@ export default function MenuSection() {
                             e.currentTarget.style.color = "#333";
                           }}
                         >
-                          {product.title}
+                          {cleanText(product.title)}
                         </Link>
                       ))
                     ) : (
@@ -608,7 +609,7 @@ export default function MenuSection() {
           {rightMenuItems.map((item) => (
             <li key={item.label} className="menu-item">
               <a href={item.href} className="menu-link">
-                {item.label}
+                {cleanText(item.label)}
               </a>
             </li>
           ))}
@@ -633,7 +634,7 @@ export default function MenuSection() {
                 {item.hasMegaMenu ? (
                   <>
                     <a href={item.href} className="mobile-menu-link" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      {item.label}
+                      {cleanText(item.label)}
                       <FaChevronDown style={{ fontSize: "11px" }} />
                     </a>
                     {/* Mobile Mega Menu */}
@@ -654,7 +655,7 @@ export default function MenuSection() {
                                 cursor: "pointer",
                               }}
                             >
-                              <span>{level2.name}</span>
+                              <span>{cleanText(level2.name)}</span>
                               {level2.children.length > 0 && (
                                 <span style={{ fontSize: "10px" }}>
                                   {mobileSubmenu === level2.id ? "▼" : "▶"}
@@ -677,7 +678,7 @@ export default function MenuSection() {
                                       borderBottom: "1px solid #e0e0e0",
                                     }}
                                   >
-                                    {level3.name}
+                                    {cleanText(level3.name)}
                                   </Link>
                                 ))}
                               </div>
@@ -692,7 +693,7 @@ export default function MenuSection() {
                 ) : item.hasDropdown ? (
                   <>
                     <a href={item.href} className="mobile-menu-link" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      {item.label}
+                      {cleanText(item.label)}
                       <FaChevronDown style={{ fontSize: "11px" }} />
                     </a>
                     {/* Mobile Simple Dropdown */}
@@ -713,7 +714,7 @@ export default function MenuSection() {
                                 borderBottom: "1px solid #d0d0d0",
                               }}
                             >
-                              {service.title}
+                              {cleanText(service.title)}
                             </Link>
                           ))
                         ) : (
@@ -780,7 +781,7 @@ export default function MenuSection() {
                                 borderBottom: "1px solid #d0d0d0",
                               }}
                             >
-                              {product.title}
+                              {cleanText(product.title)}
                             </Link>
                           ))
                         ) : (
@@ -791,7 +792,7 @@ export default function MenuSection() {
                   </>
                 ) : (
                   <a href={item.href} className="mobile-menu-link">
-                    {item.label}
+                    {cleanText(item.label)}
                   </a>
                 )}
               </li>

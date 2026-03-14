@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { cleanText } from "../products/page";
 
 interface KitProduct {
   id: string;
@@ -166,7 +167,7 @@ export default function KitProducts() {
                     margin: "0 0 8px 0",
                   }}
                 >
-                  {product.title}
+                  {cleanText(product.title)}
                 </h3>
                 <p
                   style={{

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { cleanText } from "../products/page";
 
 interface Product {
   title: string;
@@ -398,7 +399,7 @@ export default function ProductCatalog({ initialTab = 'liquid-handling', showSer
                   color: '#1a1a2e',
                   margin: '0 0 8px 0'
                 }}>
-                  {product.title}
+                  {cleanText(product.title)}
                 </h3>
                 <p style={{
                   fontSize: '14px',
@@ -531,7 +532,7 @@ export default function ProductCatalog({ initialTab = 'liquid-handling', showSer
                     Quote Request Received!
                   </h3>
                   <p style={{ fontSize: '14px', color: '#666' }}>
-                    We'll contact you soon with a quote for {selectedProduct.title}
+                    We'll contact you soon with a quote for {cleanText(selectedProduct.title)}
                   </p>
                 </div>
               ) : (
@@ -540,7 +541,7 @@ export default function ProductCatalog({ initialTab = 'liquid-handling', showSer
                     Request a Quote
                   </h2>
                   <p style={{ fontSize: '14px', color: '#666', margin: '0 0 8px 0' }}>
-                    Product: <strong>{selectedProduct.title}</strong>
+                    Product: <strong>{cleanText(selectedProduct.title)}</strong>
                   </p>
                   <p style={{ fontSize: '13px', color: '#999', margin: '0 0 24px 0' }}>
                     Fill in your details and we'll send you a quote

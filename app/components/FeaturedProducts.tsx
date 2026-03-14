@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { cleanText } from "../products/page";
 
 interface FeaturedProduct {
   id: string;
@@ -140,7 +141,7 @@ export default function FeaturedProducts() {
                   lineHeight: 1.4,
                 }}
               >
-                {product.name}
+                {cleanText(product.name)}
               </span>
             </a>
           ))}

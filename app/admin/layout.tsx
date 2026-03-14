@@ -12,6 +12,7 @@ const sidebarLinks = [
   { label: "Dashboard", href: "/admin/dashboard", icon: <FaTachometerAlt /> },
   { label: "Products", href: "/admin/products", icon: <FaBoxes /> },
   { label: "Categories", href: "/admin/categories", icon: <FaFolderOpen /> },
+  { label: "Media", href: "/admin/media", icon: <FaImages /> }, // Added Media link
   { label: "Hero Slides", href: "/admin/hero-slides", icon: <FaImages /> },
   { label: "Lab Consumables", href: "/admin/kit-products", icon: <FaFlask /> },
   { label: "CRO Services", href: "/admin/cro-services", icon: <FaVial /> },

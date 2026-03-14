@@ -5,6 +5,7 @@ import { FaLeaf, FaMicrochip, FaFlask, FaCheckCircle } from "react-icons/fa";
 import Hero from "@/app/components/Hero";
 import USPBar from "@/app/components/USPBar";
 import ProductCatalog from "@/app/components/ProductCatalog";
+import { cleanText } from "../products/page";
 
 interface KitProduct {
   id: string;
@@ -100,7 +101,7 @@ export default function KitProductsPage() {
                 }}
               >
                 {kitProducts.map((product) => {
-                  const slug = product.title
+                  const slug = cleanText(product.title)
                     .toLowerCase()
                     .trim()
                     .replace(/[^\w\s-]/g, "")
@@ -146,7 +147,7 @@ export default function KitProductsPage() {
                       {product.image ? (
                         <img
                           src={product.image}
-                          alt={product.title}
+                          alt={cleanText(product.title)}
                           style={{ width: "100%", height: "100%", objectFit: "cover" }}
                         />
                       ) : (
@@ -165,7 +166,7 @@ export default function KitProductsPage() {
                           lineHeight: 1.3,
                         }}
                       >
-                        {product.title}
+                        {cleanText(product.title)}
                       </h3>
                       <p
                         style={{
@@ -284,7 +285,7 @@ export default function KitProductsPage() {
                       {product.image ? (
                         <img
                           src={product.image}
-                          alt={product.name}
+                          alt={cleanText(product.name)}
                           style={{ width: "100%", height: "100%", objectFit: "cover" }}
                         />
                       ) : (
@@ -305,7 +306,7 @@ export default function KitProductsPage() {
                           whiteSpace: "nowrap",
                         }}
                       >
-                        {product.name}
+                        {cleanText(product.name)}
                       </h4>
                       <p
                         style={{

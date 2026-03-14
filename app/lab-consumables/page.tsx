@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { cleanText } from "../products/page";
 
 interface ConsumableItem {
   id: string;
@@ -247,7 +248,7 @@ export default function LabConsumablesPage() {
                       e.currentTarget.style.borderColor = "#e0e0e0";
                     }}
                   >
-                    {kit.title}
+                    {cleanText(kit.title)}
                   </a>
                 </li>
               ))}
@@ -297,7 +298,7 @@ export default function LabConsumablesPage() {
                     }
                   }}
                 >
-                  {cat.title}
+                  {cleanText(cat.title)}
                 </button>
               </li>
             ))}
@@ -315,7 +316,7 @@ export default function LabConsumablesPage() {
               margin: "0 0 12px 0",
             }}
           >
-            {currentCategory?.title}
+            {cleanText(currentCategory?.title)}
           </h1>
 
           {/* Category Description */}
@@ -368,7 +369,7 @@ export default function LabConsumablesPage() {
                       marginBottom: "8px",
                     }}
                   >
-                    {item.name}
+                    {cleanText(item.name)}
                   </div>
                   <button
                     style={{
@@ -500,7 +501,7 @@ export default function LabConsumablesPage() {
                             {product.image ? (
                               <img
                                 src={product.image}
-                                alt={product.name}
+                                alt={cleanText(product.name)}
                                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                               />
                             ) : (
@@ -541,7 +542,7 @@ export default function LabConsumablesPage() {
                                 lineHeight: 1.4,
                               }}
                             >
-                              {product.name}
+                              {cleanText(product.name)}
                             </span>
                           </div>
                         </div>

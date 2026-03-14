@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { FaArrowLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { cleanText } from "../../../products/page";
 
 interface ApplicationCategory {
   id: string;
@@ -220,7 +221,7 @@ export default function ApplicationDetailPage() {
                     {product.image ? (
                       <img
                         src={product.image}
-                        alt={product.name}
+                        alt={cleanText(product.name)}
                         style={{ width: "100%", height: "100%", objectFit: "cover" }}
                       />
                     ) : (
@@ -234,7 +235,7 @@ export default function ApplicationDetailPage() {
                       {product.catalogNumber}
                     </div>
                     <h3 style={{ fontSize: "15px", fontWeight: 700, color: "#171717", margin: "0 0 12px 0", lineHeight: 1.3 }}>
-                      {product.name}
+                      {cleanText(product.name)}
                     </h3>
                     <a
                       href={`/products/${product.catalogNumber}`}

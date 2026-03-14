@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { cleanText } from "../products/page";
 
 interface ApplicationItem {
   id: string;
@@ -412,7 +413,7 @@ export default function ApplicationsPage() {
                       {product.image ? (
                         <img
                           src={product.image}
-                          alt={product.name}
+                          alt={cleanText(product.name)}
                           style={{
                             width: "100%",
                             height: "100%",
@@ -465,7 +466,7 @@ export default function ApplicationsPage() {
                           lineHeight: 1.4,
                         }}
                       >
-                        {product.name}
+                        {cleanText(product.name)}
                       </span>
                     </div>
                   </div>
