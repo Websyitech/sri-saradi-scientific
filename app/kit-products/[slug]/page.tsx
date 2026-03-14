@@ -364,6 +364,15 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
   }
 ];
 
+// Helper to get full image URL
+function getImageUrl(imagePath: string | undefined | null) {
+  if (!imagePath) return undefined;
+  if (imagePath.startsWith('http')) return imagePath;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+  // Ensure no double slashes
+  return baseUrl.replace(/\/$/, '') + (imagePath.startsWith('/') ? imagePath : '/' + imagePath);
+}
+
 function getUSPItems(slug: string | string[] | undefined) {
   const slugStr = Array.isArray(slug) ? slug[0] : slug || '';
 
@@ -535,10 +544,23 @@ export default function KitProductDetail() {
                 <div key={product.id} style={{ background: '#fff', borderRadius: '12px', border: '1px solid #e0e0e0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column' }}>
                   {/* Product Image */}
                   <div style={{ width: '100%', height: '180px', background: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #e0e0e0' }}>
-                    <div style={{ textAlign: 'center', color: '#999' }}>
-                      <div style={{ fontSize: '48px', marginBottom: '8px' }}>🖼️</div>
-                      <div style={{ fontSize: '12px', color: '#aaa' }}>Product Image</div>
-                    </div>
+                    {typeof product.image === 'string' && product.image ? (
+                      <img
+                        src={
+                          (process.env.NEXT_PUBLIC_BASE_URL
+                            ? process.env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '')
+                            : (typeof window !== 'undefined' ? window.location.origin : '')) +
+                          (product.image.startsWith('/') ? product.image : '/' + product.image)
+                        }
+                        alt={product.title}
+                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      />
+                    ) : (
+                      <div style={{ textAlign: 'center', color: '#999' }}>
+                        <div style={{ fontSize: '48px', marginBottom: '8px' }}>🖼️</div>
+                        <div style={{ fontSize: '12px', color: '#aaa' }}>Product Image</div>
+                      </div>
+                    )}
                   </div>
                   
                   <div style={{ padding: '24px' }}>
@@ -621,7 +643,7 @@ export default function KitProductDetail() {
                 >
                   {prod.image && (
                     <div style={{ width: '100%', height: '180px', background: '#fafafa', borderRadius: '8px', marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                      <img src={prod.image} alt={prod.productTitle} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={getImageUrl(prod.image)} alt={prod.productTitle} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                   )}
                   <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a1a2e', margin: '0 0 8px 0' }}>

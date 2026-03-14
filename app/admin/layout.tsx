@@ -8,11 +8,19 @@ import {
   FaTimes, FaFileAlt, FaVial,
 } from "react-icons/fa";
 
+// Utility to get base URL for admin links
+function getAdminBaseUrl() {
+  if (typeof window !== "undefined") {
+    return process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
+  }
+  return process.env.NEXT_PUBLIC_BASE_URL || "";
+}
+
 const sidebarLinks = [
   { label: "Dashboard", href: "/admin/dashboard", icon: <FaTachometerAlt /> },
   { label: "Products", href: "/admin/products", icon: <FaBoxes /> },
   { label: "Categories", href: "/admin/categories", icon: <FaFolderOpen /> },
-  { label: "Media", href: "/admin/media", icon: <FaImages /> }, // Added Media link
+  { label: "Media", href: typeof window !== "undefined" ? (getAdminBaseUrl() + "/admin/media") : "/admin/media", icon: <FaImages /> },
   { label: "Hero Slides", href: "/admin/hero-slides", icon: <FaImages /> },
   { label: "Lab Consumables", href: "/admin/kit-products", icon: <FaFlask /> },
   { label: "CRO Services", href: "/admin/cro-services", icon: <FaVial /> },

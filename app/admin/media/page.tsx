@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { FaTrash, FaDownload, FaImage, FaUpload } from "react-icons/fa";
+import { FaRegCopy } from "react-icons/fa";
 
 interface MediaFile {
   id: string;
@@ -13,12 +14,27 @@ interface MediaFile {
   uploadedBy?: string;
 }
 
+// Utility to copy text to clipboard
+const copyToClipboard = (text: string) => {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+  } else {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+  }
+};
+
 export default function MediaPage() {
   const [mediaFiles, setMediaFiles] = useState<MediaFile[]>([]);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [copiedId, setCopiedId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchMediaFiles();
@@ -80,6 +96,11 @@ export default function MediaPage() {
     } catch (error) {
       console.error("Delete failed:", error);
     }
+  };
+
+  const showCopiedToast = (id: string) => {
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 1200);
   };
 
   const filteredFiles = mediaFiles.filter((file) =>
@@ -356,6 +377,53 @@ export default function MediaPage() {
                   >
                     <FaTrash style={{ fontSize: "10px" }} />
                   </button>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        file.url.replace(/^https?:\/\/[\w\.-]+(:\d+)?/, "")
+                      );
+                      showCopiedToast(file.id);
+                    }}
+                    style={{
+                      flex: 1,
+                      padding: "4px",
+                      background: copiedId === file.id ? "#c8e6c9" : "#e0f7fa",
+                      border: "none",
+                      borderRadius: "3px",
+                      cursor: "pointer",
+                      fontSize: "12px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: copiedId === file.id ? "#388e3c" : "#00796b",
+                      fontWeight: copiedId === file.id ? 700 : 400,
+                      transition: "all 0.2s"
+                    }}
+                    title="Copy relative URL"
+                  >
+                    {copiedId === file.id ? "Copied!" : "Copy"}
+                  </button>
+                  {file.type.startsWith("image/") && (
+                    <button
+                      onClick={() => window.open(file.url, "_blank")}
+                      style={{
+                        flex: 1,
+                        padding: "4px",
+                        background: "#f5f5f5",
+                        border: "none",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        fontSize: "12px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#2D2B7F",
+                      }}
+                      title="Preview image"
+                    >
+                      Preview
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -461,6 +529,45 @@ export default function MediaPage() {
                   >
                     <FaTrash />
                   </button>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        file.url.replace(/^https?:\/\/[\w\.-]+(:\d+)?/, "")
+                      );
+                      showCopiedToast(file.id);
+                    }}
+                    style={{
+                      padding: "6px 12px",
+                      background: copiedId === file.id ? "#c8e6c9" : "#e0f7fa",
+                      border: "none",
+                      borderRadius: "3px",
+                      cursor: "pointer",
+                      fontSize: "12px",
+                      color: copiedId === file.id ? "#388e3c" : "#00796b",
+                      fontWeight: copiedId === file.id ? 700 : 400,
+                      transition: "all 0.2s"
+                    }}
+                    title="Copy relative URL"
+                  >
+                    {copiedId === file.id ? "Copied!" : "Copy"}
+                  </button>
+                  {file.type.startsWith("image/") && (
+                    <button
+                      onClick={() => window.open(file.url, "_blank")}
+                      style={{
+                        padding: "6px 12px",
+                        background: "#f5f5f5",
+                        border: "none",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        fontSize: "12px",
+                        color: "#2D2B7F",
+                      }}
+                      title="Preview image"
+                    >
+                      Preview
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -484,6 +591,29 @@ export default function MediaPage() {
           <p style={{ fontSize: "14px", margin: "8px 0 0 0" }}>
             {searchTerm ? "Try adjusting your search" : "Upload your first file to get started"}
           </p>
+        </div>
+      )}
+
+      {copiedId && (
+        <div style={{
+          position: "fixed",
+          bottom: 32,
+          left: 0,
+          right: 0,
+          margin: "0 auto",
+          maxWidth: 320,
+          background: "#388e3c",
+          color: "#fff",
+          padding: "14px 32px",
+          borderRadius: 8,
+          textAlign: "center",
+          fontWeight: 600,
+          fontSize: 16,
+          boxShadow: "0 4px 24px rgba(0,0,0,0.12)",
+          zIndex: 9999,
+          pointerEvents: "none"
+        }}>
+          Copied URL to clipboard
         </div>
       )}
     </div>
