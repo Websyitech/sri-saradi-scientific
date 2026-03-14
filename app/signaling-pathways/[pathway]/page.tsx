@@ -142,7 +142,7 @@ export default function PathwayDetailPage() {
             style={{
               marginBottom: "40px",
               borderRadius: "8px",
-              overflow: "hidden",
+             
             }}
           >
             <img
@@ -151,8 +151,7 @@ export default function PathwayDetailPage() {
               style={{
                 width: "100%",
                 height: "auto",
-                maxHeight: "400px",
-                objectFit: "cover",
+                objectFit: "contain",
               }}
             />
           </div>

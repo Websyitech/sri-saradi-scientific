@@ -54,9 +54,9 @@ const footerLinks = {
     title: "Legal",
     links: [
       { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Terms & Conditions", href: "/terms-conditions" },
+      { label: "Terms & Conditions", href: "//terms-and-conditions" },
       { label: "Cancellation Policy", href: "/cancellation-policy" },
-      { label: "Shipping Policy", href: "/shipping-policy" },
+      { label: "Shipping and Delivery Policy", href: "/shipping-and-delivery-policy" },
       { label: "Returns", href: "/return-policy" },
       { label: "Refund Policy", href: "/refund-policy" },
 
