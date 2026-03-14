@@ -379,7 +379,7 @@ export default function MediaPage() {
                   </button>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(
+                      copyToClipboard(
                         file.url.replace(/^https?:\/\/[\w\.-]+(:\d+)?/, "")
                       );
                       showCopiedToast(file.id);
@@ -531,7 +531,7 @@ export default function MediaPage() {
                   </button>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(
+                      copyToClipboard(
                         file.url.replace(/^https?:\/\/[\w\.-]+(:\d+)?/, "")
                       );
                       showCopiedToast(file.id);
