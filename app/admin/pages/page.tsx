@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { FaPlus, FaEdit, FaTrash, FaFileAlt } from "react-icons/fa";
 import AdminModal from "../components/AdminModal";
+import TinyMCEEditor from "../components/TinyMCEEditor";
 
 interface PageItem {
   id: string;
@@ -41,7 +42,14 @@ export default function AdminPages() {
     let contentStr = "";
     if (p.content) {
       try {
-        contentStr = typeof p.content === "string" ? p.content : JSON.stringify(p.content, null, 2);
+        // Check if content is an object with HTML
+        if (typeof p.content === "object" && p.content && 'html' in p.content) {
+          contentStr = (p.content as any).html;
+        } else if (typeof p.content === "string") {
+          contentStr = p.content;
+        } else {
+          contentStr = JSON.stringify(p.content, null, 2);
+        }
       } catch {
         contentStr = String(p.content);
       }
@@ -59,12 +67,8 @@ export default function AdminPages() {
 
     let contentJson: unknown = null;
     if (form.content.trim()) {
-      try {
-        contentJson = JSON.parse(form.content);
-      } catch {
-        // If not valid JSON, store as a simple object with text
-        contentJson = { text: form.content };
-      }
+      // Store HTML content in a structured format
+      contentJson = { html: form.content };
     }
 
     const method = editing ? "PUT" : "POST";
@@ -161,15 +165,14 @@ export default function AdminPages() {
             <input value={form.subtitle} onChange={(e) => setForm({ ...form, subtitle: e.target.value })} style={inputStyle} />
           </div>
           <div style={{ marginBottom: "16px" }}>
-            <label style={{ display: "block", fontSize: "13px", fontWeight: 500, color: "#555", marginBottom: "6px" }}>Content (JSON)</label>
-            <textarea
+            <label style={{ display: "block", fontSize: "13px", fontWeight: 500, color: "#555", marginBottom: "6px" }}>Content</label>
+            <TinyMCEEditor
               value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-              rows={14}
-              style={{ ...inputStyle, resize: "vertical", fontFamily: "monospace", fontSize: "13px", lineHeight: 1.5 }}
-              placeholder={'{\n  "sections": [\n    {\n      "heading": "About Us",\n      "body": "Sri Saradi Scientific is a leading..."\n    }\n  ]\n}'}
+              onChange={(content) => setForm({ ...form, content })}
+              height={350}
+              placeholder="Start typing your page content..."
             />
-            <p style={{ margin: "4px 0 0", fontSize: "11px", color: "#aaa" }}>Enter valid JSON. If plain text is provided, it will be wrapped automatically.</p>
+            <p style={{ margin: "4px 0 0", fontSize: "11px", color: "#aaa" }}>Rich text editor with formatting options. Content will be saved as HTML.</p>
           </div>
           <div style={{ marginBottom: "16px" }}>
             <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "#555", cursor: "pointer" }}>
