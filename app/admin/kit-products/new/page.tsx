@@ -7,10 +7,10 @@ export default function NewKitProduct() {
     <div>
       <div style={{ marginBottom: "24px" }}>
         <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: "0 0 8px 0" }}>
-          Create Kit Product
+          Create Lab Consumables Page
         </h1>
         <p style={{ color: "#888", fontSize: "14px", margin: 0 }}>
-          Add a new kit product to the homepage section
+          Add a new lab consumables category page (e.g., Filtration, Liquid Handling, etc.)
         </p>
       </div>
 

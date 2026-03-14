@@ -24,7 +24,7 @@ export default function EditKitProduct() {
 
   useEffect(() => {
     if (!id) {
-      setError("Product ID not found");
+      setError("Page ID not found");
       setLoading(false);
       return;
     }
@@ -38,13 +38,13 @@ export default function EditKitProduct() {
           if (found) {
             setProduct(found);
           } else {
-            setError("Product not found");
+            setError("Page not found");
           }
         } else {
-          setError("Failed to load product");
+          setError("Failed to load page");
         }
       } catch (err) {
-        setError("An error occurred while loading the product");
+        setError("An error occurred while loading the page");
         console.error(err);
       } finally {
         setLoading(false);
@@ -76,7 +76,7 @@ export default function EditKitProduct() {
     return (
       <div style={{ padding: "24px" }}>
         <div style={{ padding: "12px", background: "#fee2e2", color: "#991b1b", borderRadius: "8px" }}>
-          Product not found
+          Page not found
         </div>
       </div>
     );
@@ -86,10 +86,10 @@ export default function EditKitProduct() {
     <div>
       <div style={{ marginBottom: "24px" }}>
         <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: "0 0 8px 0" }}>
-          Edit Kit Product
+          Edit Lab Consumables Page
         </h1>
         <p style={{ color: "#888", fontSize: "14px", margin: 0 }}>
-          Update the product details
+          Update the page details and content
         </p>
       </div>
 
@@ -99,7 +99,7 @@ export default function EditKitProduct() {
           Hero Section Title
         </h2>
         <p style={{ fontSize: "13px", color: "rgba(255,255,255,0.8)", margin: "0 0 16px 0" }}>
-          This title appears in the Hero section when visitors view this product
+          This title appears in the Hero section when visitors view this page
         </p>
         <input
           type="text"

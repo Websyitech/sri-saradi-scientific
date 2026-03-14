@@ -79,7 +79,7 @@ export default function KitProducts() {
         {/* View All Link */}
         {/* <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "24px" }}>
           <a
-            href="/kit-products"
+            href="/lab-consumables"
             style={{
               color: "var(--primary)",
               textDecoration: "none",

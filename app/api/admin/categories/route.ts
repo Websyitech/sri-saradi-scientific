@@ -50,23 +50,45 @@ export async function POST(request: NextRequest) {
   const auth = adminAuth(request);
   if (auth instanceof NextResponse) return auth;
 
+  function slugify(text: string) {
+    return text
+      .toString()
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9\-]/g, '')
+      .replace(/\-+/g, '-');
+  }
+
   try {
-    const { name, slug, description, image, icon, color, sortOrder, isActive, parentId } = await request.json();
+    const { name, slug, description, image, icon, color, sortOrder, isActive, parentId, isKitCategory } = await request.json();
+    // If slug is missing or empty, generate from name
+    const finalSlug = slug && slug.trim() ? slug : slugify(name);
+    // Check for existing slug
+    const existing = await prisma.category.findUnique({ where: { slug: finalSlug } });
+    if (existing) {
+      return NextResponse.json({ error: "A category with this slug already exists." }, { status: 409 });
+    }
     const category = await prisma.category.create({
       data: {
         name,
-        slug,
+        slug: finalSlug,
         description: description || null,
         image: image || null,
         icon: icon || null,
         color: color || "#2D2B7F",
         sortOrder: sortOrder || 0,
         isActive: isActive !== undefined ? isActive : true,
-                parentId: parentId || null,
+        parent: parentId ? { connect: { id: parentId } } : undefined,
+        isKitCategory: isKitCategory === true,
       },
     });
     return NextResponse.json(category, { status: 201 });
-  } catch (error) {
+  } catch (error: any) {
+    // Handle Prisma unique constraint error for slug
+    if (error?.code === 'P2002' && error?.meta?.target?.includes('slug')) {
+      return NextResponse.json({ error: "A category with this slug already exists." }, { status: 409 });
+    }
     console.error(error);
     return NextResponse.json({ error: "Failed to create category" }, { status: 500 });
   }

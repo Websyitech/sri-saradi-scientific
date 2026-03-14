@@ -224,7 +224,7 @@ export default function LabConsumablesPage() {
               {kitProducts.map((kit) => (
                 <li key={kit.id}>
                   <a
-                    href={`/kit-products/${kit.slug}`}
+                    href={`/lab-consumables/${kit.slug}`}
                     style={{
                       display: "block",
                       padding: "10px 12px",

@@ -568,7 +568,7 @@ export default function MenuSection() {
                       kitProducts.map((product) => (
                         <Link
                           key={product.id}
-                          href={`/kit-products/${product.slug}`}
+                          href={`/lab-consumables/${product.slug}`}
                           onClick={() => handleMouseLeave()}
                           style={{
                             display: "block",

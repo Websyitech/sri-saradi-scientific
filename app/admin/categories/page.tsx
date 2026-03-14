@@ -31,11 +31,12 @@ interface Category {
   parentId?: string | null;
   sortOrder: number;
   isActive: boolean;
+  isKitCategory?: boolean;
   _count?: { products: number; children: number };
   children?: Category[];
 }
 
-const emptyForm = { name: "", slug: "", description: "", image: "", icon: "", color: "#2D2B7F", sortOrder: 0, isActive: true, parentId: "" };
+const emptyForm = { name: "", slug: "", description: "", image: "", icon: "", color: "#2D2B7F", sortOrder: 0, isActive: true, parentId: "", isKitCategory: false };
 
 export default function AdminCategories() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -98,6 +99,7 @@ export default function AdminCategories() {
       image: item.image || "", icon: item.icon || "",
       color: item.color || "#2D2B7F", sortOrder: item.sortOrder,
       isActive: item.isActive, parentId: item.parentId || "",
+      isKitCategory: item.isKitCategory || false,
     });
     setModalOpen(true);
   };
@@ -145,6 +147,7 @@ export default function AdminCategories() {
       sortOrder: form.sortOrder,
       isActive: form.isActive,
       parentId: form.parentId || null,
+      isKitCategory: form.isKitCategory || false,
     };
     await fetch("/api/admin/categories", {
       method,
@@ -411,6 +414,14 @@ export default function AdminCategories() {
                 <option value="false">Inactive</option>
               </select>
             </div>
+          </div>
+
+          <div style={{ marginBottom: "16px" }}>
+            <label style={{ display: "block", fontSize: "13px", fontWeight: 500, color: "#555", marginBottom: "6px" }}>Is Kit Category?</label>
+            <select value={form.isKitCategory ? "true" : "false"} onChange={e => setForm({ ...form, isKitCategory: e.target.value === "true" })} style={inputStyle}>
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
           </div>
 
           <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", paddingTop: "8px" }}>
