@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 interface ProductForm {
   id: string;
@@ -24,6 +25,8 @@ interface KitProduct {
   id: string;
   title: string;
 }
+
+const RichTextEditor = dynamic(() => import('@/app/components/RichTextEditor'), { ssr: false });
 
 export default function EditLabConsumableProduct() {
   const router = useRouter();
@@ -248,16 +251,11 @@ export default function EditLabConsumableProduct() {
             <label style={{ display: "block", fontSize: "13px", fontWeight: 500, color: "#555", marginBottom: "6px" }}>
               Rich Text Content
             </label>
-            <textarea
+            <RichTextEditor
               value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-              rows={8}
-              style={{ ...inputStyle, resize: "vertical", fontFamily: "monospace" }}
-              placeholder="Detailed product description with HTML formatting support"
+              onChange={content => setForm({ ...form, content })}
+              placeholder="Detailed product description with formatting"
             />
-            <p style={{ fontSize: "12px", color: "#888", margin: "6px 0 0 0" }}>
-              Rich text editor (TinyMCE) integration coming soon. For now, you can use HTML formatting.
-            </p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "16px" }}>
