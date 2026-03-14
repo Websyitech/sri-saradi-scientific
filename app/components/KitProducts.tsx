@@ -108,8 +108,8 @@ export default function KitProducts() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "30px",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "80px",
           }}
         >
           {kitProducts.map((product) => (
@@ -133,7 +133,7 @@ export default function KitProducts() {
               <div
                 style={{
                   width: "100%",
-                  aspectRatio: "1",
+                  aspectRatio: "16/9",
                   background: "#e0e0e0",
                   display: "flex",
                   alignItems: "center",
@@ -144,7 +144,7 @@ export default function KitProducts() {
                   <img
                     src={product.image}
                     alt={product.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{ width: "100%", height: "60%", objectFit: "cover" }}
                   />
                 ) : (
                   <div
