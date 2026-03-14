@@ -37,6 +37,7 @@ interface ProductData {
   specs: { label: string; value: string }[];
   applications: string[];
   features: string[];
+  image?: string;
 }
 
 const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
