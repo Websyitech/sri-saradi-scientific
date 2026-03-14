@@ -59,6 +59,27 @@ export async function POST(request: NextRequest) {
   }
 }
 
+function getMimeType(filename: string): string {
+  const ext = filename.toLowerCase().split('.').pop();
+  const mimeTypes: { [key: string]: string } = {
+    // Images
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg', 
+    'png': 'image/png',
+    'gif': 'image/gif',
+    'webp': 'image/webp',
+    'svg': 'image/svg+xml',
+    // Documents
+    'pdf': 'application/pdf',
+    'doc': 'application/msword',
+    'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'xls': 'application/vnd.ms-excel',
+    'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'txt': 'text/plain',
+  };
+  return mimeTypes[ext || ''] || 'application/octet-stream';
+}
+
 async function getMediaFiles() {
   const fs = await import("fs/promises");
   const files = await fs.readdir(UPLOADS_DIR);
@@ -72,7 +93,7 @@ async function getMediaFiles() {
       name: filename.replace(/^\d+-/, ""),
       url: `/uploads/${filename}`,
       size: stats.size,
-      type: "application/octet-stream",
+      type: getMimeType(filename),
       uploadedAt: stats.birthtime.toISOString(),
     };
   });
