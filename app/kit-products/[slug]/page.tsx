@@ -46,6 +46,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration',
     title: 'Syringe Filters',
     description: 'High-precision syringe filters for HPLC, UHPLC, and sample preparation with color-coded identification system.',
+    image: '/uploads/1773486785207-Syringe_filters.webp',
     specs: [
       { label: 'Membrane Types', value: 'PVDF, RC, CA, GF, PTFE, Nylon, PES' },
       { label: 'Pore Sizes', value: '0.22µm, 0.45µm' },
@@ -60,6 +61,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration - Sterile',
     title: 'Sterile Syringe Filters',
     description: 'Individually packaged sterile syringe filters with LRV7 bacterial retention for critical applications.',
+    image: '/uploads/1773487142493-Sterile_Syringe_Filters.webp',
     specs: [
       { label: 'Membrane Types', value: 'PES, PVDF, CA (33mm diameter)' },
       { label: 'Pore Sizes', value: '0.22µm, 0.45µm' },
@@ -74,6 +76,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration',
     title: 'Gridded Membrane Filters',
     description: 'MCE gridded membranes for microbial analysis with superior bacterial recovery rates.',
+    image: '/uploads/1773501635023-Gridded Membrane Filter.webp',
     specs: [
       { label: 'Membrane', value: 'Mixed Cellulose Ester (MCE)' },
       { label: 'Pore Sizes', value: '0.22µm, 0.45µm' },
@@ -88,6 +91,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration',
     title: 'Venting Filters',
     description: 'PTFE hydrophobic venting filters for gas sterilization and bioreactor applications.',
+    image: '/uploads/1773501649793-Venting_Filter.webp',
     specs: [
       { label: 'Membrane', value: 'Hydrophobic PTFE' },
       { label: 'Diameter', value: '50mm' },
@@ -102,6 +106,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration - Centrifugal',
     title: 'Ultra Centrifugal Filters',
     description: 'Molecular weight cut-off centrifugal filters for protein concentration and purification.',
+    image: '/uploads/1773501583491-Ultra Centrifugal.jpg',
     specs: [
       { label: 'MWCO Options', value: '3K, 5K, 10K, 30K, 50K, 100KD' },
       { label: 'Max Volume', value: '12mL (fixed-angle), 16mL (swing)' },
@@ -116,6 +121,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Absolute PP Capsule',
     description: 'Disposable polypropylene capsule filters with multi-layer graded structure for high flow rates.',
+    image: '/uploads/1773501996296-CapFlux Absolute PP Capsule.jpg',
     specs: [
       { label: 'Filter Media', value: 'Absolute Polypropylene' },
       { label: 'Pore Sizes', value: '0.1-5.0µm' },
@@ -130,6 +136,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Sterile PES Capsule',
     description: 'Sterile grade PES capsule filters with 100% integrity testing for bacteria and virus removal.',
+    image: '/uploads/1773501996296-CapFlux Absolute PP Capsule.jpg',
     specs: [
       { label: 'Filter Media', value: 'Sterile Grade PES' },
       { label: 'Pore Sizes', value: '0.1-5.0µm' },
@@ -144,6 +151,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Hydrophobic PTFE',
     description: 'Hydrophobic PTFE capsule filters for gas venting and aggressive chemical applications.',
+     image: '/uploads/1773503762050-CapFlux Hydrophobic PTFE.jpg',
     specs: [
       { label: 'Filter Media', value: 'Hydrophobic PTFE' },
       { label: 'Chemical Compatibility', value: 'Wide range (PTFE)' },
@@ -158,6 +166,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Hydrophilic PVDF',
     description: 'PVDF capsule filters with lowest protein binding for biopharmaceutical applications.',
+     image: '/uploads/1773503826870-CapFlux Hydrophilic PVDF.jpg',
     specs: [
       { label: 'Filter Media', value: 'Hydrophilic PVDF' },
       { label: 'Protein Binding', value: 'Lowest available' },
@@ -172,6 +181,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Nylon66 Capsule',
     description: 'Nylon66 and charged nylon capsules for aqueous solvents and endotoxin removal.',
+     image: '/uploads/1773503863889-CapFlux Nylon66 Capsule.jpg',
     specs: [
       { label: 'Filter Media', value: 'Nylon66 / Charged Nylon' },
       { label: 'Pore Sizes', value: '0.1-5.0µm' },
@@ -186,6 +196,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux PP Pleated',
     description: '100% polypropylene pleated cartridge filters with excellent cost-performance ratio.',
+    image: '/uploads/1773503931107-SteriFlux PES Pleated.jpg',
     specs: [
       { label: 'Filter Media', value: '100% Polypropylene' },
       { label: 'Pore Sizes', value: '0.1-10µm' },
@@ -200,6 +211,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux PES Pleated',
     description: 'Asymmetric PES membrane pleated cartridges with superior bacteria and particle removal.',
+     image: '/uploads/1773503931107-SteriFlux PES Pleated.jpg',
     specs: [
       { label: 'Filter Media', value: 'Asymmetric PES' },
       { label: 'Bacterial Challenge', value: 'LRV7' },
@@ -214,6 +226,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux PTFE Pleated',
     description: 'Hydrophobic PTFE pleated cartridges for aggressive chemicals and organic solvents.',
+     image: '/uploads/1773503931108-SteriFlux PTFE Pleated.jpg',
     specs: [
       { label: 'Filter Media', value: 'Hydrophobic PTFE' },
       { label: 'Chemical Compatibility', value: 'Excellent (most chemicals)' },
@@ -228,6 +241,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux Glass Fiber',
     description: 'Glass fiber media cartridge filters with thermal bonding for extended service life.',
+      image: '/uploads/1773504044244-SteriFlux Glass Fiber.jpg',
     specs: [
       { label: 'Filter Media', value: 'Glass Fiber' },
       { label: 'Pore Sizes', value: '0.1-10µm' },
@@ -242,6 +256,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - High Flow',
     title: 'SupFlux High Flow Series',
     description: 'Large 6" diameter high flow cartridges for reduced change-outs and maintenance.',
+      image: '/uploads/1773504112027-SupFlux High Flow Series.jpg',
     specs: [
       { label: 'Diameter', value: '152mm (6")' },
       { label: 'Lengths', value: '20", 40", 60"' },
@@ -256,6 +271,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Sediment',
     title: 'AquaFlux Melt Blown',
     description: '100% polypropylene melt blown filters with three nano fiber layers for absolute efficiency.',
+     image: '/uploads/1773499746787-AquaFlux Melt Blown.jpg',
     specs: [
       { label: 'Material', value: '100% Polypropylene' },
       { label: 'Pore Sizes', value: '1-150µm' },
@@ -270,6 +286,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Sediment',
     title: 'AquaFlux String Wound',
     description: 'Maximum wound string filters with 30% more material for superior dirt-holding capacity.',
+     image: '/uploads/1773505663731-AquaFlux String Wound.jpg',
     specs: [
       { label: 'Material', value: 'PP, Cotton, Glass Fiber' },
       { label: 'Pore Sizes', value: '1-150µm' },
@@ -284,6 +301,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Specialty',
     title: 'AquaFlux Multi-Layer PP',
     description: 'Multi-layer depth media filters with graded pore structure for extended lifespan.',
+     image: '/uploads/1773505663731-AquaFlux Multi-Layer PP.jpg',
     specs: [
       { label: 'Construction', value: '5+ layers depth media + PP membrane' },
       { label: 'Pore Sizes', value: '0.1-10µm' },
@@ -298,6 +316,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Sanitary',
     title: 'SteelFlux Sanitary Housing',
     description: 'Stainless steel sanitary filter housings with quick connection design for pharmaceutical applications.',
+     image: '/uploads/1773505995110-SteelFlux Sanitary Housing.jpg',
     specs: [
       { label: 'Material', value: 'SS304, SS316L' },
       { label: 'Connection', value: 'Tri-Clamp, Flange' },
@@ -312,6 +331,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Security',
     title: 'SteelFlux Security Housing',
     description: 'Multi-round security filter housings available in SS, glass steel, and carbon steel materials.',
+     image: '/uploads/1773506051797-SteelFlux Security Housing.png',
     specs: [
       { label: 'Material Options', value: 'SS304/316L, Glass Steel, Carbon Steel' },
       { label: 'Rounds', value: '1, 3, 5, 7, 9, 12 rounds' },
@@ -326,7 +346,9 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - High Flow',
     title: 'SteelFlux High Flow Housing',
     description: 'High flow filter housings for 6" diameter cartridges with quick connection design.',
+     image: '/uploads/1773505870883-SteelFlux High Flow Housing.png',
     specs: [
+
       { label: 'Material', value: 'SS304, SS316L, Glass Steel' },
       { label: 'Cartridge Lengths', value: '20", 40", 60"' },
       { label: 'Design Pressure', value: '10 bar' },
@@ -340,6 +362,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Bag Filter',
     title: 'SteelFlux Bag Filter Housing',
     description: 'Standard bag filter housings for size 1-4 bag filters with reliable sealing design.',
+     image: '/uploads/1773505818896-SteelFlux Bag Filter Housing.jpg',
     specs: [
       { label: 'Material', value: 'SS304, SS316L' },
       { label: 'Bag Sizes', value: '01, 02, 03, 04' },
@@ -354,6 +377,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Lenticular',
     title: 'SteelFlux Lenticular Housing',
     description: 'Sanitary lenticular filter housings for depth filtration and modular closed systems.',
+     image: '/uploads/1773505788997-SteelFlux Lenticular Housing.png',
     specs: [
       { label: 'Material', value: 'SS304, SS316L' },
       { label: 'Filter Types', value: '8", 12", 16" diameter' },
@@ -603,15 +627,15 @@ export default function KitProductDetail() {
         </section>
       )}
 
-      {/* Associated Products */}
-      {Array.isArray(product.associatedProducts) && product.associatedProducts.length > 0 && (
+      {/* Associated Products - Use LIQUID_HANDLING_PRODUCTS for filtration */}
+      {slug === 'filtration' ? (
         <section style={{ padding: '60px 40px', background: '#f8f9fc' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1a1a2e', textAlign: 'center', marginBottom: '12px' }}>
-              Product Range
+              Featured Products
             </h2>
             <p style={{ textAlign: 'center', fontSize: '1.1rem', color: '#666', marginBottom: '48px', maxWidth: '800px', margin: '0 auto' }}>
-              Explore the complete range of products available in this series.
+              Explore our featured filtration products with complete specifications and images.
             </p>
 
             <div style={{
@@ -619,9 +643,9 @@ export default function KitProductDetail() {
               gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
               gap: '24px'
             }}>
-              {(Array.isArray(product.associatedProducts) ? product.associatedProducts : []).map((prod, idx) => (
+              {LIQUID_HANDLING_PRODUCTS.slice(0, 6).map((productData) => (
                 <div
-                  key={idx}
+                  key={productData.id}
                   style={{
                     background: '#fff',
                     borderRadius: '12px',
@@ -642,39 +666,40 @@ export default function KitProductDetail() {
                     e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
                   }}
                 >
-                  {prod.image && (
+                  {productData.image && (
                     <div style={{ width: '100%', height: '180px', background: '#fafafa', borderRadius: '8px', marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-                      <img src={getImageUrl(prod.image)} alt={prod.productTitle} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={getImageUrl(productData.image)} alt={productData.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                   )}
+                  <div style={{ marginBottom: '12px' }}>
+                    <span style={{ fontSize: '12px', color: '#667eea', fontWeight: 600, background: '#f0f2ff', padding: '2px 8px', borderRadius: '4px' }}>
+                      {productData.category}
+                    </span>
+                  </div>
                   <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a1a2e', margin: '0 0 8px 0' }}>
-                    {prod.productTitle}
+                    {productData.title}
                   </h3>
                   <p style={{ fontSize: '14px', color: '#666', margin: '0 0 16px 0', fontWeight: 500 }}>
-                    {prod.description}
+                    {productData.description}
                   </p>
-                  {prod.details && prod.details.length > 0 && (
-                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 16px 0' }}>
-                      {prod.details.map((detail, detailIdx) => (
-                        <li
-                          key={detailIdx}
-                          style={{
-                            fontSize: '13px',
-                            color: '#555',
-                            margin: '6px 0',
-                            paddingLeft: '16px',
-                            position: 'relative'
-                          }}
-                        >
-                          <span style={{ position: 'absolute', left: 0, color: '#667eea' }}>•</span>
-                          {detail}
-                        </li>
+                  <div style={{ marginBottom: '16px' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 600, color: '#333', marginBottom: '8px' }}>Specifications:</div>
+                    <div style={{ display: 'grid', gap: '4px' }}>
+                      {productData.specs.slice(0, 3).map((spec, idx) => (
+                        <div key={idx} style={{ fontSize: '11px', color: '#555' }}>
+                          <span style={{ fontWeight: 600, color: '#333' }}>{spec.label}:</span> {spec.value}
+                        </div>
                       ))}
-                    </ul>
-                  )}
-                  {prod.isCustom && (
-                    <span style={{ fontSize: '10px', color: '#667eea', fontWeight: 600, marginBottom: '12px' }}>Custom Product</span>
-                  )}
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: '16px' }}>
+                    <div style={{ fontSize: '12px', fontWeight: 600, color: '#333', marginBottom: '8px' }}>Applications:</div>
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                      {productData.applications.slice(0, 3).map((app, idx) => (
+                        <span key={idx} style={{ fontSize: '10px', background: '#f0f0f0', color: '#555', padding: '2px 8px', borderRadius: '12px' }}>{app}</span>
+                      ))}
+                    </div>
+                  </div>
                   <button
                     style={{
                       width: '100%',
@@ -705,6 +730,110 @@ export default function KitProductDetail() {
             </div>
           </div>
         </section>
+      ) : (
+        /* Original Associated Products for other kit products */
+        Array.isArray(product.associatedProducts) && product.associatedProducts.length > 0 && (
+          <section style={{ padding: '60px 40px', background: '#f8f9fc' }}>
+            <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+              <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1a1a2e', textAlign: 'center', marginBottom: '12px' }}>
+                Product Range
+              </h2>
+              <p style={{ textAlign: 'center', fontSize: '1.1rem', color: '#666', marginBottom: '48px', maxWidth: '800px', margin: '0 auto' }}>
+                Explore the complete range of products available in this series.
+              </p>
+
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                gap: '24px'
+              }}>
+                {(Array.isArray(product.associatedProducts) ? product.associatedProducts : []).map((prod, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      background: '#fff',
+                      borderRadius: '12px',
+                      border: '1px solid #e0e0e0',
+                      padding: '24px',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                      transition: 'all 0.3s',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'translateY(-4px)';
+                      e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
+                    }}
+                  >
+                    {prod.image && (
+                      <div style={{ width: '100%', height: '180px', background: '#fafafa', borderRadius: '8px', marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                        <img src={getImageUrl(prod.image)} alt={prod.productTitle} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      </div>
+                    )}
+                    <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1a1a2e', margin: '0 0 8px 0' }}>
+                      {prod.productTitle}
+                    </h3>
+                    <p style={{ fontSize: '14px', color: '#666', margin: '0 0 16px 0', fontWeight: 500 }}>
+                      {prod.description}
+                    </p>
+                    {prod.details && prod.details.length > 0 && (
+                      <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 16px 0' }}>
+                        {prod.details.map((detail, detailIdx) => (
+                          <li
+                            key={detailIdx}
+                            style={{
+                              fontSize: '13px',
+                              color: '#555',
+                              margin: '6px 0',
+                              paddingLeft: '16px',
+                              position: 'relative'
+                            }}
+                          >
+                            <span style={{ position: 'absolute', left: 0, color: '#667eea' }}>•</span>
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {prod.isCustom && (
+                      <span style={{ fontSize: '10px', color: '#667eea', fontWeight: 600, marginBottom: '12px' }}>Custom Product</span>
+                    )}
+                    <button
+                      style={{
+                        width: '100%',
+                        padding: '12px 16px',
+                        background: '#2D2B7F',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '8px',
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s',
+                        marginTop: 'auto'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = '0.9';
+                        e.currentTarget.style.transform = 'scale(1.02)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = '1';
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }}
+                    >
+                      Request Quote
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )
       )}
     </main>
   );
