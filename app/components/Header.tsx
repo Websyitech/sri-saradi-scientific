@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import MenuSection from "./MenuSection";
 
 interface SiteSettings {
   site_name?: string;
@@ -25,6 +26,7 @@ export default function Header() {
   const [isLoading, setIsLoading] = useState(false);
   const [showResearchModal, setShowResearchModal] = useState(false);
   const [showMobileSearchModal, setShowMobileSearchModal] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
   const mobileSearchRef = useRef<HTMLDivElement>(null);
@@ -117,6 +119,7 @@ export default function Header() {
   };
 
   return (
+    <>
     <header className="main-header">
       <div className="main-header-container">
         {/* Logo */}
@@ -247,6 +250,28 @@ export default function Header() {
           aria-label="Open Search"
         >
           <FaSearch />
+        </button>
+
+        {/* Mobile Hamburger Menu - Hidden on desktop */}
+        <button
+          className="mobile-menu-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          style={{
+            display: "none", // Hidden by default, shown on mobile via CSS
+            background: "none",
+            border: "2px solid #2D2B7F",
+            borderRadius: "6px",
+            color: "#2D2B7F",
+            padding: "8px",
+            cursor: "pointer",
+            fontSize: "16px",
+            transition: "all 0.2s",
+            position: "relative",
+            zIndex: 10000
+          }}
+          aria-label="Toggle menu"
+        >
+          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
         {/* Right - Request Research Product Button */}
@@ -649,5 +674,12 @@ export default function Header() {
         </button>
       </div>
     </header>
+
+    {/* Menu Section with shared mobile menu state */}
+    <MenuSection 
+      mobileMenuOpen={mobileMenuOpen} 
+      setMobileMenuOpen={setMobileMenuOpen} 
+    />
+    </>
   );
 }

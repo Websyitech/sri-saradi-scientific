@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import TopHeader from "./components/TopHeader";
 import Header from "./components/Header";
-import MenuSection from "./components/MenuSection";
 import Footer from "./components/Footer";
 import CookiesPopup from "./components/CookiesPopup";
 import DisclaimerModal from "./components/DisclaimerModal";
@@ -79,7 +78,6 @@ export default function RootLayout({
       >
         <TopHeader />
         <Header />
-        <MenuSection />
         {children}
         <Footer />
         <CookiesPopup />

@@ -81,8 +81,17 @@ interface FAQ {
   heading?: string;
 }
 
-export default function MenuSection() {
+interface MenuSectionProps {
+  mobileMenuOpen?: boolean;
+  setMobileMenuOpen?: (open: boolean) => void;
+}
+
+export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen }: MenuSectionProps = {}) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  
+  // Use external mobile menu state if provided
+  const isMenuOpen = setMobileMenuOpen ? mobileMenuOpen : mobileOpen;
+  const toggleMenu = setMobileMenuOpen || setMobileOpen;
   const [showMegaMenu, setShowMegaMenu] = useState<string | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
@@ -282,7 +291,7 @@ export default function MenuSection() {
           ) : (
             <a
               href={item.href}
-              onClick={() => setMobileOpen(false)}
+              onClick={() => toggleMenu(false)}
               style={{
                 display: 'block',
                 padding: '16px 20px',
@@ -324,7 +333,7 @@ export default function MenuSection() {
           ) : (
             <a
               href={`/products?brand=Solarbio&category=${level2.slug}`}
-              onClick={() => setMobileOpen(false)}
+              onClick={() => toggleMenu(false)}
               style={{
                 display: 'block',
                 padding: '16px 20px',
@@ -891,20 +900,20 @@ export default function MenuSection() {
         <button
           className="menu-mobile-toggle"
           onClick={() => {
-            const newState = !mobileOpen;
-            setMobileOpen(newState);
+            const newState = !isMenuOpen;
+            toggleMenu(newState);
             if (newState) {
               initializeMobileMenu();
             }
           }}
           aria-label="Toggle menu"
         >
-          {mobileOpen ? <FaTimes /> : <FaBars />}
+          {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
       {/* Multi-Level Mobile Menu */}
-      {mobileOpen && (
+      {isMenuOpen && (
         <div className="mobile-menu">
           <div style={{ 
             position: 'relative', 
