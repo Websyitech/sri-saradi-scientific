@@ -11,6 +11,13 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  experimental: {
+    serverComponentsExternalPackages: [],
+  },
+  // Increase the maximum request body size for file uploads
+  serverRuntimeConfig: {
+    maxRequestBodySize: '200mb',
+  },
 };
 
 export default nextConfig;

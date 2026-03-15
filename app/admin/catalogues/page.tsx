@@ -22,6 +22,8 @@ export default function CataloguesAdminPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<Catalogue>>({});
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadType, setUploadType] = useState<'cover' | 'pdf' | null>(null);
 
   useEffect(() => {
     fetchCatalogues();
@@ -104,32 +106,81 @@ export default function CataloguesAdminPage() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Check file size before upload
+    const maxSize = file.type === "application/pdf" ? 150 * 1024 * 1024 : 10 * 1024 * 1024;
+    if (file.size > maxSize) {
+      const maxSizeMB = file.type === "application/pdf" ? "150MB" : "10MB";
+      alert(`File too large. Maximum size allowed: ${maxSizeMB}`);
+      return;
+    }
+
     setUploading(true);
+    setUploadProgress(0);
+    setUploadType(type);
+
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("file", file);
 
-      const res = await fetch("/api/admin/upload", {
-        method: "POST",
-        body: formDataToSend,
+      const xhr = new XMLHttpRequest();
+
+      // Track upload progress
+      xhr.upload.addEventListener('progress', (event) => {
+        if (event.lengthComputable) {
+          const percentComplete = Math.round((event.loaded / event.total) * 100);
+          setUploadProgress(percentComplete);
+        }
       });
 
-      const data = await res.json();
-      if (data.url) {
-        if (type === 'cover') {
-          setFormData({ ...formData, coverImage: data.url });
-        } else {
-          setFormData({ ...formData, pdfUrl: data.url });
+      // Handle response
+      xhr.addEventListener('load', () => {
+        try {
+          const data = JSON.parse(xhr.responseText);
+          if (xhr.status === 201 && data.url) {
+            if (type === 'cover') {
+              setFormData({ ...formData, coverImage: data.url });
+            } else {
+              setFormData({ ...formData, pdfUrl: data.url });
+            }
+            alert(`${type === 'cover' ? 'Cover image' : 'PDF'} uploaded successfully!`);
+          } else {
+            alert("Upload failed: " + (data.error || 'Unknown error'));
+          }
+        } catch (error) {
+          alert("Upload failed: Invalid response");
+        } finally {
+          setUploading(false);
+          setUploadProgress(0);
+          setUploadType(null);
         }
-        alert(`${type === 'cover' ? 'Cover image' : 'PDF'} uploaded successfully!`);
-      } else {
-        alert("Upload failed: " + data.error);
-      }
+      });
+
+      // Handle errors
+      xhr.addEventListener('error', () => {
+        alert("Upload failed: Network error");
+        setUploading(false);
+        setUploadProgress(0);
+        setUploadType(null);
+      });
+
+      // Handle timeout
+      xhr.addEventListener('timeout', () => {
+        alert("Upload failed: Request timeout");
+        setUploading(false);
+        setUploadProgress(0);
+        setUploadType(null);
+      });
+
+      xhr.timeout = 300000; // 5 minutes timeout
+      xhr.open('POST', '/api/admin/upload');
+      xhr.send(formDataToSend);
+
     } catch (error) {
       console.error("Upload error:", error);
       alert("Failed to upload file");
-    } finally {
       setUploading(false);
+      setUploadProgress(0);
+      setUploadType(null);
     }
   }
 
@@ -236,7 +287,7 @@ export default function CataloguesAdminPage() {
                   whiteSpace: "nowrap",
                 }}
               >
-                {uploading ? "Uploading..." : "Choose Image"}
+                {uploading && uploadType === 'cover' ? `Uploading... ${uploadProgress}%` : "Choose Image"}
                 <input
                   type="file"
                   accept="image/*"
@@ -246,6 +297,27 @@ export default function CataloguesAdminPage() {
                 />
               </label>
             </div>
+            {uploading && uploadType === 'cover' && (
+              <div style={{ marginTop: "8px" }}>
+                <div style={{ 
+                  width: "100%", 
+                  height: "4px", 
+                  background: "#f0f0f0", 
+                  borderRadius: "2px",
+                  overflow: "hidden"
+                }}>
+                  <div style={{
+                    height: "100%",
+                    width: `${uploadProgress}%`,
+                    background: "var(--primary)",
+                    transition: "width 0.3s ease"
+                  }} />
+                </div>
+                <div style={{ fontSize: "12px", color: "#666", marginTop: "4px" }}>
+                  Uploading image... {uploadProgress}%
+                </div>
+              </div>
+            )}
             {formData.coverImage && (
               <div style={{ marginTop: "12px" }}>
                 <img
@@ -294,7 +366,7 @@ export default function CataloguesAdminPage() {
                   whiteSpace: "nowrap",
                 }}
               >
-                {uploading ? "Uploading..." : "Choose PDF"}
+                {uploading && uploadType === 'pdf' ? `Uploading... ${uploadProgress}%` : "Choose PDF"}
                 <input
                   type="file"
                   accept=".pdf"
@@ -304,6 +376,28 @@ export default function CataloguesAdminPage() {
                 />
               </label>
             </div>
+            {uploading && uploadType === 'pdf' && (
+              <div style={{ marginTop: "8px" }}>
+                <div style={{ 
+                  width: "100%", 
+                  height: "6px", 
+                  background: "#f0f0f0", 
+                  borderRadius: "3px",
+                  overflow: "hidden"
+                }}>
+                  <div style={{
+                    height: "100%",
+                    width: `${uploadProgress}%`,
+                    background: "linear-gradient(90deg, #4CAF50, #45a049)",
+                    transition: "width 0.3s ease"
+                  }} />
+                </div>
+                <div style={{ fontSize: "13px", color: "#666", marginTop: "4px", fontWeight: "500" }}>
+                  Uploading PDF... {uploadProgress}% 
+                  {uploadProgress > 0 && uploadProgress < 100 && " (Large files may take several minutes)"}
+                </div>
+              </div>
+            )}
             {formData.pdfUrl && (
               <div style={{ marginTop: "8px", fontSize: "14px", color: "#666" }}>
                 PDF: {formData.pdfUrl.split('/').pop()}

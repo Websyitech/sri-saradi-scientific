@@ -20,6 +20,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Only image files and PDFs are allowed" }, { status: 400 });
     }
 
+    // Validate file size (150MB max for PDFs, 10MB for images)
+    const maxSize = file.type === "application/pdf" ? 150 * 1024 * 1024 : 10 * 1024 * 1024;
+    if (file.size > maxSize) {
+      const maxSizeMB = file.type === "application/pdf" ? "150MB" : "10MB";
+      return NextResponse.json({ 
+        error: `File too large. Maximum size allowed: ${maxSizeMB}` 
+      }, { status: 400 });
+    }
+
     // Generate unique filename
     const timestamp = Date.now();
     const name = file.name.replace(/\s+/g, "_");
