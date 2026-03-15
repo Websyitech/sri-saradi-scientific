@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { FaArrowLeft, FaCheckCircle, FaShoppingCart } from "react-icons/fa";
-import { cleanText } from "../page";
+import { cleanText } from "../../utils/textUtils";
 
 interface ProductVariant {
   id: string;
