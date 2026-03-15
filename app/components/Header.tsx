@@ -24,8 +24,10 @@ export default function Header() {
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showResearchModal, setShowResearchModal] = useState(false);
+  const [showMobileSearchModal, setShowMobileSearchModal] = useState(false);
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
+  const mobileSearchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/api/settings")
@@ -226,6 +228,26 @@ export default function Header() {
             `}</style>
           </div>
         </div>
+
+        {/* Mobile Search Icon - Hidden on desktop */}
+        <button
+          className="mobile-search-icon"
+          onClick={() => setShowMobileSearchModal(true)}
+          style={{
+            display: "none", // Hidden by default, shown on mobile via CSS
+            background: "none",
+            border: "2px solid #2D2B7F",
+            borderRadius: "6px",
+            color: "#2D2B7F",
+            padding: "8px",
+            cursor: "pointer",
+            fontSize: "16px",
+            transition: "all 0.2s"
+          }}
+          aria-label="Open Search"
+        >
+          <FaSearch />
+        </button>
 
         {/* Right - Request Research Product Button */}
         <div className="header-action-section">
@@ -456,6 +478,175 @@ export default function Header() {
             </div>
           </div>
         )}
+
+        {/* Mobile Search Modal */}
+        {showMobileSearchModal && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 9999,
+              display: "flex",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              padding: "20px",
+              paddingTop: "60px"
+            }}
+            onClick={() => setShowMobileSearchModal(false)}
+          >
+            <div
+              ref={mobileSearchRef}
+              style={{
+                background: "#fff",
+                borderRadius: "12px",
+                padding: "24px",
+                width: "100%",
+                maxWidth: "500px",
+                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)"
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                <h2 style={{ margin: 0, fontSize: "20px", fontWeight: 600, color: "#333" }}>
+                  Search Products
+                </h2>
+                <button
+                  onClick={() => setShowMobileSearchModal(false)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: "24px",
+                    cursor: "pointer",
+                    color: "#666",
+                    padding: "0",
+                    lineHeight: 1
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              <div style={{ position: "relative" }}>
+                <input
+                  type="text"
+                  placeholder="Type the Product Name, Product id, CAS No"
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                  onKeyPress={handleKeyPress}
+                  autoComplete="off"
+                  autoFocus
+                  style={{
+                    width: "100%",
+                    padding: "16px 50px 16px 16px",
+                    border: "2px solid #e0e0e0",
+                    borderRadius: "12px",
+                    fontSize: "16px",
+                    outline: "none",
+                    transition: "border-color 0.2s",
+                    boxSizing: "border-box"
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = "#2D2B7F"}
+                  onBlur={(e) => e.target.style.borderColor = "#e0e0e0"}
+                />
+                <button
+                  style={{
+                    position: "absolute",
+                    right: "12px",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    color: "#666",
+                    fontSize: "18px",
+                    cursor: "pointer",
+                    padding: "8px"
+                  }}
+                  aria-label="Search"
+                >
+                  <FaSearch />
+                </button>
+
+                {/* Mobile Search Results */}
+                {showResults && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "calc(100% + 8px)",
+                      left: 0,
+                      right: 0,
+                      background: "#fff",
+                      border: "1px solid #e0e0e0",
+                      borderRadius: "12px",
+                      boxShadow: "0 8px 24px rgba(0, 0, 0, 0.15)",
+                      zIndex: 10001,
+                      maxHeight: "300px",
+                      overflowY: "auto"
+                    }}
+                  >
+                    {isLoading ? (
+                      <div style={{ padding: "24px", textAlign: "center" }}>
+                        <div style={{ 
+                          display: "inline-block",
+                          width: "24px",
+                          height: "24px",
+                          border: "3px solid #f0f0f0",
+                          borderTop: "3px solid #2D2B7F",
+                          borderRadius: "50%",
+                          animation: "spin 1s linear infinite"
+                        }} />
+                        <p style={{ margin: "12px 0 0 0", color: "#666" }}>Searching...</p>
+                      </div>
+                    ) : searchResults.length > 0 ? (
+                      searchResults.map((result) => (
+                        <div
+                          key={result.id}
+                          onClick={() => {
+                            handleSelectResult(result.slug || result.id);
+                            setShowMobileSearchModal(false);
+                          }}
+                          style={{
+                            padding: "16px",
+                            borderBottom: "1px solid #f0f0f0",
+                            cursor: "pointer",
+                            transition: "background 0.2s"
+                          }}
+                          onMouseEnter={(e) => e.currentTarget.style.background = "#f8f9fa"}
+                          onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
+                        >
+                          <div style={{ fontWeight: 500, color: "#333", marginBottom: "4px" }}>
+                            {result.name}
+                          </div>
+                          {result.catalogNumber && (
+                            <div style={{ fontSize: "12px", color: "#666" }}>
+                              Cat. No: {result.catalogNumber}
+                            </div>
+                          )}
+                        </div>
+                      ))
+                    ) : searchQuery.length > 0 ? (
+                      <div style={{ padding: "24px", textAlign: "center", color: "#666" }}>
+                        No products found for "{searchQuery}"
+                      </div>
+                    ) : null}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Sticky Bottom Button */}
+        <button
+          className="mobile-sticky-button"
+          onClick={() => setShowResearchModal(true)}
+          style={{ display: "none" }} // Hidden by default, shown on mobile via CSS
+        >
+          Request a Research Product
+        </button>
       </div>
     </header>
   );

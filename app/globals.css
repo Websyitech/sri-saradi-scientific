@@ -398,11 +398,19 @@ body {
     flex-shrink: 0;
   }
 
-  .header-action-section button {
-    padding: 8px 12px;
-    font-size: 12px;
-    white-space: nowrap;
-    min-width: auto;
+  /* Hide desktop search, show mobile search icon */
+  .header-search-section {
+    display: none !important;
+  }
+
+  .mobile-search-icon {
+    display: block !important;
+    flex-shrink: 0;
+  }
+
+  /* Hide header action section and make button sticky */
+  .header-action-section {
+    display: none !important;
   }
 
   /* Menu */
@@ -423,6 +431,40 @@ body {
 
   .mobile-menu {
     display: block;
+  }
+
+  /* Sticky bottom button for mobile */
+  .mobile-sticky-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: #2D2B7F;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(45, 43, 127, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .mobile-sticky-button:hover {
+    background: #1e1c5e;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(45, 43, 127, 0.4);
+  }
+
+  .mobile-sticky-button:active {
+    transform: translateY(0);
+  }
+
+  .mobile-sticky-button {
+    display: block !important;
   }
 }
 
