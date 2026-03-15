@@ -144,7 +144,7 @@ export default function KitProducts() {
                   <img
                     src={product.image}
                     alt={product.title}
-                    style={{ width: "100%", height: "60%", objectFit: "cover" }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 ) : (
                   <div

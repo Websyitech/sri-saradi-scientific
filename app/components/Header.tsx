@@ -135,7 +135,7 @@ export default function Header() {
             <input
               type="text"
               className="header-search-input"
-              placeholder="Type the Product Name , Product id, CAS  N0"
+              placeholder="Type the Product Name, Product id, CAS No"
               value={searchQuery}
               onChange={handleSearchInputChange}
               onKeyPress={handleKeyPress}

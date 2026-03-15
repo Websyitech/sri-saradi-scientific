@@ -8,6 +8,7 @@ interface SiteSettings {
   site_logo?: string;
 }
 
+
 const footerLinks = {
   quickLinks: {
     title: "Quick Links",
@@ -22,21 +23,21 @@ const footerLinks = {
       { label: "Contact", href: "/contact" },
     ],
   },
-  products1: {
+  solarbioCataegories: {
     title: "Products",
     links: [
-      { label: "Antibodies", href: "/products?category=antibodies" },
-      { label: "ELISA Kits", href: "/products?category=elisa-kits" },
-      { label: "Proteins", href: "/products?category=proteins" },
-      { label: "Peptides", href: "/products?category=peptides" },
-      { label: "Enzymes", href: "/products?category=enzymes" },
+      { label: "Antibody", href: "/products?brand=Solarbio&category=antibody" },
+      { label: "Biochemical Assay Kit", href: "/products?brand=Solarbio&category=biochemical-assay-kit" },
+      { label: "Recombinant Protein", href: "/products?brand=Solarbio&category=recombinant-protein" },
+      { label: "Peptide", href: "/products?brand=Solarbio&category=peptide" },
+      { label: "Cell Biology", href: "/products?brand=Solarbio&category=cell-biology" },
     ],
   },
   products2: {
     title: "More Products",
     links: [
-      { label: "Buffers", href: "/products?category=buffers" },
-      { label: "Amino Acids", href: "/products?category=amino-acids" },
+      { label: "Biochemical Reagent", href: "/products?brand=Solarbio&category=biochemical-reagent" },
+      { label: "Peptides", href: "/products?brand=Solarbio&category=peptides" },
       { label: "Reagents", href: "/products?category=reagents" },
       { label: "Standards", href: "/products?category=standards" },
       { label: "Kits", href: "/products?category=kits" },
@@ -68,6 +69,7 @@ export default function Footer() {
   const [settings, setSettings] = useState<SiteSettings>({});
 
   useEffect(() => {
+    // Fetch settings
     fetch("/api/settings")
       .then((r) => r.json())
       .then((data) => {
@@ -99,48 +101,215 @@ export default function Footer() {
             gap: "40px",
           }}
         >
-          {Object.values(footerLinks).map((section) => (
-            <div key={section.title}>
-              <h4
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 700,
-                  color: "#171717",
-                  margin: "0 0 20px 0",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                {section.title}
-              </h4>
-              <ul
-                style={{
-                  listStyle: "none",
-                  margin: 0,
-                  padding: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                }}
-              >
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      style={{
-                        textDecoration: "none",
-                        color: "#666",
-                        fontSize: "13px",
-                        transition: "color 0.2s",
-                      }}
-                      className="footer-link"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Quick Links */}
+          <div>
+            <h4
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "#171717",
+                margin: "0 0 20px 0",
+                letterSpacing: "0.5px",
+              }}
+            >
+              {footerLinks.quickLinks.title}
+            </h4>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {footerLinks.quickLinks.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    style={{
+                      textDecoration: "none",
+                      color: "#666",
+                      fontSize: "13px",
+                      transition: "color 0.2s",
+                    }}
+                    className="footer-link"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Solarbio Categories */}
+          <div>
+            <h4
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "#171717",
+                margin: "0 0 20px 0",
+                letterSpacing: "0.5px",
+              }}
+            >
+              {footerLinks.solarbioCataegories.title}
+            </h4>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {footerLinks.solarbioCataegories.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    style={{
+                      textDecoration: "none",
+                      color: "#666",
+                      fontSize: "13px",
+                      transition: "color 0.2s",
+                    }}
+                    className="footer-link"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* More Products */}
+          <div>
+            <h4
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "#171717",
+                margin: "0 0 20px 0",
+                letterSpacing: "0.5px",
+              }}
+            >
+              {footerLinks.products2.title}
+            </h4>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {footerLinks.products2.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    style={{
+                      textDecoration: "none",
+                      color: "#666",
+                      fontSize: "13px",
+                      transition: "color 0.2s",
+                    }}
+                    className="footer-link"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Lab Consumables */}
+          <div>
+            <h4
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "#171717",
+                margin: "0 0 20px 0",
+                letterSpacing: "0.5px",
+              }}
+            >
+              {footerLinks.labConsumables.title}
+            </h4>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {footerLinks.labConsumables.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    style={{
+                      textDecoration: "none",
+                      color: "#666",
+                      fontSize: "13px",
+                      transition: "color 0.2s",
+                    }}
+                    className="footer-link"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                color: "#171717",
+                margin: "0 0 20px 0",
+                letterSpacing: "0.5px",
+              }}
+            >
+              {footerLinks.legal.title}
+            </h4>
+            <ul
+              style={{
+                listStyle: "none",
+                margin: 0,
+                padding: 0,
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              {footerLinks.legal.links.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    style={{
+                      textDecoration: "none",
+                      color: "#666",
+                      fontSize: "13px",
+                      transition: "color 0.2s",
+                    }}
+                    className="footer-link"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
