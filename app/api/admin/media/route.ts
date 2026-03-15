@@ -5,6 +5,10 @@ import { existsSync } from "fs";
 
 const UPLOADS_DIR = join(process.cwd(), "public", "uploads");
 
+// Configure the maximum size for uploads (150MB)
+export const maxDuration = 300; // 5 minutes timeout
+export const runtime = 'nodejs';
+
 export async function GET() {
   try {
     if (!existsSync(UPLOADS_DIR)) {
@@ -35,9 +39,25 @@ export async function POST(request: NextRequest) {
     const uploadedFiles = [];
 
     for (const file of files) {
+      // Validate file type (images and PDFs)
+      if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
+        return NextResponse.json({ 
+          error: `File "${file.name}" is not allowed. Only image files and PDFs are accepted.` 
+        }, { status: 400 });
+      }
+
+      // Validate file size (150MB max for PDFs, 10MB for images)
+      const maxSize = file.type === "application/pdf" ? 150 * 1024 * 1024 : 10 * 1024 * 1024;
+      if (file.size > maxSize) {
+        const maxSizeMB = file.type === "application/pdf" ? "150MB" : "10MB";
+        return NextResponse.json({ 
+          error: `File "${file.name}" is too large. Maximum size allowed: ${maxSizeMB}` 
+        }, { status: 400 });
+      }
+
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
-      const filename = `${Date.now()}-${file.name}`;
+      const filename = `${Date.now()}-${file.name.replace(/\s+/g, "_")}`;
       const filepath = join(UPLOADS_DIR, filename);
 
       await writeFile(filepath, buffer);

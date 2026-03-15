@@ -3,6 +3,10 @@ import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { adminAuth } from "@/app/lib/adminAuth";
 
+// Configure the maximum size for uploads (150MB)
+export const maxDuration = 300; // 5 minutes timeout
+export const runtime = 'nodejs';
+
 export async function POST(request: NextRequest) {
   const auth = adminAuth(request);
   if (auth instanceof NextResponse) return auth;
