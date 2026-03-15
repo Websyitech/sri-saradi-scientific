@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface KitProduct {
@@ -12,7 +12,15 @@ interface KitProduct {
   image?: string;
   href?: string;
   heroTitle?: string;
+  catalogId?: string;
   sortOrder: number;
+  isActive: boolean;
+}
+
+interface Catalogue {
+  id: string;
+  title: string;
+  description?: string;
   isActive: boolean;
 }
 
@@ -35,7 +43,7 @@ export default function KitProductForm({ initialData, isNew = false }: KitProduc
   const router = useRouter();
   
   const parseData = (data: any) => {
-    if (!data) return { title: "", subtitle: "", description: "", content: "", image: "", href: "", heroTitle: "", sortOrder: 0, isActive: true };
+    if (!data) return { title: "", subtitle: "", description: "", content: "", image: "", href: "", heroTitle: "", catalogId: "", sortOrder: 0, isActive: true };
     return data;
   };
   
@@ -46,6 +54,19 @@ export default function KitProductForm({ initialData, isNew = false }: KitProduc
   const [uploading, setUploading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string>(initialData?.image || "");
   const [error, setError] = useState("");
+  const [catalogues, setCatalogues] = useState<Catalogue[]>([]);
+
+  useEffect(() => {
+    // Fetch catalogues
+    fetch("/api/catalogues")
+      .then((res) => res.json())
+      .then((data: Catalogue[]) => {
+        if (Array.isArray(data)) {
+          setCatalogues(data.filter(cat => cat.isActive));
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -145,6 +166,27 @@ export default function KitProductForm({ initialData, isNew = false }: KitProduc
         />
         <p style={{ fontSize: "12px", color: "#888", margin: "6px 0 0 0" }}>
           This title appears in the hero section when customers view this product. Leave blank to use the product title.
+        </p>
+      </div>
+
+      <div style={{ marginBottom: "16px" }}>
+        <label style={{ display: "block", fontSize: "13px", fontWeight: 500, color: "#555", marginBottom: "6px" }}>
+          Catalogue
+        </label>
+        <select
+          value={form.catalogId || ""}
+          onChange={(e) => setForm({ ...form, catalogId: e.target.value || undefined })}
+          style={inputStyle}
+        >
+          <option value="">Select a catalogue (optional)</option>
+          {catalogues.map((catalogue) => (
+            <option key={catalogue.id} value={catalogue.id}>
+              {catalogue.title}
+            </option>
+          ))}
+        </select>
+        <p style={{ fontSize: "12px", color: "#888", margin: "6px 0 0 0" }}>
+          Associate this kit product with a specific catalogue.
         </p>
       </div>
 

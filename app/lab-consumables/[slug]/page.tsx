@@ -16,6 +16,15 @@ interface AssociatedProduct {
   isCustom?: boolean;
 }
 
+interface Catalogue {
+  id: string;
+  title: string;
+  description?: string | null;
+  coverImage?: string | null;
+  pdfUrl?: string | null;
+  isActive: boolean;
+}
+
 interface KitProduct {
   id: string;
   title: string;
@@ -26,6 +35,8 @@ interface KitProduct {
   href: string | null;
   sortOrder: number;
   isActive: boolean;
+  catalogId?: string | null;
+  catalog?: Catalogue | null;
   associatedProducts?: AssociatedProduct[] | string;
 }
 
@@ -498,11 +509,11 @@ export default function KitProductDetail() {
         showPartnerPill={true}
         showActions={true}
         buttons={[
-          { 
+          ...(product?.catalog?.pdfUrl ? [{ 
             label: "Download Catalog", 
-            href: "#download", 
+            href: product.catalog.pdfUrl,
             variant: "outline" as const 
-          },
+          }] : []),
           { 
             label: "Get a Sample Kit", 
             onClick: () => setShowSampleModal(true), 

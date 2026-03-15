@@ -8,6 +8,9 @@ export async function GET(request: NextRequest) {
     if (slug) {
       const kitProduct = await prisma.kitProduct.findFirst({
         where: { slug, isActive: true },
+        include: {
+          catalog: true
+        }
       });
       console.log("Fetched kit product with slug:", slug, kitProduct);
       return NextResponse.json(kitProduct);

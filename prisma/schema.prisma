@@ -115,6 +115,8 @@ model KitProduct {
   href               String?
   heroTitle          String?
   associatedProducts String?
+  catalogId          String?
+  catalog            Catalogue? @relation(fields: [catalogId], references: [id])
   sortOrder          Int      @default(0)
   isActive           Boolean  @default(true)
   createdAt          DateTime @default(now())
@@ -382,6 +384,7 @@ model Catalogue {
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  kitProducts KitProduct[]
 
   @@map("catalogues")
 }
