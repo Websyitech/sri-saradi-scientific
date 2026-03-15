@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { cleanText } from "../products/page";
+import { cleanText } from "../utils/textUtils";
 
 interface ApplicationItem {
   id: string;

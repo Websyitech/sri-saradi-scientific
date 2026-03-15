@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { cleanText } from "../products/page";
+import { cleanText } from "../utils/textUtils";
 
 interface KitProduct {
   id: string;

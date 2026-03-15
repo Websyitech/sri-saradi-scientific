@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
-import { cleanText } from "../products/page";
+import { cleanText } from "../utils/textUtils";
 
 const leftMenuItems = [
   { label: "Home", href: "/", active: true },

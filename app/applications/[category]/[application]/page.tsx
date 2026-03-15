@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { FaArrowLeft, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { cleanText } from "../../../products/page";
+import { cleanText } from "../../../utils/textUtils";
 
 interface ApplicationCategory {
   id: string;

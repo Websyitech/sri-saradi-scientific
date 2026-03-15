@@ -11,14 +11,14 @@ export async function POST(request: NextRequest) {
         slug: "filtration-solutions",
         heroTitle: "Advanced Filtration Solutions",
         description: "Comprehensive filtration consumables for laboratory applications.",
-        image: "https://via.placeholder.com/400x300?text=Filtration",
-        href: "/products?category=filtration",
+        image: "https://via.placeholder.com/400x300?text=orient-filtr-products",
+        href: "/products?category=orient-filtr-products",
         sortOrder: 1,
         isActive: true,
         associatedProducts: JSON.stringify([
           {
             productTitle: "Syringe Filter 0.22µm",
-            categoryId: "filtration",
+            categoryId: "orient-filtr-products",
             image: "https://via.placeholder.com/200x200?text=Syringe+Filter",
             description: "High-quality syringe filters for sterilization and sample preparation",
             details: ["0.22µm pore size", "100pcs per pack", "Compatible with common syringes"]

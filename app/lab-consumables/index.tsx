@@ -5,7 +5,7 @@ import { FaLeaf, FaMicrochip, FaFlask, FaCheckCircle } from "react-icons/fa";
 import Hero from "@/app/components/Hero";
 import USPBar from "@/app/components/USPBar";
 import ProductCatalog from "@/app/components/ProductCatalog";
-import { cleanText } from "../products/page";
+import { cleanText } from "../utils/textUtils";
 
 interface KitProduct {
   id: string;

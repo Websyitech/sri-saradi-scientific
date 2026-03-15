@@ -5,77 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { FaChevronDown, FaChevronUp, FaSearch, FaThList, FaTh, FaCheckCircle } from "react-icons/fa";
 import AuthModal from "@/app/components/AuthModal";
 
-export const cleanText = (text: string | null | undefined): string => {
-  if (!text) return "";
-  
-  // Replace mojibake characters commonly caused by encoding issues
-  let cleaned = text
-    // Apostrophes
-    .replace(/Äô|â€™/g, "'")
-    // Fix for Äë mojibake
-    .replace(/Äë/g, "ë")
-    // Accented latin
-    .replace(/Ã¡/g, "á")
-    .replace(/Ã©/g, "é")
-    .replace(/Ã­/g, "í")
-    .replace(/Ã³/g, "ó")
-    .replace(/Ãº/g, "ú")
-    .replace(/Ã /g, "à")
-    .replace(/Ã§/g, "ç")
-
-    // Micro
-    .replace(/Œº|Âµ|Î¼/g, "μ")
-
-    // Multiplication
-    .replace(/Ã×|√ó/g, "×")
-
-    // Math operators
-    .replace(/Â±/g, "±")
-    .replace(/â‰¥/g, "≥")
-    .replace(/â‰¤/g, "≤")
-    .replace(/â‰ /g, "≠")
-    .replace(/â‰ˆ/g, "≈")
-    .replace(/âˆž/g, "∞")
-    .replace(/âˆ‘/g, "∑")
-    .replace(/âˆ†/g, "Δ")
-    .replace(/âˆš/g, "√")
-
-    // Degrees
-    .replace(/Â°/g, "°")
-
-    // Superscripts
-    .replace(/Â²/g, "²")
-    .replace(/Â³/g, "³")
-    .replace(/â�´/g, "⁴")
-    .replace(/â�µ/g, "⁵")
-
-    // Subscripts
-    .replace(/â‚€/g, "₀")
-    .replace(/â‚�/g, "₁")
-    .replace(/â‚‚/g, "₂")
-    .replace(/â‚ƒ/g, "₃")
-
-    // Greek letters
-    .replace(/Î±/g, "α")
-    .replace(/Î²/g, "β")
-    .replace(/Î³/g, "γ")
-    .replace(/Î´/g, "δ")
-    .replace(/Îµ/g, "ε")
-    .replace(/Î»/g, "λ")
-    .replace(/Ï€/g, "π")
-    .replace(/Ïƒ/g, "σ")
-    .replace(/Ï‰/g, "ω")
-    .replace(/Î©/g, "Ω")
-
-    // Remove stray encoding artifacts
-    .replace(/Â/g, "")
-
-    // Normalize whitespace
-    .replace(/\s+/g, " ")
-    .trim();
-  
-  return cleaned;
-};
+import { cleanText } from "../utils/textUtils";
 
 interface ProductVariant {
   id: string;

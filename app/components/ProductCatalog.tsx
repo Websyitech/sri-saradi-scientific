@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { cleanText } from "../products/page";
+import { cleanText } from "../utils/textUtils";
 
 interface Product {
   id: string;

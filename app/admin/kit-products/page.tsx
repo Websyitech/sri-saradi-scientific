@@ -137,7 +137,7 @@ export default function AdminKitProducts() {
         <div>
           <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: 0 }}>Lab Consumables Management</h1>
           <p style={{ color: "#888", fontSize: "14px", margin: "4px 0 0" }}>
-            {activeTab === 'products' ? `${products.length} pages (Filtration, Liquid Handling, etc.)` : activeTab === 'categories' ? `${categories.length} categories` : `${labProducts.length} individual products`}
+            {activeTab === 'products' ? `${products.length} pages (orient-filtr-products, Liquid Handling, etc.)` : activeTab === 'categories' ? `${categories.length} categories` : `${labProducts.length} individual products`}
           </p>
         </div>
         <Link 
