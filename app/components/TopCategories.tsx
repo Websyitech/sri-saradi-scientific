@@ -104,7 +104,7 @@ export default function TopCategories() {
                   <span className="top-cat-name">{cat.name}</span>
                   {cat.count > 0 && (
                     <span className="top-cat-count" style={{ color, background: `${color}12` }}>
-                      {cat.count.toLocaleString()} products
+                      {cat.count.toLocaleString()} subcategor{cat.count === 1 ? 'y' : 'ies'}
                     </span>
                   )}
                   <span className="top-cat-arrow" style={{ color }}>

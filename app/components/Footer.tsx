@@ -26,21 +26,22 @@ const footerLinks = {
   solarbioCataegories: {
     title: "Products",
     links: [
+      { label: "Analytical Standards", href: "/products?brand=Solarbio&category=analytical-standards" },
+      { label: "Molecular Biology", href: "/products?brand=Solarbio&category=molecular-biology" },
+      { label: "Protein & Immunity", href: "/products?brand=Solarbio&category=protein-immunity" },
+      { label: "ELISA Kit", href: "/products?brand=Solarbio&category=elisa-kit" },
+      { label: "Cell Culture Media", href: "/products?brand=Solarbio&category=cell-culture-media" },
       { label: "Antibody", href: "/products?brand=Solarbio&category=antibody" },
-      { label: "Biochemical Assay Kit", href: "/products?brand=Solarbio&category=biochemical-assay-kit" },
-      { label: "Recombinant Protein", href: "/products?brand=Solarbio&category=recombinant-protein" },
-      { label: "Peptide", href: "/products?brand=Solarbio&category=peptide" },
-      { label: "Cell Biology", href: "/products?brand=Solarbio&category=cell-biology" },
     ],
   },
   products2: {
     title: "More Products",
     links: [
+      { label: "Biochemical Assay Kit", href: "/products?brand=Solarbio&category=biochemical-assay-kit" },
+      { label: "Recombinant Protien", href: "/products?brand=Solarbio&category=recombinant-protien" },
+      { label: "Peptide", href: "/products?brand=Solarbio&category=peptide" },
+      { label: "Cell Biology", href: "/products?brand=Solarbio&category=cell-biology" },
       { label: "Biochemical Reagent", href: "/products?brand=Solarbio&category=biochemical-reagent" },
-      { label: "Peptides", href: "/products?brand=Solarbio&category=peptides" },
-      { label: "Reagents", href: "/products?category=reagents" },
-      { label: "Standards", href: "/products?category=standards" },
-      { label: "Kits", href: "/products?category=kits" },
     ],
   },
   labConsumables: {
@@ -55,7 +56,7 @@ const footerLinks = {
     title: "Legal",
     links: [
       { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Terms & Conditions", href: "//terms-and-conditions" },
+      { label: "Terms & Conditions", href: "/terms-and-conditions" },
       { label: "Cancellation Policy", href: "/cancellation-policy" },
       { label: "Shipping and Delivery Policy", href: "/shipping-and-delivery-policy" },
       { label: "Returns", href: "/return-policy" },

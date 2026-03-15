@@ -13,7 +13,10 @@ export async function GET() {
           orderBy: { sortOrder: "asc" },
           include: {
             _count: {
-              select: { products: true },
+              select: { 
+                products: true,
+                children: { where: { isActive: true } }
+              },
             },
           },
         },
@@ -32,7 +35,8 @@ export async function GET() {
       description: child.description,
       icon: child.icon,
       color: child.color || "#2D2B7F",
-      count: child._count.products,
+      count: child._count.children, // Show subcategory count instead of product count
+      productCount: child._count.products, // Keep product count available if needed
     }));
 
     return NextResponse.json(result);

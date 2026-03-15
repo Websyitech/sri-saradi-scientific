@@ -6,6 +6,7 @@ import { FaChevronDown, FaChevronUp, FaSearch, FaThList, FaTh, FaCheckCircle } f
 import AuthModal from "@/app/components/AuthModal";
 
 import { cleanText } from "../utils/textUtils";
+import { formatForScientificDisplay } from "../utils/scientific-formatter";
 
 interface ProductVariant {
   id: string;
@@ -494,6 +495,68 @@ export default function ProductsPage() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#fff" }}>
+      {/* Mobile Responsive CSS */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .desktop-table { display: none !important; }
+          .mobile-product-container {
+            display: block !important;
+            padding: 16px !important;
+          }
+          .mobile-product-card {
+            border: 1px solid #e0e0e0 !important;
+            border-radius: 8px !important;
+            margin-bottom: 16px !important;
+            padding: 16px !important;
+            background: #fff !important;
+          }
+          .mobile-field {
+            display: flex !important;
+            justify-content: space-between !important;
+            padding: 8px 0 !important;
+            border-bottom: 1px solid #f0f0f0 !important;
+            font-size: 14px !important;
+          }
+          .mobile-field:last-child {
+            border-bottom: none !important;
+          }
+          .mobile-label {
+            font-weight: 600 !important;
+            color: #666 !important;
+            min-width: 100px !important;
+          }
+          .mobile-value {
+            color: #333 !important;
+            flex: 1 !important;
+            text-align: right !important;
+          }
+          .mobile-actions {
+            display: flex !important;
+            gap: 8px !important;
+            margin-top: 12px !important;
+            justify-content: center !important;
+          }
+          .mobile-sidebar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+            background: white !important;
+            z-index: 9999 !important;
+            padding: 20px !important;
+            overflow-y: auto !important;
+            transform: translateX(-100%) !important;
+            transition: transform 0.3s ease !important;
+          }
+          .mobile-sidebar.open {
+            transform: translateX(0) !important;
+          }
+        }
+        @media (min-width: 769px) {
+          .mobile-only { display: none !important; }
+        }
+      `}</style>
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -965,8 +1028,9 @@ export default function ProductsPage() {
             </span>
           </div>
 
-          {/* Table Header */}
+          {/* Desktop Table Header */}
           <div
+            className="desktop-table"
             style={{
               display: "grid",
               gridTemplateColumns: selectedCategoryName?.toLowerCase().includes("antibod") 
@@ -1017,33 +1081,34 @@ export default function ProductsPage() {
             </div>
           )}
 
-          {/* Product Rows */}
-          {!loading && products.map((product) => (
-            <div
-              key={product.id}
-              style={{
-                borderBottom: "1px solid #eee",
-              }}
-              role="row"
-            >
-              {/* Main Row */}
+          {/* Desktop Product Rows */}
+          <div className="desktop-table">
+            {!loading && products.map((product) => (
               <div
+                key={product.id}
                 style={{
-                  display: "grid",
-                  gridTemplateColumns: selectedCategoryName?.toLowerCase().includes("antibod") 
-                    ? "100px 120px 90px 100px 140px 70px 180px 150px 1fr"
-                    : "100px 120px 90px 100px 140px 70px 180px 1fr",
-                  padding: "12px 8px",
-                  alignItems: "left",
-                  fontSize: "13px",
-                  gap: "8px",
+                  borderBottom: "1px solid #eee",
                 }}
+                role="row"
               >
+                {/* Main Row */}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: selectedCategoryName?.toLowerCase().includes("antibod") 
+                      ? "100px 120px 90px 100px 140px 70px 180px 150px 1fr"
+                      : "100px 120px 90px 100px 140px 70px 180px 1fr",
+                    padding: "12px 8px",
+                    alignItems: "left",
+                    fontSize: "13px",
+                    gap: "8px",
+                  }}
+                >
                 <div style={{ color: "#444", fontWeight: 600 }} role="cell">
                   {product.catalogNumber}
                 </div>
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
-                  {cleanText(product.name) || "-"}
+                  <span dangerouslySetInnerHTML={{ __html: formatForScientificDisplay(cleanText(product.name) || "-") }} />
                 </div>
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
                   {product.productLine || "-"}
@@ -1054,7 +1119,11 @@ export default function ProductsPage() {
                   </div>
                 )}
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
-                  {product.applications ? cleanText(product.applications.substring(0, 30)) + (product.applications.length > 30 ? "..." : "") : "-"}
+                  {product.applications ? (
+                    <span dangerouslySetInnerHTML={{ 
+                      __html: formatForScientificDisplay(cleanText(product.applications.substring(0, 30))) + (product.applications.length > 30 ? "..." : "")
+                    }} />
+                  ) : "-"}
                 </div>
                 <div style={{ color: "#555", fontSize: "12px" }} role="cell">
                   {product.variants && product.variants.length > 0
@@ -1064,10 +1133,14 @@ export default function ProductsPage() {
                 {selectedCategoryName?.toLowerCase().includes("antibod") && (
                   <>
                     <div style={{ color: "#555", fontSize: "12px", wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "normal" }} role="cell">
-                      {product.abReactivity || "-"}
+                      {product.abReactivity ? (
+                        <span dangerouslySetInnerHTML={{ __html: formatForScientificDisplay(cleanText(product.abReactivity)) }} />
+                      ) : "-"}
                     </div>
                     <div style={{ color: "#555", fontSize: "12px", wordWrap: "break-word", overflowWrap: "break-word", whiteSpace: "normal" }} role="cell">
-                      {product.abTarget || "-"}
+                      {product.abTarget ? (
+                        <span dangerouslySetInnerHTML={{ __html: formatForScientificDisplay(cleanText(product.abTarget)) }} />
+                      ) : "-"}
                     </div>
                   </>
                 )}
@@ -1196,6 +1269,109 @@ export default function ProductsPage() {
               </div>
             </div>
           ))}
+          </div>
+
+          {/* Mobile Product Cards */}
+          <div className="mobile-only mobile-product-container">
+            {!loading && products.map((product) => (
+              <div key={`mobile-${product.id}`} className="mobile-product-card">
+                <div className="mobile-field">
+                  <span className="mobile-label">Catalog No:</span>
+                  <span className="mobile-value">{product.catalogNumber}</span>
+                </div>
+                <div className="mobile-field">
+                  <span className="mobile-label">Product:</span>
+                  <span className="mobile-value">
+                    <span dangerouslySetInnerHTML={{ __html: formatForScientificDisplay(cleanText(product.name) || "-") }} />
+                  </span>
+                </div>
+                <div className="mobile-field">
+                  <span className="mobile-label">Product Line:</span>
+                  <span className="mobile-value">{product.productLine || "-"}</span>
+                </div>
+                {!selectedCategoryName?.toLowerCase().includes("antibod") && (
+                  <div className="mobile-field">
+                    <span className="mobile-label">Brand:</span>
+                    <span className="mobile-value">{product.brand || "-"}</span>
+                  </div>
+                )}
+                <div className="mobile-field">
+                  <span className="mobile-label">Applications:</span>
+                  <span className="mobile-value">
+                    {product.applications ? (
+                      <span dangerouslySetInnerHTML={{ 
+                        __html: formatForScientificDisplay(cleanText(product.applications.substring(0, 50))) + (product.applications.length > 50 ? "..." : "")
+                      }} />
+                    ) : "-"}
+                  </span>
+                </div>
+                <div className="mobile-field">
+                  <span className="mobile-label">Pack Size:</span>
+                  <span className="mobile-value">
+                    {product.variants && product.variants.length > 0 ? product.variants[0].packSize || "-" : "-"}
+                  </span>
+                </div>
+                {selectedCategoryName?.toLowerCase().includes("antibod") && (
+                  <>
+                    <div className="mobile-field">
+                      <span className="mobile-label">Reactivity:</span>
+                      <span className="mobile-value">
+                        {product.abReactivity ? (
+                          <span dangerouslySetInnerHTML={{ __html: formatForScientificDisplay(cleanText(product.abReactivity)) }} />
+                        ) : "-"}
+                      </span>
+                    </div>
+                    <div className="mobile-field">
+                      <span className="mobile-label">Target:</span>
+                      <span className="mobile-value">
+                        {product.abTarget ? (
+                          <span dangerouslySetInnerHTML={{ __html: formatForScientificDisplay(cleanText(product.abTarget)) }} />
+                        ) : "-"}
+                      </span>
+                    </div>
+                  </>
+                )}
+                <div className="mobile-actions">
+                  <a
+                    href={`/products/${product.catalogNumber}`}
+                    style={{
+                      background: "#f0f0f0",
+                      color: "var(--primary)",
+                      border: "1px solid #ddd",
+                      padding: "8px 16px",
+                      borderRadius: "4px",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    View Details
+                  </a>
+                  <button
+                    onClick={() => handleGetQuote(product)}
+                    style={{
+                      background: "var(--primary)",
+                      color: "#fff",
+                      border: "none",
+                      padding: "8px 16px",
+                      borderRadius: "4px",
+                      fontSize: "12px",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    Get Quote
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
 
           {/* Pagination */}
           {totalProducts > pageSize && (
