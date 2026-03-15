@@ -23,7 +23,7 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
 
