@@ -34,6 +34,7 @@ interface ProductData {
   category: string;
   title: string;
   description: string;
+  image?: string;
   specs: { label: string; value: string }[];
   applications: string[];
   features: string[];
@@ -45,6 +46,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration',
     title: 'Syringe Filters',
     description: 'High-precision syringe filters for HPLC, UHPLC, and sample preparation with color-coded identification system.',
+    image: '/uploads/1773486785207-Syringe_filters.webp',
     specs: [
       { label: 'Membrane Types', value: 'PVDF, RC, CA, GF, PTFE, Nylon, PES' },
       { label: 'Pore Sizes', value: '0.22µm, 0.45µm' },
@@ -59,6 +61,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration - Sterile',
     title: 'Sterile Syringe Filters',
     description: 'Individually packaged sterile syringe filters with LRV7 bacterial retention for critical applications.',
+    image: '/uploads/1773487142493-Sterile_Syringe_Filters.webp',
     specs: [
       { label: 'Membrane Types', value: 'PES, PVDF, CA (33mm diameter)' },
       { label: 'Pore Sizes', value: '0.22µm, 0.45µm' },
@@ -73,6 +76,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration',
     title: 'Gridded Membrane Filters',
     description: 'MCE gridded membranes for microbial analysis with superior bacterial recovery rates.',
+    image: '/uploads/1773501635023-Gridded Membrane Filter.webp',
     specs: [
       { label: 'Membrane', value: 'Mixed Cellulose Ester (MCE)' },
       { label: 'Pore Sizes', value: '0.22µm, 0.45µm' },
@@ -87,6 +91,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration',
     title: 'Venting Filters',
     description: 'PTFE hydrophobic venting filters for gas sterilization and bioreactor applications.',
+    image: '/uploads/1773501649793-Venting_Filter.webp',
     specs: [
       { label: 'Membrane', value: 'Hydrophobic PTFE' },
       { label: 'Diameter', value: '50mm' },
@@ -101,6 +106,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Laboratory Filtration - Centrifugal',
     title: 'Ultra Centrifugal Filters',
     description: 'Molecular weight cut-off centrifugal filters for protein concentration and purification.',
+    image: '/uploads/1773501583491-Ultra Centrifugal.jpg',
     specs: [
       { label: 'MWCO Options', value: '3K, 5K, 10K, 30K, 50K, 100KD' },
       { label: 'Max Volume', value: '12mL (fixed-angle), 16mL (swing)' },
@@ -115,6 +121,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Absolute PP Capsule',
     description: 'Disposable polypropylene capsule filters with multi-layer graded structure for high flow rates.',
+    image: '/uploads/1773501996296-CapFlux Absolute PP Capsule.jpg',
     specs: [
       { label: 'Filter Media', value: 'Absolute Polypropylene' },
       { label: 'Pore Sizes', value: '0.1-5.0µm' },
@@ -129,6 +136,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Sterile PES Capsule',
     description: 'Sterile grade PES capsule filters with 100% integrity testing for bacteria and virus removal.',
+    image: '/uploads/1773501996296-CapFlux Absolute PP Capsule.jpg',
     specs: [
       { label: 'Filter Media', value: 'Sterile Grade PES' },
       { label: 'Pore Sizes', value: '0.1-5.0µm' },
@@ -143,6 +151,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Hydrophobic PTFE',
     description: 'Hydrophobic PTFE capsule filters for gas venting and aggressive chemical applications.',
+     image: '/uploads/1773503762050-CapFlux Hydrophobic PTFE.jpg',
     specs: [
       { label: 'Filter Media', value: 'Hydrophobic PTFE' },
       { label: 'Chemical Compatibility', value: 'Wide range (PTFE)' },
@@ -157,6 +166,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Hydrophilic PVDF',
     description: 'PVDF capsule filters with lowest protein binding for biopharmaceutical applications.',
+     image: '/uploads/1773503826870-CapFlux Hydrophilic PVDF.jpg',
     specs: [
       { label: 'Filter Media', value: 'Hydrophilic PVDF' },
       { label: 'Protein Binding', value: 'Lowest available' },
@@ -171,6 +181,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Capsule',
     title: 'CapFlux Nylon66 Capsule',
     description: 'Nylon66 and charged nylon capsules for aqueous solvents and endotoxin removal.',
+     image: '/uploads/1773503863889-CapFlux Nylon66 Capsule.jpg',
     specs: [
       { label: 'Filter Media', value: 'Nylon66 / Charged Nylon' },
       { label: 'Pore Sizes', value: '0.1-5.0µm' },
@@ -185,6 +196,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux PP Pleated',
     description: '100% polypropylene pleated cartridge filters with excellent cost-performance ratio.',
+    image: '/uploads/1773503931107-SteriFlux PES Pleated.jpg',
     specs: [
       { label: 'Filter Media', value: '100% Polypropylene' },
       { label: 'Pore Sizes', value: '0.1-10µm' },
@@ -199,6 +211,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux PES Pleated',
     description: 'Asymmetric PES membrane pleated cartridges with superior bacteria and particle removal.',
+     image: '/uploads/1773503931107-SteriFlux PES Pleated.jpg',
     specs: [
       { label: 'Filter Media', value: 'Asymmetric PES' },
       { label: 'Bacterial Challenge', value: 'LRV7' },
@@ -213,6 +226,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux PTFE Pleated',
     description: 'Hydrophobic PTFE pleated cartridges for aggressive chemicals and organic solvents.',
+     image: '/uploads/1773503931108-SteriFlux PTFE Pleated.jpg',
     specs: [
       { label: 'Filter Media', value: 'Hydrophobic PTFE' },
       { label: 'Chemical Compatibility', value: 'Excellent (most chemicals)' },
@@ -227,6 +241,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Cartridge',
     title: 'SteriFlux Glass Fiber',
     description: 'Glass fiber media cartridge filters with thermal bonding for extended service life.',
+      image: '/uploads/1773504044244-SteriFlux Glass Fiber.jpg',
     specs: [
       { label: 'Filter Media', value: 'Glass Fiber' },
       { label: 'Pore Sizes', value: '0.1-10µm' },
@@ -241,6 +256,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - High Flow',
     title: 'SupFlux High Flow Series',
     description: 'Large 6" diameter high flow cartridges for reduced change-outs and maintenance.',
+      image: '/uploads/1773504112027-SupFlux High Flow Series.jpg',
     specs: [
       { label: 'Diameter', value: '152mm (6")' },
       { label: 'Lengths', value: '20", 40", 60"' },
@@ -255,6 +271,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Sediment',
     title: 'AquaFlux Melt Blown',
     description: '100% polypropylene melt blown filters with three nano fiber layers for absolute efficiency.',
+     image: '/uploads/1773499746787-AquaFlux Melt Blown.jpg',
     specs: [
       { label: 'Material', value: '100% Polypropylene' },
       { label: 'Pore Sizes', value: '1-150µm' },
@@ -269,6 +286,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Sediment',
     title: 'AquaFlux String Wound',
     description: 'Maximum wound string filters with 30% more material for superior dirt-holding capacity.',
+     image: '/uploads/1773505663731-AquaFlux String Wound.jpg',
     specs: [
       { label: 'Material', value: 'PP, Cotton, Glass Fiber' },
       { label: 'Pore Sizes', value: '1-150µm' },
@@ -277,12 +295,13 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     ],
     applications: ['Water Treatment', 'Desalination', 'Industrial', 'Heavy Particle Load'],
     features: ['Max wound process (30% more material)', 'Wide chemical compatibility', 'Special connector options', 'High temperature capability (80-120°C)']
-  },
+  }, 
   {
     id: 'aquaflux-multilayer',
     category: 'Process Filtration - Specialty',
     title: 'AquaFlux Multi-Layer PP',
     description: 'Multi-layer depth media filters with graded pore structure for extended lifespan.',
+     image: '/uploads/1773505663731-AquaFlux Multi-Layer PP.jpg',
     specs: [
       { label: 'Construction', value: '5+ layers depth media + PP membrane' },
       { label: 'Pore Sizes', value: '0.1-10µm' },
@@ -297,6 +316,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Sanitary',
     title: 'SteelFlux Sanitary Housing',
     description: 'Stainless steel sanitary filter housings with quick connection design for pharmaceutical applications.',
+     image: '/uploads/1773505995110-SteelFlux Sanitary Housing.jpg',
     specs: [
       { label: 'Material', value: 'SS304, SS316L' },
       { label: 'Connection', value: 'Tri-Clamp, Flange' },
@@ -311,6 +331,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Security',
     title: 'SteelFlux Security Housing',
     description: 'Multi-round security filter housings available in SS, glass steel, and carbon steel materials.',
+     image: '/uploads/1773506051797-SteelFlux Security Housing.png',
     specs: [
       { label: 'Material Options', value: 'SS304/316L, Glass Steel, Carbon Steel' },
       { label: 'Rounds', value: '1, 3, 5, 7, 9, 12 rounds' },
@@ -325,7 +346,9 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - High Flow',
     title: 'SteelFlux High Flow Housing',
     description: 'High flow filter housings for 6" diameter cartridges with quick connection design.',
+     image: '/uploads/1773505870883-SteelFlux High Flow Housing.png',
     specs: [
+
       { label: 'Material', value: 'SS304, SS316L, Glass Steel' },
       { label: 'Cartridge Lengths', value: '20", 40", 60"' },
       { label: 'Design Pressure', value: '10 bar' },
@@ -339,6 +362,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Bag Filter',
     title: 'SteelFlux Bag Filter Housing',
     description: 'Standard bag filter housings for size 1-4 bag filters with reliable sealing design.',
+     image: '/uploads/1773505818896-SteelFlux Bag Filter Housing.jpg',
     specs: [
       { label: 'Material', value: 'SS304, SS316L' },
       { label: 'Bag Sizes', value: '01, 02, 03, 04' },
@@ -353,6 +377,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Filter Housing - Lenticular',
     title: 'SteelFlux Lenticular Housing',
     description: 'Sanitary lenticular filter housings for depth filtration and modular closed systems.',
+     image: '/uploads/1773505788997-SteelFlux Lenticular Housing.png',
     specs: [
       { label: 'Material', value: 'SS304, SS316L' },
       { label: 'Filter Types', value: '8", 12", 16" diameter' },
@@ -534,11 +559,23 @@ export default function KitProductDetail() {
                 .map((product) => (
                 <div key={product.id} style={{ background: '#fff', borderRadius: '12px', border: '1px solid #e0e0e0', overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,0.06)', display: 'flex', flexDirection: 'column' }}>
                   {/* Product Image */}
-                  <div style={{ width: '100%', height: '180px', background: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #e0e0e0' }}>
-                    <div style={{ textAlign: 'center', color: '#999' }}>
-                      <div style={{ fontSize: '48px', marginBottom: '8px' }}>🖼️</div>
-                      <div style={{ fontSize: '12px', color: '#aaa' }}>Product Image</div>
-                    </div>
+                  <div style={{ width: '100%', height: '180px', background: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center', borderBottom: '1px solid #e0e0e0', overflow: 'hidden' }}>
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.title}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover'
+                        }}
+                      />
+                    ) : (
+                      <div style={{ textAlign: 'center', color: '#999' }}>
+                        <div style={{ fontSize: '48px', marginBottom: '8px' }}>🖼️</div>
+                        <div style={{ fontSize: '12px', color: '#aaa' }}>Product Image</div>
+                      </div>
+                    )}
                   </div>
                   
                   <div style={{ padding: '24px' }}>
