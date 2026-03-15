@@ -329,6 +329,17 @@ body {
 /* ===================== */
 /* RESPONSIVE            */
 /* ===================== */
+@media (min-width: 769px) {
+  /* Show desktop navigation on larger screens */
+  .menu-list {
+    display: flex !important;
+  }
+  
+  .menu-section {
+    display: block !important;
+  }
+}
+
 @media (max-width: 1024px) {
   .header-search-section {
     max-width: 350px;
@@ -418,7 +429,7 @@ body {
     display: none !important;
   }
 
-  /* Menu */
+  /* Menu - Hide on mobile, show desktop navigation on larger screens */
   .menu-list {
     display: none;
   }

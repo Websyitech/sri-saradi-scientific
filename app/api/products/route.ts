@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
+import { transformProductsForDisplay } from "@/lib/character-transformer";
 
 export async function GET(request: NextRequest) {
   try {
@@ -149,8 +150,11 @@ export async function GET(request: NextRequest) {
     const total = await prisma.product.count({ where });
     const page = Math.floor(offset / limit) + 1;
 
+    // Transform products to handle special characters properly
+    const transformedProducts = transformProductsForDisplay(filteredProducts);
+
     return NextResponse.json({
-      products: filteredProducts,
+      products: transformedProducts,
       total,
       page,
       totalPages: Math.ceil(total / limit),

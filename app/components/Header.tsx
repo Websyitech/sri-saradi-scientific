@@ -675,7 +675,6 @@ export default function Header() {
       </div>
     </header>
 
-    {/* Menu Section with shared mobile menu state */}
     <MenuSection 
       mobileMenuOpen={mobileMenuOpen} 
       setMobileMenuOpen={setMobileMenuOpen} 

@@ -44,45 +44,45 @@ model ApplicationItem {
 }
 
 model Category {
-  id        String      @id @default(cuid())
-  name      String
-  slug      String      @unique
-  description String?
-  image     String?
-  sortOrder Int         @default(0)
-  isActive  Boolean     @default(true)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  icon      String?
-  color     String?     @default("#2D2B7F")
-  parentId  String?
-  parent    Category?   @relation("CategoryTree", fields: [parentId], references: [id])
-  children  Category[]  @relation("CategoryTree")
-  products  Product[]
+  id                    String                 @id @default(cuid())
+  name                  String
+  slug                  String                 @unique
+  description           String?
+  image                 String?
+  sortOrder             Int                    @default(0)
+  isActive              Boolean                @default(true)
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  icon                  String?
+  color                 String?                @default("#2D2B7F")
+  parentId              String?
+  isKitCategory         Boolean                @default(false)
+  parent                Category?              @relation("CategoryTree", fields: [parentId], references: [id])
+  children              Category[]             @relation("CategoryTree")
   labConsumableProducts LabConsumableProduct[]
-  isKitCategory Boolean @default(false)
+  products              Product[]
 
   @@map("categories")
 }
 
 model HeroSlide {
-  id             String   @id @default(cuid())
-  title          String
-  subtitle       String?
-  description    String?
-  ctaText        String?
-  ctaLink        String?
-  ctaType        String?  @default("link")
-  pdfUrl         String?
-  pdfLabel       String?
-  quoteCtaLabel  String?
-  bgImage        String?
-  bgGradient     String?
-  accentColor    String?  @default("#6C63FF")
-  sortOrder      Int      @default(0)
-  isActive       Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id            String   @id @default(cuid())
+  title         String
+  subtitle      String?
+  description   String?
+  ctaText       String?
+  ctaLink       String?
+  bgGradient    String?
+  accentColor   String?  @default("#6C63FF")
+  sortOrder     Int      @default(0)
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  bgImage       String?
+  ctaType       String?  @default("link")
+  pdfLabel      String?
+  pdfUrl        String?
+  quoteCtaLabel String?
 
   @@map("hero_slides")
 }
@@ -105,22 +105,22 @@ model JobOpening {
 }
 
 model KitProduct {
-  id                 String   @id @default(cuid())
+  id                 String                 @id @default(cuid())
   title              String
-  slug               String?
   description        String?
-  subtitle           String?
-  content            String?  // Rich text content
   image              String?
   href               String?
+  sortOrder          Int                    @default(0)
+  isActive           Boolean                @default(true)
+  createdAt          DateTime               @default(now())
+  updatedAt          DateTime               @updatedAt
+  slug               String?
   heroTitle          String?
   associatedProducts String?
+  content            String?
+  subtitle           String?
   catalogId          String?
-  catalog            Catalogue? @relation(fields: [catalogId], references: [id])
-  sortOrder          Int      @default(0)
-  isActive           Boolean  @default(true)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  catalog            Catalogue?             @relation(fields: [catalogId], references: [id])
   products           LabConsumableProduct[]
 
   @@map("kit_products")
@@ -309,81 +309,81 @@ model User {
 }
 
 model CROService {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  heading     String?
-  subheading  String?
-  banner      String?
-  content     String?
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  heading    String?
+  subheading String?
+  banner     String?
+  content    String?
+  sortOrder  Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@map("cro_services")
 }
 
 model SignalingPathway {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  heading     String?
-  subheading  String?
-  banner      String?
-  content     String?
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  heading    String?
+  subheading String?
+  banner     String?
+  content    String?
+  sortOrder  Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@map("signaling_pathways")
 }
 
 model FAQ {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  heading     String?
-  subheading  String?
-  banner      String?
-  content     String?
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  heading    String?
+  subheading String?
+  banner     String?
+  content    String?
+  sortOrder  Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@map("faqs")
 }
 
 model LabConsumableProduct {
-  id           String     @id @default(cuid())
+  id           String      @id @default(cuid())
   title        String
   subheading   String?
-  content      String?    // Rich text content from TinyMCE
+  content      String?
   image        String?
-  categoryId   String?    // References Category model
-  kitProductId String?    // References KitProduct model (page)
-  sortOrder    Int        @default(0)
-  isActive     Boolean    @default(true)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  category     Category?  @relation(fields: [categoryId], references: [id])
+  categoryId   String?
+  kitProductId String?
+  sortOrder    Int         @default(0)
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  category     Category?   @relation(fields: [categoryId], references: [id])
   kitProduct   KitProduct? @relation(fields: [kitProductId], references: [id])
 
   @@map("lab_consumable_products")
 }
 
 model Catalogue {
-  id          String   @id @default(cuid())
+  id          String       @id @default(cuid())
   title       String
   description String?
-  coverImage  String?  // Cover page image URL
-  pdfUrl      String?  // URL to the catalogue PDF file
-  sortOrder   Int      @default(0)
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  coverImage  String?
+  pdfUrl      String?
+  sortOrder   Int          @default(0)
+  isActive    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   kitProducts KitProduct[]
 
   @@map("catalogues")

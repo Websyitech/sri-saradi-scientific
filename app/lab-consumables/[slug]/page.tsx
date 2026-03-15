@@ -1,6 +1,7 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Hero from '@/app/components/Hero';
 import USPBar from '@/app/components/USPBar';
 import SampleKitModal from '@/app/components/SampleKitModal';
@@ -443,12 +444,28 @@ export default function KitProductDetail() {
   const [loading, setLoading] = useState(true);
   const [showSampleModal, setShowSampleModal] = useState(false);
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('Laboratory Filtration');
+  const tabsRef = useRef<HTMLDivElement>(null);
 
   const getMainCategory = (category: string) => {
     if (category.includes('Laboratory')) return 'Laboratory Filtration';
     if (category.includes('Process')) return 'Process Filtration';
     if (category.includes('Filter Housing')) return 'Filter Housing';
     return category;
+  };
+
+  const scrollTabs = (direction: 'left' | 'right') => {
+    if (tabsRef.current) {
+      const scrollAmount = 200;
+      const currentScroll = tabsRef.current.scrollLeft;
+      const targetScroll = direction === 'left' 
+        ? currentScroll - scrollAmount 
+        : currentScroll + scrollAmount;
+      
+      tabsRef.current.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
@@ -538,30 +555,111 @@ export default function KitProductDetail() {
             <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1a1a2e', textAlign: 'center', marginBottom: '12px' }}>Complete Liquid Handling & Filtration Solutions</h2>
             <p style={{ textAlign: 'center', fontSize: '1.1rem', color: '#666', marginBottom: '48px', maxWidth: '800px', margin: '0 auto' }}>Comprehensive range of laboratory and process filtration products for all your liquid handling applications.</p>
             
-            {/* Category Tabs */}
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '32px', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {Array.from(new Set(LIQUID_HANDLING_PRODUCTS.map(p => getMainCategory(p.category)))).map((mainCategory) => (
-                <button
-                  key={mainCategory}
-                  onClick={() => setSelectedMainCategory(mainCategory)}
-                  style={{
-                    padding: '8px 16px',
-                    borderRadius: '6px',
-                    fontSize: '13px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
-                    transition: 'all 0.3s',
-                    background: selectedMainCategory === mainCategory ? '#667eea' : '#fff',
-                    color: selectedMainCategory === mainCategory ? '#fff' : '#333',
-                    border: selectedMainCategory === mainCategory ? 'none' : '1px solid #e0e0e0',
-                    boxShadow: selectedMainCategory === mainCategory ? '0 4px 12px rgba(102, 126, 234, 0.4)' : '0 1px 3px rgba(0,0,0,0.1)',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  {mainCategory}
-                </button>
-              ))}
+            {/* Category Tabs with Arrow Navigation */}
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '32px', gap: '16px' }}>
+              {/* Left Arrow */}
+              <button
+                onClick={() => scrollTabs('left')}
+                style={{
+                  background: '#fff',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '50%',
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f5f5f5';
+                  e.currentTarget.style.borderColor = '#ccc';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#fff';
+                  e.currentTarget.style.borderColor = '#e0e0e0';
+                }}
+              >
+                <FaChevronLeft style={{ fontSize: '14px', color: '#666' }} />
+              </button>
+
+              {/* Scrollable Tabs Container */}
+              <div
+                ref={tabsRef}
+                style={{
+                  display: 'flex',
+                  gap: '8px',
+                  overflowX: 'auto',
+                  scrollbarWidth: 'none', // Firefox
+                  msOverflowStyle: 'none', // IE/Edge
+                  flex: 1,
+                  padding: '4px 0'
+                }}
+                className="tabs-container"
+              >
+                {Array.from(new Set(LIQUID_HANDLING_PRODUCTS.map(p => getMainCategory(p.category)))).map((mainCategory) => (
+                  <button
+                    key={mainCategory}
+                    onClick={() => setSelectedMainCategory(mainCategory)}
+                    style={{
+                      padding: '8px 16px',
+                      borderRadius: '6px',
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.3s',
+                      background: selectedMainCategory === mainCategory ? '#667eea' : '#fff',
+                      color: selectedMainCategory === mainCategory ? '#fff' : '#333',
+                      border: selectedMainCategory === mainCategory ? 'none' : '1px solid #e0e0e0',
+                      boxShadow: selectedMainCategory === mainCategory ? '0 4px 12px rgba(102, 126, 234, 0.4)' : '0 1px 3px rgba(0,0,0,0.1)',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0
+                    }}
+                  >
+                    {mainCategory}
+                  </button>
+                ))}
+              </div>
+
+              {/* Right Arrow */}
+              <button
+                onClick={() => scrollTabs('right')}
+                style={{
+                  background: '#fff',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '50%',
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  flexShrink: 0
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f5f5f5';
+                  e.currentTarget.style.borderColor = '#ccc';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#fff';
+                  e.currentTarget.style.borderColor = '#e0e0e0';
+                }}
+              >
+                <FaChevronRight style={{ fontSize: '14px', color: '#666' }} />
+              </button>
             </div>
+
+            {/* Hide scrollbar for webkit browsers */}
+            <style jsx>{`
+              .tabs-container::-webkit-scrollbar {
+                display: none;
+              }
+            `}</style>
             
             {/* Products Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '24px' }}>

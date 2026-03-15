@@ -1,8 +1,32 @@
 export const cleanText = (text: string | null | undefined): string => {
   if (!text) return "";
   
-  // Replace mojibake characters commonly caused by encoding issues
+  // First handle chemical-specific patterns
   let cleaned = text
+    // Remove malformed HTML tags (your specific issue)
+    .replace(/<sup>(\d+)-<\/sup>/g, '$1-')
+    .replace(/<sup>(\d+)<\/sup>/g, '$1')
+    // Fix specific chemical symbols
+    .replace(/Œ&ge;/g, 'γ')
+    .replace(/Œ&le;/g, 'α')
+    .replace(/Œ&beta;/g, 'β')
+    // Clean up backslash artifacts
+    .replace(/\\\\\n\\\\\n/g, ' ')
+    .replace(/\\\\/g, ' ')
+    .replace(/\\\n/g, ' ')
+    .replace(/\\/g, '')
+    // Fix chemical punctuation
+    .replace(/\{\s*/g, '(')
+    .replace(/\s*\}/g, ')')
+    .replace(/,\s*,/g, ',')
+    .replace(/\s*,\s*/g, ', ')
+    // Clean position numbers in chemical names (preserve some spaces for readability)
+    .replace(/(\d+),\s*(\d+)/g, '$1, $2')  // Keep space after comma
+    .replace(/\)\s*-/g, ')-')
+    .replace(/-\s*\(/g, '-(')
+  
+  // Then handle general mojibake characters commonly caused by encoding issues
+  cleaned = cleaned
     // Apostrophes
     .replace(/Äô|â€™/g, "'")
     // Fix for Äë mojibake
