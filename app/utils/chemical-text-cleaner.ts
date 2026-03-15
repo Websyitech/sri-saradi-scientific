@@ -91,10 +91,10 @@ export function cleanChemicalText(text: string | null | undefined): string {
     patterns.forEach(([pattern, replacement]) => {
       if (typeof pattern === 'string') {
         // String replacement
-        cleaned = cleaned.replace(new RegExp(escapeRegex(pattern), 'g'), replacement);
+        cleaned = cleaned.replace(new RegExp(escapeRegex(pattern), 'g'), replacement as string);
       } else {
         // Regex replacement
-        cleaned = cleaned.replace(pattern, replacement);
+        cleaned = cleaned.replace(pattern, replacement as string);
       }
     });
   });
