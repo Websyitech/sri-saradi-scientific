@@ -371,3 +371,17 @@ model LabConsumableProduct {
 
   @@map("lab_consumable_products")
 }
+
+model Catalogue {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  coverImage  String?  // Cover page image URL
+  pdfUrl      String?  // URL to the catalogue PDF file
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("catalogues")
+}
