@@ -513,7 +513,7 @@ export default function KitProductDetail() {
 
       <SampleKitModal isOpen={showSampleModal} onClose={() => setShowSampleModal(false)} />
 
-      <USPBar items={getUSPItems(slug)} />
+      {/* <USPBar items={getUSPItems(slug)} /> */}
 
       {slug === 'genfollower-products' && <ProductCatalog />}
 
