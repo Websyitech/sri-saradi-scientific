@@ -8,6 +8,7 @@ interface Product {
   category: string;
   title: string;
   description: string;
+  image?: string;
   specs: Array<{
     label: string;
     value: string;
@@ -31106,9 +31107,16 @@ export default function ProductCatalog({ initialTab = 'pcr-plates', showSeries }
                   e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.06)';
                 }}
               >
-                <div style={{ width: '100%', height: '180px', background: '#fafafa', border: '1px solid #e0e0e0', borderRadius: '8px', marginBottom: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999', flexDirection: 'column', gap: '8px' }}>
-                  <div style={{ fontSize: '40px' }}>🖼️</div>
-                  <div style={{ fontSize: '12px', color: '#aaa' }}>No image</div>
+                <div style={{ width: '100%', height: '180px', background: '#fafafa', border: '1px solid #e0e0e0', borderRadius: '8px', marginBottom: '12px', overflow: 'hidden' }}>
+                  <img
+                    src="/uploads/1773556851579-genfollower.jpg"
+                    alt={product.title}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                  />
                 </div>
                 <h3 style={{
                   fontSize: '18px',
