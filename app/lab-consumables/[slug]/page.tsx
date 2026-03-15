@@ -301,7 +301,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
     category: 'Process Filtration - Specialty',
     title: 'AquaFlux Multi-Layer PP',
     description: 'Multi-layer depth media filters with graded pore structure for extended lifespan.',
-     image: '/uploads/1773505663731-AquaFlux Multi-Layer PP.jpg',
+     image: '/uploads/1773556506254-AquaFlux_Multi_Layer.jpg',
     specs: [
       { label: 'Construction', value: '5+ layers depth media + PP membrane' },
       { label: 'Pore Sizes', value: '0.1-10µm' },
@@ -604,11 +604,41 @@ export default function KitProductDetail() {
                     </div>
                   </div>
                   
-                  <ul style={{ fontSize: '12px', color: '#555', marginBottom: 0, paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <ul style={{ fontSize: '12px', color: '#555', marginBottom: '16px', paddingLeft: '18px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                     {product.features.map((feature, idx) => (
                       <li key={idx}>{feature}</li>
                     ))}
                   </ul>
+                  
+                  {/* Request Quote Button */}
+                  <button
+                    onClick={() => setShowSampleModal(true)}
+                    style={{
+                      width: '100%',
+                      background: '#2D2B7F',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      padding: '12px 16px',
+                      fontSize: '14px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#1a1a2e';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
+                      e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = '#2D2B7F';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                    }}
+                  >
+                    Request Quote
+                  </button>
                   </div>
                 </div>
               ))}
@@ -618,7 +648,7 @@ export default function KitProductDetail() {
       )}
 
       {/* Associated Products */}
-      {Array.isArray(product.associatedProducts) && product.associatedProducts.length > 0 && (
+      {/* {Array.isArray(product.associatedProducts) && product.associatedProducts.length > 0 && (
         <section style={{ padding: '60px 40px', background: '#f8f9fc' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
             <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1a1a2e', textAlign: 'center', marginBottom: '12px' }}>
@@ -719,7 +749,7 @@ export default function KitProductDetail() {
             </div>
           </div>
         </section>
-      )}
+      )} */}
     </main>
   );
 }
