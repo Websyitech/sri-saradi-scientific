@@ -124,7 +124,7 @@ export default function Header() {
               <img
                 src={settings.site_logo}
                 alt={settings.site_name || "Logo"}
-                style={{ height: "80px", maxWidth: "200px", objectFit: "contain" }}
+                style={{ height: "100px", maxWidth: "250px", objectFit: "contain" }}
               />
             </div>
           )}
