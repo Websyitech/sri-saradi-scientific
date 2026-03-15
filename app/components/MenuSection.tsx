@@ -495,6 +495,29 @@ export default function MenuSection() {
                   ) : item.label === "Resources" ? (
                     <>
                       <Link
+                        href="/catalogues"
+                        onClick={() => handleMouseLeave()}
+                        style={{
+                          display: "block",
+                          padding: "10px 16px",
+                          fontSize: "13px",
+                          color: "#333",
+                          textDecoration: "none",
+                          transition: "all 0.2s",
+                          cursor: "pointer",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = "#f5f5f5";
+                          e.currentTarget.style.color = "var(--primary)";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "transparent";
+                          e.currentTarget.style.color = "#333";
+                        }}
+                      >
+                        Catalogues
+                      </Link>
+                      <Link
                         href="/signaling-pathways"
                         onClick={() => handleMouseLeave()}
                         style={{
@@ -722,6 +745,20 @@ export default function MenuSection() {
                         )
                       ) : item.label === "Resources" ? (
                         <>
+                          <Link
+                            href="/catalogues"
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: "block",
+                              padding: "10px 0",
+                              fontSize: "13px",
+                              color: "#333",
+                              textDecoration: "none",
+                              borderBottom: "1px solid #d0d0d0",
+                            }}
+                          >
+                            Catalogues
+                          </Link>
                           <Link
                             href="/signaling-pathways"
                             onClick={() => setMobileOpen(false)}
