@@ -117,8 +117,8 @@ export const detectUnknownMojibake = (text: string): string[] => {
   
   const suspiciousPatterns: string[] = [];
   
-  // Look for potential mojibake patterns (using safer character class definitions)
-  const mojibakeRegex = /Ã[‚-ÿ][\x80-\xFF]|â€[\x80-\xFF]|Î[\x80-\xFF]|Ï[\x80-\xFF]/g;
+  // Look for potential mojibake patterns (using explicit character matching)
+  const mojibakeRegex = /Ã[\x80-\xFF][\x80-\xFF]|â€[\x80-\xFF]|Î[\x80-\xFF]|Ï[\x80-\xFF]/g;
   
   let match;
   while ((match = mojibakeRegex.exec(text)) !== null) {
