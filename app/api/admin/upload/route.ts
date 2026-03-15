@@ -15,9 +15,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Validate file type (images only)
-    if (!file.type.startsWith("image/")) {
-      return NextResponse.json({ error: "Only image files are allowed" }, { status: 400 });
+    // Validate file type (images and PDFs)
+    if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
+      return NextResponse.json({ error: "Only image files and PDFs are allowed" }, { status: 400 });
     }
 
     // Generate unique filename
