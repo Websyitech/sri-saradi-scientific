@@ -6,6 +6,9 @@ import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 interface SiteSettings {
   site_name?: string;
   site_logo?: string;
+  social_facebook?: string;
+  social_linkedin?: string;
+  social_twitter?: string;
 }
 
 
@@ -77,6 +80,9 @@ export default function Footer() {
         setSettings({
           site_name: data.site_name || "",
           site_logo: data.site_logo || "",
+          social_facebook: data.social_facebook || "",
+          social_linkedin: data.social_linkedin || "",
+          social_twitter: data.social_twitter || "",
         });
       })
       .catch(() => {});
@@ -425,66 +431,78 @@ For product-specific documentation, certificates of analysis, safety data sheets
 
           {/* Social Icons */}
           <div style={{ display: "flex", gap: "12px" }}>
-            <a
-              href="https://facebook.com"
-              aria-label="Facebook"
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-                background: "#1a1a2e",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontSize: "14px",
-                textDecoration: "none",
-                transition: "background 0.2s",
-              }}
-              className="footer-social-icon"
-            >
-              <FaFacebookF />
-            </a>
-            <a
-              href="https://linkedin.com"
-              aria-label="LinkedIn"
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-                background: "#1a1a2e",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontSize: "14px",
-                textDecoration: "none",
-                transition: "background 0.2s",
-              }}
-              className="footer-social-icon"
-            >
-              <FaLinkedinIn />
-            </a>
-            <a
-              href="https://twitter.com"
-              aria-label="Twitter"
-              style={{
-                width: "36px",
-                height: "36px",
-                borderRadius: "50%",
-                background: "#1a1a2e",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontSize: "14px",
-                textDecoration: "none",
-                transition: "background 0.2s",
-              }}
-              className="footer-social-icon"
-            >
-              <FaTwitter />
-            </a>
+            {settings.social_facebook && (
+              <a
+                href={settings.social_facebook}
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "50%",
+                  background: "#1a1a2e",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
+                  fontSize: "14px",
+                  textDecoration: "none",
+                  transition: "background 0.2s",
+                }}
+                className="footer-social-icon"
+              >
+                <FaFacebookF />
+              </a>
+            )}
+            {settings.social_linkedin && (
+              <a
+                href={settings.social_linkedin}
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "50%",
+                  background: "#1a1a2e",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
+                  fontSize: "14px",
+                  textDecoration: "none",
+                  transition: "background 0.2s",
+                }}
+                className="footer-social-icon"
+              >
+                <FaLinkedinIn />
+              </a>
+            )}
+            {settings.social_twitter && (
+              <a
+                href={settings.social_twitter}
+                aria-label="Twitter"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  width: "36px",
+                  height: "36px",
+                  borderRadius: "50%",
+                  background: "#1a1a2e",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
+                  fontSize: "14px",
+                  textDecoration: "none",
+                  transition: "background 0.2s",
+                }}
+                className="footer-social-icon"
+              >
+                <FaTwitter />
+              </a>
+            )}
           </div>
         </div>
       </div>
