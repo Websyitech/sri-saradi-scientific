@@ -444,7 +444,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    placeholder="Your message here..."
+                    placeholder="Please mention product details such as Product Name, CAS No. if present, Specifications required etc. If nothing specific to mention, please write NA"
                     rows={6}
                     style={{
                       width: "100%",

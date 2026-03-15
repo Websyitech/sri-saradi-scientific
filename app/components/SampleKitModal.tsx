@@ -226,13 +226,14 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
 
               <div>
                 <label style={{ display: 'block', fontSize: '13px', fontWeight: 500, color: '#555', marginBottom: '6px' }}>
-                  Message
+                  Message *
                 </label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Tell us about your requirements..."
+                  required
+                  placeholder="Please mention product details such as Product Name, CAS No. if present, Specifications required etc. If nothing specific to mention, please write NA"
                   rows={3}
                   style={{
                     width: '100%',
