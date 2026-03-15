@@ -86,6 +86,16 @@ export default function MenuSection() {
   const [showMegaMenu, setShowMegaMenu] = useState<string | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
+  
+  // Multi-level mobile menu state
+  const [mobileMenuLevel, setMobileMenuLevel] = useState(0);
+  const [mobileMenuStack, setMobileMenuStack] = useState<Array<{
+    title: string;
+    items: any[];
+    type: 'main' | 'products' | 'level2' | 'labconsumables' | 'croservices' | 'resources';
+    parentId?: string;
+  }>>([]);
+  
   const [categories, setCategories] = useState<Level2Category[]>([]);
   const [applications, setApplications] = useState<ApplicationCategory[]>([]);
   const [kitProducts, setKitProducts] = useState<KitProduct[]>([]);
@@ -164,6 +174,245 @@ export default function MenuSection() {
 
   const handleMouseLeave = () => {
     setShowMegaMenu(null);
+  };
+
+  // Multi-level mobile menu functions
+  const initializeMobileMenu = () => {
+    setMobileMenuLevel(0);
+    setMobileMenuStack([{
+      title: "Menu",
+      type: 'main',
+      items: [
+        ...leftMenuItems.map(item => ({ ...item, type: 'main' })),
+        ...rightMenuItems.map(item => ({ ...item, type: 'main' }))
+      ]
+    }]);
+  };
+
+  const navigateToLevel = (level: {
+    title: string;
+    items: any[];
+    type: 'main' | 'products' | 'level2' | 'labconsumables' | 'croservices' | 'resources';
+    parentId?: string;
+  }) => {
+    setMobileMenuStack(prev => [...prev, level]);
+    setMobileMenuLevel(prev => prev + 1);
+  };
+
+  const navigateBack = () => {
+    if (mobileMenuLevel > 0) {
+      setMobileMenuStack(prev => prev.slice(0, -1));
+      setMobileMenuLevel(prev => prev - 1);
+    }
+  };
+
+  const getCurrentMenuLevel = () => {
+    return mobileMenuStack[mobileMenuLevel] || mobileMenuStack[0];
+  };
+
+  const renderMobileMenuItems = (menuLevel: any) => {
+    if (menuLevel.type === 'main') {
+      return menuLevel.items.map((item: any) => (
+        <div key={item.label}>
+          {item.hasMegaMenu ? (
+            <div
+              onClick={() => navigateToLevel({
+                title: item.label,
+                type: 'products',
+                items: categories
+              })}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '16px 20px',
+                color: '#fff',
+                cursor: 'pointer',
+                borderBottom: '1px solid #3a3d4e'
+              }}
+            >
+              <span style={{ fontSize: '15px' }}>{cleanText(item.label)}</span>
+              <span style={{ color: '#888', fontSize: '14px' }}>→</span>
+            </div>
+          ) : item.hasDropdown ? (
+            <div
+              onClick={() => {
+                let nextLevel;
+                if (item.label === 'Lab Consumables') {
+                  nextLevel = {
+                    title: item.label,
+                    type: 'labconsumables' as const,
+                    items: kitProducts
+                  };
+                } else if (item.label === 'CRO Services') {
+                  nextLevel = {
+                    title: item.label,
+                    type: 'croservices' as const,
+                    items: croServices
+                  };
+                } else if (item.label === 'Resources') {
+                  nextLevel = {
+                    title: item.label,
+                    type: 'resources' as const,
+                    items: [
+                      { label: 'Catalogues', href: '/catalogues' },
+                      { label: 'Signaling Pathways', href: '/signaling-pathways' },
+                      { label: 'Publications', href: '/publications' },
+                      { label: 'FAQ', href: '/faq' }
+                    ]
+                  };
+                }
+                if (nextLevel) {
+                  navigateToLevel(nextLevel);
+                }
+              }}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '16px 20px',
+                color: '#fff',
+                cursor: 'pointer',
+                borderBottom: '1px solid #3a3d4e'
+              }}
+            >
+              <span style={{ fontSize: '15px' }}>{cleanText(item.label)}</span>
+              <span style={{ color: '#888', fontSize: '14px' }}>→</span>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              onClick={() => setMobileOpen(false)}
+              style={{
+                display: 'block',
+                padding: '16px 20px',
+                color: '#fff',
+                textDecoration: 'none',
+                fontSize: '15px',
+                borderBottom: '1px solid #3a3d4e'
+              }}
+            >
+              {cleanText(item.label)}
+            </a>
+          )}
+        </div>
+      ));
+    } else if (menuLevel.type === 'products') {
+      return menuLevel.items.map((level2: Level2Category) => (
+        <div key={level2.id}>
+          {level2.children && level2.children.length > 0 ? (
+            <div
+              onClick={() => navigateToLevel({
+                title: level2.name,
+                type: 'level2',
+                items: level2.children,
+                parentId: level2.id
+              })}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '16px 20px',
+                color: '#fff',
+                cursor: 'pointer',
+                borderBottom: '1px solid #3a3d4e'
+              }}
+            >
+              <span style={{ fontSize: '15px' }}>{cleanText(level2.name)}</span>
+              <span style={{ color: '#888', fontSize: '14px' }}>→</span>
+            </div>
+          ) : (
+            <a
+              href={`/products?brand=Solarbio&category=${level2.slug}`}
+              onClick={() => setMobileOpen(false)}
+              style={{
+                display: 'block',
+                padding: '16px 20px',
+                color: '#fff',
+                textDecoration: 'none',
+                fontSize: '15px',
+                borderBottom: '1px solid #3a3d4e'
+              }}
+            >
+              {cleanText(level2.name)}
+            </a>
+          )}
+        </div>
+      ));
+    } else if (menuLevel.type === 'level2') {
+      return menuLevel.items.map((level3: Level3Category) => (
+        <a
+          key={level3.id}
+          href={`/products?brand=Solarbio&category=${level3.slug}`}
+          onClick={() => setMobileOpen(false)}
+          style={{
+            display: 'block',
+            padding: '16px 20px',
+            color: '#fff',
+            textDecoration: 'none',
+            fontSize: '15px',
+            borderBottom: '1px solid #3a3d4e'
+          }}
+        >
+          {cleanText(level3.name)}
+        </a>
+      ));
+    } else if (menuLevel.type === 'labconsumables') {
+      return menuLevel.items.map((product: KitProduct) => (
+        <a
+          key={product.id}
+          href={`/lab-consumables/${product.slug}`}
+          onClick={() => setMobileOpen(false)}
+          style={{
+            display: 'block',
+            padding: '16px 20px',
+            color: '#fff',
+            textDecoration: 'none',
+            fontSize: '15px',
+            borderBottom: '1px solid #3a3d4e'
+          }}
+        >
+          {cleanText(product.title)}
+        </a>
+      ));
+    } else if (menuLevel.type === 'croservices') {
+      return menuLevel.items.map((service: CROService) => (
+        <a
+          key={service.id}
+          href={`/cro-services/${service.slug}`}
+          onClick={() => setMobileOpen(false)}
+          style={{
+            display: 'block',
+            padding: '16px 20px',
+            color: '#fff',
+            textDecoration: 'none',
+            fontSize: '15px',
+            borderBottom: '1px solid #3a3d4e'
+          }}
+        >
+          {cleanText(service.title)}
+        </a>
+      ));
+    } else if (menuLevel.type === 'resources') {
+      return menuLevel.items.map((item: any) => (
+        <a
+          key={item.label}
+          href={item.href}
+          onClick={() => setMobileOpen(false)}
+          style={{
+            display: 'block',
+            padding: '16px 20px',
+            color: '#fff',
+            textDecoration: 'none',
+            fontSize: '15px',
+            borderBottom: '1px solid #3a3d4e'
+          }}
+        >
+          {cleanText(item.label)}
+        </a>
+      ));
+    }
+    return null;
   };
 
   return (
@@ -641,200 +890,89 @@ export default function MenuSection() {
         {/* Mobile Toggle */}
         <button
           className="menu-mobile-toggle"
-          onClick={() => setMobileOpen(!mobileOpen)}
+          onClick={() => {
+            const newState = !mobileOpen;
+            setMobileOpen(newState);
+            if (newState) {
+              initializeMobileMenu();
+            }
+          }}
           aria-label="Toggle menu"
         >
           {mobileOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Multi-Level Mobile Menu */}
       {mobileOpen && (
         <div className="mobile-menu">
-          <ul className="mobile-menu-list">
-            {[...leftMenuItems, ...rightMenuItems].map((item: any) => (
-              <li key={item.label} className="mobile-menu-item">
-                {item.hasMegaMenu ? (
-                  <>
-                    <a href={item.href} className="mobile-menu-link" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      {cleanText(item.label)}
-                      <FaChevronDown style={{ fontSize: "11px" }} />
-                    </a>
-                    {/* Mobile Mega Menu */}
-                    <div style={{ marginTop: "8px", paddingBottom: "8px" }}>
-                      {categories.length > 0 ? (
-                        categories.map((level2) => (
-                          <div key={level2.id}>
-                            <div
-                              onClick={() => setMobileSubmenu(mobileSubmenu === level2.id ? null : level2.id)}
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                alignItems: "center",
-                                padding: "10px 0",
-                                fontSize: "13px",
-                                color: "#333",
-                                borderBottom: "1px solid #d0d0d0",
-                                cursor: "pointer",
-                              }}
-                            >
-                              <span>{cleanText(level2.name)}</span>
-                              {level2.children.length > 0 && (
-                                <span style={{ fontSize: "10px" }}>
-                                  {mobileSubmenu === level2.id ? "▼" : "▶"}
-                                </span>
-                              )}
-                            </div>
-                            {mobileSubmenu === level2.id && level2.children.length > 0 && (
-                              <div style={{ marginLeft: "16px", backgroundColor: "#f9f9f9" }}>
-                                {level2.children.map((level3) => (
-                                  <Link
-                                    key={level3.id}
-                                    href={`/products?brand=Solarbio&category=${level3.slug}`}
-                                    onClick={() => setMobileOpen(false)}
-                                    style={{
-                                      display: "block",
-                                      padding: "8px 0",
-                                      fontSize: "12px",
-                                      color: "#666",
-                                      textDecoration: "none",
-                                      borderBottom: "1px solid #e0e0e0",
-                                    }}
-                                  >
-                                    {cleanText(level3.name)}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ))
-                      ) : (
-                        <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
-                      )}
-                    </div>
-                  </>
-                ) : item.hasDropdown ? (
-                  <>
-                    <a href={item.href} className="mobile-menu-link" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                      {cleanText(item.label)}
-                      <FaChevronDown style={{ fontSize: "11px" }} />
-                    </a>
-                    {/* Mobile Simple Dropdown */}
-                    <div style={{ marginTop: "8px", paddingBottom: "8px" }}>
-                      {item.label === "CRO Services" ? (
-                        croServices.length > 0 ? (
-                          croServices.map((service) => (
-                            <Link
-                              key={service.id}
-                              href={`/cro-services/${service.slug}`}
-                              onClick={() => setMobileOpen(false)}
-                              style={{
-                                display: "block",
-                                padding: "10px 0",
-                                fontSize: "13px",
-                                color: "#333",
-                                textDecoration: "none",
-                                borderBottom: "1px solid #d0d0d0",
-                              }}
-                            >
-                              {cleanText(service.title)}
-                            </Link>
-                          ))
-                        ) : (
-                          <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
-                        )
-                      ) : item.label === "Resources" ? (
-                        <>
-                          <Link
-                            href="/catalogues"
-                            onClick={() => setMobileOpen(false)}
-                            style={{
-                              display: "block",
-                              padding: "10px 0",
-                              fontSize: "13px",
-                              color: "#333",
-                              textDecoration: "none",
-                              borderBottom: "1px solid #d0d0d0",
-                            }}
-                          >
-                            Catalogues
-                          </Link>
-                          <Link
-                            href="/signaling-pathways"
-                            onClick={() => setMobileOpen(false)}
-                            style={{
-                              display: "block",
-                              padding: "10px 0",
-                              fontSize: "13px",
-                              color: "#333",
-                              textDecoration: "none",
-                              borderBottom: "1px solid #d0d0d0",
-                            }}
-                          >
-                            Signaling Pathways
-                          </Link>
-                          <Link
-                            href="/publications"
-                            onClick={() => setMobileOpen(false)}
-                            style={{
-                              display: "block",
-                              padding: "10px 0",
-                              fontSize: "13px",
-                              color: "#333",
-                              textDecoration: "none",
-                              borderBottom: "1px solid #d0d0d0",
-                            }}
-                          >
-                            Publications
-                          </Link>
-                          <Link
-                            href="/faq"
-                            onClick={() => setMobileOpen(false)}
-                            style={{
-                              display: "block",
-                              padding: "10px 0",
-                              fontSize: "13px",
-                              color: "#333",
-                              textDecoration: "none",
-                              borderBottom: "1px solid #d0d0d0",
-                            }}
-                          >
-                            FAQ
-                          </Link>
-                        </>
-                      ) : (
-                        kitProducts.length > 0 ? (
-                          kitProducts.map((product) => (
-                            <Link
-                              key={product.id}
-                              href={`/lab-consumables/${product.slug}`}
-                              onClick={() => setMobileOpen(false)}
-                              style={{
-                                display: "block",
-                                padding: "10px 0",
-                                fontSize: "13px",
-                                color: "#333",
-                                textDecoration: "none",
-                                borderBottom: "1px solid #d0d0d0",
-                              }}
-                            >
-                              {cleanText(product.title)}
-                            </Link>
-                          ))
-                        ) : (
-                          <div style={{ fontSize: "12px", color: "#999", padding: "10px 0" }}>Loading...</div>
-                        )
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <a href={item.href} className="mobile-menu-link">
-                    {cleanText(item.label)}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div style={{ 
+            position: 'relative', 
+            height: '100%', 
+            overflow: 'hidden',
+            background: '#2a2d3e'
+          }}>
+            {mobileMenuStack.map((menuLevel, index) => {
+              const isActive = index === mobileMenuLevel;
+              const translateX = (index - mobileMenuLevel) * 100;
+              
+              return (
+                <div
+                  key={`${menuLevel.type}-${index}`}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    transform: `translateX(${translateX}%)`,
+                    transition: 'transform 0.3s ease-in-out',
+                    background: '#2a2d3e',
+                    zIndex: isActive ? 20 : 15
+                  }}
+                >
+                  {/* Header with back button and title */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '16px 20px',
+                    borderBottom: '1px solid #3a3d4e',
+                    background: '#242736'
+                  }}>
+                    {index > 0 && (
+                      <button
+                        onClick={navigateBack}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: '#fff',
+                          fontSize: '18px',
+                          marginRight: '12px',
+                          cursor: 'pointer',
+                          padding: '4px'
+                        }}
+                      >
+                        ←
+                      </button>
+                    )}
+                    <h3 style={{
+                      margin: 0,
+                      color: '#fff',
+                      fontSize: '16px',
+                      fontWeight: 600
+                    }}>
+                      {menuLevel.title}
+                    </h3>
+                  </div>
+
+                  {/* Menu Items */}
+                  <div style={{ padding: '8px 0' }}>
+                    {renderMobileMenuItems(menuLevel)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
       </nav>
