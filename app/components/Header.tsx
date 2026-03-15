@@ -23,6 +23,7 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showResearchModal, setShowResearchModal] = useState(false);
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
 
@@ -129,7 +130,7 @@ export default function Header() {
           )}
         </Link>
 
-{/* Right - Search Bar */}
+{/* Center - Search Bar */}
         <div className="header-search-section" ref={searchRef} >
           <div className="header-search-bar" style={{ position: "relative" }}>
             <input
@@ -225,6 +226,236 @@ export default function Header() {
             `}</style>
           </div>
         </div>
+
+        {/* Right - Request Research Product Button */}
+        <div className="header-action-section">
+          <button 
+            onClick={() => setShowResearchModal(true)}
+            style={{
+              background: "#2D2B7F",
+              color: "#fff",
+              border: "none",
+              borderRadius: "8px",
+              padding: "12px 20px",
+              fontSize: "14px",
+              fontWeight: 600,
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+              whiteSpace: "nowrap"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#1e1a5c";
+              e.currentTarget.style.transform = "translateY(-1px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "#2D2B7F";
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+          >
+            Request a Research Product
+          </button>
+        </div>
+
+        {/* Research Product Modal */}
+        {showResearchModal && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 9999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "20px"
+            }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setShowResearchModal(false);
+              }
+            }}
+          >
+            <div
+              style={{
+                backgroundColor: "#fff",
+                borderRadius: "12px",
+                padding: "32px",
+                maxWidth: "500px",
+                width: "100%",
+                maxHeight: "90vh",
+                overflowY: "auto",
+                boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)"
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
+                <h2 style={{ margin: 0, fontSize: "24px", fontWeight: 600, color: "#333" }}>
+                  Request a Research Product
+                </h2>
+                <button
+                  onClick={() => setShowResearchModal(false)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: "24px",
+                    cursor: "pointer",
+                    color: "#666",
+                    padding: "0",
+                    lineHeight: 1
+                  }}
+                >
+                  ×
+                </button>
+              </div>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  // Handle form submission
+                  setShowResearchModal(false);
+                }}
+                style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+              >
+
+
+
+                <div>
+                  <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#333", marginBottom: "8px" }}>
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #ddd",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      outline: "none",
+                      boxSizing: "border-box"
+                    }}
+                    placeholder="Your full name"
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#333", marginBottom: "8px" }}>
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #ddd",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      outline: "none",
+                      boxSizing: "border-box"
+                    }}
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#333", marginBottom: "8px" }}>
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #ddd",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      outline: "none",
+                      boxSizing: "border-box"
+                    }}
+                    placeholder="Your phone number"
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#333", marginBottom: "8px" }}>
+                    Organization
+                  </label>
+                  <input
+                    type="text"
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #ddd",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      outline: "none",
+                      boxSizing: "border-box"
+                    }}
+                    placeholder="Company or institution name"
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: "block", fontSize: "14px", fontWeight: 500, color: "#333", marginBottom: "8px" }}>
+                    Additional Details
+                  </label>
+                  <textarea
+                    rows={4}
+                    style={{
+                      width: "100%",
+                      padding: "12px",
+                      border: "1px solid #ddd",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      outline: "none",
+                      resize: "vertical",
+                      boxSizing: "border-box"
+                    }}
+                    placeholder="Any specific requirements, purity level, packaging preferences, or other details"
+                  />
+                </div>
+
+                <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "8px" }}>
+                  <button
+                    type="button"
+                    onClick={() => setShowResearchModal(false)}
+                    style={{
+                      padding: "12px 24px",
+                      border: "1px solid #ddd",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      background: "#fff",
+                      cursor: "pointer",
+                      fontWeight: 500
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    style={{
+                      padding: "12px 24px",
+                      background: "#2D2B7F",
+                      color: "#fff",
+                      border: "none",
+                      borderRadius: "8px",
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      cursor: "pointer"
+                    }}
+                  >
+                    Submit Request
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import TopHeader from "./components/TopHeader";
 import Header from "./components/Header";
@@ -9,14 +9,10 @@ import CookiesPopup from "./components/CookiesPopup";
 import DisclaimerModal from "./components/DisclaimerModal";
 import prisma from "@/app/lib/prisma";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const googleSans = Inter({
+  variable: "--font-google-sans",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: 'swap',
 });
 
 // Fetch settings for metadata
@@ -79,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${googleSans.variable} antialiased`}
       >
         <TopHeader />
         <Header />

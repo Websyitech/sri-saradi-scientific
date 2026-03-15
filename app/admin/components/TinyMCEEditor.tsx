@@ -38,7 +38,7 @@ export default function TinyMCEEditor({
           'bold italic forecolor | alignleft aligncenter ' +
           'alignright alignjustify | bullist numlist outdent indent | ' +
           'removeformat | help',
-        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size:14px }',
+        content_style: 'body { font-family: var(--font-google-sans), system-ui, -apple-system, sans-serif; font-size:14px }',
         placeholder,
         branding: false,
         promotion: false,
