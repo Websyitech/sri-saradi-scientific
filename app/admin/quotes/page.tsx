@@ -101,8 +101,8 @@ export default function AdminQuotes() {
     <div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px", flexWrap: "wrap", gap: "12px" }}>
         <div>
-          <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: 0 }}>Quote Requests</h1>
-          <p style={{ color: "#888", fontSize: "14px", margin: "4px 0 0" }}>{quotes.length} quotes</p>
+          <h1 style={{ fontSize: "24px", fontWeight: 700, color: "#1a1a2e", margin: 0 }}>Orders</h1>
+          <p style={{ color: "#888", fontSize: "14px", margin: "4px 0 0" }}>{quotes.length} orders</p>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <FaFilter style={{ color: "#888", fontSize: "13px" }} />
@@ -171,7 +171,7 @@ export default function AdminQuotes() {
       </div>
 
       {/* Quote Detail Modal */}
-      <AdminModal title="Quote Request Details" isOpen={modalOpen} onClose={() => setModalOpen(false)} width="640px">
+      <AdminModal title="Order Details" isOpen={modalOpen} onClose={() => setModalOpen(false)} width="640px">
         {viewQuote && (
           <div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginBottom: "20px" }}>
@@ -245,7 +245,7 @@ export default function AdminQuotes() {
             )}
 
             <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", paddingTop: "8px", borderTop: "1px solid #eee" }}>
-              <button onClick={() => handleDelete(viewQuote.id)} style={{ padding: "10px 20px", border: "1px solid #fca5a5", borderRadius: "8px", fontSize: "13px", background: "#fff", color: "#dc2626", cursor: "pointer", fontWeight: 500 }}>Delete Quote</button>
+              <button onClick={() => handleDelete(viewQuote.id)} style={{ padding: "10px 20px", border: "1px solid #fca5a5", borderRadius: "8px", fontSize: "13px", background: "#fff", color: "#dc2626", cursor: "pointer", fontWeight: 500 }}>Delete Order</button>
               <button onClick={() => setModalOpen(false)} style={{ padding: "10px 20px", background: "#2D2B7F", color: "#fff", border: "none", borderRadius: "8px", fontSize: "13px", fontWeight: 600, cursor: "pointer" }}>Close</button>
             </div>
           </div>

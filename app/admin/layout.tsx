@@ -28,7 +28,7 @@ const sidebarLinks = [
   { label: "FAQ", href: "/admin/faqs", icon: <FaClipboardList /> },
   { label: "Catalogues", href: "/admin/catalogues", icon: <FaBook /> },
   { label: "Careers", href: "/admin/careers", icon: <FaBriefcase /> },
-  { label: "Quotes", href: "/admin/quotes", icon: <FaClipboardList /> },
+  { label: "Orders", href: "/admin/quotes", icon: <FaClipboardList /> },
   { label: "Pages", href: "/admin/pages", icon: <FaFileAlt /> },
   { label: "Settings", href: "/admin/settings", icon: <FaCog /> },
 ];

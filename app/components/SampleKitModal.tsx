@@ -28,7 +28,19 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
     setLoading(true);
 
     try {
-      console.log('Form data:', formData);
+      const response = await fetch('/api/contact-messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          subject: 'Sample Kit Request'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit request');
+      }
+
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);

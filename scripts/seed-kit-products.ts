@@ -11,7 +11,7 @@ async function main() {
         heroTitle: "Advanced Filtration Solutions",
         description: "Comprehensive filtration consumables for laboratory applications including syringe filters, membrane filters, and filtration systems.",
         image: "https://via.placeholder.com/400x300?text=Filtration",
-        href: "/products?category=filtration",
+        href: "/products?category=orient-filtr-products",
         sortOrder: 1,
         isActive: true,
       },
