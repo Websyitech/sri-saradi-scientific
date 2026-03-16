@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AboutPage() {
   return (
-    <div style={{ background: "#FAFAF7", color: "#1A1A1A" }}>
+    <div style={{ background: "#FAFAF7", color: "#1A1A1A", backgroundImage: "url('https://srisaradiscientific.com/uploads/1773597822715-About_us__background_1.webp')", backgroundRepeat: "no-repeat", backgroundPosition: "top center" }}>
       {/* Hero Section */}
       <section style={{ background: "#0B1D33", color: "#fff", padding: "80px 24px 70px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "-40%", right: "-10%", width: 500, height: 500, background: "radial-gradient(circle, rgba(15,123,108,0.15) 0%, transparent 70%)", borderRadius: "50%" }} />

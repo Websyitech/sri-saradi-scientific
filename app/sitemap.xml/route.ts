@@ -61,12 +61,14 @@ export async function GET() {
       }
     }
 
-    // Add products (limit to prevent huge sitemaps)
+    // Add products (limit to stay under 50,000 total URLs)
     if (includeProducts) {
+      const maxProductUrls = 49000 - urls.length; // Leave room for static pages and categories
       const products = await prisma.product.findMany({
         where: { isActive: true },
         select: { catalogNumber: true, updatedAt: true },
-        take: 50000, // Sitemap limit
+        take: maxProductUrls > 0 ? maxProductUrls : 0,
+        orderBy: { catalogNumber: 'asc' }
       });
 
       for (const prod of products) {
