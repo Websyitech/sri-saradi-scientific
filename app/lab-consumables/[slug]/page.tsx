@@ -5,6 +5,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Hero from '@/app/components/Hero';
 import USPBar from '@/app/components/USPBar';
 import SampleKitModal from '@/app/components/SampleKitModal';
+import QuoteModal from '@/app/components/QuoteModal';
 import ProductCatalog from '@/app/components/ProductCatalog';
 
 interface AssociatedProduct {
@@ -443,6 +444,7 @@ export default function KitProductDetail() {
   const [product, setProduct] = useState<KitProduct | null>(null);
   const [loading, setLoading] = useState(true);
   const [showSampleModal, setShowSampleModal] = useState(false);
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('Laboratory Filtration');
   const tabsRef = useRef<HTMLDivElement>(null);
 
@@ -540,6 +542,7 @@ export default function KitProductDetail() {
       />
 
       <SampleKitModal isOpen={showSampleModal} onClose={() => setShowSampleModal(false)} />
+      <QuoteModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} items={[]} />
 
       {/* <USPBar items={getUSPItems(slug)} /> */}
 
@@ -721,7 +724,7 @@ export default function KitProductDetail() {
                   
                   {/* Request Quote Button */}
                   <button
-                    onClick={() => setShowSampleModal(true)}
+                    onClick={() => setShowQuoteModal(true)}
                     style={{
                       width: '100%',
                       background: '#2D2B7F',

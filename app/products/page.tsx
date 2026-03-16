@@ -385,20 +385,25 @@ export default function ProductsPage() {
   };
 
   const submitQuote = async (product: Product) => {
-    const quoteItems = (product.variants
-      ?.map((v) => {
-        const quantity = getQuantity(v.id);
-        return {
-          productId: product.id,
-          sku: v.sku || "",
-          name: `${product.name} - ${v.packSize || ""}`,
-          quantity,
-        };
-      })
-      .filter((item) => item.quantity > 0)) || [];
+    // Get the quantity for this product (stored by product.id)
+    const productQuantity = getQuantity(product.id);
+    
+    // If no quantity is selected, show error
+    if (productQuantity === 0) {
+      setSuccessMessage("Please select a quantity greater than 0");
+      setTimeout(() => setSuccessMessage(""), 3000);
+      return;
+    }
 
-    if (!user || quoteItems.length === 0) {
-      setSuccessMessage("Please select at least one variation");
+    const quoteItems = [{
+      productId: product.id,
+      sku: product.catalogNumber,
+      name: product.name,
+      quantity: productQuantity,
+    }];
+
+    if (!user) {
+      setSuccessMessage("Please log in to submit a quote");
       setTimeout(() => setSuccessMessage(""), 3000);
       return;
     }

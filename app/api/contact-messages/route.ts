@@ -16,8 +16,10 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+    console.log("Contact message received:", { name: body.name, email: body.email, subject: body.subject, hasMessage: !!body.message });
 
     if (!body.name || !body.email || !body.message) {
+      console.log("Contact message validation failed:", { name: !!body.name, email: !!body.email, message: !!body.message });
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -35,6 +37,7 @@ export async function POST(request: Request) {
       },
     });
 
+    console.log("Contact message created:", { id: message.id, subject: message.subject });
     return NextResponse.json(message, { status: 201 });
   } catch (error) {
     console.error("Error creating contact message:", error);

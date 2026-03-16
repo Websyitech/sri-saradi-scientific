@@ -27,6 +27,15 @@ export default function Header() {
   const [showResearchModal, setShowResearchModal] = useState(false);
   const [showMobileSearchModal, setShowMobileSearchModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [researchFormData, setResearchFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    notes: "",
+  });
+  const [submittingResearch, setSubmittingResearch] = useState(false);
+  const [researchSubmitted, setResearchSubmitted] = useState(false);
   const router = useRouter();
   const searchRef = useRef<HTMLDivElement>(null);
   const mobileSearchRef = useRef<HTMLDivElement>(null);
@@ -115,6 +124,52 @@ export default function Header() {
       setShowResults(false);
       setSearchQuery("");
       setSearchResults([]);
+    }
+  };
+
+  const handleResearchFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setResearchFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleResearchFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmittingResearch(true);
+
+    try {
+      const response = await fetch('/api/quotes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: researchFormData.name,
+          email: researchFormData.email,
+          phone: researchFormData.phone,
+          company: researchFormData.company,
+          notes: researchFormData.notes || "Research Product Request",
+          items: [] // Empty items for research request
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit request');
+      }
+
+      setResearchSubmitted(true);
+      setTimeout(() => {
+        setShowResearchModal(false);
+        setResearchSubmitted(false);
+        setResearchFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          notes: "",
+        });
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting research request:', error);
+    } finally {
+      setSubmittingResearch(false);
     }
   };
 
@@ -358,14 +413,21 @@ export default function Header() {
                 </button>
               </div>
 
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  // Handle form submission
-                  setShowResearchModal(false);
-                }}
-                style={{ display: "flex", flexDirection: "column", gap: "20px" }}
-              >
+              {researchSubmitted ? (
+                <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                  <div style={{ fontSize: '48px', marginBottom: '16px' }}>✓</div>
+                  <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#1a1a2e', marginBottom: '8px' }}>
+                    Request Submitted!
+                  </h3>
+                  <p style={{ fontSize: '14px', color: '#666' }}>
+                    We'll contact you soon with information about your research product.
+                  </p>
+                </div>
+              ) : (
+                <form
+                  onSubmit={handleResearchFormSubmit}
+                  style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                >
 
 
 
@@ -375,6 +437,9 @@ export default function Header() {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    value={researchFormData.name}
+                    onChange={handleResearchFormChange}
                     required
                     style={{
                       width: "100%",
@@ -395,6 +460,9 @@ export default function Header() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={researchFormData.email}
+                    onChange={handleResearchFormChange}
                     required
                     style={{
                       width: "100%",
@@ -415,6 +483,9 @@ export default function Header() {
                   </label>
                   <input
                     type="tel"
+                    name="phone"
+                    value={researchFormData.phone}
+                    onChange={handleResearchFormChange}
                     style={{
                       width: "100%",
                       padding: "12px",
@@ -434,6 +505,9 @@ export default function Header() {
                   </label>
                   <input
                     type="text"
+                    name="company"
+                    value={researchFormData.company}
+                    onChange={handleResearchFormChange}
                     style={{
                       width: "100%",
                       padding: "12px",
@@ -452,6 +526,9 @@ export default function Header() {
                     Additional Details
                   </label>
                   <textarea
+                    name="notes"
+                    value={researchFormData.notes}
+                    onChange={handleResearchFormChange}
                     rows={4}
                     style={{
                       width: "100%",
@@ -485,21 +562,23 @@ export default function Header() {
                   </button>
                   <button
                     type="submit"
+                    disabled={submittingResearch}
                     style={{
                       padding: "12px 24px",
-                      background: "#2D2B7F",
+                      background: submittingResearch ? "#ccc" : "#2D2B7F",
                       color: "#fff",
                       border: "none",
                       borderRadius: "8px",
                       fontSize: "14px",
                       fontWeight: 600,
-                      cursor: "pointer"
+                      cursor: submittingResearch ? "not-allowed" : "pointer"
                     }}
                   >
-                    Submit Request
+                    {submittingResearch ? "Submitting..." : "Submit Request"}
                   </button>
                 </div>
               </form>
+              )}
             </div>
           </div>
         )}

@@ -66,6 +66,68 @@ export default function ProductDetailPage() {
     company: "",
     phone: "",
   });
+  const [submitting, setSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  const handleQuoteSubmit = async () => {
+    if (!formData.name || !formData.email) {
+      setSubmitError("Name and email are required");
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError("");
+
+    try {
+      // Create items array from selected quantities and variants
+      const items = product.variants
+        ?.filter(variant => quantities[variant.id] > 0)
+        .map(variant => ({
+          productId: product.id,
+          sku: variant.sku || "",
+          name: `${product.name} - ${variant.packSize || ""}`,
+          quantity: quantities[variant.id] || 1,
+        })) || [];
+
+      console.log("Individual product page quote submission:", {
+        formData,
+        items,
+        product: product.catalogNumber
+      });
+
+      const response = await fetch("/api/quotes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          notes: `Quote request for ${product.catalogNumber} - ${product.name}`,
+          items,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Individual product page quote response:", { status: response.status, data });
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit quote");
+      }
+
+      setSubmitSuccess(true);
+      // Reset form after 2 seconds
+      setTimeout(() => {
+        setShowQuoteForm(false);
+        setSubmitSuccess(false);
+        setFormData({ name: "", email: "", company: "", phone: "" });
+        setQuantities({});
+      }, 2000);
+    } catch (error) {
+      console.error("Quote submission error:", error);
+      setSubmitError(error instanceof Error ? error.message : "Failed to submit quote");
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (!slug || slug.length === 0) return;
@@ -616,9 +678,21 @@ export default function ProductDetailPage() {
                   }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <h2 style={{ fontSize: "24px", fontWeight: 800, margin: "0 0 24px 0", color: "#171717" }}>
-                    Request Quote
-                  </h2>
+                  {submitSuccess ? (
+                    <div style={{ textAlign: "center", padding: "40px 0" }}>
+                      <div style={{ fontSize: "48px", marginBottom: "16px", color: "#22c55e" }}>✓</div>
+                      <h3 style={{ fontSize: "20px", fontWeight: 700, color: "#171717", marginBottom: "8px" }}>
+                        Quote Request Submitted!
+                      </h3>
+                      <p style={{ fontSize: "14px", color: "#666" }}>
+                        We'll send you a detailed quotation soon.
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      <h2 style={{ fontSize: "24px", fontWeight: 800, margin: "0 0 24px 0", color: "#171717" }}>
+                        Request Quote
+                      </h2>
 
                   <div style={{ marginBottom: "16px" }}>
                     <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: "#666", marginBottom: "6px" }}>
@@ -700,6 +774,20 @@ export default function ProductDetailPage() {
                     />
                   </div>
 
+                  {submitError && (
+                    <div style={{
+                      background: "#fef2f2",
+                      color: "#dc2626",
+                      padding: "12px",
+                      borderRadius: "6px",
+                      fontSize: "14px",
+                      marginBottom: "16px",
+                      border: "1px solid #fecaca"
+                    }}>
+                      {submitError}
+                    </div>
+                  )}
+
                   <div style={{ display: "flex", gap: "12px" }}>
                     <button
                       onClick={() => setShowQuoteForm(false)}
@@ -718,26 +806,25 @@ export default function ProductDetailPage() {
                       Cancel
                     </button>
                     <button
-                      onClick={() => {
-                        console.log("Quote submitted:", { ...formData, quantities, product: product?.catalogNumber });
-                        setShowQuoteForm(false);
-                        setFormData({ name: "", email: "", company: "", phone: "" });
-                      }}
+                      onClick={handleQuoteSubmit}
+                      disabled={submitting}
                       style={{
                         flex: 1,
                         padding: "12px",
-                        background: "var(--primary)",
+                        background: submitting ? "#ccc" : "var(--primary)",
                         color: "#fff",
                         border: "none",
                         borderRadius: "6px",
                         fontSize: "14px",
                         fontWeight: 600,
-                        cursor: "pointer",
+                        cursor: submitting ? "not-allowed" : "pointer",
                       }}
                     >
-                      Submit Quote
+                      {submitting ? "Submitting..." : "Submit Quote"}
                     </button>
                   </div>
+                    </>
+                  )}
                 </div>
               </div>
             )}

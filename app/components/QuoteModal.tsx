@@ -48,23 +48,37 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
     setError("");
     setLoading(true);
 
+    console.log("QuoteModal submission started:", {
+      formData: formData,
+      items: items,
+      itemsLength: items.length,
+      hasNotes: !!formData.notes
+    });
+
     try {
+      const requestData = {
+        ...formData,
+        items,
+      };
+
+      console.log("QuoteModal sending request:", requestData);
+
       const response = await fetch("/api/quotes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          items,
-        }),
+        body: JSON.stringify(requestData),
       });
 
       const data = await response.json();
+      console.log("QuoteModal response received:", { status: response.status, ok: response.ok, data });
 
       if (!response.ok) {
+        console.error("QuoteModal submission failed:", data);
         setError(data.error || "Failed to submit quote");
         return;
       }
 
+      console.log("QuoteModal submission successful:", data);
       setSuccess(true);
       setOrderId(data.orderId);
     } catch (err) {

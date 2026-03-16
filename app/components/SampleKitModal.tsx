@@ -17,6 +17,7 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -26,21 +27,40 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     try {
+      // Combine message with company info
+      const messageWithCompany = `Company: ${formData.company}\n\n${formData.message}`;
+
+      console.log('Submitting sample kit request:', { 
+        name: formData.name, 
+        email: formData.email, 
+        company: formData.company,
+        phone: formData.phone,
+        messageLength: messageWithCompany.length 
+      });
+
       const response = await fetch('/api/contact-messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
-          subject: 'Sample Kit Request'
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: 'Sample Kit Request',
+          message: messageWithCompany
         })
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to submit request');
+        console.error('Server response error:', data);
+        throw new Error(data.error || 'Failed to submit request');
       }
 
+      console.log('Sample kit request submitted successfully:', data);
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
@@ -49,6 +69,7 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
       }, 2000);
     } catch (error) {
       console.error('Error submitting form:', error);
+      setError(error instanceof Error ? error.message : 'Failed to submit request');
     } finally {
       setLoading(false);
     }
@@ -263,6 +284,19 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
                   onBlur={(e) => e.target.style.borderColor = '#ddd'}
                 />
               </div>
+
+              {error && (
+                <div style={{ 
+                  background: '#fef2f2', 
+                  color: '#dc2626', 
+                  padding: '12px', 
+                  borderRadius: '8px', 
+                  fontSize: '14px',
+                  border: '1px solid #fecaca'
+                }}>
+                  {error}
+                </div>
+              )}
 
               <div style={{ display: 'flex', gap: '12px', paddingTop: '8px' }}>
                 <button
