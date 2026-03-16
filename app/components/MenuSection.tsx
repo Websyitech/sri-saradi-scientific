@@ -104,6 +104,18 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
     type: 'main' | 'products' | 'level2' | 'labconsumables' | 'croservices' | 'resources';
     parentId?: string;
   }>>([]);
+
+  // Initialize mobile menu stack when menu opens
+  useEffect(() => {
+    if (isMenuOpen && mobileMenuStack.length === 0) {
+      setMobileMenuStack([{
+        title: 'Menu',
+        items: [...leftMenuItems, ...rightMenuItems],
+        type: 'main'
+      }]);
+      setMobileMenuLevel(0);
+    }
+  }, [isMenuOpen, mobileMenuStack.length]);
   
   const [categories, setCategories] = useState<Level2Category[]>([]);
   const [applications, setApplications] = useState<ApplicationCategory[]>([]);

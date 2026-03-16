@@ -11,6 +11,14 @@ interface SiteSettings {
   social_twitter?: string;
 }
 
+interface KitProduct {
+  id: string;
+  title: string;
+  slug: string | null;
+  href: string | null;
+  isActive: boolean;
+}
+
 
 const footerLinks = {
   quickLinks: {
@@ -47,14 +55,7 @@ const footerLinks = {
       { label: "Biochemical Reagent", href: "/products?brand=Solarbio&category=biochemical-reagent" },
     ],
   },
-  labConsumables: {
-    title: "Lab Consumables",
-    links: [
-      { label: "Filtration", href: "/lab-consumables?type=filtration" },
-      { label: "Liquid Handling", href: "/lab-consumables?type=liquid-handling" },
-      { label: "PCR Consumables", href: "/lab-consumables?type=pcr-consumables" },
-    ],
-  },
+  // labConsumables will be dynamically loaded
   legal: {
     title: "Legal",
     links: [
@@ -71,6 +72,7 @@ const footerLinks = {
 
 export default function Footer() {
   const [settings, setSettings] = useState<SiteSettings>({});
+  const [labConsumables, setLabConsumables] = useState<KitProduct[]>([]);
 
   useEffect(() => {
     // Fetch settings
@@ -84,6 +86,16 @@ export default function Footer() {
           social_linkedin: data.social_linkedin || "",
           social_twitter: data.social_twitter || "",
         });
+      })
+      .catch(() => {});
+
+    // Fetch lab consumables
+    fetch("/api/kit-products")
+      .then((r) => r.json())
+      .then((data: KitProduct[]) => {
+        if (Array.isArray(data)) {
+          setLabConsumables(data.filter(product => product.isActive));
+        }
       })
       .catch(() => {});
   }, []);
@@ -245,7 +257,7 @@ export default function Footer() {
                 letterSpacing: "0.5px",
               }}
             >
-              {footerLinks.labConsumables.title}
+              Lab Consumables
             </h4>
             <ul
               style={{
@@ -257,22 +269,25 @@ export default function Footer() {
                 gap: "10px",
               }}
             >
-              {footerLinks.labConsumables.links.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    style={{
-                      textDecoration: "none",
-                      color: "#666",
-                      fontSize: "13px",
-                      transition: "color 0.2s",
-                    }}
-                    className="footer-link"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              {labConsumables.map((product) => {
+                const url = product.href || `/lab-consumables/${product.slug}`;
+                return (
+                  <li key={product.id}>
+                    <a
+                      href={url}
+                      style={{
+                        textDecoration: "none",
+                        color: "#666",
+                        fontSize: "13px",
+                        transition: "color 0.2s",
+                      }}
+                      className="footer-link"
+                    >
+                      {product.title}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

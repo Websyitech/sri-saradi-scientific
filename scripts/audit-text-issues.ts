@@ -3,7 +3,7 @@
  * This will help you identify ALL mojibake patterns like "Äë"
  */
 
-import { PrismaClient } from '../app/generated/prisma';
+import { PrismaClient } from '@prisma/client';
 import { auditTextIssues, detectUnknownMojibake } from '../app/utils/textUtils-enhanced';
 
 const prisma = new PrismaClient();

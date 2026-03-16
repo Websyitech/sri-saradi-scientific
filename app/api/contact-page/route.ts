@@ -3,24 +3,39 @@ import prisma from "@/app/lib/prisma";
 
 export async function GET() {
   try {
+    // First try to get contact page data
     const contactPage = await prisma.contactPage.findFirst();
     
-    if (!contactPage) {
+    // Get contact info from site settings
+    const settings = await prisma.siteSetting.findMany();
+    const settingsMap: Record<string, string> = {};
+    settings.forEach((s) => {
+      settingsMap[s.key] = s.value;
+    });
+    
+    // If contactPage exists, merge with settings
+    if (contactPage) {
       return NextResponse.json({
-        id: null,
-        title: "Contact Us",
-        subtitle: "Get in touch with us",
-        description: "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
-        email: "contact@srisaradiscientific.com",
-        phone: "+91-XXXXXXXXXX",
-        address: "Your Address Here",
-        businessHours: "Monday - Friday: 9:00 AM - 6:00 PM",
-        mapEmbedUrl: "",
-        isActive: true,
+        ...contactPage,
+        email: contactPage.email || settingsMap.contact_email || "info@srisaradiscientific.com",
+        phone: contactPage.phone || settingsMap.contact_phone || "+91 97424 43809",
+        address: contactPage.address || settingsMap.contact_address || "Hyderabad, Telangana, India",
       });
     }
-
-    return NextResponse.json(contactPage);
+    
+    // Return default data with settings values
+    return NextResponse.json({
+      id: null,
+      title: "Contact Us",
+      subtitle: "Get in touch with us",
+      description: "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+      email: settingsMap.contact_email || "info@srisaradiscientific.com",
+      phone: settingsMap.contact_phone || "+91 97424 43809",
+      address: settingsMap.contact_address || "Hyderabad, Telangana, India",
+      businessHours: "Monday - Friday: 9:00 AM - 6:00 PM",
+      mapEmbedUrl: "",
+      isActive: true,
+    });
   } catch (error) {
     console.error("Error fetching contact page:", error);
     return NextResponse.json({
@@ -28,9 +43,9 @@ export async function GET() {
       title: "Contact Us",
       subtitle: "Get in touch with us",
       description: "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
-      email: "contact@srisaradiscientific.com",
-      phone: "+91-XXXXXXXXXX",
-      address: "Your Address Here",
+      email: "info@srisaradiscientific.com",
+      phone: "+91 97424 43809",
+      address: "Hyderabad, Telangana, India",
       businessHours: "Monday - Friday: 9:00 AM - 6:00 PM",
       mapEmbedUrl: "",
       isActive: true,
