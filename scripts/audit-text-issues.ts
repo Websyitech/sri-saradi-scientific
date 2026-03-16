@@ -3,10 +3,8 @@
  * This will help you identify ALL mojibake patterns like "Äë"
  */
 
-import { PrismaClient } from '@prisma/client';
+import prisma from '../app/lib/prisma';
 import { auditTextIssues, detectUnknownMojibake } from '../app/utils/textUtils-enhanced';
-
-const prisma = new PrismaClient();
 
 async function auditDatabase() {
   console.log('🔍 Auditing database for text encoding issues...\n');

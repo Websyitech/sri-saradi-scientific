@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -675,10 +675,12 @@ export default function Header() {
       </div>
     </header>
 
-    <MenuSection 
-      mobileMenuOpen={mobileMenuOpen} 
-      setMobileMenuOpen={setMobileMenuOpen} 
-    />
+    <Suspense fallback={<div />}>
+      <MenuSection 
+        mobileMenuOpen={mobileMenuOpen} 
+        setMobileMenuOpen={setMobileMenuOpen} 
+      />
+    </Suspense>
     </>
   );
 }
