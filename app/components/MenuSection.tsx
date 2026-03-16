@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { cleanText } from "../utils/textUtils";
 
 const leftMenuItems = [
@@ -87,6 +88,8 @@ interface MenuSectionProps {
 }
 
 export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen }: MenuSectionProps = {}) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
   
   // Use external mobile menu state if provided
@@ -229,6 +232,25 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
 
   const getCurrentMenuLevel = () => {
     return mobileMenuStack[mobileMenuLevel] || mobileMenuStack[0];
+  };
+
+  const handleViewAllProducts = () => {
+    // If we're already on the products page, just update the URL parameters
+    if (window.location.pathname === '/products') {
+      const currentParams = new URLSearchParams(searchParams?.toString());
+      
+      // Keep brand parameter but remove category
+      currentParams.delete('category');
+      
+      const newUrl = `/products?${currentParams.toString()}`;
+      router.push(newUrl);
+    } else {
+      // If we're on a different page, navigate to products with brand only
+      router.push('/products?brand=Solarbio');
+    }
+    
+    // Close the mega menu
+    handleMouseLeave();
   };
 
   const renderMobileMenuItems = (menuLevel: any) => {
@@ -630,21 +652,24 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
                         )}
                       </div>
                       <div style={{ marginTop: "12px", paddingTop: "12px", borderTop: "1px solid #eee" }}>
-                        <Link
-                          href="/products?brand=Solarbio"
-                          onClick={() => handleMouseLeave()}
+                        <button
+                          onClick={handleViewAllProducts}
                           style={{
                             fontSize: "12px",
                             fontWeight: 600,
                             color: "var(--primary)",
                             textDecoration: "none",
                             transition: "color 0.2s",
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            padding: 0,
                           }}
                           onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
                           onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
                         >
                           View All Products →
-                        </Link>
+                        </button>
                       </div>
                     </>
                   ) : item.label === "Applications" ? (
