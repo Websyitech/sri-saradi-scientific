@@ -333,13 +333,13 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
 
           <div>
             <label style={{ display: "block", fontSize: "13px", fontWeight: 600, color: "#555", marginBottom: "6px" }}>
-              Additional Notes *
+              Additional Notes {items.length === 0 ? "*" : ""}
             </label>
             <textarea
               name="notes"
               value={formData.notes}
               onChange={handleChange}
-              required
+              required={items.length === 0}
               placeholder="Please mention product details such as Product Name, CAS No. if present, Specifications required etc. If nothing specific to mention, please write NA"
               rows={3}
               style={{

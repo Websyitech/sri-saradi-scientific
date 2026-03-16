@@ -13,10 +13,13 @@ export async function POST(request: NextRequest) {
     const token = request.cookies.get("auth_token")?.value;
     const { name, email, phone, company, notes, items } = await request.json();
 
+    console.log("Quote submission received:", { name, email, phone, company, notes, items: items?.length });
+
     // Validate input
-    if (!name || !email || !items || items.length === 0) {
+    if (!name || !email) {
+      console.log("Quote validation failed:", { name: !!name, email: !!email, items: items?.length });
       return NextResponse.json(
-        { error: "Name, email, and at least one item are required" },
+        { error: "Name and email are required" },
         { status: 400 }
       );
     }
@@ -33,6 +36,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Create quote request
+    console.log("Creating quote request with data:", { userId, name, email, phone, company, notes });
     const quoteRequest = await prisma.quoteRequest.create({
       data: {
         userId,
@@ -44,21 +48,27 @@ export async function POST(request: NextRequest) {
         status: "pending",
       },
     });
+    console.log("Quote request created:", { id: quoteRequest.id, orderId: quoteRequest.orderId });
 
     // Create quote items
-    const quoteItems = await Promise.all(
-      items.map((item: QuoteItemData) =>
-        prisma.quoteItem.create({
-          data: {
-            quoteId: quoteRequest.id,
-            productId: item.productId || null,
-            sku: item.sku || null,
-            name: item.name,
-            quantity: item.quantity || 1,
-          },
-        })
-      )
-    );
+    console.log("Creating quote items:", items);
+    let quoteItems: any[] = [];
+    if (items && items.length > 0) {
+      quoteItems = await Promise.all(
+        items.map((item: QuoteItemData) =>
+          prisma.quoteItem.create({
+            data: {
+              quoteId: quoteRequest.id,
+              productId: item.productId || null,
+              sku: item.sku || null,
+              name: item.name,
+              quantity: item.quantity || 1,
+            },
+          })
+        )
+      );
+    }
+    console.log("Quote items created:", quoteItems.length);
 
     return NextResponse.json(
       {

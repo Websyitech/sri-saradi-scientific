@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
       orderBy: { createdAt: "desc" },
       include: { items: true },
     });
+    console.log("Admin quotes fetched:", { count: quotes.length, filter: status });
     return NextResponse.json(quotes);
   } catch {
     return NextResponse.json({ error: "Failed to fetch quotes" }, { status: 500 });
