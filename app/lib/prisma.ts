@@ -9,7 +9,7 @@ const globalForPrisma = globalThis as unknown as {
   prisma: InstanceType<typeof PrismaClient> | undefined;
 };
 
-function createPrismaClient() {
+function createPrismaClient(): PrismaClient {
   // Strip sslmode from the connection string so the explicit ssl config takes effect.
   // Newer pg-connection-string versions treat sslmode=require as verify-full,
   // which rejects AWS RDS self-signed certs — the explicit ssl object overrides this.
