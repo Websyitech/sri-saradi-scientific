@@ -10,12 +10,14 @@ const leftMenuItems = [
   { label: "Home", href: "/", active: true },
   { label: "Products", href: "/products", hasMegaMenu: true },
   { label: "Lab Consumables", href: "#", hasDropdown: true },
+  { label: "Services", href: "/services" },
   { label: "CRO Services", href: "/cro-services", hasDropdown: true },
   { label: "Resources", href: "/resources", hasDropdown: true },
 ];
 
 const rightMenuItems = [
   { label: "About us", href: "/about" },
+  { label: "Certificates", href: "/certificates" },
   { label: "Careers", href: "/careers" },
   { label: "Contact Us", href: "/contact" },
 ];

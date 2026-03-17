@@ -2,7 +2,7 @@ import React from "react";
 
 export default function AboutPage() {
   return (
-    <div style={{ background: "#FAFAF7", color: "#1A1A1A", backgroundImage: "url('https://srisaradiscientific.com/uploads/1773597822715-About_us__background_1.webp')", backgroundRepeat: "no-repeat", backgroundPosition: "top center" }}>
+    <div style={{color: "#1A1A1A", backgroundImage: "url('https://srisaradiscientific.com/uploads/1773597822715-About_us__background_1.webp')", backgroundRepeat: "no-repeat", backgroundPosition: "top center" }}>
       {/* Hero Section */}
       <section style={{ background: "#0B1D33", color: "#fff", padding: "80px 24px 70px", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "-40%", right: "-10%", width: 500, height: 500, background: "radial-gradient(circle, rgba(15,123,108,0.15) 0%, transparent 70%)", borderRadius: "50%" }} />
@@ -206,15 +206,18 @@ export default function AboutPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "0.75rem",
-              color: "#6B7280",
-              textAlign: "center",
-              border: "1px dashed #D1D5DB",
-              marginBottom: "16px"
+              marginBottom: "16px",
+              overflow: "hidden"
             }}>
-              Solarbio Logo
-              <br />
-              Placeholder
+              <img 
+                src="https://srisaradiscientific.com/uploads/1773575798194-solarbio-logo.png" 
+                alt="Solarbio Life Sciences Logo"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain"
+                }}
+              />
             </div>
             <h4 style={{ fontSize: "1rem", fontWeight: 400, color: "#0B1D33", marginBottom: 6 }}>Solarbio Life Sciences</h4>
             <p style={{ fontSize: "0.85rem", color: "#4A5568", lineHeight: 1.6 }}>
@@ -230,15 +233,18 @@ export default function AboutPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "0.75rem",
-              color: "#6B7280",
-              textAlign: "center",
-              border: "1px dashed #D1D5DB",
-              marginBottom: "16px"
+              marginBottom: "16px",
+              overflow: "hidden"
             }}>
-              GenFollower Logo
-              <br />
-              Placeholder
+              <img 
+                src="https://srisaradiscientific.com/uploads/1773561941894-genfollower.jpg" 
+                alt="GenFollower Logo"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain"
+                }}
+              />
             </div>
             <h4 style={{ fontSize: "1rem", fontWeight: 400, color: "#0B1D33", marginBottom: 6 }}>GenFollower</h4>
             <p style={{ fontSize: "0.85rem", color: "#4A5568", lineHeight: 1.6 }}>
@@ -254,15 +260,18 @@ export default function AboutPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "0.75rem",
-              color: "#6B7280",
-              textAlign: "center",
-              border: "1px dashed #D1D5DB",
-              marginBottom: "16px"
+              marginBottom: "16px",
+              overflow: "hidden"
             }}>
-              Orientfiltr Logo
-              <br />
-              Placeholder
+              <img 
+                src="https://srisaradiscientific.com/uploads/1773575777508-orientfiltr-logo.png" 
+                alt="Orientfiltr Logo"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain"
+                }}
+              />
             </div>
             <h4 style={{ fontSize: "1rem", fontWeight: 400, color: "#0B1D33", marginBottom: 6 }}>Orientfiltr</h4>
             <p style={{ fontSize: "0.85rem", color: "#4A5568", lineHeight: 1.6 }}>
@@ -278,15 +287,18 @@ export default function AboutPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: "0.75rem",
-              color: "#6B7280",
-              textAlign: "center",
-              border: "1px dashed #D1D5DB",
-              marginBottom: "16px"
+              marginBottom: "16px",
+              overflow: "hidden"
             }}>
-              SS Instruments Logo
-              <br />
-              Placeholder
+              <img 
+                src="https://srisaradiscientific.com/uploads/1773575855481-SS_Instruments.png" 
+                alt="SS Instruments Logo"
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                  objectFit: "contain"
+                }}
+              />
             </div>
             <h4 style={{ fontSize: "1rem", fontWeight: 400, color: "#0B1D33", marginBottom: 6 }}>SS Instruments</h4>
             <p style={{ fontSize: "0.85rem", color: "#4A5568", lineHeight: 1.6 }}>
@@ -339,25 +351,19 @@ export default function AboutPage() {
       <section style={{ background: "#0B1D33", padding: "60px 0" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 60, alignItems: "start", color: "#fff" }}>
-            {/* Founder Image Placeholder */}
+            {/* Founder Image */}
             <div style={{ position: "relative" }}>
-              <div style={{ 
-                width: "100%", 
-                height: "360px", 
-                backgroundColor: "rgba(255,255,255,0.1)", 
-                borderRadius: "12px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "0.9rem",
-                color: "rgba(255,255,255,0.6)",
-                textAlign: "center",
-                border: "2px dashed rgba(255,255,255,0.2)"
-              }}>
-                Founder Photo
-                <br />
-                Placeholder
-              </div>
+              <img 
+                src="https://srisaradiscientific.com/uploads/1773633209944-QW3A0110.JPG" 
+                alt="Praveen Gadde, Founder of Sri Saradi Scientific"
+                style={{ 
+                  width: "100%", 
+                  height: "360px", 
+                  borderRadius: "12px",
+                  objectFit: "cover",
+                  display: "block"
+                }}
+              />
             </div>
             
             {/* Founder Content */}
@@ -402,14 +408,14 @@ export default function AboutPage() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, margin: "32px 0 48px" }}>
           <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #E2E0DB", background: "#fff" }}>
-            <img src="solarbio-signing.jpg" alt="Praveen Gadde signing the authorized distribution agreement at Solarbio headquarters" style={{ width: "100%", height: 280, objectFit: "cover", display: "block" }} />
+            <img src="https://srisaradiscientific.com/uploads/1773567373257-PXL_20251215_075202682.jpg" alt="Praveen Gadde signing the authorized distribution agreement at Solarbio headquarters" style={{ width: "100%", height: 280, objectFit: "cover", display: "block" }} />
             <div style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: 4 }}>
               <strong style={{ fontSize: "0.92rem", color: "#0B1D33", fontWeight: 600 }}>Signing our exclusive distribution agreement</strong>
               <span style={{ fontSize: "0.82rem", color: "#4A5568" }}>Solarbio Life Sciences headquarters</span>
             </div>
           </div>
           <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #E2E0DB", background: "#fff" }}>
-            <img src="solarbio-team.jpg" alt="Praveen Gadde with the Solarbio team at their office" style={{ width: "100%", height: 280, objectFit: "cover", display: "block" }} />
+            <img src="https://srisaradiscientific.com/uploads/1773567365012-1000112654.jpg" alt="Praveen Gadde with the Solarbio team at their office" style={{ width: "100%", height: 280, objectFit: "cover", display: "block" }} />
             <div style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: 4 }}>
               <strong style={{ fontSize: "0.92rem", color: "#0B1D33", fontWeight: 600 }}>With the Solarbio team</strong>
               <span style={{ fontSize: "0.82rem", color: "#4A5568" }}>Building a partnership, not just a supply chain</span>

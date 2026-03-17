@@ -287,47 +287,48 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Search Icon - Hidden on desktop */}
-        <button
-          className="mobile-search-icon"
-          onClick={() => setShowMobileSearchModal(true)}
-          style={{
-            display: "none", // Hidden by default, shown on mobile via CSS
-            background: "none",
-            border: "2px solid #2D2B7F",
-            borderRadius: "6px",
-            color: "#2D2B7F",
-            padding: "8px",
-            cursor: "pointer",
-            fontSize: "16px",
-            transition: "all 0.2s"
-          }}
-          aria-label="Open Search"
-        >
-          <FaSearch />
-        </button>
+        {/* Mobile Icons Container */}
+        <div className="mobile-icons-container" style={{ display: "none" }}>
+          {/* Mobile Search Icon */}
+          <button
+            className="mobile-search-icon"
+            onClick={() => setShowMobileSearchModal(true)}
+            style={{
+              background: "none",
+              border: "2px solid #2D2B7F",
+              borderRadius: "6px",
+              color: "#2D2B7F",
+              padding: "8px",
+              cursor: "pointer",
+              fontSize: "16px",
+              transition: "all 0.2s"
+            }}
+            aria-label="Open Search"
+          >
+            <FaSearch />
+          </button>
 
-        {/* Mobile Hamburger Menu - Hidden on desktop */}
-        <button
-          className="mobile-menu-toggle"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          style={{
-            display: "none", // Hidden by default, shown on mobile via CSS
-            background: "none",
-            border: "2px solid #2D2B7F",
-            borderRadius: "6px",
-            color: "#2D2B7F",
-            padding: "8px",
-            cursor: "pointer",
-            fontSize: "16px",
-            transition: "all 0.2s",
-            position: "relative",
-            zIndex: 10000
-          }}
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+          {/* Mobile Hamburger Menu */}
+          <button
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{
+              background: "none",
+              border: "2px solid #2D2B7F",
+              borderRadius: "6px",
+              color: "#2D2B7F",
+              padding: "8px",
+              cursor: "pointer",
+              fontSize: "16px",
+              transition: "all 0.2s",
+              position: "relative",
+              zIndex: 10000
+            }}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
 
         {/* Right - Request Research Product Button */}
         <div className="header-action-section">

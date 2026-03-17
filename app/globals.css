@@ -377,6 +377,7 @@ body {
     gap: 8px;
     padding: 8px 12px;
     align-items: center;
+    justify-content: space-between;
   }
 
   .header-logo-section {
@@ -414,13 +415,15 @@ body {
     display: none !important;
   }
 
-  .mobile-search-icon {
-    display: block !important;
+  .mobile-icons-container {
+    display: flex !important;
+    align-items: center;
+    gap: 15px;
     flex-shrink: 0;
   }
 
+  .mobile-search-icon,
   .mobile-menu-toggle {
-    display: block !important;
     flex-shrink: 0;
   }
 
@@ -495,7 +498,7 @@ body {
 
   .main-header-container {
     padding: 6px 8px;
-    gap: 6px;
+    gap: 5px;
   }
 
   .header-logo-section {

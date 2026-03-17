@@ -78,6 +78,7 @@ export default function ProductsPage() {
   const [totalProducts, setTotalProducts] = useState(0);
   const pageSize = 20;
   const [categoryImageErrors, setCategoryImageErrors] = useState<Record<string, boolean>>({});
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   // Auth & Quote state
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -500,13 +501,97 @@ export default function ProductsPage() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#fff" }}>
+      {/* Mobile Filters Backdrop */}
+      <div 
+        className={`mobile-filters-backdrop ${mobileFiltersOpen ? 'open' : ''}`}
+        onClick={() => setMobileFiltersOpen(false)}
+      />
+      
       {/* Mobile Responsive CSS */}
       <style jsx>{`
+        .mobile-filter-toggle {
+          display: none;
+        }
+        
+        .mobile-only {
+          display: none;
+        }
+        
         @media (max-width: 768px) {
           .desktop-table { display: none !important; }
+          .mobile-only { display: block !important; }
+          
+          .mobile-filter-toggle {
+            display: flex !important;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            width: 100%;
+            justify-content: center;
+          }
+          
+          .mobile-filters-sidebar {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 9999;
+            overflow-y: auto;
+            padding: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+          }
+          
+          .mobile-filters-sidebar.open {
+            transform: translateX(0);
+          }
+          
+          .mobile-filters-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+          }
+          
+          .mobile-filters-backdrop.open {
+            opacity: 1;
+            visibility: visible;
+          }
+          
+          .filters-sidebar {
+            width: 100% !important;
+          }
+          
+          .products-main-section {
+            flex-direction: column !important;
+            gap: 0 !important;
+            padding: 20px !important;
+          }
+          
+          .products-listing {
+            width: 100% !important;
+            padding: 0 !important;
+          }
+          
           .mobile-product-container {
             display: block !important;
-            padding: 16px !important;
+            padding: 0 !important;
           }
           .mobile-product-card {
             border: 1px solid #e0e0e0 !important;
@@ -514,15 +599,64 @@ export default function ProductsPage() {
             margin-bottom: 16px !important;
             padding: 16px !important;
             background: #fff !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
           }
           .mobile-field {
             display: flex !important;
             justify-content: space-between !important;
+            align-items: flex-start !important;
             padding: 8px 0 !important;
             border-bottom: 1px solid #f0f0f0 !important;
             font-size: 14px !important;
           }
           .mobile-field:last-child {
+            border-bottom: none !important;
+          }
+          .mobile-label {
+            font-weight: 600 !important;
+            color: #333 !important;
+            flex: 0 0 40% !important;
+          }
+          .mobile-value {
+            flex: 1 !important;
+            text-align: right !important;
+            font-weight: 500 !important;
+            color: #666 !important;
+          }
+          .mobile-quantity-section {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            flex-wrap: wrap !important;
+          }
+          .mobile-quantity-input {
+            width: 60px !important;
+            padding: 6px !important;
+            border: 1px solid #ddd !important;
+            border-radius: 4px !important;
+            text-align: center !important;
+          }
+          .mobile-quote-btn {
+            padding: 8px 16px !important;
+            background: var(--primary) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 4px !important;
+            font-size: 12px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+          }
+          .mobile-actions {
+            display: flex !important;
+            gap: 12px !important;
+            margin-top: 16px !important;
+            padding-top: 16px !important;
+            border-top: 2px solid #f0f0f0 !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .mobile-field {
             border-bottom: none !important;
           }
           .mobile-label {
@@ -802,6 +936,7 @@ export default function ProductsPage() {
       {/* Products Section - Only show if a category is selected */}
       {selectedCategoryName && (
         <section
+          className="products-main-section"
           style={{
             maxWidth: "1400px",
             margin: "0 auto",
@@ -812,8 +947,46 @@ export default function ProductsPage() {
           }}
           aria-label="Product listing"
         >
+        {/* Mobile Filter Toggle Button */}
+        <button
+          className="mobile-filter-toggle"
+          onClick={() => setMobileFiltersOpen(true)}
+        >
+          <FaThList />
+          Filters & Categories
+        </button>
+
         {/* Sidebar Filters */}
-        <aside style={{ width: "240px", flexShrink: 0 }}>
+        <aside 
+          className={`filters-sidebar ${mobileFiltersOpen ? 'mobile-filters-sidebar open' : 'mobile-filters-sidebar'}`}
+          style={{ width: "240px", flexShrink: 0 }}
+        >
+          {/* Mobile Filter Header */}
+          <div className="mobile-only" style={{ 
+            display: "flex", 
+            justifyContent: "space-between", 
+            alignItems: "center",
+            marginBottom: "20px",
+            paddingBottom: "16px",
+            borderBottom: "1px solid #eee"
+          }}>
+            <h3 style={{ margin: 0, fontSize: "18px", fontWeight: 700, color: "#333" }}>
+              Filters
+            </h3>
+            <button
+              onClick={() => setMobileFiltersOpen(false)}
+              style={{
+                background: "none",
+                border: "none",
+                fontSize: "18px",
+                color: "#666",
+                cursor: "pointer",
+                padding: "4px"
+              }}
+            >
+              ✕
+            </button>
+          </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "20px" }}>
             <h2 style={{ fontSize: "22px", fontWeight: 800, margin: 0, color: "#171717" }}>
               Products
@@ -948,7 +1121,7 @@ export default function ProductsPage() {
         </aside>
 
         {/* Product Listing */}
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="products-listing" style={{ flex: 1, minWidth: 0 }}>
           <h2 style={{ fontSize: "18px", fontWeight: 700, color: "#333", margin: "0 0 20px 0" }}>
             Available Products ({totalProducts > 0 ? `${startItem}-${endItem} of ${totalProducts}` : 0})
           </h2>
@@ -1336,6 +1509,66 @@ export default function ProductsPage() {
                     </div>
                   </>
                 )}
+                
+                {/* Quantity Section */}
+                <div className="mobile-field">
+                  <span className="mobile-label">Quantity:</span>
+                  <div className="mobile-quantity-section">
+                    <input
+                      type="number"
+                      min="1"
+                      value={quantities[product.id] || 1}
+                      onChange={(e) => setQuantities({
+                        ...quantities,
+                        [product.id]: Math.max(1, parseInt(e.target.value) || 1)
+                      })}
+                      className="mobile-quantity-input"
+                    />
+                    <button
+                      onClick={() => setQuantities({
+                        ...quantities,
+                        [product.id]: Math.max(1, (quantities[product.id] || 1) - 1)
+                      })}
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        backgroundColor: "#f0f0f0",
+                        border: "1px solid #ddd",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "14px",
+                        color: "#666"
+                      }}
+                    >
+                      -
+                    </button>
+                    <button
+                      onClick={() => setQuantities({
+                        ...quantities,
+                        [product.id]: (quantities[product.id] || 1) + 1
+                      })}
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        backgroundColor: "var(--primary)",
+                        border: "1px solid var(--primary)",
+                        borderRadius: "3px",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "14px",
+                        color: "#fff"
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                
                 <div className="mobile-actions">
                   <a
                     href={`/products/${product.catalogNumber}`}

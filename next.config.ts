@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  basePath: '',
   async redirects() {
     return [
       // Redirect /kit-products/* to /lab-consumables/*

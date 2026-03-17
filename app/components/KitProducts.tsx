@@ -111,6 +111,7 @@ export default function KitProducts() {
             gridTemplateColumns: "repeat(2, 1fr)",
             gap: "80px",
           }}
+          className="kit-products-grid"
         >
           {kitProducts.map((product) => (
             <a
@@ -184,6 +185,21 @@ export default function KitProducts() {
           ))}
         </div>
       </div>
+      
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .kit-products-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .kit-products-grid {
+            gap: 24px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

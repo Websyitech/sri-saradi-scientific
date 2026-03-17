@@ -70,6 +70,7 @@ export default function FeaturedProducts() {
             gridTemplateColumns: "repeat(6, 1fr)",
             gap: "24px",
           }}
+          className="featured-products-grid"
         >
           {products.map((product) => (
             <a
@@ -147,6 +148,28 @@ export default function FeaturedProducts() {
           ))}
         </div>
       </div>
+      
+      <style jsx>{`
+        @media (max-width: 1024px) {
+          .featured-products-grid {
+            grid-template-columns: repeat(4, 1fr) !important;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .featured-products-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .featured-products-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

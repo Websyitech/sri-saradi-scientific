@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   FaTachometerAlt, FaBoxes, FaFolderOpen, FaImages, FaFlask,
   FaBriefcase, FaClipboardList, FaCog, FaSignOutAlt, FaBars,
-  FaTimes, FaFileAlt, FaVial, FaBook,
+  FaTimes, FaFileAlt, FaVial, FaBook, FaCertificate,
 } from "react-icons/fa";
 
 // Utility to get base URL for admin links
@@ -27,6 +27,7 @@ const sidebarLinks = [
   { label: "Signaling Pathways", href: "/admin/signaling-pathways", icon: <FaVial /> },
   { label: "FAQ", href: "/admin/faqs", icon: <FaClipboardList /> },
   { label: "Catalogues", href: "/admin/catalogues", icon: <FaBook /> },
+  { label: "Certificates", href: "/admin/certificates", icon: <FaCertificate /> },
   { label: "Careers", href: "/admin/careers", icon: <FaBriefcase /> },
   { label: "Orders", href: "/admin/quotes", icon: <FaClipboardList /> },
   { label: "Pages", href: "/admin/pages", icon: <FaFileAlt /> },

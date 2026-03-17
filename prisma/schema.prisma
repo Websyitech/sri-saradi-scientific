@@ -388,3 +388,15 @@ model Catalogue {
 
   @@map("catalogues")
 }
+
+model Certificate {
+  id          String   @id @default(cuid())
+  title       String
+  image       String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("certificates")
+}
