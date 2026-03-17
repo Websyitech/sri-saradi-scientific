@@ -797,8 +797,7 @@ export default function CertificatesPage() {
                       borderRadius: "8px",
                       overflow: "hidden",
                       cursor: "pointer",
-                      transition: "border-color 0.2s",
-                      ":hover": { borderColor: "#2D2B7F" }
+                      transition: "border-color 0.2s"
                     }}
                     onMouseEnter={(e) => e.currentTarget.style.borderColor = "#2D2B7F"}
                     onMouseLeave={(e) => e.currentTarget.style.borderColor = "#ddd"}
