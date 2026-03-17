@@ -263,7 +263,7 @@ export default function Header() {
                       }}
                     >
                       <div style={{ fontSize: "13px", fontWeight: 500, color: "#333" }}>
-                        {result.name}
+                        {result.name.replace(/<\/?su[bp]>/g, '')}
                       </div>
                       {result.catalogNumber && (
                         <div style={{ fontSize: "12px", color: "#999", marginTop: "4px" }}>
@@ -723,7 +723,7 @@ export default function Header() {
                           onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}
                         >
                           <div style={{ fontWeight: 500, color: "#333", marginBottom: "4px" }}>
-                            {result.name}
+                            {result.name.replace(/<\/?su[bp]>/g, '')}
                           </div>
                           {result.catalogNumber && (
                             <div style={{ fontSize: "12px", color: "#666" }}>
