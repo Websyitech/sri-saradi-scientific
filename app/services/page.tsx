@@ -36,7 +36,7 @@ export default function ServicesPage() {
             marginBottom: 20, 
             fontWeight: 600 
           }}>
-            Our Services
+            Drug Discovery Intelligence
           </div>
           <h1 style={{ 
             fontSize: "clamp(2rem, 5vw, 3rem)", 
@@ -45,7 +45,7 @@ export default function ServicesPage() {
             marginBottom: 24, 
             color: "#fff" 
           }}>
-            Complete laboratory solutions for <em style={{ color: "#C4983A", fontStyle: "normal" }}>modern research</em>
+            From <em style={{ color: "#C4983A", fontStyle: "normal" }}>Target</em> to <em style={{ color: "#C4983A", fontStyle: "normal" }}>Therapy</em>, Faster.
           </h1>
           <p style={{ 
             fontSize: "1.15rem", 
@@ -54,7 +54,7 @@ export default function ServicesPage() {
             lineHeight: 1.8, 
             fontWeight: 300 
           }}>
-            From product sourcing to custom synthesis, sample preparation to analytical services - we provide end-to-end support for your research needs with pharmaceutical-grade quality standards.
+            We combine a proprietary database of 5,000+ validated oncology targets with end-to-end NGS bioinformatics — so your team spends less time on literature review and more time advancing candidates.
           </p>
         </div>
       </section>
@@ -81,7 +81,7 @@ export default function ServicesPage() {
               maxWidth: 800,
               margin: "0 auto 18px" 
             }}>
-              Comprehensive laboratory support services
+              Three ways to accelerate<br/>your drug discovery pipeline
             </h2>
             <p style={{ 
               color: "#4A5568", 
@@ -90,7 +90,7 @@ export default function ServicesPage() {
               margin: "0 auto", 
               lineHeight: 1.8 
             }}>
-              We understand that successful research requires more than just quality products. Our integrated service portfolio supports every aspect of your laboratory operations.
+              Whether you need a curated database, custom bioinformatics analysis, or a prioritized target report — we deliver research-grade intelligence built on experimentally validated data.
             </p>
           </div>
 
@@ -102,86 +102,6 @@ export default function ServicesPage() {
             marginTop: 48 
           }}>
             {/* Service 1 */}
-            <div style={{ 
-              background: "#fff", 
-              borderRadius: 12, 
-              border: "1px solid #E5E5E5", 
-              padding: "40px 32px", 
-              boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-              transition: "all 0.3s ease",
-              position: "relative",
-              overflow: "hidden"
-            }}>
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 4,
-                background: "#2D2B7F"
-              }} />
-              <div style={{ 
-                display: "flex", 
-                alignItems: "center", 
-                marginBottom: 20 
-              }}>
-                <div style={{ 
-                  width: 52, 
-                  height: 52, 
-                  borderRadius: 12, 
-                  background: "rgba(45, 43, 127, 0.1)", 
-                  display: "flex", 
-                  alignItems: "center", 
-                  justifyContent: "center", 
-                  marginRight: 16,
-                  fontSize: 24
-                }}>
-                  🛒
-                </div>
-                <h3 style={{ 
-                  fontSize: "1.3rem", 
-                  fontWeight: 600, 
-                  color: "#1A1A1A", 
-                  margin: 0 
-                }}>
-                  Product Procurement
-                </h3>
-              </div>
-              <p style={{ 
-                color: "#4A5568", 
-                fontSize: "1rem", 
-                lineHeight: 1.7, 
-                marginBottom: 24 
-              }}>
-                Direct sourcing from international principals with full documentation and quality validation. No middleman markups, transparent pricing.
-              </p>
-              <ul style={{ 
-                listStyle: "none", 
-                padding: 0, 
-                margin: 0, 
-                fontSize: "0.9rem", 
-                color: "#4A5568" 
-              }}>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Research reagents & biochemicals
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Laboratory consumables
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Analytical reference standards
-                </li>
-                <li style={{ paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Custom sourcing solutions
-                </li>
-              </ul>
-            </div>
-
-            {/* Service 2 */}
             <div style={{ 
               background: "#fff", 
               borderRadius: 12, 
@@ -216,7 +136,7 @@ export default function ServicesPage() {
                   marginRight: 16,
                   fontSize: 24
                 }}>
-                  🧪
+                  🗄️
                 </div>
                 <h3 style={{ 
                   fontSize: "1.3rem", 
@@ -224,7 +144,7 @@ export default function ServicesPage() {
                   color: "#1A1A1A", 
                   margin: 0 
                 }}>
-                  Custom Synthesis
+                  Target & Drug Repurposing Database
                 </h3>
               </div>
               <p style={{ 
@@ -233,7 +153,7 @@ export default function ServicesPage() {
                 lineHeight: 1.7, 
                 marginBottom: 24 
               }}>
-                Bespoke chemical synthesis and compound development with pharmaceutical-grade quality control and documentation.
+                Access our proprietary database of 5,000+ oncology genes — each manually curated, prioritized by druggability tier, and mapped to existing approved drugs for repurposing.
               </p>
               <ul style={{ 
                 listStyle: "none", 
@@ -244,19 +164,107 @@ export default function ServicesPage() {
               }}>
                 <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Small molecule synthesis
+                  Diamond, Gold, Silver, Bronze target classifications
                 </li>
                 <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Peptide & protein production
+                  Druggability annotations with evidence levels
                 </li>
                 <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Reference standard development
+                  Approved drug ↔ gene target repurposing maps
+                </li>
+                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
+                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
+                  Targeting mechanism data (small molecule, antibody, etc.)
                 </li>
                 <li style={{ paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Scale-up capabilities
+                  Searchable by disease area, gene, or drug
+                </li>
+              </ul>
+            </div>
+
+            {/* Service 2 */}
+            <div style={{ 
+              background: "#fff", 
+              borderRadius: 12, 
+              border: "1px solid #E5E5E5", 
+              padding: "40px 32px", 
+              boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+              transition: "all 0.3s ease",
+              position: "relative",
+              overflow: "hidden"
+            }}>
+              <div style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 4,
+                background: "#2D2B7F"
+              }} />
+              <div style={{ 
+                display: "flex", 
+                alignItems: "center", 
+                marginBottom: 20 
+              }}>
+                <div style={{ 
+                  width: 52, 
+                  height: 52, 
+                  borderRadius: 12, 
+                  background: "rgba(45, 43, 127, 0.1)", 
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "center", 
+                  marginRight: 16,
+                  fontSize: 24
+                }}>
+                  🧬
+                </div>
+                <h3 style={{ 
+                  fontSize: "1.3rem", 
+                  fontWeight: 600, 
+                  color: "#1A1A1A", 
+                  margin: 0 
+                }}>
+                  NGS Bioinformatics Services
+                </h3>
+              </div>
+              <p style={{ 
+                color: "#4A5568", 
+                fontSize: "1rem", 
+                lineHeight: 1.7, 
+                marginBottom: 24 
+              }}>
+                From raw sequencing data to actionable insights. Our team builds and runs custom NGS pipelines tailored to your research — RNA-seq, WES, WGS, and beyond.
+              </p>
+              <ul style={{ 
+                listStyle: "none", 
+                padding: 0, 
+                margin: 0, 
+                fontSize: "0.9rem", 
+                color: "#4A5568" 
+              }}>
+                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
+                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
+                  End-to-end pipeline design and execution
+                </li>
+                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
+                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
+                  Differential gene expression analysis
+                </li>
+                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
+                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
+                  Variant calling and annotation
+                </li>
+                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
+                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
+                  Pathway and gene ontology enrichment
+                </li>
+                <li style={{ paddingLeft: 20, position: "relative" }}>
+                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
+                  Publication-ready figures and reports
                 </li>
               </ul>
             </div>
@@ -296,86 +304,6 @@ export default function ServicesPage() {
                   marginRight: 16,
                   fontSize: 24
                 }}>
-                  📊
-                </div>
-                <h3 style={{ 
-                  fontSize: "1.3rem", 
-                  fontWeight: 600, 
-                  color: "#1A1A1A", 
-                  margin: 0 
-                }}>
-                  Analytical Services
-                </h3>
-              </div>
-              <p style={{ 
-                color: "#4A5568", 
-                fontSize: "1rem", 
-                lineHeight: 1.7, 
-                marginBottom: 24 
-              }}>
-                Complete analytical testing and characterization services with validated methods and regulatory compliance.
-              </p>
-              <ul style={{ 
-                listStyle: "none", 
-                padding: 0, 
-                margin: 0, 
-                fontSize: "0.9rem", 
-                color: "#4A5568" 
-              }}>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  HPLC/LC-MS analysis
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  NMR characterization
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Purity & impurity profiling
-                </li>
-                <li style={{ paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Stability studies
-                </li>
-              </ul>
-            </div>
-
-            {/* Service 4 */}
-            <div style={{ 
-              background: "#fff", 
-              borderRadius: 12, 
-              border: "1px solid #E5E5E5", 
-              padding: "40px 32px", 
-              boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-              transition: "all 0.3s ease",
-              position: "relative",
-              overflow: "hidden"
-            }}>
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 4,
-                background: "#2D2B7F"
-              }} />
-              <div style={{ 
-                display: "flex", 
-                alignItems: "center", 
-                marginBottom: 20 
-              }}>
-                <div style={{ 
-                  width: 52, 
-                  height: 52, 
-                  borderRadius: 12, 
-                  background: "rgba(45, 43, 127, 0.1)", 
-                  display: "flex", 
-                  alignItems: "center", 
-                  justifyContent: "center", 
-                  marginRight: 16,
-                  fontSize: 24
-                }}>
                   📋
                 </div>
                 <h3 style={{ 
@@ -384,7 +312,7 @@ export default function ServicesPage() {
                   color: "#1A1A1A", 
                   margin: 0 
                 }}>
-                  Technical Consulting
+                  Custom Target Prioritization Reports
                 </h3>
               </div>
               <p style={{ 
@@ -393,7 +321,7 @@ export default function ServicesPage() {
                 lineHeight: 1.7, 
                 marginBottom: 24 
               }}>
-                Expert guidance on method development, regulatory compliance, and research optimization from our scientific team.
+                Tell us your disease area and therapeutic hypothesis. We deliver a curated report with ranked targets, repurposing candidates, and the supporting evidence — ready for your discovery team.
               </p>
               <ul style={{ 
                 listStyle: "none", 
@@ -404,182 +332,27 @@ export default function ServicesPage() {
               }}>
                 <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Method validation support
+                  Disease-specific target shortlists
                 </li>
                 <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Regulatory documentation
+                  Competitive landscape analysis per target
                 </li>
                 <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Protocol development
+                  Literature evidence summaries
+                </li>
+                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
+                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
+                  Repurposing candidates with rationale
                 </li>
                 <li style={{ paddingLeft: 20, position: "relative" }}>
                   <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Training & support
+                  Delivered within 2–4 weeks
                 </li>
               </ul>
             </div>
 
-            {/* Service 5 */}
-            <div style={{ 
-              background: "#fff", 
-              borderRadius: 12, 
-              border: "1px solid #E5E5E5", 
-              padding: "40px 32px", 
-              boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-              transition: "all 0.3s ease",
-              position: "relative",
-              overflow: "hidden"
-            }}>
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 4,
-                background: "#0F7B6C"
-              }} />
-              <div style={{ 
-                display: "flex", 
-                alignItems: "center", 
-                marginBottom: 20 
-              }}>
-                <div style={{ 
-                  width: 52, 
-                  height: 52, 
-                  borderRadius: 12, 
-                  background: "rgba(15, 123, 108, 0.1)", 
-                  display: "flex", 
-                  alignItems: "center", 
-                  justifyContent: "center", 
-                  marginRight: 16,
-                  fontSize: 24
-                }}>
-                  🚚
-                </div>
-                <h3 style={{ 
-                  fontSize: "1.3rem", 
-                  fontWeight: 600, 
-                  color: "#1A1A1A", 
-                  margin: 0 
-                }}>
-                  Logistics & Storage
-                </h3>
-              </div>
-              <p style={{ 
-                color: "#4A5568", 
-                fontSize: "1rem", 
-                lineHeight: 1.7, 
-                marginBottom: 24 
-              }}>
-                Temperature-controlled storage and specialized shipping for sensitive research materials and biologics.
-              </p>
-              <ul style={{ 
-                listStyle: "none", 
-                padding: 0, 
-                margin: 0, 
-                fontSize: "0.9rem", 
-                color: "#4A5568" 
-              }}>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Cold chain management
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Controlled substance handling
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Real-time tracking
-                </li>
-                <li style={{ paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Emergency delivery options
-                </li>
-              </ul>
-            </div>
-
-            {/* Service 6 */}
-            <div style={{ 
-              background: "#fff", 
-              borderRadius: 12, 
-              border: "1px solid #E5E5E5", 
-              padding: "40px 32px", 
-              boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-              transition: "all 0.3s ease",
-              position: "relative",
-              overflow: "hidden"
-            }}>
-              <div style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 4,
-                background: "#C4983A"
-              }} />
-              <div style={{ 
-                display: "flex", 
-                alignItems: "center", 
-                marginBottom: 20 
-              }}>
-                <div style={{ 
-                  width: 52, 
-                  height: 52, 
-                  borderRadius: 12, 
-                  background: "rgba(196, 152, 58, 0.1)", 
-                  display: "flex", 
-                  alignItems: "center", 
-                  justifyContent: "center", 
-                  marginRight: 16,
-                  fontSize: 24
-                }}>
-                  🤝
-                </div>
-                <h3 style={{ 
-                  fontSize: "1.3rem", 
-                  fontWeight: 600, 
-                  color: "#1A1A1A", 
-                  margin: 0 
-                }}>
-                  Partnership Programs
-                </h3>
-              </div>
-              <p style={{ 
-                color: "#4A5568", 
-                fontSize: "1rem", 
-                lineHeight: 1.7, 
-                marginBottom: 24 
-              }}>
-                Long-term partnerships with research institutions and pharmaceutical companies for ongoing supply and support.
-              </p>
-              <ul style={{ 
-                listStyle: "none", 
-                padding: 0, 
-                margin: 0, 
-                fontSize: "0.9rem", 
-                color: "#4A5568" 
-              }}>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Bulk purchase agreements
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Dedicated account management
-                </li>
-                <li style={{ marginBottom: 10, paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Custom inventory management
-                </li>
-                <li style={{ paddingLeft: 20, position: "relative" }}>
-                  <span style={{ position: "absolute", left: 0, color: "#0F7B6C", fontWeight: "bold" }}>✓</span>
-                  Priority support access
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </section>
@@ -596,7 +369,7 @@ export default function ServicesPage() {
               fontWeight: 600, 
               marginBottom: 14 
             }}>
-              How We Work
+              NGS Pipeline
             </div>
             <h2 style={{ 
               fontSize: "2.2rem", 
@@ -606,7 +379,7 @@ export default function ServicesPage() {
               maxWidth: 800,
               margin: "0 auto 18px" 
             }}>
-              Our service delivery process
+              Our bioinformatics workflow
             </h2>
             <p style={{ 
               color: "#4A5568", 
@@ -615,7 +388,7 @@ export default function ServicesPage() {
               margin: "0 auto", 
               lineHeight: 1.8 
             }}>
-              From initial consultation to project delivery, we follow a structured approach to ensure quality outcomes and transparent communication.
+              End-to-end analysis from raw sequencing files to prioritized therapeutic targets — with human validation at every stage.
             </p>
           </div>
 
@@ -626,10 +399,11 @@ export default function ServicesPage() {
             marginTop: 48 
           }}>
             {[
-              { step: "01", title: "Consultation", desc: "Understanding your specific requirements and technical constraints" },
-              { step: "02", title: "Proposal", desc: "Detailed project scope, timeline, and transparent pricing" },
-              { step: "03", title: "Execution", desc: "Regular updates and quality checkpoints throughout delivery" },
-              { step: "04", title: "Delivery", desc: "Complete documentation package and post-delivery support" }
+              { step: "01", title: "Data Intake", desc: "FASTQ files, BAM/CRAM, or raw sequencer output from your NGS platform" },
+              { step: "02", title: "QC & Alignment", desc: "Quality control, adapter trimming, and reference genome alignment" },
+              { step: "03", title: "Analysis", desc: "Variant calling, differential expression, pathway enrichment" },
+              { step: "04", title: "Target Mapping", desc: "Cross-reference with our 5,000-gene database for druggability and tier classification" },
+              { step: "05", title: "Deliverables", desc: "Prioritized target list, repurposing candidates, publication-ready report" }
             ].map((item, index) => (
               <div key={index} style={{ 
                 background: "#fff", 
@@ -694,7 +468,7 @@ export default function ServicesPage() {
                 fontWeight: 600, 
                 marginBottom: 14 
               }}>
-                Quality Assurance
+                Why Sri Saradi
               </div>
               <h2 style={{ 
                 fontSize: "2rem", 
@@ -702,7 +476,7 @@ export default function ServicesPage() {
                 marginBottom: 24, 
                 color: "#0B1D33" 
               }}>
-                Pharmaceutical-grade standards across all services
+                What sets us apart
               </h2>
               <p style={{ 
                 color: "#4A5568", 
@@ -710,7 +484,7 @@ export default function ServicesPage() {
                 lineHeight: 1.8, 
                 marginBottom: 32 
               }}>
-                Our quality management system ensures every service delivery meets the highest standards of scientific rigor and regulatory compliance.
+                Every gene in our database is manually curated against published literature and experimental data. No automated scraping, no unverified predictions.
               </p>
               <div style={{ 
                 display: "grid", 
@@ -718,10 +492,10 @@ export default function ServicesPage() {
                 gap: 20 
               }}>
                 {[
-                  "ISO 9001:2015 Certified",
-                  "GMP Compliant Processes", 
-                  "Validated Analytical Methods",
-                  "Full Traceability Documentation"
+                  "Manually Curated",
+                  "Pharma R&D Lineage", 
+                  "Full Stack Capability",
+                  "Repurposing Focus"
                 ].map((item, index) => (
                   <div key={index} style={{ 
                     display: "flex", 
@@ -766,7 +540,7 @@ export default function ServicesPage() {
                 marginBottom: 24, 
                 color: "#fff" 
               }}>
-                Service Level Commitments
+                Database Statistics
               </h3>
               <div style={{ 
                 display: "flex", 
@@ -774,10 +548,10 @@ export default function ServicesPage() {
                 gap: 16 
               }}>
                 {[
-                  { metric: "Response Time", value: "< 24 hours" },
-                  { metric: "Project Updates", value: "Weekly reports" },
-                  { metric: "Documentation", value: "Complete CoA/CoC" },
-                  { metric: "Support Access", value: "Direct scientist contact" }
+                  { metric: "Curated Targets", value: "5,000+" },
+                  { metric: "Disease Areas", value: "5 Solid Tumors" },
+                  { metric: "Validation", value: "100% Manual" },
+                  { metric: "Drug Mapping", value: "Complete" }
                 ].map((item, index) => (
                   <div key={index} style={{ 
                     display: "flex", 
@@ -805,7 +579,7 @@ export default function ServicesPage() {
             marginBottom: 20, 
             color: "#fff" 
           }}>
-            Ready to discuss your project?
+            Ready to accelerate your<br/>target discovery?
           </h2>
           <p style={{ 
             fontSize: "1.15rem", 
@@ -813,7 +587,7 @@ export default function ServicesPage() {
             marginBottom: 36, 
             lineHeight: 1.7 
           }}>
-            Our team of scientists and project managers is here to help you achieve your research goals with confidence and efficiency.
+            Whether you need database access, a bioinformatics pipeline, or a custom target report — let's discuss how we can support your research.
           </p>
           <div style={{ 
             display: "flex", 
@@ -822,7 +596,7 @@ export default function ServicesPage() {
             flexWrap: "wrap" 
           }}>
             <a 
-              href="/contact" 
+              href="mailto:info@srisaradiscientific.com" 
               style={{ 
                 background: "#0F7B6C", 
                 color: "#fff", 
@@ -834,10 +608,10 @@ export default function ServicesPage() {
                 transition: "all 0.3s ease"
               }}
             >
-              Start a Conversation
+              Schedule a Call →
             </a>
             <a 
-              href="mailto:services@srisaradiscientific.com" 
+              href="#" 
               style={{ 
                 background: "transparent", 
                 color: "#fff", 
@@ -850,7 +624,7 @@ export default function ServicesPage() {
                 transition: "all 0.3s ease"
               }}
             >
-              Email Our Team
+              Download Capability Deck
             </a>
           </div>
         </div>
