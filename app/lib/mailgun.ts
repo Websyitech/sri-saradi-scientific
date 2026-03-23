@@ -3,10 +3,10 @@ import FormData from 'form-data';
 
 const mailgun = new Mailgun(FormData);
 
-const mg = mailgun.client({
+const mg = process.env.MAILGUN_API_KEY ? mailgun.client({
   username: 'api',
-  key: process.env.MAILGUN_API_KEY || '',
-});
+  key: process.env.MAILGUN_API_KEY,
+}) : null;
 
 interface EmailParams {
   to: string;
@@ -17,6 +17,10 @@ interface EmailParams {
 
 export async function sendEmail({ to, subject, text, html }: EmailParams) {
   try {
+    if (!mg) {
+      throw new Error('Mailgun client not initialized - missing API key');
+    }
+
     const domain = process.env.MAILGUN_DOMAIN;
     const from = process.env.MAILGUN_FROM;
 
