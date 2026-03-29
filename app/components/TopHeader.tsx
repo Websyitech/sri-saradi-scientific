@@ -365,8 +365,8 @@ export default function TopHeader() {
                     transition: 'background-color 0.2s',
                     marginTop: '8px',
                   }}
-                  onMouseOver={(e) => !isSubmitting && (e.target.style.backgroundColor = '#1e1c5e')}
-                  onMouseOut={(e) => !isSubmitting && (e.target.style.backgroundColor = '#2D2B7F')}
+                  onMouseOver={(e) => !isSubmitting && ((e.target as HTMLElement).style.backgroundColor = '#1e1c5e')}
+                  onMouseOut={(e) => !isSubmitting && ((e.target as HTMLElement).style.backgroundColor = '#2D2B7F')}
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit Inquiry'}
                 </button>
