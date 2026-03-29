@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
+import { sendContactFormNotification, sendContactConfirmation } from "@/app/lib/email";
 
 export async function GET() {
   try {
@@ -38,6 +39,32 @@ export async function POST(request: Request) {
     });
 
     console.log("Contact message created:", { id: message.id, subject: message.subject });
+
+    // Send email notifications
+    try {
+      const emailData = {
+        name: body.name,
+        email: body.email,
+        phone: body.phone,
+        subject: body.subject,
+        message: body.message
+      };
+
+      // Send notification to admin
+      const notificationSent = await sendContactFormNotification(emailData);
+      
+      // Send confirmation to customer
+      const confirmationSent = await sendContactConfirmation(emailData);
+      
+      console.log("Email notifications:", { 
+        notification: notificationSent, 
+        confirmation: confirmationSent 
+      });
+    } catch (emailError) {
+      console.error("Error sending email notifications:", emailError);
+      // Continue with success response even if emails fail
+    }
+
     return NextResponse.json(message, { status: 201 });
   } catch (error) {
     console.error("Error creating contact message:", error);

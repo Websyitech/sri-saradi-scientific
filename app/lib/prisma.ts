@@ -16,10 +16,16 @@ function createPrismaClient(): PrismaClient {
   const cleanConnectionString = connectionString.replace(/([?&])sslmode=[^&]*/g, "$1").replace(/[?&]$/, "");
   const pool = new pg.Pool({
     connectionString: cleanConnectionString,
-    max: 1,
+    max: 10,
+    min: 2,
     ssl: { rejectUnauthorized: false },
-    idleTimeoutMillis: 0,
-    connectionTimeoutMillis: 10000,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 30000,
+    acquireTimeoutMillis: 30000,
+    createTimeoutMillis: 30000,
+    destroyTimeoutMillis: 5000,
+    reapIntervalMillis: 1000,
+    createRetryIntervalMillis: 200
   });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter } as never);

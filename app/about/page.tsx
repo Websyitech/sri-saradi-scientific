@@ -4,14 +4,24 @@ export default function AboutPage() {
   return (
     <div style={{color: "#1A1A1A", backgroundImage: "url('https://srisaradiscientific.com/uploads/1773597822715-About_us__background_1.webp')", backgroundRepeat: "no-repeat", backgroundPosition: "top center" }}>
       {/* Hero Section */}
-      <section style={{ background: "#0B1D33", color: "#fff", padding: "80px 24px 70px", position: "relative", overflow: "hidden" }}>
+      <section style={{ 
+        background: `url('https://srisaradiscientific.com/uploads/1773597822715-About_us__background_1.webp')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        color: "#C4983A", 
+        padding: "80px 24px 70px", 
+        position: "relative", 
+        overflow: "hidden" 
+      }}>
         <div style={{ position: "absolute", top: "-40%", right: "-10%", width: 500, height: 500, background: "radial-gradient(circle, rgba(15,123,108,0.15) 0%, transparent 70%)", borderRadius: "50%" }} />
         <div style={{ maxWidth: 800, margin: "0", position: "relative", zIndex: 1, textAlign: "left", padding: "0px 40px" }}>
-          <div style={{ fontSize: "0.8rem", letterSpacing: 3, textTransform: "uppercase", color: "#0F7B6C", marginBottom: 20, fontWeight: 600 }}>
+          <div className="partner-pill" style={{ marginBottom: 20 }}>
+            <div className="partner-dot"></div>
             About Sri Saradi Scientific
           </div>
           <h1 style={{ fontSize: "clamp(2rem, 5vw, 3rem)", lineHeight: 1.25, fontWeight: 400, marginBottom: 24, color: "#fff" }}>
-            Your lab deserves a supplier who <em style={{ color: "#C4983A", fontStyle: "normal" }}>understands your science</em>
+            Your lab deserves a supplier who <em style={{ color: "#fff", fontStyle: "normal" }}>understands your science</em>
           </h1>
           <p style={{ fontSize: "1.15rem", color: "rgba(255,255,255,0.75)", maxWidth: 620, lineHeight: 1.8, fontWeight: 300 }}>
             We bring globally manufactured, quality-validated research products to Indian laboratories. Direct sourcing from international principals, pharmaceutical-grade documentation standards, and honest pricing without the multinational brand premium.

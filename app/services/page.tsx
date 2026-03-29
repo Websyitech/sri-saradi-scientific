@@ -7,8 +7,11 @@ export default function ServicesPage() {
     <div style={{ color: "#1A1A1A", backgroundColor: "#fff" }}>
       {/* Hero Section */}
       <section style={{
-        background: "#0B1D33",
-        color: "#fff",
+        background: `url('https://srisaradiscientific.com/uploads/1773597822715-About_us__background_1.webp')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        color: "#C4983A",
         padding: "80px 24px 0",
         position: "relative",
         overflow: "hidden"
@@ -30,14 +33,8 @@ export default function ServicesPage() {
           textAlign: "left",
           padding: "0px 40px"
         }}>
-          <div style={{
-            fontSize: "0.8rem",
-            letterSpacing: 3,
-            textTransform: "uppercase",
-            color: "#0F7B6C",
-            marginBottom: 20,
-            fontWeight: 600
-          }}>
+          <div className="partner-pill" style={{ marginBottom: 20 }}>
+            <div className="partner-dot"></div>
             Drug Discovery Intelligence
           </div>
           <h1 style={{
@@ -48,7 +45,7 @@ export default function ServicesPage() {
             color: "#fff",
             maxWidth: 800
           }}>
-            From <em style={{ color: "#C4983A", fontStyle: "normal" }}>Target</em> to <em style={{ color: "#C4983A", fontStyle: "normal" }}>Therapy</em>, Faster.
+            From <em style={{ color: "#fff", fontStyle: "normal" }}>Target</em> to <em style={{ color: "#fff", fontStyle: "normal" }}>Therapy</em>, Faster.
           </h1>
           <p style={{
             fontSize: "1.15rem",

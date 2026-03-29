@@ -450,39 +450,6 @@ body {
     display: block;
   }
 
-  /* Sticky bottom button for mobile */
-  .mobile-sticky-button {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: #2D2B7F;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 16px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 8px 24px rgba(45, 43, 127, 0.3);
-    z-index: 1000;
-    transition: all 0.3s ease;
-    text-align: center;
-  }
-
-  .mobile-sticky-button:hover {
-    background: #1e1c5e;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(45, 43, 127, 0.4);
-  }
-
-  .mobile-sticky-button:active {
-    transform: translateY(0);
-  }
-
-  .mobile-sticky-button {
-    display: block !important;
-  }
 }
 
 /* Extra small mobile screens - Even more compact */
@@ -936,6 +903,77 @@ body {
 
 .footer-social-icon:hover {
   background: var(--primary) !important;
+}
+
+/* Footer Responsive Styles */
+.footer-main-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+}
+
+@media (max-width: 1200px) {
+  .footer-main-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 30px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  footer > div:first-child {
+    padding: 40px 0 30px !important;
+  }
+
+  .footer-main-grid {
+    padding: 0 16px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+
+  footer > div:nth-child(2) > div {
+    padding: 0 16px !important;
+  }
+
+  footer > div:last-child > div {
+    padding: 0 16px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  footer > div:last-child > div > p {
+    order: 1;
+    margin-top: 8px;
+  }
+
+  footer > div:last-child > div > div:last-child {
+    order: 0;
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 0 12px !important;
+  }
+
+  footer > div:nth-child(2) > div {
+    padding: 0 12px !important;
+  }
+
+  footer > div:last-child > div {
+    padding: 0 12px !important;
+  }
+
+  footer > div:last-child > div img {
+    height: 32px !important;
+  }
+
+  footer > div:last-child > div > div:first-child img {
+    max-width: 160px !important;
+  }
 }
 
 /* ===================== */

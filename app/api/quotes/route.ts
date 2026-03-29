@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
+import { sendQuoteNotification, sendQuoteConfirmation } from "@/app/lib/email";
 
 interface QuoteItemData {
   productId?: string;
@@ -69,6 +70,33 @@ export async function POST(request: NextRequest) {
       );
     }
     console.log("Quote items created:", quoteItems.length);
+
+    // Send email notifications
+    try {
+      const emailData = {
+        name,
+        email,
+        phone,
+        company,
+        notes,
+        items: items || [],
+        orderId: quoteRequest.orderId
+      };
+
+      // Send notification to admin
+      const notificationSent = await sendQuoteNotification(emailData);
+      
+      // Send confirmation to customer
+      const confirmationSent = await sendQuoteConfirmation(emailData);
+      
+      console.log("Quote email notifications:", { 
+        notification: notificationSent, 
+        confirmation: confirmationSent 
+      });
+    } catch (emailError) {
+      console.error("Error sending quote email notifications:", emailError);
+      // Continue with success response even if emails fail
+    }
 
     return NextResponse.json(
       {

@@ -115,10 +115,8 @@ export default function Footer() {
             maxWidth: "1400px",
             margin: "0 auto",
             padding: "0 40px",
-            display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
-            gap: "40px",
           }}
+          className="footer-main-grid"
         >
           {/* Quick Links */}
           <div>

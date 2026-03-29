@@ -369,7 +369,7 @@ export default function Header() {
               right: 0,
               bottom: 0,
               backgroundColor: "rgba(0, 0, 0, 0.5)",
-              zIndex: 9999,
+              zIndex: 10002,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -594,7 +594,7 @@ export default function Header() {
               right: 0,
               bottom: 0,
               backgroundColor: "rgba(0, 0, 0, 0.5)",
-              zIndex: 9999,
+              zIndex: 10002,
               display: "flex",
               alignItems: "flex-start",
               justifyContent: "center",
@@ -744,14 +744,6 @@ export default function Header() {
           </div>
         )}
 
-        {/* Mobile Sticky Bottom Button */}
-        <button
-          className="mobile-sticky-button"
-          onClick={() => setShowResearchModal(true)}
-          style={{ display: "none" }} // Hidden by default, shown on mobile via CSS
-        >
-          Request a Research Product
-        </button>
       </div>
     </header>
 

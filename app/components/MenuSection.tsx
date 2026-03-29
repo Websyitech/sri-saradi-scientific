@@ -504,7 +504,7 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
                     borderRadius: "0",
                     boxShadow: "0 8px 24px rgba(0, 0, 0, 0.12)",
                     padding: "20px 24px",
-                    zIndex: 1000,
+                    zIndex: 10010,
                     animation: "slideDown 0.3s ease-out forwards",
                   }}
                   onAnimationEnd={(e) => {
@@ -747,7 +747,7 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
                     borderRadius: "4px",
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                     padding: "8px 0",
-                    zIndex: 1000,
+                    zIndex: 10010,
                     animation: "slideDown 0.3s ease-out forwards",
                     minWidth: "180px",
                   }}
