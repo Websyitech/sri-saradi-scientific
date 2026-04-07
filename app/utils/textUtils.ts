@@ -1,9 +1,44 @@
 export const cleanText = (text: string | null | undefined): string => {
   if (!text) return "";
   
-  // First handle chemical-specific patterns
+  // First handle HTML tags and chemical-specific patterns
   let cleaned = text
-    // Remove malformed HTML tags (your specific issue)
+    // Handle escaped HTML subscript entities - convert to Unicode subscripts
+    .replace(/&lt;sub&gt;([^&]+)&lt;\/sub&gt;/g, (match, content) => {
+      return content.split('').map((char: string) => {
+        const subscriptMap: { [key: string]: string } = {
+          '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄',
+          '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉',
+          '+': '₊', '-': '₋', '=': '₌', '(': '₍', ')': '₎',
+          'a': 'ₐ', 'e': 'ₑ', 'h': 'ₕ', 'i': 'ᵢ', 'j': 'ⱼ',
+          'k': 'ₖ', 'l': 'ₗ', 'm': 'ₘ', 'n': 'ₙ', 'o': 'ₒ',
+          'p': 'ₚ', 'r': 'ᵣ', 's': 'ₛ', 't': 'ₜ', 'u': 'ᵤ',
+          'v': 'ᵥ', 'x': 'ₓ'
+        };
+        return subscriptMap[char] || char;
+      }).join('');
+    })
+    // Handle escaped HTML superscript entities - convert to Unicode superscripts
+    .replace(/&lt;sup&gt;([^&]+)&lt;\/sup&gt;/g, (match, content) => {
+      return content.split('').map((char: string) => {
+        const superscriptMap: { [key: string]: string } = {
+          '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
+          '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
+          '+': '⁺', '-': '⁻', '=': '⁼', '(': '⁽', ')': '⁾',
+          'a': 'ᵃ', 'b': 'ᵇ', 'c': 'ᶜ', 'd': 'ᵈ', 'e': 'ᵉ',
+          'f': 'ᶠ', 'g': 'ᵍ', 'h': 'ʰ', 'i': 'ⁱ', 'j': 'ʲ',
+          'k': 'ᵏ', 'l': 'ˡ', 'm': 'ᵐ', 'n': 'ⁿ', 'o': 'ᵒ',
+          'p': 'ᵖ', 'r': 'ʳ', 's': 'ˢ', 't': 'ᵗ', 'u': 'ᵘ',
+          'v': 'ᵛ', 'w': 'ʷ', 'x': 'ˣ', 'y': 'ʸ', 'z': 'ᶻ'
+        };
+        return superscriptMap[char] || char;
+      }).join('');
+    })
+    // Handle HTML subscript tags - just remove tags, keep content as normal text
+    .replace(/<sub>([^<]+)<\/sub>/g, '$1')
+    // Handle HTML superscript tags - just remove tags, keep content as normal text
+    .replace(/<sup>([^<]+)<\/sup>/g, '$1')
+    // Remove malformed HTML tags (legacy patterns)
     .replace(/<sup>(\d+)-<\/sup>/g, '$1-')
     .replace(/<sup>(\d+)<\/sup>/g, '$1')
     // Fix specific chemical symbols

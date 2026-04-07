@@ -181,10 +181,10 @@ export default function ProductsPage() {
               if (subCatStr.includes("/")) {
                 const subCatItems = subCatStr.split("/").map((item) => item.trim());
                 subCatItems.forEach((item) => {
-                  if (item) subCategories.add(item);
+                  if (item) subCategories.add(cleanText(item));
                 });
               } else {
-                subCategories.add(subCatStr);
+                subCategories.add(cleanText(subCatStr));
               }
             }
             // Pack sizes from variants
@@ -194,19 +194,19 @@ export default function ProductsPage() {
               });
             }
             // Reactivity
-            if (product.abReactivity) reactivity.add(String(product.abReactivity));
+            if (product.abReactivity) reactivity.add(cleanText(String(product.abReactivity)));
             // Target
-            if (product.abTarget) targets.add(String(product.abTarget));
+            if (product.abTarget) targets.add(cleanText(String(product.abTarget)));
             // Applications - split by "/" and add each as separate item
             if (product.applications) {
               const appStr = String(product.applications).trim();
               if (appStr.includes("/")) {
                 const appItems = appStr.split("/").map((item) => item.trim());
                 appItems.forEach((item) => {
-                  if (item) applications.add(item);
+                  if (item) applications.add(cleanText(item));
                 });
               } else {
-                applications.add(appStr);
+                applications.add(cleanText(appStr));
               }
             }
           });
@@ -1110,7 +1110,7 @@ export default function ProductsPage() {
                           cursor: "pointer",
                         }}
                       />
-                      {opt.label}
+                      {cleanText(opt.label)}
                     </label>
                     ))}
                 </div>
