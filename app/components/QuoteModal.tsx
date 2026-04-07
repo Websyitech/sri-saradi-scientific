@@ -59,6 +59,7 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
       const requestData = {
         ...formData,
         items,
+        pageUrl: window.location.href,
       };
 
       console.log("QuoteModal sending request:", requestData);
@@ -102,7 +103,7 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          zIndex: 9999,
+          zIndex: 10999,
         }}
         onClick={onClose}
       >

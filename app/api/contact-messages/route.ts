@@ -47,7 +47,8 @@ export async function POST(request: Request) {
         email: body.email,
         phone: body.phone,
         subject: body.subject,
-        message: body.message
+        message: body.message,
+        pageUrl: body.pageUrl
       };
 
       // Send notification to admin

@@ -4,6 +4,51 @@ import React from "react";
 
 export default function ServicesPage() {
   return (
+    <>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .hero-content {
+            padding: 0 20px !important;
+          }
+          
+          .hero-stats-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+            margin-bottom: 60px !important;
+          }
+          
+          section {
+            padding: 40px 0 !important;
+          }
+          
+          section > div {
+            padding: 0 20px !important;
+          }
+          
+          div[style*="gridTemplateColumns"] {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .hero-content {
+            padding: 0 16px !important;
+          }
+          
+          section > div {
+            padding: 0 16px !important;
+          }
+          
+          .hero-stats-grid {
+            gap: 12px !important;
+          }
+          
+          div[style*="gridTemplateColumns"] {
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     <div style={{ color: "#1A1A1A", backgroundColor: "#fff" }}>
       {/* Hero Section */}
       <section style={{
@@ -32,7 +77,7 @@ export default function ServicesPage() {
           zIndex: 1,
           textAlign: "left",
           padding: "0px 40px"
-        }}>
+        }} className="hero-content">
           <div className="partner-pill" style={{ marginBottom: 20 }}>
             <div className="partner-dot"></div>
             Drug Discovery Intelligence
@@ -64,7 +109,7 @@ export default function ServicesPage() {
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: 24,
             marginBottom: 80
-          }}>
+          }} className="hero-stats-grid">
             <div style={{
               background: "rgba(255,255,255,0.08)",
               border: "1px solid rgba(255,255,255,0.12)",
@@ -1061,5 +1106,6 @@ export default function ServicesPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

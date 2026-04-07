@@ -12,7 +12,7 @@ interface QuoteItemData {
 export async function POST(request: NextRequest) {
   try {
     const token = request.cookies.get("auth_token")?.value;
-    const { name, email, phone, company, notes, items } = await request.json();
+    const { name, email, phone, company, notes, items, pageUrl } = await request.json();
 
     console.log("Quote submission received:", { name, email, phone, company, notes, items: items?.length });
 
@@ -80,7 +80,8 @@ export async function POST(request: NextRequest) {
         company,
         notes,
         items: items || [],
-        orderId: quoteRequest.orderId
+        orderId: quoteRequest.orderId,
+        pageUrl
       };
 
       // Send notification to admin

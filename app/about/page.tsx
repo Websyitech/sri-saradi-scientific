@@ -2,6 +2,61 @@ import React from "react";
 
 export default function AboutPage() {
   return (
+    <>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .hero-content {
+            padding: 0 20px !important;
+          }
+          
+          .comparison-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+            margin: 32px 0 !important;
+          }
+          
+          .values-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+            margin: 32px 0 !important;
+          }
+          
+          .founder-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+            text-align: center !important;
+          }
+          
+          .partnership-grid {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          section {
+            padding: 40px 0 !important;
+          }
+          
+          section > div {
+            padding: 0 20px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .hero-content {
+            padding: 0 16px !important;
+          }
+          
+          section > div {
+            padding: 0 16px !important;
+          }
+          
+          .comparison-grid,
+          .values-grid,
+          .partnership-grid {
+            gap: 16px !important;
+          }
+        }
+      `}</style>
     <div style={{color: "#1A1A1A", backgroundImage: "url('https://srisaradiscientific.com/uploads/1773597822715-About_us__background_1.webp')", backgroundRepeat: "no-repeat", backgroundPosition: "top center" }}>
       {/* Hero Section */}
       <section style={{ 
@@ -15,7 +70,7 @@ export default function AboutPage() {
         overflow: "hidden" 
       }}>
         <div style={{ position: "absolute", top: "-40%", right: "-10%", width: 500, height: 500, background: "radial-gradient(circle, rgba(15,123,108,0.15) 0%, transparent 70%)", borderRadius: "50%" }} />
-        <div style={{ maxWidth: 800, margin: "0", position: "relative", zIndex: 1, textAlign: "left", padding: "0px 40px" }}>
+        <div style={{ maxWidth: 800, margin: "0", position: "relative", zIndex: 1, textAlign: "left", padding: "0px 40px" }} className="hero-content">
           <div className="partner-pill" style={{ marginBottom: 20 }}>
             <div className="partner-dot"></div>
             About Sri Saradi Scientific
@@ -49,7 +104,7 @@ export default function AboutPage() {
           </div>
 
           {/* Before & After Comparison */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, margin: "48px 0" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, margin: "48px 0" }} className="comparison-grid">
             {/* Before Card */}
             <div style={{ 
               position: "relative",
@@ -331,7 +386,7 @@ export default function AboutPage() {
             Three things we won't compromise on
           </h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, margin: "48px 0" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, margin: "48px 0" }} className="values-grid">
           <div style={{ textAlign: "center", padding: "32px 20px", border: "1px solid #E2E0DB", borderRadius: 8, transition: "border-color 0.3s ease" }}>
             <div style={{ width: 44, height: 44, margin: "0 auto 16px", background: "#E8F5F2", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem" }}>🔬</div>
             <h4 style={{ fontSize: "1.05rem", fontWeight: 400, marginBottom: 8, color: "#0B1D33" }}>Technical honesty</h4>
@@ -360,7 +415,7 @@ export default function AboutPage() {
       {/* Section 5 - Dark Background (Founder) */}
       <section style={{ background: "#0B1D33", padding: "60px 0" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 40px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 60, alignItems: "start", color: "#fff" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 60, alignItems: "start", color: "#fff" }} className="founder-grid">
             {/* Founder Image */}
             <div style={{ position: "relative" }}>
               <img 
@@ -416,7 +471,7 @@ export default function AboutPage() {
             There's a reason we fly to our manufacturers and walk their factory floors instead of just signing contracts over email. We want to see the production lines, meet the quality teams, and understand how our principals actually make the products you'll use in your lab. That's how we know what we're recommending, and it's how we earn the right to put our name behind it.
           </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, margin: "32px 0 48px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, margin: "32px 0 48px" }} className="partnership-grid">
           <div style={{ borderRadius: 8, overflow: "hidden", border: "1px solid #E2E0DB", background: "#fff" }}>
             <img src="https://srisaradiscientific.com/uploads/1773567373257-PXL_20251215_075202682.jpg" alt="Praveen Gadde signing the authorized distribution agreement at Solarbio headquarters" style={{ width: "100%", height: 280, objectFit: "cover", display: "block" }} />
             <div style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: 4 }}>
@@ -448,5 +503,6 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
+    </>
   );
 }

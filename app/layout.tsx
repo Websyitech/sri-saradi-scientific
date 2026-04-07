@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CookiesPopup from "./components/CookiesPopup";
 import DisclaimerModal from "./components/DisclaimerModal";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import prisma from "@/app/lib/prisma";
 
 const googleSans = Inter({
@@ -85,6 +86,7 @@ export default function RootLayout({
         <Footer />
         <CookiesPopup />
         <DisclaimerModal />
+        <GoogleAnalytics />
       </body>
     </html>
   );

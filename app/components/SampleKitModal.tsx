@@ -49,7 +49,8 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
           email: formData.email,
           phone: formData.phone,
           subject: 'Sample Kit Request',
-          message: messageWithCompany
+          message: messageWithCompany,
+          pageUrl: window.location.href
         })
       });
 
@@ -89,7 +90,7 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
           right: 0,
           bottom: 0,
           background: 'rgba(0, 0, 0, 0.5)',
-          zIndex: 999,
+          zIndex: 10999,
           backdropFilter: 'blur(4px)'
         }}
       />
@@ -104,7 +105,7 @@ export default function SampleKitModal({ isOpen, onClose }: SampleKitModalProps)
           background: '#fff',
           borderRadius: '12px',
           boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-          zIndex: 1000,
+          zIndex: 11000,
           maxWidth: '500px',
           width: '90%',
           maxHeight: '90vh',

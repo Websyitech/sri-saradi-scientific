@@ -34,6 +34,7 @@ interface ContactFormData {
   phone?: string;
   subject?: string;
   message: string;
+  pageUrl?: string;
 }
 
 // Send email function
@@ -69,6 +70,7 @@ export async function sendContactFormNotification(data: ContactFormData): Promis
     <p><strong>Email:</strong> ${data.email}</p>
     ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
     ${data.subject ? `<p><strong>Subject:</strong> ${data.subject}</p>` : ''}
+    ${data.pageUrl ? `<p><strong>Page URL:</strong> <a href="${data.pageUrl}">${data.pageUrl}</a></p>` : ''}
     <p><strong>Message:</strong></p>
     <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 10px 0;">
       ${data.message.replace(/\n/g, '<br>')}
@@ -86,6 +88,7 @@ export async function sendContactFormNotification(data: ContactFormData): Promis
     Email: ${data.email}
     ${data.phone ? `Phone: ${data.phone}` : ''}
     ${data.subject ? `Subject: ${data.subject}` : ''}
+    ${data.pageUrl ? `Page URL: ${data.pageUrl}` : ''}
 
     Message:
     ${data.message}
@@ -191,6 +194,7 @@ interface QuoteFormData {
   notes?: string;
   items?: QuoteItemData[];
   orderId: string;
+  pageUrl?: string;
 }
 
 // Send quote request notification to admin
@@ -228,6 +232,7 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
     <p><strong>Email:</strong> ${data.email}</p>
     ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
     ${data.company ? `<p><strong>Company:</strong> ${data.company}</p>` : ''}
+    ${data.pageUrl ? `<p><strong>Page URL:</strong> <a href="${data.pageUrl}">${data.pageUrl}</a></p>` : ''}
     
     ${itemsHtml}
     
@@ -252,6 +257,7 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
     Email: ${data.email}
     ${data.phone ? `Phone: ${data.phone}` : ''}
     ${data.company ? `Company: ${data.company}` : ''}
+    ${data.pageUrl ? `Page URL: ${data.pageUrl}` : ''}
 
     ${data.items && data.items.length > 0 ? `
     Requested Items:
