@@ -110,8 +110,6 @@ export default function TopHeader() {
             Can't Find Product?
           </button>
           <span className="top-header-divider">|</span>
-          <a href="/login" className="top-header-link">Login / Register</a>
-          <span className="top-header-divider">|</span>
           <a href="/track-order" className="top-header-link">Track Order</a>
         </div>
       </div>
