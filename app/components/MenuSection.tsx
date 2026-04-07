@@ -17,7 +17,6 @@ const leftMenuItems = [
 
 const rightMenuItems = [
   { label: "About us", href: "/about" },
-  { label: "Careers", href: "/careers" },
   { label: "Contact Us", href: "/contact" },
 ];
 
