@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
 import { sendQuoteNotification, sendQuoteConfirmation } from "@/app/lib/email";
+import { generateOrderId } from "@/app/lib/orderIdGenerator";
 
 interface QuoteItemData {
   productId?: string;
@@ -36,10 +37,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Generate custom order ID
+    const orderId = await generateOrderId();
+    console.log("Generated order ID:", orderId);
+
     // Create quote request
-    console.log("Creating quote request with data:", { userId, name, email, phone, company, notes });
+    console.log("Creating quote request with data:", { userId, name, email, phone, company, notes, orderId });
     const quoteRequest = await prisma.quoteRequest.create({
       data: {
+        orderId,
         userId,
         name,
         email,

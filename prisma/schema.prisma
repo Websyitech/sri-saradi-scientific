@@ -223,7 +223,7 @@ model QuoteItem {
 
 model QuoteRequest {
   id        String      @id @default(cuid())
-  orderId   String      @unique @default(cuid())
+  orderId   String      @unique
   name      String
   email     String
   phone     String?

@@ -22,7 +22,7 @@ export default function TrackOrderPage() {
     e.preventDefault();
     // Demo order status
     setOrderStatus({
-      orderId: orderId || "ORD-2025-00847",
+      orderId: orderId || "SSS-001",
       date: "January 15, 2025",
       status: "in-transit",
       items: [
