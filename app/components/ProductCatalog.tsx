@@ -11526,19 +11526,19 @@ const PRODUCT_CATEGORIES: Product[] = [
     ],
     "features": [
       "Loads 1µL samples without damaging gel",
-      "Compatible with most pipettes (excluding Rainin Universal and Thermo Clip-Tip)",
+      "Compatible with most pipettes (excluding Rainin LTS and Thermo Clip-Tip)",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR20-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 20µL — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 20µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTR20-S",
+    "category": "LTS-Compatibility  Filter Pipette Tips",
+    "title": "LTS Filter Tip 20µL — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 20µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR20-S"
+        "value": "LTS-FTR20-S"
       },
       {
         "label": "Volume",
@@ -11562,7 +11562,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11571,21 +11571,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB20",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 20µL — Common (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 20µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTB20",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 20µL — Common (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 20µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB20"
+        "value": "LTS-FTB20"
       },
       {
         "label": "Volume",
@@ -11609,7 +11609,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11618,21 +11618,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR20-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 20µL — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR20-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 20µL — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR20-L-S"
+        "value": "LTS-FTR20-L-S"
       },
       {
         "label": "Volume",
@@ -11656,7 +11656,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11665,21 +11665,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB20-L",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 20µL — Ultra Low Retention (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTB20-L",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 20µL — Ultra Low Retention (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB20-L"
+        "value": "LTS-FTB20-L"
       },
       {
         "label": "Volume",
@@ -11703,7 +11703,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11712,21 +11712,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR200-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 200µL — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 200µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTR200-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS-Compatibility Filter Tip 200µL — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 200µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR200-S"
+        "value": "LTS-FTR200-S"
       },
       {
         "label": "Volume",
@@ -11750,7 +11750,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11759,21 +11759,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB200",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 200µL — Common (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 200µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTB200",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS-Compatibility Filter Tip 200µL — Common (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 200µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB200"
+        "value": "LTS-FTB200"
       },
       {
         "label": "Volume",
@@ -11797,7 +11797,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11806,21 +11806,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR200-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 200µL — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR200-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 200µL — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR200-L-S"
+        "value": "LTS-FTR200-L-S"
       },
       {
         "label": "Volume",
@@ -11844,7 +11844,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11853,21 +11853,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB200-L",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 200µL — Ultra Low Retention (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTB200-L",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 200µL — Ultra Low Retention (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB200-L"
+        "value": "LTS-FTB200-L"
       },
       {
         "label": "Volume",
@@ -11891,7 +11891,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11900,21 +11900,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR200XL-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 200µL Extended 102mm — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Common. CC Rack for manual use.",
+    "id": "LTS-FTR200XL-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 200µL Extended 102mm — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR200XL-S"
+        "value": "LTS-FTR200XL-S"
       },
       {
         "label": "Volume",
@@ -11938,7 +11938,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11947,21 +11947,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR200XL-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 200µL Extended 102mm — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR200XL-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 200µL Extended 102mm — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR200XL-L-S"
+        "value": "LTS-FTR200XL-L-S"
       },
       {
         "label": "Volume",
@@ -11985,7 +11985,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -11994,21 +11994,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR300-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 300µL — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 300µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTR300-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 300µL — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 300µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR300-S"
+        "value": "LTS-FTR300-S"
       },
       {
         "label": "Volume",
@@ -12032,7 +12032,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12041,21 +12041,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB300",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 300µL — Common (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 300µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTB300",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 300µL — Common (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 300µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB300"
+        "value": "LTS-FTB300"
       },
       {
         "label": "Volume",
@@ -12079,7 +12079,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12088,21 +12088,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR300-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 300µL — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR300-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 300µL — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR300-L-S"
+        "value": "LTS-FTR300-L-S"
       },
       {
         "label": "Volume",
@@ -12126,7 +12126,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12135,21 +12135,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB300-L",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 300µL — Ultra Low Retention (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTB300-L",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 300µL — Ultra Low Retention (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB300-L"
+        "value": "LTS-FTB300-L"
       },
       {
         "label": "Volume",
@@ -12173,7 +12173,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12182,21 +12182,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR1000-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1000µL — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1000µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTR1000-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1000µL — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1000µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR1000-S"
+        "value": "LTS-FTR1000-S"
       },
       {
         "label": "Volume",
@@ -12220,7 +12220,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12229,21 +12229,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB1000",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1000µL — Common (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1000µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTB1000",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1000µL — Common (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1000µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB1000"
+        "value": "LTS-FTB1000"
       },
       {
         "label": "Volume",
@@ -12267,7 +12267,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12276,21 +12276,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR1000-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1000µL — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR1000-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1000µL — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR1000-L-S"
+        "value": "LTS-FTR1000-L-S"
       },
       {
         "label": "Volume",
@@ -12314,7 +12314,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12323,21 +12323,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB1000-L",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1000µL — Ultra Low Retention (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTB1000-L",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1000µL — Ultra Low Retention (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB1000-L"
+        "value": "LTS-FTB1000-L"
       },
       {
         "label": "Volume",
@@ -12361,7 +12361,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12370,21 +12370,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR1200-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1200µL — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1200µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTR1200-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1200µL — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1200µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR1200-S"
+        "value": "LTS-FTR1200-S"
       },
       {
         "label": "Volume",
@@ -12408,7 +12408,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12417,21 +12417,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB1200",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1200µL — Common (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1200µL, Common. CC Rack for manual use.",
+    "id": "LTS-FTB1200",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1200µL — Common (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1200µL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB1200"
+        "value": "LTS-FTB1200"
       },
       {
         "label": "Volume",
@@ -12455,7 +12455,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12464,21 +12464,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR1200-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1200µL — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR1200-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1200µL — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR1200-L-S"
+        "value": "LTS-FTR1200-L-S"
       },
       {
         "label": "Volume",
@@ -12502,7 +12502,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12511,21 +12511,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB1200-L",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 1200µL — Ultra Low Retention (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTB1200-L",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 1200µL — Ultra Low Retention (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB1200-L"
+        "value": "LTS-FTB1200-L"
       },
       {
         "label": "Volume",
@@ -12549,7 +12549,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12558,21 +12558,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR5000-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 5000µL/5mL — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common. CC Rack for manual use.",
+    "id": "LTS-FTR5000-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 5000µL/5mL — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR5000-S"
+        "value": "LTS-FTR5000-S"
       },
       {
         "label": "Volume",
@@ -12596,7 +12596,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12605,21 +12605,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB5000",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 5000µL/5mL — Common (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common. CC Rack for manual use.",
+    "id": "LTS-FTB5000",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 5000µL/5mL — Common (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB5000"
+        "value": "LTS-FTB5000"
       },
       {
         "label": "Volume",
@@ -12643,7 +12643,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12652,21 +12652,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR5000-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 5000µL/5mL — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR5000-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 5000µL/5mL — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR5000-L-S"
+        "value": "LTS-FTR5000-L-S"
       },
       {
         "label": "Volume",
@@ -12690,7 +12690,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12699,21 +12699,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB5000-L",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 5000µL/5mL — Ultra Low Retention (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTB5000-L",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 5000µL/5mL — Ultra Low Retention (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB5000-L"
+        "value": "LTS-FTB5000-L"
       },
       {
         "label": "Volume",
@@ -12737,7 +12737,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12746,21 +12746,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR10000-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 10000µL/10mL — Common (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common. CC Rack for manual use.",
+    "id": "LTS-FTR10000-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 10000µL/10mL — Common (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR10000-S"
+        "value": "LTS-FTR10000-S"
       },
       {
         "label": "Volume",
@@ -12784,7 +12784,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12793,21 +12793,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB10000",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 10000µL/10mL — Common (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common. CC Rack for manual use.",
+    "id": "LTS-FTB10000",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 10000µL/10mL — Common (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB10000"
+        "value": "LTS-FTB10000"
       },
       {
         "label": "Volume",
@@ -12831,7 +12831,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12840,21 +12840,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTR10000-L-S",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 10000µL/10mL — Ultra Low Retention (Rack)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTR10000-L-S",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 10000µL/10mL — Ultra Low Retention (Rack)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTR10000-L-S"
+        "value": "LTS-FTR10000-L-S"
       },
       {
         "label": "Volume",
@@ -12878,7 +12878,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12887,21 +12887,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-FTB10000-L",
-    "category": "Universal Filter Pipette Tips",
-    "title": "Universal Filter Tip 10000µL/10mL — Ultra Low Retention (Bag)",
-    "description": "Universal filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention. CC Rack for manual use.",
+    "id": "LTS-FTB10000-L",
+    "category": "LTS Filter Pipette Tips",
+    "title": "LTS Filter Tip 10000µL/10mL — Ultra Low Retention (Bag)",
+    "description": "LTS filtered pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention. CC Rack for manual use.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-FTB10000-L"
+        "value": "LTS-FTB10000-L"
       },
       {
         "label": "Volume",
@@ -12925,7 +12925,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12934,21 +12934,21 @@ const PRODUCT_CATEGORIES: Product[] = [
       "High-throughput pipetting with Rainin"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use",
       "DNase-free, RNase-free"
     ]
   },
   {
-    "id": "Universal-TR20-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 20µL — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 20µL, Common.",
+    "id": "LTS-TR20-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 20µL — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 20µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR20-S"
+        "value": "LTS-TR20-S"
       },
       {
         "label": "Volume",
@@ -12972,7 +12972,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -12981,20 +12981,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB20",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 20µL — Common (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 20µL, Common.",
+    "id": "LTS-TB20",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 20µL — Common (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 20µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB20"
+        "value": "LTS-TB20"
       },
       {
         "label": "Volume",
@@ -13018,7 +13018,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13027,20 +13027,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR20-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 20µL — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention.",
+    "id": "LTS-TR20-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 20µL — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR20-L-S"
+        "value": "LTS-TR20-L-S"
       },
       {
         "label": "Volume",
@@ -13064,7 +13064,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13073,20 +13073,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB20-L",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 20µL — Ultra Low Retention (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention.",
+    "id": "LTS-TB20-L",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 20µL — Ultra Low Retention (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 20µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB20-L"
+        "value": "LTS-TB20-L"
       },
       {
         "label": "Volume",
@@ -13110,7 +13110,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13119,20 +13119,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR200-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 200µL — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 200µL, Common.",
+    "id": "LTS-TR200-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 200µL — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 200µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR200-S"
+        "value": "LTS-TR200-S"
       },
       {
         "label": "Volume",
@@ -13156,7 +13156,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13165,20 +13165,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB200",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 200µL — Common (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 200µL, Common.",
+    "id": "LTS-TB200",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 200µL — Common (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 200µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB200"
+        "value": "LTS-TB200"
       },
       {
         "label": "Volume",
@@ -13202,7 +13202,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13211,20 +13211,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR200-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 200µL — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention.",
+    "id": "LTS-TR200-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 200µL — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR200-L-S"
+        "value": "LTS-TR200-L-S"
       },
       {
         "label": "Volume",
@@ -13248,7 +13248,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13257,20 +13257,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB200-L",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 200µL — Ultra Low Retention (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention.",
+    "id": "LTS-TB200-L",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 200µL — Ultra Low Retention (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 200µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB200-L"
+        "value": "LTS-TB200-L"
       },
       {
         "label": "Volume",
@@ -13294,7 +13294,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13303,20 +13303,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR200XL-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 200µL Extended 102mm — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Common.",
+    "id": "LTS-TR200XL-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 200µL Extended 102mm — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR200XL-S"
+        "value": "LTS-TR200XL-S"
       },
       {
         "label": "Volume",
@@ -13340,7 +13340,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13349,20 +13349,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR200XL-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 200µL Extended 102mm — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Ultra Low Retention.",
+    "id": "LTS-TR200XL-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 200µL Extended 102mm — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 200µL Extended 102mm, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR200XL-L-S"
+        "value": "LTS-TR200XL-L-S"
       },
       {
         "label": "Volume",
@@ -13386,7 +13386,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13395,20 +13395,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR300-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 300µL — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 300µL, Common.",
+    "id": "LTS-TR300-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 300µL — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 300µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR300-S"
+        "value": "LTS-TR300-S"
       },
       {
         "label": "Volume",
@@ -13432,7 +13432,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13441,20 +13441,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB300",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 300µL — Common (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 300µL, Common.",
+    "id": "LTS-TB300",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 300µL — Common (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 300µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB300"
+        "value": "LTS-TB300"
       },
       {
         "label": "Volume",
@@ -13478,7 +13478,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13487,20 +13487,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR300-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 300µL — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention.",
+    "id": "LTS-TR300-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 300µL — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR300-L-S"
+        "value": "LTS-TR300-L-S"
       },
       {
         "label": "Volume",
@@ -13524,7 +13524,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13533,20 +13533,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB300-L",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 300µL — Ultra Low Retention (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention.",
+    "id": "LTS-TB300-L",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 300µL — Ultra Low Retention (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 300µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB300-L"
+        "value": "LTS-TB300-L"
       },
       {
         "label": "Volume",
@@ -13570,7 +13570,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13579,20 +13579,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR1000-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1000µL — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1000µL, Common.",
+    "id": "LTS-TR1000-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1000µL — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1000µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR1000-S"
+        "value": "LTS-TR1000-S"
       },
       {
         "label": "Volume",
@@ -13616,7 +13616,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13625,20 +13625,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB1000",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1000µL — Common (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1000µL, Common.",
+    "id": "LTS-TB1000",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1000µL — Common (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1000µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB1000"
+        "value": "LTS-TB1000"
       },
       {
         "label": "Volume",
@@ -13662,7 +13662,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13671,20 +13671,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR1000-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1000µL — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention.",
+    "id": "LTS-TR1000-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1000µL — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR1000-L-S"
+        "value": "LTS-TR1000-L-S"
       },
       {
         "label": "Volume",
@@ -13708,7 +13708,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13717,20 +13717,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB1000-L",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1000µL — Ultra Low Retention (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention.",
+    "id": "LTS-TB1000-L",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1000µL — Ultra Low Retention (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1000µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB1000-L"
+        "value": "LTS-TB1000-L"
       },
       {
         "label": "Volume",
@@ -13754,7 +13754,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13763,20 +13763,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR1200-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1200µL — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1200µL, Common.",
+    "id": "LTS-TR1200-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1200µL — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1200µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR1200-S"
+        "value": "LTS-TR1200-S"
       },
       {
         "label": "Volume",
@@ -13800,7 +13800,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13809,20 +13809,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB1200",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1200µL — Common (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1200µL, Common.",
+    "id": "LTS-TB1200",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1200µL — Common (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1200µL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB1200"
+        "value": "LTS-TB1200"
       },
       {
         "label": "Volume",
@@ -13846,7 +13846,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13855,20 +13855,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR1200-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1200µL — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention.",
+    "id": "LTS-TR1200-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1200µL — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR1200-L-S"
+        "value": "LTS-TR1200-L-S"
       },
       {
         "label": "Volume",
@@ -13892,7 +13892,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13901,20 +13901,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB1200-L",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 1200µL — Ultra Low Retention (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention.",
+    "id": "LTS-TB1200-L",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 1200µL — Ultra Low Retention (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 1200µL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB1200-L"
+        "value": "LTS-TB1200-L"
       },
       {
         "label": "Volume",
@@ -13938,7 +13938,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13947,20 +13947,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR5000-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 5000µL/5mL — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common.",
+    "id": "LTS-TR5000-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 5000µL/5mL — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR5000-S"
+        "value": "LTS-TR5000-S"
       },
       {
         "label": "Volume",
@@ -13984,7 +13984,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -13993,20 +13993,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB5000",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 5000µL/5mL — Common (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common.",
+    "id": "LTS-TB5000",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 5000µL/5mL — Common (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB5000"
+        "value": "LTS-TB5000"
       },
       {
         "label": "Volume",
@@ -14030,7 +14030,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -14039,20 +14039,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR5000-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 5000µL/5mL — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention.",
+    "id": "LTS-TR5000-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 5000µL/5mL — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR5000-L-S"
+        "value": "LTS-TR5000-L-S"
       },
       {
         "label": "Volume",
@@ -14076,7 +14076,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -14085,20 +14085,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB5000-L",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 5000µL/5mL — Ultra Low Retention (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention.",
+    "id": "LTS-TB5000-L",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 5000µL/5mL — Ultra Low Retention (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 5000µL/5mL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB5000-L"
+        "value": "LTS-TB5000-L"
       },
       {
         "label": "Volume",
@@ -14122,7 +14122,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -14131,20 +14131,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR10000-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 10000µL/10mL — Common (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common.",
+    "id": "LTS-TR10000-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 10000µL/10mL — Common (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR10000-S"
+        "value": "LTS-TR10000-S"
       },
       {
         "label": "Volume",
@@ -14168,7 +14168,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -14177,20 +14177,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB10000",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 10000µL/10mL — Common (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common.",
+    "id": "LTS-TB10000",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 10000µL/10mL — Common (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Common.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB10000"
+        "value": "LTS-TB10000"
       },
       {
         "label": "Volume",
@@ -14214,7 +14214,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -14223,20 +14223,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TR10000-L-S",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 10000µL/10mL — Ultra Low Retention (Rack)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention.",
+    "id": "LTS-TR10000-L-S",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 10000µL/10mL — Ultra Low Retention (Rack)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TR10000-L-S"
+        "value": "LTS-TR10000-L-S"
       },
       {
         "label": "Volume",
@@ -14260,7 +14260,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -14269,20 +14269,20 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
   },
   {
-    "id": "Universal-TB10000-L",
-    "category": "Universal Pipette Tips",
-    "title": "Universal Tip 10000µL/10mL — Ultra Low Retention (Bag)",
-    "description": "Universal non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention.",
+    "id": "LTS-TB10000-L",
+    "category": "LTS Pipette Tips",
+    "title": "LTS Tip 10000µL/10mL — Ultra Low Retention (Bag)",
+    "description": "LTS non-filter pipette tip for Rainin liquid handling systems. 10000µL/10mL, Ultra Low Retention.",
     "specs": [
       {
         "label": "Cat. No.",
-        "value": "Universal-TB10000-L"
+        "value": "LTS-TB10000-L"
       },
       {
         "label": "Volume",
@@ -14306,7 +14306,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       },
       {
         "label": "Compatibility",
-        "value": "Rainin Universal"
+        "value": "Rainin LTS"
       }
     ],
     "applications": [
@@ -14315,7 +14315,7 @@ const PRODUCT_CATEGORIES: Product[] = [
       "Genomics"
     ],
     "features": [
-      "Compatible with Rainin Universal liquid handling systems",
+      "Compatible with Rainin LTS liquid handling systems",
       "Ultra Low Retention available",
       "CC Rack for manual use"
     ]
