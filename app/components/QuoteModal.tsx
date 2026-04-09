@@ -250,9 +250,11 @@ export default function QuoteModal({ isOpen, onClose, items, user }: QuoteModalP
                     SKU: {item.sku}
                   </p>
                 </div>
-                <span style={{ fontSize: "13px", fontWeight: 600, color: "#2D2B7F" }}>
-                  Qty: {item.quantity}
-                </span>
+                {item.quantity > 0 && (
+                  <span style={{ fontSize: "13px", fontWeight: 600, color: "#2D2B7F" }}>
+                    Qty: {item.quantity}
+                  </span>
+                )}
               </div>
             ))}
           </div>

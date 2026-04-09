@@ -445,6 +445,7 @@ export default function KitProductDetail() {
   const [loading, setLoading] = useState(true);
   const [showSampleModal, setShowSampleModal] = useState(false);
   const [showQuoteModal, setShowQuoteModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(null);
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('Laboratory Filtration');
   const tabsRef = useRef<HTMLDivElement>(null);
 
@@ -542,7 +543,19 @@ export default function KitProductDetail() {
       />
 
       <SampleKitModal isOpen={showSampleModal} onClose={() => setShowSampleModal(false)} />
-      <QuoteModal isOpen={showQuoteModal} onClose={() => setShowQuoteModal(false)} items={[]} />
+      <QuoteModal 
+        isOpen={showQuoteModal} 
+        onClose={() => {
+          setShowQuoteModal(false);
+          setSelectedProduct(null);
+        }} 
+        items={selectedProduct ? [{
+          productId: selectedProduct.id,
+          sku: selectedProduct.id,
+          name: selectedProduct.title,
+          quantity: 0
+        }] : []} 
+      />
 
       {/* <USPBar items={getUSPItems(slug)} /> */}
 
@@ -724,7 +737,10 @@ export default function KitProductDetail() {
                   
                   {/* Request Quote Button */}
                   <button
-                    onClick={() => setShowQuoteModal(true)}
+                    onClick={() => {
+                      setSelectedProduct(product);
+                      setShowQuoteModal(true);
+                    }}
                     style={{
                       width: '100%',
                       background: '#2D2B7F',

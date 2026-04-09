@@ -201,6 +201,7 @@ interface QuoteFormData {
 export async function sendQuoteNotification(data: QuoteFormData): Promise<boolean> {
   const subject = `New Quote Request - ${data.orderId}`;
   
+  const showQuantity = data.items && data.items.some(item => item.quantity > 0);
   const itemsHtml = data.items && data.items.length > 0 
     ? `
       <h3>Requested Items:</h3>
@@ -209,7 +210,7 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
           <tr style="background: #f5f5f5;">
             <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Product</th>
             <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">SKU</th>
-            <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Quantity</th>
+            ${showQuantity ? '<th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Quantity</th>' : ''}
           </tr>
         </thead>
         <tbody>
@@ -217,7 +218,7 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
             <tr>
               <td style="border: 1px solid #ddd; padding: 8px;">${item.name}</td>
               <td style="border: 1px solid #ddd; padding: 8px;">${item.sku || 'N/A'}</td>
-              <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${item.quantity}</td>
+              ${showQuantity ? `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${item.quantity}</td>` : ''}
             </tr>
           `).join('')}
         </tbody>
@@ -261,7 +262,7 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
 
     ${data.items && data.items.length > 0 ? `
     Requested Items:
-    ${data.items.map(item => `- ${item.name} (SKU: ${item.sku || 'N/A'}) - Qty: ${item.quantity}`).join('\n')}
+    ${data.items.map(item => `- ${item.name} (SKU: ${item.sku || 'N/A'})${showQuantity ? ` - Qty: ${item.quantity}` : ''}`).join('\n')}
     ` : ''}
 
     ${data.notes ? `
@@ -285,6 +286,7 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
 export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolean> {
   const subject = `Quote Request Confirmation - ${data.orderId}`;
   
+  const showQuantityCustomer = data.items && data.items.some(item => item.quantity > 0);
   const itemsHtml = data.items && data.items.length > 0 
     ? `
       <div style="background: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
@@ -294,7 +296,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
             <tr style="background: #e9e9e9;">
               <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Product</th>
               <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">SKU</th>
-              <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Quantity</th>
+              ${showQuantityCustomer ? '<th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Quantity</th>' : ''}
             </tr>
           </thead>
           <tbody>
@@ -302,7 +304,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
               <tr>
                 <td style="border: 1px solid #ddd; padding: 8px;">${item.name}</td>
                 <td style="border: 1px solid #ddd; padding: 8px;">${item.sku || 'N/A'}</td>
-                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${item.quantity}</td>
+                ${showQuantityCustomer ? `<td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${item.quantity}</td>` : ''}
               </tr>
             `).join('')}
           </tbody>
@@ -375,7 +377,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
 
     ${data.items && data.items.length > 0 ? `
     Your Requested Items:
-    ${data.items.map(item => `- ${item.name} (SKU: ${item.sku || 'N/A'}) - Qty: ${item.quantity}`).join('\n')}
+    ${data.items.map(item => `- ${item.name} (SKU: ${item.sku || 'N/A'})${showQuantityCustomer ? ` - Qty: ${item.quantity}` : ''}`).join('\n')}
     ` : ''}
 
     ${data.notes ? `
