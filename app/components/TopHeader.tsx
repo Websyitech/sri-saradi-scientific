@@ -328,6 +328,9 @@ export default function TopHeader() {
                       fontSize: '14px',
                       outline: 'none',
                       transition: 'border-color 0.2s',
+                      color: '#333',
+                      backgroundColor: '#fff',
+                      boxSizing: 'border-box',
                     }}
                     onFocus={(e) => e.target.style.borderColor = '#2D2B7F'}
                     onBlur={(e) => e.target.style.borderColor = '#d0d0d0'}
