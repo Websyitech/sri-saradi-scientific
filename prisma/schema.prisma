@@ -7,66 +7,147 @@ datasource db {
   provider = "postgresql"
 }
 
-model AdminUser {
-  id        String   @id @default(cuid())
+model admin_users {
+  id        String   @id
   email     String   @unique
   password  String
   name      String
   role      String   @default("admin")
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("admin_users")
+  updatedAt DateTime
 }
 
-model ApplicationCategory {
-  id        String            @id @default(cuid())
+model application_categories {
+  id                String              @id
+  title             String
+  sortOrder         Int                 @default(0)
+  isActive          Boolean             @default(true)
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime
+  application_items application_items[]
+}
+
+model application_items {
+  id                     String                 @id
+  name                   String
+  categoryId             String
+  sortOrder              Int                    @default(0)
+  isActive               Boolean                @default(true)
+  application_categories application_categories @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+model catalogues {
+  id           String         @id
+  title        String
+  description  String?
+  coverImage   String?
+  pdfUrl       String?
+  sortOrder    Int            @default(0)
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime
+  kit_products kit_products[]
+}
+
+model categories {
+  id                      String                    @id
+  name                    String
+  slug                    String                    @unique
+  description             String?
+  image                   String?
+  sortOrder               Int                       @default(0)
+  isActive                Boolean                   @default(true)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  icon                    String?
+  color                   String?                   @default("#2D2B7F")
+  parentId                String?
+  isKitCategory           Boolean                   @default(false)
+  categories              categories?               @relation("categoriesTocategories", fields: [parentId], references: [id])
+  other_categories        categories[]              @relation("categoriesTocategories")
+  lab_consumable_products lab_consumable_products[]
+  products                products[]
+}
+
+model certificates {
+  id        String   @id
   title     String
-  sortOrder Int               @default(0)
-  isActive  Boolean           @default(true)
-  createdAt DateTime          @default(now())
-  updatedAt DateTime          @updatedAt
-  items     ApplicationItem[]
-
-  @@map("application_categories")
+  image     String?
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
 }
 
-model ApplicationItem {
-  id         String              @id @default(cuid())
-  name       String
-  categoryId String
-  sortOrder  Int                 @default(0)
-  isActive   Boolean             @default(true)
-  category   ApplicationCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-
-  @@map("application_items")
+model contact_messages {
+  id        String   @id
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
 }
 
-model Category {
-  id                    String                 @id @default(cuid())
-  name                  String
-  slug                  String                 @unique
-  description           String?
-  image                 String?
-  sortOrder             Int                    @default(0)
-  isActive              Boolean                @default(true)
-  createdAt             DateTime               @default(now())
-  updatedAt             DateTime               @updatedAt
-  icon                  String?
-  color                 String?                @default("#2D2B7F")
-  parentId              String?
-  isKitCategory         Boolean                @default(false)
-  parent                Category?              @relation("CategoryTree", fields: [parentId], references: [id])
-  children              Category[]             @relation("CategoryTree")
-  labConsumableProducts LabConsumableProduct[]
-  products              Product[]
-
-  @@map("categories")
+model contact_pages {
+  id            String   @id
+  title         String   @default("Contact Us")
+  subtitle      String?
+  description   String?
+  email         String?
+  phone         String?
+  address       String?
+  businessHours String?
+  mapEmbedUrl   String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
 }
 
-model HeroSlide {
-  id            String   @id @default(cuid())
+model cro_services {
+  id         String   @id
+  slug       String   @unique
+  title      String
+  heading    String?
+  subheading String?
+  banner     String?
+  content    String?
+  sortOrder  Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+}
+
+model disclaimers {
+  id                String   @id
+  title             String   @default("Data & Privacy Notice")
+  content           String
+  isActive          Boolean  @default(true)
+  acceptButtonText  String   @default("I Accept")
+  declineButtonText String   @default("Decline")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime
+}
+
+model faqs {
+  id         String   @id
+  slug       String   @unique
+  title      String
+  heading    String?
+  subheading String?
+  banner     String?
+  content    String?
+  sortOrder  Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
+}
+
+model hero_slides {
+  id            String   @id
   title         String
   subtitle      String?
   description   String?
@@ -77,18 +158,16 @@ model HeroSlide {
   sortOrder     Int      @default(0)
   isActive      Boolean  @default(true)
   createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  updatedAt     DateTime
   bgImage       String?
   ctaType       String?  @default("link")
   pdfLabel      String?
   pdfUrl        String?
   quoteCtaLabel String?
-
-  @@map("hero_slides")
 }
 
-model JobOpening {
-  id               String   @id @default(cuid())
+model job_openings {
+  id               String   @id
   title            String
   department       String?
   location         String?
@@ -99,48 +178,58 @@ model JobOpening {
   isActive         Boolean  @default(true)
   postedAt         DateTime @default(now())
   createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  @@map("job_openings")
+  updatedAt        DateTime
 }
 
-model KitProduct {
-  id                 String                 @id @default(cuid())
-  title              String
-  description        String?
-  image              String?
-  href               String?
-  sortOrder          Int                    @default(0)
-  isActive           Boolean                @default(true)
-  createdAt          DateTime               @default(now())
-  updatedAt          DateTime               @updatedAt
-  slug               String?
-  heroTitle          String?
-  associatedProducts String?
-  content            String?
-  subtitle           String?
-  catalogId          String?
-  catalog            Catalogue?             @relation(fields: [catalogId], references: [id])
-  products           LabConsumableProduct[]
-
-  @@map("kit_products")
+model kit_products {
+  id                      String                    @id
+  title                   String
+  description             String?
+  image                   String?
+  href                    String?
+  sortOrder               Int                       @default(0)
+  isActive                Boolean                   @default(true)
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  slug                    String?
+  heroTitle               String?
+  associatedProducts      String?
+  content                 String?
+  subtitle                String?
+  catalogId               String?
+  catalogues              catalogues?               @relation(fields: [catalogId], references: [id])
+  lab_consumable_products lab_consumable_products[]
 }
 
-model Page {
-  id        String   @id @default(cuid())
+model lab_consumable_products {
+  id           String        @id
+  title        String
+  subheading   String?
+  content      String?
+  image        String?
+  categoryId   String?
+  kitProductId String?
+  sortOrder    Int           @default(0)
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime
+  categories   categories?   @relation(fields: [categoryId], references: [id])
+  kit_products kit_products? @relation(fields: [kitProductId], references: [id])
+}
+
+model pages {
+  id        String   @id
   slug      String   @unique
   title     String
   subtitle  String?
   content   Json?
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("pages")
+  updatedAt DateTime
 }
 
-model ProductVariant {
-  id        String   @id @default(cuid())
+model product_variants {
+  id        String   @id
   productId String
   sku       String?
   packSize  String?
@@ -148,16 +237,15 @@ model ProductVariant {
   sortOrder Int      @default(0)
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  updatedAt DateTime
+  products  products @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@index([productId])
-  @@map("product_variants")
 }
 
-model Product {
-  id                    String           @id @default(cuid())
-  catalogNumber         String           @unique
+model products {
+  id                    String             @id
+  catalogNumber         String             @unique
   name                  String
   description           String?
   categoryId            String?
@@ -167,11 +255,11 @@ model Product {
   needleShape           String?
   size                  String?
   image                 String?
-  isFeatured            Boolean          @default(false)
-  isActive              Boolean          @default(true)
-  sortOrder             Int              @default(0)
-  createdAt             DateTime         @default(now())
-  updatedAt             DateTime         @updatedAt
+  isFeatured            Boolean            @default(false)
+  isActive              Boolean            @default(true)
+  sortOrder             Int                @default(0)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime
   abApplicationType     String?
   abCalculatedMw        String?
   abCloneType           String?
@@ -203,200 +291,67 @@ model Product {
   section               String?
   storage               String?
   subCategory           String?
-  variants              ProductVariant[]
-  category              Category?        @relation(fields: [categoryId], references: [id])
-
-  @@map("products")
+  product_variants      product_variants[]
+  categories            categories?        @relation(fields: [categoryId], references: [id])
 }
 
-model QuoteItem {
-  id        String       @id @default(cuid())
-  quoteId   String
-  productId String?
-  sku       String?
-  name      String
-  quantity  Int          @default(1)
-  quote     QuoteRequest @relation(fields: [quoteId], references: [id], onDelete: Cascade)
-
-  @@map("quote_items")
+model quote_items {
+  id             String         @id
+  quoteId        String
+  productId      String?
+  sku            String?
+  name           String
+  quantity       Int            @default(1)
+  quote_requests quote_requests @relation(fields: [quoteId], references: [id], onDelete: Cascade)
 }
 
-model QuoteRequest {
-  id        String      @id @default(cuid())
-  orderId   String      @unique
-  name      String
-  email     String
-  phone     String?
-  company   String?
-  status    String      @default("pending")
-  notes     String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  userId    String?
-  items     QuoteItem[]
-  user      User?       @relation(fields: [userId], references: [id])
-
-  @@map("quote_requests")
+model quote_requests {
+  id          String        @id
+  orderId     String        @unique
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  status      String        @default("pending")
+  notes       String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime
+  userId      String?
+  quote_items quote_items[]
+  users       users?        @relation(fields: [userId], references: [id])
 }
 
-model Disclaimer {
-  id                String   @id @default(cuid())
-  title             String   @default("Data & Privacy Notice")
-  content           String
-  isActive          Boolean  @default(true)
-  acceptButtonText  String   @default("I Accept")
-  declineButtonText String   @default("Decline")
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
-
-  @@map("disclaimers")
+model signaling_pathways {
+  id         String   @id
+  slug       String   @unique
+  title      String
+  heading    String?
+  subheading String?
+  banner     String?
+  content    String?
+  sortOrder  Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime
 }
 
-model ContactPage {
-  id            String   @id @default(cuid())
-  title         String   @default("Contact Us")
-  subtitle      String?
-  description   String?
-  email         String?
-  phone         String?
-  address       String?
-  businessHours String?
-  mapEmbedUrl   String?
-  isActive      Boolean  @default(true)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  @@map("contact_pages")
-}
-
-model ContactMessage {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  phone     String?
-  subject   String?
-  message   String
-  isRead    Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("contact_messages")
-}
-
-model SiteSetting {
-  id    String @id @default(cuid())
+model site_settings {
+  id    String @id
   key   String @unique
   value String
   type  String @default("text")
-
-  @@map("site_settings")
 }
 
-model User {
-  id        String         @id @default(cuid())
-  email     String         @unique
-  password  String
-  name      String
-  company   String?
-  phone     String?
-  country   String?
-  isActive  Boolean        @default(true)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  quotes    QuoteRequest[]
-
-  @@map("users")
-}
-
-model CROService {
-  id         String   @id @default(cuid())
-  slug       String   @unique
-  title      String
-  heading    String?
-  subheading String?
-  banner     String?
-  content    String?
-  sortOrder  Int      @default(0)
-  isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@map("cro_services")
-}
-
-model SignalingPathway {
-  id         String   @id @default(cuid())
-  slug       String   @unique
-  title      String
-  heading    String?
-  subheading String?
-  banner     String?
-  content    String?
-  sortOrder  Int      @default(0)
-  isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@map("signaling_pathways")
-}
-
-model FAQ {
-  id         String   @id @default(cuid())
-  slug       String   @unique
-  title      String
-  heading    String?
-  subheading String?
-  banner     String?
-  content    String?
-  sortOrder  Int      @default(0)
-  isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@map("faqs")
-}
-
-model LabConsumableProduct {
-  id           String      @id @default(cuid())
-  title        String
-  subheading   String?
-  content      String?
-  image        String?
-  categoryId   String?
-  kitProductId String?
-  sortOrder    Int         @default(0)
-  isActive     Boolean     @default(true)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  category     Category?   @relation(fields: [categoryId], references: [id])
-  kitProduct   KitProduct? @relation(fields: [kitProductId], references: [id])
-
-  @@map("lab_consumable_products")
-}
-
-model Catalogue {
-  id          String       @id @default(cuid())
-  title       String
-  description String?
-  coverImage  String?
-  pdfUrl      String?
-  sortOrder   Int          @default(0)
-  isActive    Boolean      @default(true)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  kitProducts KitProduct[]
-
-  @@map("catalogues")
-}
-
-model Certificate {
-  id        String   @id @default(cuid())
-  title     String
-  image     String?
-  sortOrder Int      @default(0)
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("certificates")
+model users {
+  id             String           @id
+  email          String           @unique
+  password       String
+  name           String
+  company        String?
+  phone          String?
+  country        String?
+  isActive       Boolean          @default(true)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  quote_requests quote_requests[]
 }
