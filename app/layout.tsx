@@ -40,6 +40,13 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteName = settings.site_name || "Sri Saradi Scientific";
   const favicon = settings.site_favicon || "/favicon.ico";
 
+  // Open Graph specific settings with fallbacks
+  const ogTitle = settings.og_title || title;
+  const ogDescription = settings.og_description || description;
+  const ogType = settings.og_type || "website";
+  const ogUrl = settings.og_url || siteUrl;
+  const ogSiteName = settings.og_site_name || siteName;
+
   return {
     title,
     description,
@@ -50,17 +57,17 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: favicon,
     },
     openGraph: {
-      title,
-      description,
-      url: siteUrl,
-      siteName,
+      title: ogTitle,
+      description: ogDescription,
+      url: ogUrl,
+      siteName: ogSiteName,
       images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : [],
-      type: "website",
+      type: ogType as any,
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: ogTitle,
+      description: ogDescription,
       images: ogImage ? [ogImage] : [],
     },
     metadataBase: new URL(siteUrl),

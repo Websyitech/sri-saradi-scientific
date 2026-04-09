@@ -31,6 +31,13 @@ const DEFAULT_SETTINGS = {
   seo_og_image: "",
   seo_twitter_handle: "",
 
+  // Open Graph Meta
+  og_title: "",
+  og_description: "",
+  og_type: "website",
+  og_url: "",
+  og_site_name: "",
+
   // Robots.txt
   robots_txt: `User-agent: *
 Allow: /
@@ -544,6 +551,77 @@ export default function AdminSettings() {
                   style={inputStyle}
                   placeholder="@yourhandle"
                 />
+              </div>
+            </div>
+
+            {/* Open Graph Section */}
+            <div style={{ marginTop: "32px", padding: "20px", background: "#f8fafc", borderRadius: "8px", border: "1px solid #e2e8f0" }}>
+              <h3 style={{ fontSize: "14px", fontWeight: 600, color: "#333", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" }}>
+                🔗 Open Graph Settings
+              </h3>
+              
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                <div>
+                  <label style={labelStyle}>OG Title</label>
+                  <input
+                    value={settings.og_title || ""}
+                    onChange={(e) => updateSetting("og_title", e.target.value)}
+                    style={inputStyle}
+                    placeholder="Custom title for social media (leave empty to use SEO title)"
+                  />
+                  <p style={{ fontSize: "10px", color: "#666", marginTop: "2px" }}>
+                    Used when shared on Facebook, Twitter, etc.
+                  </p>
+                </div>
+                <div>
+                  <label style={labelStyle}>OG Site Name</label>
+                  <input
+                    value={settings.og_site_name || ""}
+                    onChange={(e) => updateSetting("og_site_name", e.target.value)}
+                    style={inputStyle}
+                    placeholder="Your site name (leave empty to use site name)"
+                  />
+                </div>
+              </div>
+
+              <div style={{ marginTop: "12px" }}>
+                <label style={labelStyle}>OG Description</label>
+                <textarea
+                  value={settings.og_description || ""}
+                  onChange={(e) => updateSetting("og_description", e.target.value)}
+                  style={{ ...inputStyle, resize: "vertical" }}
+                  rows={2}
+                  placeholder="Custom description for social media (leave empty to use SEO description)"
+                  maxLength={200}
+                />
+                <p style={{ fontSize: "10px", color: "#666", marginTop: "2px" }}>
+                  {(settings.og_description || "").length}/200 characters (recommended max for social media)
+                </p>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", marginTop: "12px" }}>
+                <div>
+                  <label style={labelStyle}>OG Type</label>
+                  <select
+                    value={settings.og_type || "website"}
+                    onChange={(e) => updateSetting("og_type", e.target.value)}
+                    style={inputStyle}
+                  >
+                    <option value="website">Website</option>
+                    <option value="article">Article</option>
+                    <option value="product">Product</option>
+                    <option value="business.business">Business</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={labelStyle}>OG URL</label>
+                  <input
+                    value={settings.og_url || ""}
+                    onChange={(e) => updateSetting("og_url", e.target.value)}
+                    style={inputStyle}
+                    placeholder="Canonical URL (leave empty to use site URL)"
+                  />
+                </div>
               </div>
             </div>
           </div>
