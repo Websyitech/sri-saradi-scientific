@@ -31028,13 +31028,49 @@ export default function ProductCatalog({ initialTab = 'pcr-plates', showSeries }
     try {
       console.log('Quote request for:', selectedProduct?.title);
       console.log('Form data:', formData);
+
+      // Validate required fields
+      if (!formData.name || !formData.email || !formData.message) {
+        console.error('Missing required fields');
+        return;
+      }
+
+      const requestData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        notes: `Product: ${selectedProduct?.title}${selectedProduct?.id ? ` (ID: ${selectedProduct.id})` : ''}\n\n${formData.message}`,
+        items: [],
+        pageUrl: window.location.href,
+      };
+
+      console.log('Submitting quote request:', requestData);
+
+      const response = await fetch("/api/quotes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+      console.log('Quote submission response:', { status: response.status, ok: response.ok, data });
+
+      if (!response.ok) {
+        console.error('Quote submission failed:', data);
+        throw new Error(data.error || "Failed to submit quote");
+      }
+
+      console.log('Quote submitted successfully:', data);
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
         handleCloseModal();
-      }, 2000);
+      }, 3000);
     } catch (error) {
       console.error('Error submitting quote request:', error);
+      // Show error to user - you may want to add error state handling here
+      alert('Failed to submit quote request. Please try again.');
     } finally {
       setLoading(false);
     }
