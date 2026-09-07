@@ -17,84 +17,43 @@ export async function GET() {
 
     const siteUrl = settings.site_url || "https://srisaradiscientific.com";
     const includeProducts = settings.sitemap_include_products !== "false";
-    const includeCategories = settings.sitemap_include_categories !== "false";
-    const changeFreq = settings.sitemap_change_freq || "weekly";
-    const priority = settings.sitemap_priority || "0.8";
 
-    const urls: { loc: string; lastmod: string; changefreq: string; priority: string }[] = [];
-
-    // Add static pages
-    const staticPages = [
-      { path: "/", priority: "1.0" },
-      { path: "/products", priority: "0.9" },
-      { path: "/about", priority: "0.7" },
-      { path: "/contact", priority: "0.7" },
-      { path: "/careers", priority: "0.6" },
-      { path: "/quote", priority: "0.6" },
-    ];
-
+    // Generate sitemap index XML
     const today = new Date().toISOString().split("T")[0];
+    const sitemapEntries = [];
 
-    for (const page of staticPages) {
-      urls.push({
-        loc: `${siteUrl}${page.path}`,
-        lastmod: today,
-        changefreq: changeFreq,
-        priority: page.priority,
-      });
-    }
+    // Always include main sitemap (static pages + categories)
+    sitemapEntries.push(`  <sitemap>
+    <loc>${siteUrl}/sitemap-main.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>`);
 
-    // Add categories
-    if (includeCategories) {
-      const categories = await prisma.category.findMany({
-        where: { isActive: true },
-        select: { slug: true, updatedAt: true },
-      });
-
-      for (const cat of categories) {
-        urls.push({
-          loc: `${siteUrl}/products?category=${cat.slug}`,
-          lastmod: cat.updatedAt.toISOString().split("T")[0],
-          changefreq: changeFreq,
-          priority: "0.7",
-        });
-      }
-    }
-
-    // Add products (limit to stay under 50,000 total URLs)
+    // Add product sitemaps if products are included
     if (includeProducts) {
-      const maxProductUrls = 49000 - urls.length; // Leave room for static pages and categories
-      const products = await prisma.product.findMany({
-        where: { isActive: true },
-        select: { catalogNumber: true, updatedAt: true },
-        take: maxProductUrls > 0 ? maxProductUrls : 0,
-        orderBy: { catalogNumber: 'asc' }
+      const productCount = await prisma.product.count({
+        where: { isActive: true }
       });
 
-      for (const prod of products) {
-        urls.push({
-          loc: `${siteUrl}/product/${prod.catalogNumber}`,
-          lastmod: prod.updatedAt.toISOString().split("T")[0],
-          changefreq: changeFreq,
-          priority: priority,
-        });
+      const productsPerSitemap = 5000;
+      const numberOfProductSitemaps = Math.ceil(productCount / productsPerSitemap);
+
+      // Only include sitemaps that will have content (max 10 sitemaps)
+      for (let i = 1; i <= Math.min(numberOfProductSitemaps, 10); i++) {
+        // Check if this sitemap would have any products
+        const productsInThisSitemap = Math.min(5000, productCount - (i - 1) * 5000);
+        if (productsInThisSitemap > 0) {
+          sitemapEntries.push(`  <sitemap>
+    <loc>${siteUrl}/sitemap-products-${i}.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>`);
+        }
       }
     }
 
-    // Generate XML
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls
-  .map(
-    (url) => `  <url>
-    <loc>${url.loc}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-    <changefreq>${url.changefreq}</changefreq>
-    <priority>${url.priority}</priority>
-  </url>`
-  )
-  .join("\n")}
-</urlset>`;
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapEntries.join('\n')}
+</sitemapindex>`;
 
     return new NextResponse(xml, {
       headers: {
@@ -102,7 +61,7 @@ ${urls
       },
     });
   } catch (error) {
-    console.error("Sitemap error:", error);
-    return new NextResponse("Error generating sitemap", { status: 500 });
+    console.error("Sitemap index error:", error);
+    return new NextResponse("Error generating sitemap index", { status: 500 });
   }
 }
