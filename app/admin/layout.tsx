@@ -11,9 +11,9 @@ import {
 // Utility to get base URL for admin links
 function getAdminBaseUrl() {
   if (typeof window !== "undefined") {
-    return process.env.NEXT_PUBLIC_BASE_URL || window.location.origin;
+    return process.env.NEXT_PUBLIC_SERVER_URL || window.location.origin;
   }
-  return process.env.NEXT_PUBLIC_BASE_URL || "";
+  return process.env.NEXT_PUBLIC_SERVER_URL || "";
 }
 
 const sidebarLinks = [

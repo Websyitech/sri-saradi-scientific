@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cleanText } from "../utils/textUtils";
+import { getImageUrl } from "../utils/getImageUrl";
 
 interface FeaturedProduct {
   id: string;
@@ -102,14 +103,14 @@ export default function FeaturedProducts() {
               >
                 {product.image ? (
                   <img
-                    src={product.image}
+                    src={getImageUrl(product.image)}
                     alt={product.name}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     onError={(e) => {
                       const target = e.currentTarget;
                       target.onerror = null;
                       if (product.category?.image) {
-                        target.src = product.category.image;
+                        target.src = getImageUrl(product.category.image) || "";
                       } else {
                         target.style.display = "none";
                       }
@@ -117,7 +118,7 @@ export default function FeaturedProducts() {
                   />
                 ) : product.category?.image ? (
                   <img
-                    src={product.category.image}
+                    src={getImageUrl(product.category.image)}
                     alt={product.category.name}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />

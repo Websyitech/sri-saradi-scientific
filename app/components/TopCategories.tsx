@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { getImageUrl } from "../utils/getImageUrl";
 
 interface SolarbioCategory {
   id: string;
@@ -88,7 +89,7 @@ export default function TopCategories() {
 
                   {cat.image ? (
                     <img
-                      src={cat.image}
+                      src={getImageUrl(cat.image)}
                       alt={cat.name}
                       className="top-cat-img"
                     />

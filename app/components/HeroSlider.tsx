@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import QuoteModal from "./QuoteModal";
+import { getImageUrl } from "../utils/getImageUrl";
 
 interface Slide {
   id: string;
@@ -84,7 +85,7 @@ export default function HeroSlider() {
               transition: "opacity 0.6s ease-in-out",
               zIndex: index === current ? 2 : 1,
               background: slide.bgImage
-                ? `url(${slide.bgImage}) center/cover no-repeat`
+                ? `url(${getImageUrl(slide.bgImage)}) center/cover no-repeat`
                 : slide.bgGradient || "linear-gradient(135deg, #2D2B7F 0%, #1a1a2e 60%, #0d0d1a 100%)",
             }}
           >

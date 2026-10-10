@@ -1,0 +1,186 @@
+/* Omni-Search page styles.
+   Uses the site's existing custom properties: --primary, --primary-dark,
+   --primary-light, --teal, --teal-dark, --teal-light, --charcoal, --foreground.
+   Fallbacks are included so the file also works if dropped in before those
+   variables are in scope. */
+
+.omni-page {
+  --omni-primary: var(--primary, #2d2b7f);
+  --omni-primary-dark: var(--primary-dark, #1e1c5e);
+  --omni-primary-light: var(--primary-light, #3a38a0);
+  --omni-teal: var(--teal, #009e8e);
+  --omni-teal-dark: var(--teal-dark, #007a6b);
+  --omni-teal-light: var(--teal-light, #e8f5f3);
+  --omni-charcoal: var(--charcoal, #1a1a2e);
+  --omni-ink: var(--foreground, #171717);
+  --omni-muted: #4a5565;
+  --omni-tint: #f8f9fc;
+  --omni-line: #e8e8f0;
+  color: var(--omni-ink);
+  /* The palette is light-only. Without an explicit background the
+     untinted sections inherit whatever is behind them, which renders
+     #1a1a2e headings on a dark surface in any dark-mode context. */
+  background: #fff;
+}
+
+.omni-container {
+  /* box-sizing is explicit because width:100% plus 48px of padding overflows
+     the viewport by exactly 48px under content-box. The live site's reset
+     already sets border-box globally; this makes the page self-contained so
+     it also behaves in a standalone preview or any host without a reset. */
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.omni-page, .omni-page *, .omni-page *::before, .omni-page *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- hero ---------- */
+.omni-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--omni-primary-dark) 0%, var(--omni-primary) 55%, var(--omni-primary-light) 100%);
+  color: #fff;
+  padding: 88px 0 72px;
+}
+
+/* Mobile blur effect on the hero background image */
+@media (max-width: 768px) {
+  .omni-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(30, 28, 94, 0.65); /* Slightly darker tint to go with the stronger blur */
+    z-index: 0;
+  }
+}
+.omni-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0 0 14px;
+  opacity: 0.85;
+}
+.omni-hero-title {
+  font-size: clamp(2rem, 4.6vw, 3.25rem);
+  line-height: 1.12;
+  font-weight: 700;
+  margin: 0 0 20px;
+  max-width: 20ch;
+}
+.omni-accent { color: #7ef0e0; }
+.omni-hero-sub {
+  font-size: clamp(1rem, 1.6vw, 1.175rem);
+  line-height: 1.65;
+  max-width: 62ch;
+  margin: 0 0 32px;
+  opacity: 0.94;
+}
+.omni-hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* ---------- buttons ---------- */
+.omni-btn {
+  display: inline-block;
+  padding: 13px 26px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.97rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+.omni-btn:hover { transform: translateY(-1px); }
+.omni-btn:focus-visible {
+  outline: 3px solid #7ef0e0;
+  outline-offset: 3px;
+}
+.omni-btn-primary { background: var(--omni-teal); color: #fff; }
+.omni-btn-primary:hover { background: var(--omni-teal-dark); }
+.omni-btn-ghost { background: rgba(255, 255, 255, 0.12); color: #fff; border: 1px solid rgba(255, 255, 255, 0.45); }
+.omni-btn-ghost:hover { background: rgba(255, 255, 255, 0.2); }
+.omni-btn-light { background: #fff; color: var(--omni-primary); }
+.omni-btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.5); }
+.omni-btn-outline:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* ---------- stat band ---------- */
+.omni-stats { background: var(--omni-charcoal); color: #fff; padding: 36px 0; }
+.omni-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.omni-stat { display: flex; flex-direction: column; gap: 6px; }
+.omni-stat-num { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: #7ef0e0; line-height: 1.1; }
+.omni-stat-label { font-size: 0.9rem; opacity: 0.82; line-height: 1.45; }
+
+/* ---------- sections ---------- */
+.omni-section { padding: 76px 0; }
+.omni-section-tint { background: var(--omni-tint); }
+.omni-h2 {
+  font-size: clamp(1.6rem, 3vw, 2.15rem);
+  font-weight: 700;
+  line-height: 1.22;
+  margin: 0 0 18px;
+  color: var(--omni-charcoal);
+  max-width: 26ch;
+}
+.omni-h3 { font-size: 1.08rem; font-weight: 650; margin: 0 0 10px; color: var(--omni-charcoal); line-height: 1.35; }
+.omni-lead { font-size: 1.02rem; line-height: 1.7; color: var(--omni-muted); max-width: 70ch; margin: 0 0 16px; }
+.omni-section p { line-height: 1.65; color: var(--omni-muted); margin: 0 0 14px; }
+.omni-section p:last-child { margin-bottom: 0; }
+
+/* ---------- steps ---------- */
+.omni-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 34px; }
+.omni-step { background: #fff; border: 1px solid var(--omni-line); border-radius: 12px; padding: 26px 24px; }
+.omni-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--omni-teal-light); color: var(--omni-teal-dark);
+  font-weight: 700; font-size: 0.95rem; margin-bottom: 14px;
+}
+
+/* ---------- cards ---------- */
+.omni-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 32px; }
+.omni-card { background: #fff; border: 1px solid var(--omni-line); border-radius: 12px; padding: 26px 24px; }
+.omni-card-icon { font-size: 1.6rem; display: block; margin-bottom: 12px; }
+
+/* ---------- validation ---------- */
+.omni-split { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: start; }
+.omni-validation-box { background: var(--omni-charcoal); border-radius: 14px; padding: 30px 28px; color: #fff; }
+.omni-vrow { display: flex; align-items: baseline; gap: 14px; padding: 13px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.14); }
+.omni-vrow:last-child { border-bottom: none; }
+.omni-vnum { font-size: 1.55rem; font-weight: 700; color: #7ef0e0; min-width: 76px; line-height: 1.1; }
+.omni-vlabel { font-size: 0.92rem; opacity: 0.85; line-height: 1.45; }
+
+/* ---------- check list ---------- */
+.omni-check-list { list-style: none; padding: 0; margin: 30px 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 30px; }
+.omni-check-list li { display: flex; gap: 12px; align-items: flex-start; line-height: 1.55; color: var(--omni-muted); }
+.omni-check { color: var(--omni-teal); font-weight: 700; flex-shrink: 0; }
+
+/* ---------- cta ---------- */
+.omni-cta { background: linear-gradient(135deg, var(--omni-primary) 0%, var(--omni-primary-dark) 100%); color: #fff; padding: 72px 0; text-align: center; }
+.omni-cta-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin: 0 0 14px; }
+.omni-cta-sub { font-size: 1.02rem; opacity: 0.92; margin: 0 auto 30px; max-width: 54ch; line-height: 1.6; }
+.omni-cta .omni-hero-actions { justify-content: center; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .omni-steps, .omni-cards, .omni-stats-grid { grid-template-columns: 1fr; }
+  .omni-split { grid-template-columns: 1fr; gap: 30px; }
+  .omni-check-list { grid-template-columns: 1fr; }
+  .omni-hero { padding: 64px 0 56px; }
+  .omni-section { padding: 56px 0; }
+}
+
+@media (max-width: 1040px) and (min-width: 901px) {
+  /* Three columns are cramped between the breakpoint and the container max. */
+  .omni-stats-grid, .omni-steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .omni-btn { transition: none; }
+  .omni-btn:hover { transform: none; }
+}

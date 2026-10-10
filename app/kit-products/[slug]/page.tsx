@@ -393,7 +393,7 @@ const LIQUID_HANDLING_PRODUCTS: ProductData[] = [
 function getImageUrl(imagePath: string | undefined | null) {
   if (!imagePath) return undefined;
   if (imagePath.startsWith('http')) return imagePath;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+  const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || '';
   // Ensure no double slashes
   return baseUrl.replace(/\/$/, '') + (imagePath.startsWith('/') ? imagePath : '/' + imagePath);
 }
@@ -572,8 +572,8 @@ export default function KitProductDetail() {
                     {typeof product.image === 'string' && product.image ? (
                       <img
                         src={
-                          (process.env.NEXT_PUBLIC_BASE_URL
-                            ? process.env.NEXT_PUBLIC_BASE_URL.replace(/\/$/, '')
+                          (process.env.NEXT_PUBLIC_SERVER_URL
+                            ? process.env.NEXT_PUBLIC_SERVER_URL.replace(/\/$/, '')
                             : (typeof window !== 'undefined' ? window.location.origin : '')) +
                           (product.image.startsWith('/') ? product.image : '/' + product.image)
                         }

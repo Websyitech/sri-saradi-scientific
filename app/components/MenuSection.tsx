@@ -5,9 +5,11 @@ import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cleanText } from "../utils/textUtils";
+import { getImageUrl } from "../utils/getImageUrl";
 
 const leftMenuItems = [
   { label: "Home", href: "/", active: true },
+  { label: "Omni-Search", href: "/omni-search" },
   { label: "Products", href: "/products", hasMegaMenu: true },
   { label: "Lab Consumables", href: "#", hasDropdown: true },
   { label: "Services", href: "/services" },
@@ -626,7 +628,7 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
                                     >
                                       {level3.image ? (
                                         <img
-                                          src={level3.image}
+                                          src={getImageUrl(level3.image) || ""}
                                           alt={cleanText(level3.name)}
                                           style={{
                                             width: "100%",

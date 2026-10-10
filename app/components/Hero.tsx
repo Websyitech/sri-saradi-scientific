@@ -1,3 +1,5 @@
+import { getImageUrl } from "../utils/getImageUrl";
+
 interface HeroButton {
   label: string;
   onClick?: () => void;
@@ -124,7 +126,7 @@ export default function Hero({
         {image ? (
           <div className="hero-image-placeholder">
             <img 
-              src={image} 
+              src={getImageUrl(image) || ""}
               alt="Product" 
               style={{
                 width: '100%',

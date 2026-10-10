@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cleanText } from "../utils/textUtils";
+import { getImageUrl } from "../utils/getImageUrl";
 
 interface KitProduct {
   id: string;
@@ -143,7 +144,7 @@ export default function KitProducts() {
               >
                 {product.image ? (
                   <img
-                    src={product.image}
+                    src={getImageUrl(product.image)}
                     alt={product.title}
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
