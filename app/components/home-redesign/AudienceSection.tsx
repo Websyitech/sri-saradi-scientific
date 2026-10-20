@@ -90,15 +90,26 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
                     <span>↔</span>
                   </div>
                 )}
-                <article className={`role-card ${n === 1 ? 'role-centre' : ''}`}>
-                  <div className="role-heading">
+                <article
+                  className={`role-card ${n === 1 ? 'role-centre' : ''}`}
+                  style={n === 1 ? { backgroundColor: '#34398A', borderColor: '#34398A', color: '#ffffff' } : undefined}
+                >
+                  <div
+                    className="role-heading"
+                    style={n === 1 ? { color: '#e2e6ff' } : undefined}
+                  >
                     <SvgIcon name={r.icon} />
-                    <span>{r.label}</span>
+                    <span style={n === 1 ? { color: '#e2e6ff' } : undefined}>{r.label}</span>
                   </div>
-                  <h3>{r.title}</h3>
+                  <h3 style={n === 1 ? { color: '#ffffff' } : undefined}>{r.title}</h3>
                   <div className="role-details">
                     {r.items.map((item, idx) => (
-                      <div key={idx}>{item}</div>
+                      <div
+                        key={idx}
+                        style={n === 1 ? { color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.22)' } : undefined}
+                      >
+                        {item}
+                      </div>
                     ))}
                   </div>
                 </article>

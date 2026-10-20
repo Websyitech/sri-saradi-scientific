@@ -11,12 +11,14 @@ export const CtaSection: React.FC<CtaSectionProps> = ({ onOpenEnquiry }) => {
     <section className="cta">
       <div className="wrap cta-inner">
         <div>
-          <h2>
+          <h2 style={{ color: '#ffffff' }}>
             Bring us the requirement.
             <br />
             We’ll help connect the next steps.
           </h2>
-          <p>A protocol, a process condition or a project brief is a good place to start.</p>
+          <p style={{ color: '#ffffff', opacity: 0.95 }}>
+            A protocol, a process condition or a project brief is a good place to start.
+          </p>
         </div>
         <button
           type="button"

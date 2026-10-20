@@ -10,7 +10,20 @@ export const PartnerBar: React.FC = () => {
           our principals
         </div>
         <div className="partner">
-          Solarbio
+          <img
+            src="/assets/solarbio_life_sciences_logo.webp"
+            alt="Solarbio"
+            className="partner-logo"
+            width={213}
+            height={85}
+            style={{
+              height: '30px',
+              width: 'auto',
+              objectFit: 'contain',
+              display: 'block',
+              marginBottom: '3px',
+            }}
+          />
           <span>Reagents, antibodies & kits</span>
         </div>
         <div className="partner">

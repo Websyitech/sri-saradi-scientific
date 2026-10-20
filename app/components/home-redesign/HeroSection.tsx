@@ -33,6 +33,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <button
                 type="button"
                 className="btn"
+                id="hero-discuss-requirement-btn"
+                aria-haspopup="dialog"
+                aria-controls="enquiry-dialog"
                 onClick={() => onOpenEnquiry('product')}
               >
                 Discuss your requirement <span aria-hidden="true">↗</span>
