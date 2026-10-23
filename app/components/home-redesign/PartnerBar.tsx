@@ -10,28 +10,39 @@ export const PartnerBar: React.FC = () => {
           our principals
         </div>
         <div className="partner">
-          <img
-            src="/assets/solarbio_life_sciences_logo.webp"
-            alt="Solarbio"
-            className="partner-logo"
-            width={213}
-            height={85}
-            style={{
-              height: '30px',
-              width: 'auto',
-              objectFit: 'contain',
-              display: 'block',
-              marginBottom: '3px',
-            }}
-          />
-          <span>Reagents, antibodies & kits</span>
+          <div className="partner-brand">
+            <img
+              src="/assets/solarbio_life_sciences_logo.webp"
+              alt="Solarbio"
+              className="partner-logo"
+              width={213}
+              height={85}
+            />
+          </div>
+          <span>Reagents, antibodies &amp; kits</span>
         </div>
         <div className="partner">
-          Orient Filtr
-          <span>Laboratory & process filtration</span>
+          <div className="partner-brand">
+            <img
+              src="/assets/orientfiltr-logo.webp"
+              alt="Orient Filtr"
+              className="partner-logo"
+              width={955}
+              height={247}
+            />
+          </div>
+          <span>Laboratory &amp; process filtration</span>
         </div>
         <div className="partner">
-          Galactics
+          <div className="partner-brand">
+            <img
+              src="/assets/GenFollower_logo.webp"
+              alt="GenFollower"
+              className="partner-logo"
+              width={2172}
+              height={724}
+            />
+          </div>
           <span>Specialist biological plasticware</span>
         </div>
       </div>

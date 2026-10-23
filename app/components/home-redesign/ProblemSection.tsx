@@ -1,8 +1,19 @@
 import React from 'react';
+import Image from 'next/image';
 
 export const ProblemSection: React.FC = () => {
   return (
-    <section className="section">
+    <section className="section problem-section">
+      <Image
+        className="problem-section-banner"
+        src="/assets/laboratory_banner_2.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+      />
       <div className="wrap problem-grid">
         <div className="reveal visible">
           <div className="eyebrow">The problem we solve</div>

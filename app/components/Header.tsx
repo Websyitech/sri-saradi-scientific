@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef, Suspense } from "react";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import MenuSection from "./MenuSection";
 
 interface SiteSettings {
@@ -20,10 +19,6 @@ interface SearchResult {
 
 export default function Header() {
   const [settings, setSettings] = useState<SiteSettings>({});
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [showResults, setShowResults] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [showResearchModal, setShowResearchModal] = useState(false);
   const [showMobileSearchModal, setShowMobileSearchModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -36,10 +31,15 @@ export default function Header() {
   });
   const [submittingResearch, setSubmittingResearch] = useState(false);
   const [researchSubmitted, setResearchSubmitted] = useState(false);
-  const router = useRouter();
-  const searchRef = useRef<HTMLDivElement>(null);
   const mobileSearchRef = useRef<HTMLDivElement>(null);
+  const searchQuery = "";
+  const searchResults: SearchResult[] = [];
+  const showResults = false;
+  const isLoading = false;
 
+  const handleSearchInputChange = () => undefined;
+  const handleKeyPress = () => undefined;
+  const handleSelectResult = () => undefined;
   useEffect(() => {
     fetch("/api/settings")
       .then((r) => r.json())
@@ -51,81 +51,6 @@ export default function Header() {
       })
       .catch(() => {});
   }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowResults(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const fetchSearchResults = async (query: string) => {
-    if (!query.trim()) {
-      setSearchResults([]);
-      setShowResults(false);
-      return;
-    }
-
-    setIsLoading(true);
-    setShowResults(true);
-    
-    try {
-      const url = `/api/products?search=${encodeURIComponent(query)}&limit=8`;
-      const response = await fetch(url);
-      const data = await response.json();
-      
-      if (data.products && Array.isArray(data.products)) {
-        const results = data.products.map((product: any) => ({
-          id: product.id,
-          name: product.name,
-          catalogNumber: product.catalogNumber,
-          slug: product.catalogNumber || product.id,
-        }));
-        setSearchResults(results);
-      } else {
-        setSearchResults([]);
-      }
-    } catch (error) {
-      console.error("Search error:", error);
-      setSearchResults([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSearchInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchQuery(value);
-
-    const charCount = value.trim().length;
-    
-    if (charCount >= 3) {
-      setShowResults(true);
-      fetchSearchResults(value);
-    } else if (value.trim() === "") {
-      setSearchResults([]);
-      setShowResults(false);
-    }
-  };
-
-  const handleSelectResult = (slug: string) => {
-    router.push(`/products/${slug}`);
-    setShowResults(false);
-    setSearchQuery("");
-    setSearchResults([]);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      setShowResults(false);
-      setSearchQuery("");
-      setSearchResults([]);
-    }
-  };
 
   const handleResearchFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -190,124 +115,8 @@ export default function Header() {
           )}
         </Link>
 
-{/* Center - Search Bar */}
-        <div className="header-search-section" ref={searchRef} >
-          <div className="header-search-bar" style={{ position: "relative" }}>
-            <input
-              type="text"
-              className="header-search-input"
-              placeholder="Type the Product Name, Product id, CAS No"
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-              onKeyPress={handleKeyPress}
-              autoComplete="off"
-            />
-            <button 
-              className="header-search-btn" 
-              aria-label="Search"
-            >
-              <FaSearch />
-            </button>
-
-            {/* Search Results Dropdown */}
-            {showResults && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: "calc(100% + 4px)",
-                  left: 0,
-                  right: 0,
-                  background: "#fff",
-                  border: "1px solid #ccc",
-                  borderRadius: "4px",
-                  boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
-                  zIndex: 10000,
-                  maxHeight: "400px",
-                  overflowY: "auto",
-                  minWidth: "100%",
-                  display: "block",
-              
-                }}
-              >
-                {isLoading ? (
-                  <div style={{ padding: "16px", textAlign: "center" }}>
-                    <div style={{ 
-                      display: "inline-block",
-                      width: "20px",
-                      height: "20px",
-                      border: "3px solid #f0f0f0",
-                      borderTop: "3px solid var(--primary, #2c3e50)",
-                      borderRadius: "50%",
-                      animation: "spin 0.8s linear infinite",
-                    }} />
-                    <div style={{ marginTop: "8px", fontSize: "13px", color: "#999" }}>
-                      Loading...
-                    </div>
-                  </div>
-                ) : searchResults.length > 0 ? (
-                  searchResults.map((result) => (
-                    <div
-                      key={result.id}
-                      onClick={() => handleSelectResult(result.slug || result.id)}
-                      style={{
-                        padding: "12px 16px",
-                        borderBottom: "1px solid #f0f0f0",
-                        cursor: "pointer",
-                        transition: "background 0.2s",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = "#f5f5f5";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "transparent";
-                      }}
-                    >
-                      <div style={{ fontSize: "13px", fontWeight: 500, color: "#333" }}>
-                        {result.name.replace(/<\/?su[bp]>/g, '')}
-                      </div>
-                      {result.catalogNumber && (
-                        <div style={{ fontSize: "12px", color: "#999", marginTop: "4px" }}>
-                          {result.catalogNumber}
-                        </div>
-                      )}
-                    </div>
-                  ))
-                ) : (
-                  <div style={{ padding: "16px", textAlign: "center", color: "#999", fontSize: "13px" }}>
-                    No products found
-                  </div>
-                )}
-              </div>
-            )}
-            <style>{`
-              @keyframes spin {
-                to { transform: rotate(360deg); }
-              }
-            `}</style>
-          </div>
-        </div>
-
         {/* Mobile Icons Container */}
         <div className="mobile-icons-container" style={{ display: "none" }}>
-          {/* Mobile Search Icon */}
-          <button
-            className="mobile-search-icon"
-            onClick={() => setShowMobileSearchModal(true)}
-            style={{
-              background: "none",
-              border: "2px solid #2D2B7F",
-              borderRadius: "6px",
-              color: "#2D2B7F",
-              padding: "8px",
-              cursor: "pointer",
-              fontSize: "16px",
-              transition: "all 0.2s"
-            }}
-            aria-label="Open Search"
-          >
-            <FaSearch />
-          </button>
-
           {/* Mobile Hamburger Menu */}
           <button
             className="mobile-menu-toggle"
@@ -585,7 +394,7 @@ export default function Header() {
         )}
 
         {/* Mobile Search Modal */}
-        {showMobileSearchModal && (
+        {false && showMobileSearchModal && (
           <div
             style={{
               position: "fixed",

@@ -78,7 +78,7 @@ export const WorkflowSection: React.FC = () => {
   };
 
   return (
-    <section className="section dark-section" id="workflow">
+    <section className="section dark-section workflow-section" id="workflow">
       <div className="wrap">
         <div className="section-head">
           <div>
@@ -90,7 +90,7 @@ export const WorkflowSection: React.FC = () => {
             </h2>
           </div>
           <p>
-            Choose your application. Follow the brief, the product review and the supply route — with a clear owner and a useful output at every stage.
+            Choose your application. Follow the brief, the product review and the supply route with a clear owner and a useful output at every stage.
           </p>
         </div>
 
@@ -140,14 +140,18 @@ export const WorkflowSection: React.FC = () => {
           className={isPlaying ? 'is-playing' : ''}
         >
           <div className="journey-controls">
-            <span id="journey-status">{statusMessage}</span>
+            <span id="journey-status">
+              <span className="live-status-dot" aria-hidden="true" />
+              {statusMessage}
+            </span>
             <button
               id="play-workflow"
               className="journey-button"
               aria-pressed={isPlaying}
               onClick={handlePlayToggle}
             >
-              {isPlaying ? 'Pause workflow' : 'Play workflow'}
+              <span className="play-icon" aria-hidden="true">{isPlaying ? '⏸' : '▶'}</span>
+              <span>{isPlaying ? 'Pause workflow' : 'Play workflow'}</span>
             </button>
           </div>
 
@@ -181,64 +185,68 @@ export const WorkflowSection: React.FC = () => {
                   onClick={() => handleStepClick(i)}
                 >
                   <span className="step-num">0{i + 1}</span>
-                  <span>
+                  <span className="step-info">
                     <strong>{s.title}</strong>
                     <small>{s.subtitle}</small>
                   </span>
+                  <span className="step-arrow" aria-hidden="true">→</span>
                 </button>
               ))}
             </div>
 
             <div className="workflow-panel" id="flow-panel" aria-live="polite" aria-atomic="true">
+              <div className="panel-glow" aria-hidden="true" />
               <div className="panel-index">
-                <span>{flowData.label}</span>
-                <span>Stage 0{currentStep + 1} / 0{count}</span>
+                <span className="panel-chip">{flowData.label}</span>
+                <span className="panel-counter">Stage 0{currentStep + 1} / 0{count}</span>
               </div>
-              <div className="stage-owner">
-                <strong>Who works on this</strong>
-                <span>{activeStep.owner}</span>
+              <div className="panel-meta-row">
+                <div className="stage-owner">
+                  <strong>Who works on this</strong>
+                  <span>{activeStep.owner}</span>
+                </div>
+                <div className="stage-input">
+                  <span className="in-badge">IN</span>
+                  <p>{activeStep.input}</p>
+                </div>
               </div>
-              <div className="stage-input">
-                <span>IN</span>
-                <p>{activeStep.input}</p>
+              <div className="panel-main">
+                <div className="panel-icon">
+                  <SvgIcon name={activeStep.icon} />
+                </div>
+                <div>
+                  <h3>{activeStep.heading}</h3>
+                  <p>{activeStep.description}</p>
+                </div>
               </div>
-              <div className="panel-icon">
-                <SvgIcon name={activeStep.icon} />
-              </div>
-              <h3>{activeStep.heading}</h3>
-              <p>{activeStep.description}</p>
               <div className="outcome">
                 <span className="output-label">OUT / What moves to the next step</span>
-                {activeStep.outcome}
+                <p className="outcome-text">{activeStep.outcome}</p>
+              </div>
+
+              <div className="journey-navigation">
+                <button
+                  id="previous-step"
+                  type="button"
+                  className="journey-button"
+                  disabled={currentStep === 0}
+                  onClick={handlePrev}
+                >
+                  ← Previous stage
+                </button>
+                <button
+                  id="next-step"
+                  type="button"
+                  className="journey-button"
+                  disabled={currentStep === count - 1}
+                  onClick={handleNext}
+                >
+                  Next stage →
+                </button>
               </div>
             </div>
           </div>
-
-          <div className="journey-navigation">
-            <button
-              id="previous-step"
-              type="button"
-              className="journey-button"
-              disabled={currentStep === 0}
-              onClick={handlePrev}
-            >
-              ← Previous stage
-            </button>
-            <button
-              id="next-step"
-              type="button"
-              className="journey-button"
-              disabled={currentStep === count - 1}
-              onClick={handleNext}
-            >
-              Next stage →
-            </button>
-          </div>
         </div>
-
-        <p className="workflow-note">
-          Your technical team defines acceptance criteria and approves suitability. We connect the scientific questions, manufacturer input and integrated logistics. Product delivery is confirmed for the order; custom services follow their project plan.
-        </p>
       </div>
     </section>
   );

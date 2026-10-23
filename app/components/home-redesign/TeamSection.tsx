@@ -1,101 +1,95 @@
+'use client';
+
 import React from 'react';
-import Image from 'next/image';
+
+interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
+  description: string;
+}
+
+const TEAM_MEMBERS: TeamMember[] = [
+  {
+    name: 'Kali Krishna Praveen Gadde',
+    role: 'CO-FOUNDER / ANALYTICAL SCIENCE & STRATEGY',
+    image: '/assets/praveen.jpg',
+    imageWidth: 1174,
+    imageHeight: 1577,
+    description:
+      'Experience in analytical R&D, method development, validation and scientific documentation, combined with management and value-chain work.',
+  },
+  {
+    name: 'Srilatha Kolla',
+    role: 'CO-FOUNDER / ANALYTICAL SCIENCE & COORDINATION',
+    image: '/assets/srilatha.jpg',
+    imageWidth: 1216,
+    imageHeight: 913,
+    description:
+      'Experience in NMR and analytical research, scientific query resolution, documentation and coordination across QC, QA and R&D teams.',
+  },
+  {
+    name: 'Gayam Prasanna Kumar Reddy',
+    role: 'CO-FOUNDER / MOLECULAR & COMPUTATIONAL BIOLOGY',
+    image: '/assets/prasanna.jpeg',
+    imageWidth: 1195,
+    imageHeight: 896,
+    description:
+      'Experience spanning cell culture, molecular biology, computational screening and experimental research in pharmaceutical biotechnology.',
+  },
+];
 
 export const TeamSection: React.FC = () => {
   return (
     <section className="section team-section" id="scientific-team">
-      <div className="wrap">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow">Built by people who have worked at the bench</div>
-            <h2>
+      <div className="wrap team-wrap">
+        {/* Section Header */}
+        <div className="team-section-head reveal visible">
+          <div className="team-head-left">
+            <div className="eyebrow team-eyebrow">
+              Built by people who have worked at the bench
+            </div>
+            <h2 className="team-main-heading">
               Scientific experience.
               <br />
               A practical understanding
               <br />
-              of procurement friction.
+              <span className="team-heading-accent">of procurement friction.</span>
             </h2>
           </div>
-          <p>
-            Our three co-founders bring nearly a decade of combined bench experience, with complementary strengths in analytical research, scientific coordination and molecular biology.
-          </p>
+          <div className="team-head-right">
+            <p className="team-lead-text">
+              Our three co-founders bring nearly a decade of combined bench experience, with complementary strengths in analytical research, scientific coordination and molecular biology.
+            </p>
+          </div>
         </div>
 
-        <div className="team-grid">
-          {/* Praveen */}
-          <article className="team-card">
-            <div className="portrait">
-              <img
-                src="/assets/praveen.jpg"
-                alt="Kali Krishna Praveen Gadde"
-                loading="lazy"
-                width={1174}
-                height={1577}
-              />
-            </div>
-            <div className="team-copy">
-              <small>CO-FOUNDER / ANALYTICAL SCIENCE & STRATEGY</small>
-              <h3>
-                Kali Krishna
-                <br />
-                Praveen Gadde
-              </h3>
-              <p>
-                Experience in analytical R&D, method development, validation and scientific documentation, combined with management and value-chain work.
-              </p>
-            </div>
-          </article>
+        {/* 3 Co-Founder Cards */}
+        <div className="team-grid reveal visible">
+          {TEAM_MEMBERS.map((member, idx) => (
+            <article key={idx} className="team-card">
+              <div className="team-portrait-wrapper">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  loading="lazy"
+                  width={member.imageWidth}
+                  height={member.imageHeight}
+                  className="team-portrait-img"
+                />
+                <div className="team-portrait-overlay" />
+                <span className="team-founder-badge">Co-Founder</span>
+              </div>
 
-          {/* Srilatha */}
-          <article className="team-card">
-            <div className="portrait">
-              <img
-                src="/assets/srilatha.jpg"
-                alt="Srilatha Kolla"
-                loading="lazy"
-                width={1216}
-                height={913}
-              />
-            </div>
-            <div className="team-copy">
-              <small>CO-FOUNDER / ANALYTICAL SCIENCE & COORDINATION</small>
-              <h3>Srilatha Kolla</h3>
-              <p>
-                Experience in NMR and analytical research, scientific query resolution, documentation and coordination across QC, QA and R&D teams.
-              </p>
-            </div>
-          </article>
-
-          {/* Prasanna */}
-          <article className="team-card">
-            <div className="portrait">
-              <img
-                src="/assets/prasanna.jpeg"
-                alt="Gayam Prasanna Kumar Reddy"
-                loading="lazy"
-                width={1195}
-                height={896}
-              />
-            </div>
-            <div className="team-copy">
-              <small>CO-FOUNDER / MOLECULAR & COMPUTATIONAL BIOLOGY</small>
-              <h3>
-                Gayam Prasanna
-                <br />
-                Kumar Reddy
-              </h3>
-              <p>
-                Experience spanning cell culture, molecular biology, computational screening and experimental research in pharmaceutical biotechnology.
-              </p>
-            </div>
-          </article>
-        </div>
-
-        <div className="team-note">
-          <strong>We understand the scientific conversation.</strong>
-          <p>
-            That helps us ask useful questions, preserve the application detail and connect your team with the manufacturer’s product expertise.
-          </p>
+              <div className="team-copy">
+                <span className="team-role-tag">{member.role}</span>
+                <h3 className="team-member-name">{member.name}</h3>
+                <p className="team-member-desc">{member.description}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

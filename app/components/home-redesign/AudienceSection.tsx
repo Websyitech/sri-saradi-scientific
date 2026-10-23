@@ -28,34 +28,39 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
             Your scientists keep the application decisions. Your procurement team gets a clearer requirement and supply proposal. We coordinate product questions, evidence and logistics so both teams can move forward together.
           </p>
 
-          <div className="tab-bar" role="tablist" aria-label="Benefits for your organisation">
+          <div className="audience-actions-wrap">
+            <div className="tab-bar audience-tabs" role="tablist" aria-label="Benefits for your organisation">
+              <button
+                id="audience-tab-enduser"
+                type="button"
+                role="tab"
+                aria-selected={activeAudience === 'enduser'}
+                aria-controls="audience-panel"
+                onClick={() => setActiveAudience('enduser')}
+              >
+                Labs &amp; industries
+              </button>
+              <button
+                id="audience-tab-dealer"
+                type="button"
+                role="tab"
+                aria-selected={activeAudience === 'dealer'}
+                aria-controls="audience-panel"
+                onClick={() => setActiveAudience('dealer')}
+              >
+                Dealers
+              </button>
+            </div>
+
             <button
-              id="audience-tab-enduser"
-              role="tab"
-              aria-selected={activeAudience === 'enduser'}
-              aria-controls="audience-panel"
-              onClick={() => setActiveAudience('enduser')}
+              type="button"
+              className="audience-enquiry-btn"
+              onClick={() => onOpenEnquiry(activeAudience === 'dealer' ? 'dealer' : 'product')}
             >
-              Labs & industries
-            </button>
-            <button
-              id="audience-tab-dealer"
-              role="tab"
-              aria-selected={activeAudience === 'dealer'}
-              aria-controls="audience-panel"
-              onClick={() => setActiveAudience('dealer')}
-            >
-              Dealers
+              <span>{activeAudience === 'dealer' ? 'Discuss dealer collaboration' : 'Discuss your requirement'}</span>
+              <span className="arrow" aria-hidden="true">↗</span>
             </button>
           </div>
-
-          <button
-            type="button"
-            className="text-link"
-            onClick={() => onOpenEnquiry(activeAudience === 'dealer' ? 'dealer' : 'product')}
-          >
-            {activeAudience === 'dealer' ? 'Discuss dealer collaboration ↗' : 'Discuss your requirement ↗'}
-          </button>
         </div>
 
         <div
@@ -66,10 +71,14 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
           aria-live="polite"
         >
           {benefits.map((b, i) => (
-            <article key={i} className="benefit">
-              <SvgIcon name={b.icon} />
-              <h3>{b.title}</h3>
-              <p>{b.description}</p>
+            <article key={i} className="benefit-card">
+              <div className="benefit-icon-wrap" aria-hidden="true">
+                <SvgIcon name={b.icon} />
+              </div>
+              <div className="benefit-content">
+                <h3>{b.title}</h3>
+                <p>{b.description}</p>
+              </div>
             </article>
           ))}
         </div>
@@ -78,7 +87,10 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
       <div className="wrap">
         <div className="collaboration-model" id="collaboration-model">
           <div className="model-caption">
-            <div className="eyebrow">How collaboration works</div>
+            <div>
+              <div className="eyebrow">How collaboration works</div>
+              <h3>Connected through scientific understanding</h3>
+            </div>
             <p>Application knowledge and product expertise, connected through Sri Saradi.</p>
           </div>
 
@@ -87,28 +99,23 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
               <React.Fragment key={n}>
                 {n > 0 && (
                   <div className="role-link" aria-hidden="true">
-                    <span>↔</span>
+                    <span className="role-link-dot"></span>
+                    <span className="role-link-arrow">⇄</span>
                   </div>
                 )}
-                <article
-                  className={`role-card ${n === 1 ? 'role-centre' : ''}`}
-                  style={n === 1 ? { backgroundColor: '#34398A', borderColor: '#34398A', color: '#ffffff' } : undefined}
-                >
-                  <div
-                    className="role-heading"
-                    style={n === 1 ? { color: '#e2e6ff' } : undefined}
-                  >
-                    <SvgIcon name={r.icon} />
-                    <span style={n === 1 ? { color: '#e2e6ff' } : undefined}>{r.label}</span>
+                <article className={`role-card ${n === 1 ? 'role-centre' : ''}`}>
+                  <div className="role-heading">
+                    <div className="role-icon-wrap" aria-hidden="true">
+                      <SvgIcon name={r.icon} />
+                    </div>
+                    <span className="role-label">{r.label}</span>
                   </div>
-                  <h3 style={n === 1 ? { color: '#ffffff' } : undefined}>{r.title}</h3>
+                  <h3>{r.title}</h3>
                   <div className="role-details">
                     {r.items.map((item, idx) => (
-                      <div
-                        key={idx}
-                        style={n === 1 ? { color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.22)' } : undefined}
-                      >
-                        {item}
+                      <div key={idx} className="role-detail-item">
+                        <span className="detail-check" aria-hidden="true">✓</span>
+                        <span>{item}</span>
                       </div>
                     ))}
                   </div>
@@ -116,14 +123,9 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
               </React.Fragment>
             ))}
           </div>
-
-          <div className="model-foot" id="role-foot">
-            {activeAudience === 'dealer'
-              ? 'Commercial terms and customer-contact arrangements are agreed for the collaboration. The customer’s technical team assesses application suitability.'
-              : 'Your team assesses and approves suitability. Supply and evaluation arrangements are agreed for the requirement.'}
-          </div>
         </div>
       </div>
     </section>
   );
 };
+

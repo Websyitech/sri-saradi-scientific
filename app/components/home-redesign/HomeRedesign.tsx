@@ -72,16 +72,16 @@ export const HomeRedesign: React.FC = () => {
         onToggleMotion={handleToggleMotion}
       />
       <PartnerBar />
-      <LogisticsSection onOpenEnquiry={handleOpenEnquiry} />
-      <ProblemSection />
       <DivisionSection />
-      <PlasticsSection onOpenEnquiry={handleOpenEnquiry} />
+      <LogisticsSection onOpenEnquiry={handleOpenEnquiry} />
       <WorkflowSection />
+      <ProblemSection />
+      <PlasticsSection onOpenEnquiry={handleOpenEnquiry} />
       <AudienceSection onOpenEnquiry={handleOpenEnquiry} />
       <CostSection onOpenEnquiry={handleOpenEnquiry} />
       <DocumentationSection onOpenEnquiry={handleOpenEnquiry} />
       <TeamSection />
-      <FaqSection />
+      <FaqSection onOpenEnquiry={handleOpenEnquiry} />
       <CtaSection onOpenEnquiry={handleOpenEnquiry} />
 
       <EnquiryModal
