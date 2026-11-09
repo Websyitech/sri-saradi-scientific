@@ -6,6 +6,16 @@ export const metadata: Metadata = {
   title: 'Quotation Request Received | Solarbio D1800 | Sri Saradi Scientific',
   description:
     'Thank you for your quotation request for the Solarbio D1800 Blood Genomic DNA Extraction Kit (100T). Our scientific support team will be in touch shortly.',
+  icons: {
+    icon: [
+      {
+        url: '/assets/solarbio/solarbio-favicon.webp',
+        type: 'image/webp',
+      },
+    ],
+    shortcut: '/assets/solarbio/solarbio-favicon.webp',
+    apple: '/assets/solarbio/solarbio-favicon.webp',
+  },
   robots: {
     index: false,
     follow: false,

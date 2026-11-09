@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './solarbio.css';
 
@@ -35,6 +36,46 @@ export default function SolarbioClient() {
   });
 
   const [submitting, setSubmitting] = useState(false);
+
+  // Set Solarbio Favicon and activate standalone header/footer mode
+  useEffect(() => {
+    document.body.classList.add('solarbio-page-active');
+
+    const iconLinks = Array.from(
+      document.querySelectorAll<HTMLLinkElement>("link[rel*='icon']")
+    );
+
+    const prevIcons = iconLinks.map((el) => ({
+      el,
+      href: el.getAttribute('href') || '',
+      type: el.getAttribute('type') || '',
+    }));
+
+    if (iconLinks.length === 0) {
+      const newIcon = document.createElement('link');
+      newIcon.rel = 'icon';
+      newIcon.type = 'image/webp';
+      newIcon.href = '/assets/solarbio/solarbio-favicon.webp';
+      document.head.appendChild(newIcon);
+    } else {
+      iconLinks.forEach((el) => {
+        el.href = '/assets/solarbio/solarbio-favicon.webp';
+        el.type = 'image/webp';
+      });
+    }
+
+    return () => {
+      document.body.classList.remove('solarbio-page-active');
+      prevIcons.forEach(({ el, href, type }) => {
+        el.href = href;
+        if (type) {
+          el.type = type;
+        } else {
+          el.removeAttribute('type');
+        }
+      });
+    };
+  }, []);
 
   // Close lightbox on Escape key
   useEffect(() => {
@@ -164,6 +205,30 @@ export default function SolarbioClient() {
 
   return (
     <div className="solarbio-page" id="top">
+      {/* Dedicated Navbar for Genomic Page */}
+      <header className="sb-nav">
+        <div className="sb-wrap sb-nav-in">
+          <div className="sb-brand" title="Sri Saradi Scientific">
+            <img
+              src="/assets/sri-saradi-logo.png"
+              alt="Sri Saradi Scientific"
+              width={160}
+              height={50}
+              style={{ height: '48px', width: 'auto', display: 'block' }}
+            />
+          </div>
+          <nav className="sb-nav-links" aria-label="Primary product navigation">
+            <a href="#overview">Overview</a>
+            <a href="#evidence">Experimental evidence</a>
+            <a href="#quality">Quality records</a>
+            <a href="#research">Publications</a>
+          </nav>
+          <a className="sb-btn blue sb-nav-cta" href="#enquire">
+            Request a quotation →
+          </a>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="sb-hero">
         <div className="sb-wrap">
@@ -171,7 +236,14 @@ export default function SolarbioClient() {
             <div className="sb-hero-left">
               <div className="sb-brand-row">
                 <span className="sb-sol-logo">
-                  <span className="sb-sol-icon">S</span> Solarbio
+                  <img
+                    src="/assets/solarbio/solarbio-favicon.webp"
+                    alt="Solarbio Logo"
+                    width={28}
+                    height={28}
+                    style={{ borderRadius: '50%', display: 'inline-block', verticalAlign: 'middle' }}
+                  />{' '}
+                  Solarbio
                 </span>
                 <span className="sb-eyebrow red" style={{ marginBottom: 0 }}>
                   LIFE SCIENCES
@@ -1077,6 +1149,46 @@ export default function SolarbioClient() {
           </div>
         </div>
       </section>
+
+      {/* Dedicated Footer for Genomic Page */}
+      <footer className="sb-dedicated-footer">
+        <div className="sb-wrap sb-footer-in">
+          <div className="sb-footer-brands">
+            <div className="sb-footer-brand" title="Sri Saradi Scientific">
+              <img
+                src="/assets/sri-saradi-logo.png"
+                alt="Sri Saradi Scientific"
+                width={160}
+                height={50}
+                style={{ height: '48px', width: 'auto', display: 'block' }}
+              />
+            </div>
+          </div>
+
+          <div className="sb-footer-links">
+            <a
+              href="https://www.srisaradiscientific.com/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Terms and Conditions
+            </a>
+            <span className="sb-footer-dot">•</span>
+            <a
+              href="https://www.srisaradiscientific.com/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Privacy Policy
+            </a>
+          </div>
+
+          <div className="sb-footer-right">
+            <div className="sb-footer-product">Solarbio D1800 · 100T · Research Use Only</div>
+            <p className="sb-footer-copy">© {new Date().getFullYear()} Sri Saradi Scientific Pvt. Ltd.</p>
+          </div>
+        </div>
+      </footer>
 
       {/* Lightbox Modal */}
       {lightboxImage && (

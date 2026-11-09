@@ -14,10 +14,75 @@ export default function ThankYouContent() {
   const email = searchParams.get('email') || '';
   const qty = searchParams.get('qty') || '1 kit';
 
+  // Set Solarbio Favicon and activate standalone header/footer mode
+  React.useEffect(() => {
+    document.body.classList.add('solarbio-page-active');
+
+    const iconLinks = Array.from(
+      document.querySelectorAll<HTMLLinkElement>("link[rel*='icon']")
+    );
+
+    const prevIcons = iconLinks.map((el) => ({
+      el,
+      href: el.getAttribute('href') || '',
+      type: el.getAttribute('type') || '',
+    }));
+
+    if (iconLinks.length === 0) {
+      const newIcon = document.createElement('link');
+      newIcon.rel = 'icon';
+      newIcon.type = 'image/webp';
+      newIcon.href = '/assets/solarbio/solarbio-favicon.webp';
+      document.head.appendChild(newIcon);
+    } else {
+      iconLinks.forEach((el) => {
+        el.href = '/assets/solarbio/solarbio-favicon.webp';
+        el.type = 'image/webp';
+      });
+    }
+
+    return () => {
+      document.body.classList.remove('solarbio-page-active');
+      prevIcons.forEach(({ el, href, type }) => {
+        el.href = href;
+        if (type) {
+          el.type = type;
+        } else {
+          el.removeAttribute('type');
+        }
+      });
+    };
+  }, []);
+
   return (
-    <main className="sb-thank-you-page">
-      <div className="sb-wrap">
-        <div className="sb-thank-you-card">
+    <div className="solarbio-page">
+      {/* Dedicated Navbar */}
+      <header className="sb-nav">
+        <div className="sb-wrap sb-nav-in">
+          <div className="sb-brand" title="Sri Saradi Scientific">
+            <img
+              src="/assets/sri-saradi-logo.png"
+              alt="Sri Saradi Scientific"
+              width={160}
+              height={50}
+              style={{ height: '48px', width: 'auto', display: 'block' }}
+            />
+          </div>
+          <nav className="sb-nav-links" aria-label="Primary navigation">
+            <Link href="/genomic#overview">Overview</Link>
+            <Link href="/genomic#evidence">Experimental evidence</Link>
+            <Link href="/genomic#quality">Quality records</Link>
+            <Link href="/genomic#research">Publications</Link>
+          </nav>
+          <Link className="sb-btn blue sb-nav-cta" href="/genomic#enquire">
+            Request a quotation →
+          </Link>
+        </div>
+      </header>
+
+      <main className="sb-thank-you-page">
+        <div className="sb-wrap">
+          <div className="sb-thank-you-card">
           <div className="sb-success-badge" aria-hidden="true">
             ✓
           </div>
@@ -139,6 +204,47 @@ export default function ThankYouContent() {
         </div>
       </div>
     </main>
+
+    {/* Dedicated Footer */}
+    <footer className="sb-dedicated-footer">
+      <div className="sb-wrap sb-footer-in">
+        <div className="sb-footer-brands">
+          <div className="sb-footer-brand" title="Sri Saradi Scientific">
+            <img
+              src="/assets/sri-saradi-logo.png"
+              alt="Sri Saradi Scientific"
+              width={160}
+              height={50}
+              style={{ height: '48px', width: 'auto', display: 'block' }}
+            />
+          </div>
+        </div>
+
+        <div className="sb-footer-links">
+          <a
+            href="https://www.srisaradiscientific.com/terms-and-conditions"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Terms and Conditions
+          </a>
+          <span className="sb-footer-dot">•</span>
+          <a
+            href="https://www.srisaradiscientific.com/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Privacy Policy
+          </a>
+        </div>
+
+        <div className="sb-footer-right">
+          <div className="sb-footer-product">Solarbio D1800 · 100T · Research Use Only</div>
+          <p className="sb-footer-copy">© {new Date().getFullYear()} Sri Saradi Scientific Pvt. Ltd.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
   );
 }
 
