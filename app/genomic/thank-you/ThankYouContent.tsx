@@ -13,6 +13,7 @@ export default function ThankYouContent() {
   const org = searchParams.get('org') || '';
   const email = searchParams.get('email') || '';
   const qty = searchParams.get('qty') || '1 kit';
+  const paid = searchParams.get('paid') === '1' && !!ref;
 
   // Set Solarbio Favicon and activate standalone header/footer mode
   React.useEffect(() => {
@@ -88,15 +89,18 @@ export default function ThankYouContent() {
           </div>
 
           <div className="sb-eyebrow" style={{ color: '#1e7e34', marginBottom: '8px' }}>
-            QUOTATION ENQUIRY RECEIVED
+            {paid ? 'ORDER PLACED' : 'QUOTATION ENQUIRY RECEIVED'}
           </div>
 
-          <h1>Thank You for Your Enquiry!</h1>
+          <h1>{paid ? 'Thank You for Your Order!' : 'Thank You for Your Enquiry!'}</h1>
 
           <p className="sb-thank-you-lead">
-            {name ? `Dear ${name}, we` : 'We'} have successfully received your quotation enquiry for the{' '}
-            <strong>Solarbio D1800 Blood Genomic DNA Extraction Kit (100T)</strong>. Our scientific support and
-            procurement team has been notified.
+            {name ? `Dear ${name}, we` : 'We'} have successfully received your{' '}
+            {paid ? 'online order' : 'quotation enquiry'} for the{' '}
+            <strong>Solarbio D1800 Blood Genomic DNA Extraction Kit (100T)</strong>.{' '}
+            {paid
+              ? 'A payment confirmation has been emailed to you, and our team will contact you with dispatch details.'
+              : 'Our scientific support and procurement team has been notified.'}
           </p>
 
           {ref && (
@@ -113,7 +117,7 @@ export default function ThankYouContent() {
             </div>
 
             <div className="sb-summary-item">
-              <span>Estimated Quantity</span>
+              <span>{paid ? 'Quantity' : 'Estimated Quantity'}</span>
               <strong>{qty}</strong>
             </div>
 

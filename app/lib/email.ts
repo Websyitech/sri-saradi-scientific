@@ -422,3 +422,123 @@ export async function verifyEmailConnection(): Promise<boolean> {
     return false;
   }
 }
+
+// ---- Online payment emails (Zoho Payments) ----------------------------------
+
+interface PaymentEmailData {
+  orderId: string;
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  notes?: string;
+  amount: string;
+  paymentId: string;
+  items: { name: string; quantity: number }[];
+}
+
+function esc(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function paymentItemsHtml(items: PaymentEmailData['items']): string {
+  return `
+    <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+      <thead>
+        <tr style="background: #f5f5f5;">
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Product</th>
+          <th style="border: 1px solid #ddd; padding: 8px; text-align: center;">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${items.map(item => `
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 8px;">${esc(item.name)}</td>
+            <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${item.quantity}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+}
+
+// Tell the sales team that a paid online order has arrived
+export async function sendPaymentNotification(data: PaymentEmailData): Promise<boolean> {
+  const html = `
+    <h2>New Paid Online Order</h2>
+    <p><strong>Order ID:</strong> ${esc(data.orderId)}</p>
+    <p><strong>Amount received:</strong> ₹${esc(data.amount)}</p>
+    <p><strong>Zoho payment ID:</strong> ${esc(data.paymentId)}</p>
+    <p><strong>Customer:</strong> ${esc(data.name)}</p>
+    <p><strong>Email:</strong> ${esc(data.email)}</p>
+    ${data.phone ? `<p><strong>Phone:</strong> ${esc(data.phone)}</p>` : ''}
+    ${data.company ? `<p><strong>Company:</strong> ${esc(data.company)}</p>` : ''}
+    ${paymentItemsHtml(data.items)}
+    ${data.notes ? `<h3>Order details</h3><div style="background: #f5f5f5; padding: 15px; border-radius: 5px;">${esc(data.notes).replace(/\n/g, '<br>')}</div>` : ''}
+    <hr>
+    <p style="font-size: 12px; color: #666;">Confirm the payment in Zoho Payments before dispatch.</p>
+  `;
+  const text = `New Paid Online Order
+Order ID: ${data.orderId}
+Amount received: ₹${data.amount}
+Zoho payment ID: ${data.paymentId}
+Customer: ${data.name} <${data.email}>${data.phone ? `\nPhone: ${data.phone}` : ''}${data.company ? `\nCompany: ${data.company}` : ''}
+Items:
+${data.items.map(i => `- ${i.name} x ${i.quantity}`).join('\n')}
+${data.notes ? `\nOrder details:\n${data.notes}` : ''}`;
+
+  return sendEmail({
+    to: process.env.SMTP_FROM_EMAIL || 'info@srisaradiscientific.com',
+    subject: `Paid Online Order - ${data.orderId} (₹${data.amount})`,
+    text,
+    html,
+  });
+}
+
+// Payment receipt for the customer
+export async function sendPaymentConfirmation(data: PaymentEmailData): Promise<boolean> {
+  const html = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #2D2B7F;">Payment received. Thank you!</h2>
+      <p>Dear ${esc(data.name)},</p>
+      <p>We have received your payment and your order is confirmed.</p>
+      <div style="background: #f0f8ff; padding: 20px; border-radius: 5px; margin: 20px 0; border-left: 4px solid #2D2B7F;">
+        <p><strong>Order ID:</strong> ${esc(data.orderId)}</p>
+        <p><strong>Amount paid:</strong> ₹${esc(data.amount)} (GST included)</p>
+        <p><strong>Payment reference:</strong> ${esc(data.paymentId)}</p>
+      </div>
+      ${paymentItemsHtml(data.items)}
+      <p>Our team will contact you with dispatch details and the tax invoice. For any questions, write to
+      <a href="mailto:info@srisaradiscientific.com">info@srisaradiscientific.com</a> or call
+      <a href="tel:+919742443809">+91 97424 43809</a> and quote your Order ID.</p>
+      <p>Best regards,<br><strong>Sri Saradi Scientific Team</strong></p>
+    </div>
+  `;
+  const text = `Payment received. Thank you!
+
+Dear ${data.name},
+
+We have received your payment and your order is confirmed.
+
+Order ID: ${data.orderId}
+Amount paid: ₹${data.amount} (GST included)
+Payment reference: ${data.paymentId}
+
+Items:
+${data.items.map(i => `- ${i.name} x ${i.quantity}`).join('\n')}
+
+Our team will contact you with dispatch details and the tax invoice.
+Email: info@srisaradiscientific.com | Phone: +91 97424 43809
+
+Sri Saradi Scientific Team`;
+
+  return sendEmail({
+    to: data.email,
+    subject: `Payment Confirmation - ${data.orderId}`,
+    text,
+    html,
+  });
+}

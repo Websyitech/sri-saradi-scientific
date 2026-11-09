@@ -27,6 +27,8 @@ interface Quote {
 
 const statusOptions = [
   { value: "pending", label: "Pending", bg: "#fef3c7", color: "#92400e" },
+  { value: "payment_pending", label: "Payment pending", bg: "#f3f4f6", color: "#4b5563" },
+  { value: "paid", label: "Paid online", bg: "#d1fae5", color: "#065f46" },
   { value: "reviewed", label: "Reviewed", bg: "#dbeafe", color: "#1e40af" },
   { value: "quoted", label: "Quoted", bg: "#e0e7ff", color: "#3730a3" },
   { value: "completed", label: "Completed", bg: "#dcfce7", color: "#166534" },

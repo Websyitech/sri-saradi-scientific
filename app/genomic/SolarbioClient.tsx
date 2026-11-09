@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './solarbio.css';
+import { useZohoCheckout } from '../components/checkout/useZohoCheckout';
+
+const CHECKOUT_SKU = 'solarbio-d1800-100t';
 
 interface EnquiryFormState {
   name: string;
@@ -21,9 +24,16 @@ export default function SolarbioClient() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [lightboxAlt, setLightboxAlt] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
-  const [checkoutNotice, setCheckoutNotice] = useState<string>(
-    'Payment integration is not active in this developer preview. Connect a server-created order and gateway checkout before launch. GST rate, actual availability and delivery address and cold-chain requirements must be confirmed before dispatch.'
-  );
+  const checkout = useZohoCheckout();
+  const [showCheckoutForm, setShowCheckoutForm] = useState(false);
+  const [buyer, setBuyer] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    address: '',
+    gstin: '',
+  });
 
   const [formState, setFormState] = useState<EnquiryFormState>({
     name: '',
@@ -131,14 +141,14 @@ export default function SolarbioClient() {
     }));
   };
 
-  const handleCheckoutClick = () => {
-    setCheckoutNotice(
-      `Order prepared for ${quantity} kit(s) (₹${(22420 * quantity).toLocaleString('en-IN')}). Developer notice: Server-side inventory, address verification and payment gateway integration pending. Please submit a formal quotation below for immediate processing.`
-    );
-    const elem = document.getElementById('enquire');
-    if (elem) {
-      elem.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleBuyerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setBuyer((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckoutSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    checkout.pay({ sku: CHECKOUT_SKU, quantity, customer: buyer });
   };
 
   const handleFormChange = (
@@ -974,20 +984,60 @@ export default function SolarbioClient() {
                 </span>
               </div>
 
-              <div style={{ marginTop: '20px' }}>
-                <button
-                  id="checkoutBtn"
-                  className="sb-btn blue"
-                  type="button"
-                  onClick={handleCheckoutClick}
-                  style={{ width: '100%' }}
-                >
-                  Proceed to secure checkout →
-                </button>
-              </div>
+              {!showCheckoutForm ? (
+                <div style={{ marginTop: '20px' }}>
+                  <button
+                    id="checkoutBtn"
+                    className="sb-btn blue"
+                    type="button"
+                    onClick={() => setShowCheckoutForm(true)}
+                    style={{ width: '100%' }}
+                  >
+                    Proceed to secure checkout →
+                  </button>
+                </div>
+              ) : (
+                <form className="sb-form-grid" onSubmit={handleCheckoutSubmit} style={{ marginTop: '20px' }}>
+                  <div className="sb-form-field">
+                    <label htmlFor="buyer-name">Your name *</label>
+                    <input id="buyer-name" name="name" type="text" autoComplete="name" required maxLength={120} value={buyer.name} onChange={handleBuyerChange} />
+                  </div>
+                  <div className="sb-form-field">
+                    <label htmlFor="buyer-company">Institution / company</label>
+                    <input id="buyer-company" name="company" type="text" autoComplete="organization" maxLength={160} value={buyer.company} onChange={handleBuyerChange} />
+                  </div>
+                  <div className="sb-form-field">
+                    <label htmlFor="buyer-email">Email *</label>
+                    <input id="buyer-email" name="email" type="email" autoComplete="email" required maxLength={160} value={buyer.email} onChange={handleBuyerChange} />
+                  </div>
+                  <div className="sb-form-field">
+                    <label htmlFor="buyer-phone">Phone *</label>
+                    <input id="buyer-phone" name="phone" type="tel" autoComplete="tel" required pattern="\+?[0-9][0-9\s\-]{7,16}" title="Enter a valid phone number" value={buyer.phone} onChange={handleBuyerChange} />
+                  </div>
+                  <div className="sb-form-field full">
+                    <label htmlFor="buyer-address">Delivery address with PIN code *</label>
+                    <textarea id="buyer-address" name="address" autoComplete="street-address" required minLength={10} maxLength={600} rows={3} value={buyer.address} onChange={handleBuyerChange} />
+                  </div>
+                  <div className="sb-form-field full">
+                    <label htmlFor="buyer-gstin">GSTIN (optional, for the tax invoice)</label>
+                    <input id="buyer-gstin" name="gstin" type="text" maxLength={20} value={buyer.gstin} onChange={handleBuyerChange} />
+                  </div>
+                  <div className="sb-form-field full">
+                    <button id="checkoutBtn" className="sb-btn blue" type="submit" disabled={checkout.busy} style={{ width: '100%' }}>
+                      {checkout.busy ? 'Please wait…' : `Pay ₹${totalAmount} securely →`}
+                    </button>
+                  </div>
+                </form>
+              )}
 
-              <p className="sb-fine" id="checkoutNotice" role="status" style={{ marginTop: '14px' }}>
-                {checkoutNotice}
+              <p
+                className="sb-fine"
+                id="checkoutNotice"
+                role="status"
+                style={{ marginTop: '14px', ...(checkout.isError ? { color: '#b42318' } : {}) }}
+              >
+                {checkout.message ||
+                  'Payments are processed securely by Zoho Payments (UPI, cards, net banking). We do not see or store your card details.'}
               </p>
             </div>
 
