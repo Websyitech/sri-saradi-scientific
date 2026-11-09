@@ -1,0 +1,1121 @@
+/* ==========================================================================
+   SOLARBIO D1800 - SRI SARADI SCIENTIFIC DESIGN SYSTEM
+   Clean, simple, elegant, cohesive with home-redesign theme.
+   Scoped under .solarbio-page and .sb-*
+   ========================================================================== */
+
+.solarbio-page {
+  --ink: #202449;
+  --indigo: #34398A;
+  --blue: #009FE3;
+  --green: #5D9D35;
+  --red: #d52336;
+  --muted: #657087;
+  --line: #dce4ef;
+  --line-light: #edf2f7;
+  --paper: #f6f9fc;
+  --white: #ffffff;
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 7px;
+  --max: 1216px;
+
+  font-family: var(--font-google-sans), Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.65;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.solarbio-page *,
+.solarbio-page *::before,
+.solarbio-page *::after {
+  box-sizing: border-box;
+}
+
+.solarbio-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.solarbio-page button,
+.solarbio-page input,
+.solarbio-page textarea,
+.solarbio-page select {
+  font-family: inherit;
+}
+
+.solarbio-page button {
+  cursor: pointer;
+}
+
+.solarbio-page img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   CONTAINER & SECTION BASICS
+   ========================================================================== */
+
+.solarbio-page .sb-wrap {
+  width: min(var(--max), calc(100% - 64px));
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .solarbio-page .sb-wrap {
+    width: calc(100% - 32px);
+  }
+}
+
+.solarbio-page .sb-section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.solarbio-page .sb-section.sb-tint {
+  background: var(--paper);
+}
+
+@media (max-width: 768px) {
+  .solarbio-page .sb-section {
+    padding: 56px 0;
+  }
+}
+
+/* Typography Hierarchy */
+.solarbio-page h1,
+.solarbio-page h2,
+.solarbio-page h3,
+.solarbio-page h4 {
+  font-family: var(--font-google-sans), Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.solarbio-page h1 {
+  font-size: clamp(34px, 4.2vw, 54px);
+  line-height: 1.15;
+}
+
+.solarbio-page h2 {
+  font-size: clamp(26px, 3.2vw, 38px);
+}
+
+.solarbio-page h3 {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.solarbio-page p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.solarbio-page .sb-lead {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.solarbio-page .sb-small {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.solarbio-page .sb-fine {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Eyebrows & Badges */
+.solarbio-page .sb-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--indigo);
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.solarbio-page .sb-eyebrow.red {
+  color: var(--red);
+}
+
+.solarbio-page .sb-heading {
+  max-width: 720px;
+  margin-bottom: 36px;
+}
+
+.solarbio-page .sb-heading p {
+  margin-top: 10px;
+}
+
+.solarbio-page .sb-text-indigo {
+  color: var(--indigo);
+}
+
+.solarbio-page .sb-text-blue {
+  color: var(--blue);
+}
+
+/* Buttons matching Home Theme */
+.solarbio-page .sb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--indigo);
+  color: #ffffff;
+  border: 1px solid var(--indigo);
+  padding: 13px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.solarbio-page .sb-btn:hover {
+  transform: translateY(-2px);
+  background: #252969;
+  border-color: #252969;
+  box-shadow: 0 4px 12px rgba(52, 57, 138, 0.2);
+}
+
+.solarbio-page .sb-btn.blue {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.solarbio-page .sb-btn.blue:hover {
+  background: #0087c2;
+  border-color: #0087c2;
+  box-shadow: 0 4px 12px rgba(0, 159, 227, 0.25);
+}
+
+.solarbio-page .sb-btn.outline {
+  background: #ffffff;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.solarbio-page .sb-btn.outline:hover {
+  border-color: var(--indigo);
+  color: var(--indigo);
+  background: #f8fbff;
+  transform: translateY(-2px);
+}
+
+.solarbio-page .sb-btn.link {
+  background: transparent;
+  border: none;
+  color: var(--indigo);
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.solarbio-page .sb-btn.link:hover {
+  text-decoration: underline;
+  transform: none;
+}
+
+/* Common Card */
+.solarbio-page .sb-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: 0 4px 16px rgba(32, 56, 103, 0.03);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.solarbio-page .sb-card.sb-accent {
+  border-top: 3px solid var(--indigo);
+}
+
+.solarbio-page .sb-card.sb-accent-blue {
+  border-top: 3px solid var(--blue);
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+
+.solarbio-page .sb-hero {
+  display: block !important;
+  width: 100% !important;
+  padding: 64px 0 56px !important;
+  background: radial-gradient(ellipse at 85% 30%, #e8f3fc, transparent 60%), linear-gradient(145deg, #fafcff 0%, #f4f7fc 100%) !important;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.solarbio-page .sb-hero-grid {
+  display: grid !important;
+  grid-template-columns: 1.15fr 0.85fr !important;
+  gap: 48px !important;
+  align-items: center !important;
+}
+
+@media (max-width: 960px) {
+  .solarbio-page .sb-hero {
+    padding: 44px 0 !important;
+  }
+  .solarbio-page .sb-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+}
+
+/* Hero Left Column */
+.solarbio-page .sb-hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.solarbio-page .sb-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.solarbio-page .sb-sol-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--red);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.solarbio-page .sb-sol-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.solarbio-page .sb-hero-h1 {
+  margin-top: 4px;
+  color: var(--ink);
+}
+
+.solarbio-page .sb-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+/* Hero Price Summary Box */
+.solarbio-page .sb-price-banner {
+  margin-top: 22px;
+  padding: 16px 20px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 16px rgba(32, 56, 103, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.solarbio-page .sb-price-banner-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.solarbio-page .sb-price-banner-main {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.solarbio-page .sb-price-banner-sub {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.solarbio-page .sb-price-banner-note {
+  font-size: 12px;
+  color: #1a6f87;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Micro Stats */
+.solarbio-page .sb-micro {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.solarbio-page .sb-micro > div {
+  border-left: 2px solid var(--indigo);
+  padding-left: 12px;
+}
+
+.solarbio-page .sb-micro strong {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.solarbio-page .sb-micro small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.35;
+}
+
+.solarbio-page .sb-quiet-line {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #7b889b;
+}
+
+/* Hero Right Column: Product Image Frame */
+.solarbio-page .sb-hero-art {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.solarbio-page .sb-hero-img-card {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: 0 16px 40px rgba(32, 56, 103, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.solarbio-page .sb-hero-img-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(32, 56, 103, 0.09);
+}
+
+.solarbio-page .sb-hero-img-card img {
+  max-height: 340px;
+  width: auto;
+  object-fit: contain;
+}
+
+.solarbio-page .sb-hero-zoom-chip {
+  margin-top: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+/* ==========================================================================
+   STICKY TABLE OF CONTENTS (SUBNAV)
+   ========================================================================== */
+
+.solarbio-page .sb-toc-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.solarbio-page .sb-toc-list {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 0 4px;
+  scrollbar-width: none;
+}
+
+.solarbio-page .sb-toc-list::-webkit-scrollbar {
+  display: none;
+}
+
+.solarbio-page .sb-toc-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 16px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.solarbio-page .sb-toc-link:hover {
+  color: var(--indigo);
+  border-bottom-color: var(--indigo);
+}
+
+/* ==========================================================================
+   GRIDS & LAYOUT UTILITIES
+   ========================================================================== */
+
+.solarbio-page .sb-three-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 860px) {
+  .solarbio-page .sb-three-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.solarbio-page .sb-tile-number {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--indigo);
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.solarbio-page .sb-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .solarbio-page .sb-two-cols {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Clean Tables */
+.solarbio-page .sb-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.solarbio-page .sb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.solarbio-page .sb-table th,
+.solarbio-page .sb-table td {
+  padding: 13px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.solarbio-page .sb-table tr:last-child td {
+  border-bottom: none;
+}
+
+.solarbio-page .sb-table td:first-child {
+  font-weight: 600;
+  color: var(--ink);
+  width: 44%;
+}
+
+.solarbio-page .sb-table td:last-child {
+  color: var(--muted);
+}
+
+.solarbio-page .sb-table.clean-zebra tr:nth-child(even) {
+  background: rgba(246, 249, 252, 0.5);
+}
+
+/* Notices / Callouts */
+.solarbio-page .sb-notice-box {
+  background: var(--paper);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   SECTION 2: PRODUCT PHOTOGRAPHS GRID
+   ========================================================================== */
+
+.solarbio-page .sb-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 960px) {
+  .solarbio-page .sb-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .solarbio-page .sb-gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.solarbio-page .sb-gallery-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  cursor: zoom-in;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.solarbio-page .sb-gallery-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--indigo);
+  box-shadow: 0 8px 24px rgba(32, 56, 103, 0.08);
+}
+
+.solarbio-page .sb-gallery-item img {
+  max-height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   SECTION 3: GEL EVIDENCE
+   ========================================================================== */
+
+.solarbio-page .sb-gel-container {
+  background: #111625;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  cursor: zoom-in;
+  border: 1px solid #232c45;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.solarbio-page .sb-gel-container:hover {
+  transform: scale(1.01);
+}
+
+.solarbio-page .sb-gel-container img {
+  max-height: 380px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   SECTION 5: QUALITY COA CARDS
+   ========================================================================== */
+
+.solarbio-page .sb-doc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 860px) {
+  .solarbio-page .sb-doc-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+.solarbio-page .sb-doc-item {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(32, 56, 103, 0.03);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.solarbio-page .sb-doc-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(32, 56, 103, 0.08);
+}
+
+.solarbio-page .sb-doc-thumb {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  height: 200px;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+.solarbio-page .sb-doc-thumb img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+}
+
+.solarbio-page .sb-doc-thumb.icon-thumb {
+  cursor: default;
+  font-size: 54px;
+  color: var(--indigo);
+}
+
+.solarbio-page .sb-doc-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.solarbio-page .sb-doc-body strong {
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.solarbio-page .sb-doc-link {
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--indigo);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.solarbio-page .sb-doc-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   SECTION 6: RESEARCH ARTICLES
+   ========================================================================== */
+
+.solarbio-page .sb-pub-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  box-shadow: 0 4px 16px rgba(32, 56, 103, 0.02);
+}
+
+@media (max-width: 640px) {
+  .solarbio-page .sb-pub-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+  }
+}
+
+.solarbio-page .sb-pub-badge {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--indigo);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  flex-shrink: 0;
+}
+
+.solarbio-page .sb-pub-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.solarbio-page .sb-pub-doi {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--indigo);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.solarbio-page .sb-pub-doi:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   SECTION 7: PURCHASE SECTION
+   ========================================================================== */
+
+.solarbio-page .sb-qty-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0;
+}
+
+.solarbio-page .sb-qty-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s;
+}
+
+.solarbio-page .sb-qty-btn:hover {
+  border-color: var(--indigo);
+  color: var(--indigo);
+  background: var(--paper);
+}
+
+.solarbio-page .sb-qty-input {
+  width: 60px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.solarbio-page .sb-qty-input:focus {
+  outline: none;
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(52, 57, 138, 0.1);
+}
+
+/* ==========================================================================
+   SECTION 8: FORM SECTION
+   ========================================================================== */
+
+.solarbio-page .sb-enquiry-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  box-shadow: 0 8px 30px rgba(32, 56, 103, 0.04);
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .solarbio-page .sb-enquiry-card {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 28px;
+  }
+}
+
+.solarbio-page .sb-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--indigo);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 6px 14px;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+
+.solarbio-page .sb-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 640px) {
+  .solarbio-page .sb-form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+.solarbio-page .sb-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.solarbio-page .sb-form-field.full {
+  grid-column: 1 / -1;
+}
+
+.solarbio-page .sb-form-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.solarbio-page .sb-form-field input,
+.solarbio-page .sb-form-field select,
+.solarbio-page .sb-form-field textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  background: #fdfefe;
+  color: var(--ink);
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.solarbio-page .sb-form-field textarea {
+  min-height: 95px;
+  resize: vertical;
+}
+
+.solarbio-page .sb-form-field input:focus,
+.solarbio-page .sb-form-field select:focus,
+.solarbio-page .sb-form-field textarea:focus {
+  outline: none;
+  border-color: var(--indigo);
+  box-shadow: 0 0 0 3px rgba(52, 57, 138, 0.12);
+  background: #ffffff;
+}
+
+/* ==========================================================================
+   LIGHTBOX MODAL
+   ========================================================================== */
+
+.solarbio-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: sbFadeIn 0.2s ease-out;
+}
+
+.solarbio-lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.solarbio-lightbox-content img {
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.solarbio-lightbox-caption {
+  margin-top: 14px;
+  color: #e2e8f0;
+  font-size: 13px;
+  text-align: center;
+  max-width: 600px;
+}
+
+.solarbio-lightbox-close {
+  position: absolute;
+  top: -44px;
+  right: -8px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px;
+  transition: transform 0.2s;
+}
+
+.solarbio-lightbox-close:hover {
+  transform: scale(1.15);
+}
+
+@keyframes sbFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   THANK YOU PAGE
+   ========================================================================== */
+
+.sb-thank-you-page {
+  padding: 80px 0;
+  background: var(--paper);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+
+.sb-thank-you-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 44px 36px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(32, 56, 103, 0.05);
+}
+
+.sb-success-badge {
+  width: 54px;
+  height: 54px;
+  background: #eafaf1;
+  color: #27ae60;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 auto 20px;
+}
+
+.sb-thank-you-card h1 {
+  font-size: 28px;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+.sb-thank-you-lead {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.sb-ref-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  margin-bottom: 24px;
+}
+
+.sb-ref-box strong {
+  font-size: 15px;
+  color: var(--indigo);
+  letter-spacing: 0.05em;
+}
+
+.sb-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  text-align: left;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 28px;
+}
+
+.sb-summary-item span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.sb-summary-item strong {
+  display: block;
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 2px;
+}
+
+.sb-thank-you-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
