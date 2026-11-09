@@ -112,7 +112,7 @@ export default function ThankYouContent() {
           </div>
 
           <div className="sb-action-buttons">
-            <Link href="/solarbio" className="sb-btn blue">
+            <Link href="/genomic" className="sb-btn blue">
               ← Return to Solarbio D1800 Page
             </Link>
 

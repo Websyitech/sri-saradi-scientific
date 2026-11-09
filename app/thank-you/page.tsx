@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import type { Metadata } from 'next';
-import ThankYouContent from '../solarbio/thank-you/ThankYouContent';
+import ThankYouContent from '../genomic/thank-you/ThankYouContent';
 
 export const metadata: Metadata = {
   title: 'Thank You | Sri Saradi Scientific',

@@ -121,7 +121,7 @@ export default function SolarbioClient() {
           phone: formState.phone,
           company: formState.organization,
           notes: `Request Type: ${formState.request} | Quantity: ${formState.quantity} | Details: ${formState.message}`,
-          pageUrl: typeof window !== 'undefined' ? window.location.href : 'https://srisaradiscientific.com/solarbio',
+          pageUrl: typeof window !== 'undefined' ? window.location.href : 'https://srisaradiscientific.com/genomic',
           items: [
             {
               name: 'Solarbio D1800 Blood Genomic DNA Extraction Kit (100T)',
@@ -146,7 +146,7 @@ export default function SolarbioClient() {
       if (formState.email) query.set('email', formState.email);
       if (formState.quantity) query.set('qty', formState.quantity);
 
-      router.push(`/solarbio/thank-you?${query.toString()}`);
+      router.push(`/genomic/thank-you?${query.toString()}`);
     } catch {
       const query = new URLSearchParams();
       if (formState.name) query.set('name', formState.name);
@@ -154,7 +154,7 @@ export default function SolarbioClient() {
       if (formState.email) query.set('email', formState.email);
       if (formState.quantity) query.set('qty', formState.quantity);
 
-      router.push(`/solarbio/thank-you?${query.toString()}`);
+      router.push(`/genomic/thank-you?${query.toString()}`);
     } finally {
       setSubmitting(false);
     }
