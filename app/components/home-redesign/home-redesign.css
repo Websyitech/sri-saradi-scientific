@@ -2944,85 +2944,160 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   }
 }
 
-/* Use the supplied global-supply image with the existing process steps below. */
+/* Light editorial layout for global supply. */
 .homepage-redesign .logistics-section {
-  color: #fff;
-  background: #000;
-  border-color: rgba(255, 255, 255, 0.08);
+  background: #f7f8fa;
+  border-color: #e7eaf0;
 }
 
-.homepage-redesign .logistics-grid {
-  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
-  gap: clamp(44px, 6vw, 80px);
+.homepage-redesign .logistics-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 48px;
+  margin-bottom: 38px;
+}
+
+.homepage-redesign .logistics-heading > div {
+  max-width: 760px;
+}
+
+.homepage-redesign .logistics-eyebrow {
+  display: flex;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: #4b5a72;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.homepage-redesign .logistics-visual {
-  padding: 0;
-  color: #e2e8f0;
-  background: transparent;
+.homepage-redesign .logistics-eyebrow::before {
+  width: 8px;
+  height: 8px;
+  content: '';
+  flex: 0 0 auto;
+  background: #ad2e49;
+  border-radius: 50%;
+}
+
+.homepage-redesign .logistics-heading h2 {
+  max-width: 760px;
+  color: #141b2b !important;
+  font-size: clamp(34px, 3.3vw, 48px);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.homepage-redesign .logistics-heading h2 .blue {
+  color: #34398a !important;
+}
+
+.homepage-redesign .logistics-heading .lead {
+  max-width: 690px;
+  margin-top: 14px;
+  color: #4b5a72;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.homepage-redesign .logistics-header-cta {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 3px;
+  padding: 10px 0;
+  color: #34398a;
+  background: none;
   border: 0;
-  border-radius: 0;
-  box-shadow: none;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.homepage-redesign .logistics-header-cta span {
+  font-size: 20px;
+  transition: transform 180ms ease;
+}
+
+.homepage-redesign .logistics-header-cta:hover span {
+  transform: translateX(4px);
+}
+
+.homepage-redesign .logistics-header-cta:focus-visible {
+  outline: 2px solid #34398a;
+  outline-offset: 4px;
+}
+
+.homepage-redesign .logistics-panel {
+  display: grid;
+  min-height: 450px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  background: #edf1f0;
+  border-radius: 24px;
+  box-shadow: 0 26px 46px rgba(28, 38, 56, 0.09);
+}
+
+.homepage-redesign .logistics-panel-copy {
+  z-index: 1;
+  align-self: center;
+  padding: 42px 32px 42px 44px;
 }
 
 .homepage-redesign .logistics-top {
+  display: flex;
   align-items: center;
-  padding: 0 2px 14px;
-  color: #dbe4ef;
-}
-
-.homepage-redesign .logistics-route-tag,
-.homepage-redesign .logistics-badge {
-  color: #dbe4ef;
-  font-size: 9px;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 22px;
+  color: #687487;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .homepage-redesign .logistics-badge {
-  padding: 5px 8px;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
+  padding: 6px 9px;
+  color: #526078;
+  border: 1px solid #cbd2d4;
+  border-radius: 999px;
+  white-space: nowrap;
 }
 
-.homepage-redesign .world-route-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1.25;
-  overflow: hidden;
-  background: #e8f2fc;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-}
-
-.homepage-redesign .world-route-image {
-  object-fit: cover;
+.homepage-redesign .logistics-body {
+  max-width: 490px;
+  color: #4b5a72;
+  font-size: 15px;
+  line-height: 1.7;
 }
 
 .homepage-redesign .logistics-chain {
   grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr) 18px minmax(0, 1fr);
-  gap: 6px;
-  margin-top: 18px;
-  padding-top: 18px;
-  border-color: rgba(255, 255, 255, 0.16);
+  gap: 7px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-color: #d2d9d9;
 }
 
 .homepage-redesign .logistics-chain .chain-step {
   min-width: 0;
-  gap: 7px;
+  gap: 9px;
 }
 
 .homepage-redesign .chain-icon-wrap {
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   place-items: center;
-  color: #80d8ff;
-  background: rgba(0, 159, 227, 0.14);
-  border: 1px solid rgba(125, 211, 252, 0.22);
-  border-radius: 7px;
+  color: #315fc1;
+  background: #e1e9f8;
+  border-radius: 50%;
 }
 
 .homepage-redesign .chain-icon-wrap svg {
@@ -3031,7 +3106,7 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 }
 
 .homepage-redesign .chain-step-content strong {
-  color: #f1f5f9;
+  color: #202b3d;
   font-size: 12px;
   font-weight: 600;
 }
@@ -3039,105 +3114,105 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 .homepage-redesign .logistics-chain .chain-divider {
   display: grid;
   place-items: center;
-  color: #80d8ff;
+  color: #315fc1;
 }
 
 .homepage-redesign .logistics-chain .chain-divider span {
-  color: #80d8ff;
+  color: #315fc1;
   font-size: 16px;
 }
 
-.homepage-redesign .logistics-copy h2 {
-  max-width: 620px;
-  margin: 22px 0 0;
-  color: #fff !important;
-  font-size: clamp(36px, 3.2vw, 48px);
-  line-height: 1.08;
+.homepage-redesign .world-route-wrapper {
+  position: relative;
+  min-height: 450px;
+  overflow: hidden;
+  background: #d8e0de;
 }
 
-.homepage-redesign .logistics-copy h2 .blue {
-  color: #6dd6ff !important;
+.homepage-redesign .world-route-wrapper::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 0;
+  width: 22%;
+  content: '';
+  background: linear-gradient(90deg, #edf1f0, transparent);
+  pointer-events: none;
 }
 
-.homepage-redesign .logistics-eyebrow {
-  width: fit-content;
-  margin-bottom: 22px;
-  padding: 7px 11px;
-  color: #dbe4ef;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  font-size: 10px;
-  letter-spacing: 0.14em;
+.homepage-redesign .world-route-image {
+  object-fit: cover;
+  object-position: center;
 }
 
-.homepage-redesign .logistics-copy .lead {
-  max-width: 520px;
-  margin-top: 22px;
-  color: #d3dbe7;
-  font-size: 18px;
-  font-style: italic;
-  line-height: 1.55;
-}
-
-.homepage-redesign .logistics-body {
-  margin: 0;
-  color: #b3bfce;
-  font-size: 14px;
-  line-height: 1.65;
-}
-
-.homepage-redesign .logistics-action-row {
-  display: grid;
-  gap: 14px;
-  margin-top: 28px;
-  padding: 18px;
-  background: rgba(255, 255, 255, 0.045);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-}
-
-.homepage-redesign .logistics-action-row .logistics-cta-btn {
-  width: fit-content;
-  min-height: 46px;
-  color: #202449 !important;
-  background: #fff !important;
-  border: 1px solid #fff !important;
-  border-radius: 8px !important;
-  box-shadow: none !important;
-}
-
-.homepage-redesign .logistics-action-row .logistics-cta-btn:hover {
-  color: #fff !important;
-  background: #009fe3 !important;
-  border-color: #009fe3 !important;
-}
-
-@media (max-width: 760px) {
-  .homepage-redesign .logistics-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+@media (max-width: 900px) {
+  .homepage-redesign .logistics-heading {
+    gap: 28px;
   }
 
-  .homepage-redesign .logistics-visual {
-    padding: 0;
+  .homepage-redesign .logistics-panel-copy {
+    padding-right: 18px;
+    padding-left: 30px;
   }
 
   .homepage-redesign .logistics-chain {
     grid-template-columns: minmax(0, 1fr) 12px minmax(0, 1fr) 12px minmax(0, 1fr);
     gap: 3px;
   }
+}
 
-  .homepage-redesign .chain-step-content strong {
-    font-size: 10px;
+@media (max-width: 760px) {
+  .homepage-redesign .logistics-heading {
+    display: block;
+    margin-bottom: 26px;
   }
 
-  .homepage-redesign .logistics-copy h2 {
+  .homepage-redesign .logistics-heading h2 {
     font-size: clamp(34px, 9vw, 44px);
   }
 
-  .homepage-redesign .logistics-action-row .logistics-cta-btn {
-    width: 100%;
+  .homepage-redesign .logistics-heading .lead {
+    font-size: 15px;
+  }
+
+  .homepage-redesign .logistics-header-cta {
+    margin-top: 14px;
+  }
+
+  .homepage-redesign .logistics-panel {
+    grid-template-columns: 1fr;
+    border-radius: 18px;
+  }
+
+  .homepage-redesign .logistics-panel-copy {
+    padding: 28px 24px 26px;
+  }
+
+  .homepage-redesign .world-route-wrapper {
+    min-height: 0;
+    aspect-ratio: 1.5;
+  }
+
+  .homepage-redesign .world-route-wrapper::before {
+    inset: 0 0 auto;
+    width: auto;
+    height: 20%;
+    background: linear-gradient(180deg, #edf1f0, transparent);
+  }
+}
+
+@media (max-width: 420px) {
+  .homepage-redesign .logistics-panel-copy {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .homepage-redesign .logistics-chain {
+    grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1fr) 8px minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .homepage-redesign .chain-step-content strong {
+    font-size: 10px;
   }
 }
 
