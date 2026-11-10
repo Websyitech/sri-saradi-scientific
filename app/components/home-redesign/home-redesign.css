@@ -928,12 +928,13 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 }
 
 .homepage-redesign .team-member-name {
+  min-height: 0 !important;
   font-size: 17.5px !important;
   font-weight: 700 !important;
   color: #1e2448 !important;
   letter-spacing: -0.02em !important;
   line-height: 1.3 !important;
-  margin: 0 0 8px 0 !important;
+  margin: 0 0 6px 0 !important;
 }
 
 .homepage-redesign .team-member-desc {
@@ -1756,330 +1757,391 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   }
 }
 
-/* Minimal workflow section in the site's indigo, blue, and slate palette */
-.homepage-redesign .dark-section.workflow-section {
-  background: #f5f8fc !important;
-  color: #202449 !important;
-  padding: 88px 0 !important;
-  border-color: #dce4ef !important;
+/* Reference-led workflow: soft blue stage cards beside a spacious detail panel. */
+.homepage-redesign .workflow-section {
+  --workflow-ink: #10163b;
+  --workflow-muted: #5d687b;
+  --workflow-blue: #123dda;
+  padding: 88px 0;
+  background: radial-gradient(ellipse at 50% 35%, #eaf3ff 0%, #f5f8fc 72%);
+  color: var(--workflow-ink);
+}
+
+.homepage-redesign .workflow-section .wrap {
+  width: min(1360px, calc(100% - 64px));
+  padding: 0 !important;
 }
 
 .homepage-redesign .workflow-section::before,
 .homepage-redesign .workflow-section .panel-glow {
-  display: none !important;
+  display: none;
 }
 
 .homepage-redesign .workflow-section .section-head {
-  gap: 40px !important;
-  margin-bottom: 30px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 36px;
+  text-align: center;
 }
 
 .homepage-redesign .workflow-section .eyebrow {
-  color: #34398a !important;
-}
-
-.homepage-redesign .workflow-section .eyebrow::before {
-  display: none !important;
-  content: none !important;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: #486aac;
 }
 
 .homepage-redesign .workflow-section h2 {
-  color: #202449 !important;
+  max-width: 920px;
+  color: var(--workflow-ink);
+  font-size: clamp(32px, 3.3vw, 48px);
+  line-height: 1.14;
 }
 
-.homepage-redesign .workflow-section .section-head p,
-.homepage-redesign .workflow-section .workflow-panel p {
-  color: #657087 !important;
+.homepage-redesign .workflow-section .section-head > p {
+  align-self: center;
+  max-width: 740px;
+  padding: 0;
+  margin: 0;
+  color: var(--workflow-muted);
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 .homepage-redesign .workflow-section .tab-bar {
-  gap: 20px !important;
-  padding: 0 0 10px !important;
-  margin-bottom: 24px !important;
-  background: transparent !important;
-  border: 0 !important;
-  border-bottom: 1px solid #dce4ef !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 980px;
+  padding: 0;
+  margin: 0 auto 30px;
+  background: none;
+  border: 0;
 }
 
 .homepage-redesign .workflow-section .tab-bar button {
-  padding: 8px 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  color: #657087 !important;
+  min-height: 62px;
+  padding: 16px;
+  border: 1px solid #fff;
+  border-radius: 18px;
+  background: #ffffffc7;
+  color: var(--workflow-ink);
+  box-shadow: 0 8px 20px #254da809;
+  font-size: 15px;
+  line-height: 1.4;
+  transition: background .2s, box-shadow .2s, color .2s;
 }
 
 .homepage-redesign .workflow-section .tab-bar button:hover {
-  color: #202449 !important;
-  background: transparent !important;
+  background: #fff;
+  box-shadow: 0 8px 24px #254da814;
 }
 
 .homepage-redesign .workflow-section .tab-bar button[aria-selected="true"] {
-  color: #34398a !important;
-  background: transparent !important;
-  border-bottom: 2px solid #009fe3 !important;
-  box-shadow: none !important;
-}
-
-.homepage-redesign .workflow-section #journey-status {
-  padding: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  color: #657087 !important;
-}
-
-.homepage-redesign .workflow-section .live-status-dot {
-  box-shadow: none !important;
+  color: #fff;
+  background: linear-gradient(160deg, #1653ed, #1236cc);
+  border-color: transparent;
+  box-shadow: 0 10px 24px #123dda20;
 }
 
 .homepage-redesign .workflow-section .journey-button {
-  color: #34398a !important;
-  background: #fff !important;
-  border: 1px solid #dce4ef !important;
-  border-radius: 7px !important;
-  box-shadow: none !important;
+  min-height: 44px;
+  padding: 10px 15px;
+  color: var(--workflow-blue);
+  background: #ffffffb3;
+  border: 1px solid #dce6f5;
+  border-radius: 12px;
+  font-size: 12px;
+  transition: background .2s, color .2s;
 }
 
 .homepage-redesign .workflow-section .journey-button:hover:not(:disabled) {
-  color: #fff !important;
-  background: #34398a !important;
-  border-color: #34398a !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-.homepage-redesign .workflow-section .journey-track {
-  margin-bottom: 28px !important;
-  padding: 16px 0 !important;
-  border-color: #dce4ef !important;
-}
-
-.homepage-redesign .workflow-section .journey-node {
-  color: #657087 !important;
-}
-
-.homepage-redesign .workflow-section .journey-node::after {
-  height: 1px !important;
-  background: #dce4ef !important;
-}
-
-.homepage-redesign .workflow-section .journey-dot {
-  width: 36px !important;
-  height: 36px !important;
-  color: #657087 !important;
-  background: #fff !important;
-  border: 1px solid #dce4ef !important;
-  box-shadow: none !important;
-}
-
-.homepage-redesign .workflow-section .journey-node.active .journey-dot {
-  color: #fff !important;
-  background: #34398a !important;
-  border-color: #34398a !important;
-  box-shadow: none !important;
-  transform: none !important;
-}
-
-.homepage-redesign .workflow-section .journey-node.active strong,
-.homepage-redesign .workflow-section .journey-node.complete strong {
-  color: #34398a !important;
-}
-
-.homepage-redesign .workflow-section .journey-node.complete .journey-dot {
-  color: #34398a !important;
-  background: #e8f2fc !important;
-  border-color: #dce4ef !important;
+  color: #fff;
+  background: var(--workflow-blue);
+  border-color: var(--workflow-blue);
 }
 
 .homepage-redesign .workflow-section .workflow {
-  gap: 28px !important;
+  grid-template-columns: minmax(280px, .9fr) minmax(0, 2.1fr);
+  align-items: stretch;
+  gap: 24px;
 }
 
 .homepage-redesign .workflow-section .step-list {
-  gap: 0 !important;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.homepage-redesign .workflow-section .step-list::before {
+  display: none;
 }
 
 .homepage-redesign .workflow-section .step {
-  gap: 14px !important;
-  padding: 14px 12px !important;
-  background: transparent !important;
-  border: 0 !important;
-  border-bottom: 1px solid #dce4ef !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  color: #202449 !important;
-  transform: none !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 96px;
+  padding: 20px 18px;
+  text-align: left;
+  background: #ffffffb8;
+  border: 1px solid #ffffffd9;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px #254da805;
+  color: var(--workflow-ink);
+  transition: background .2s, border-color .2s;
 }
 
-.homepage-redesign .workflow-section .step:hover,
+.homepage-redesign .workflow-section .step:hover {
+  background: #fff;
+  border-color: #cbdff5;
+}
+
 .homepage-redesign .workflow-section .step.active {
-  background: #eaf4fb !important;
-  border-color: #dce4ef !important;
-  border-left: 2px solid #009fe3 !important;
-  box-shadow: none !important;
-  transform: none !important;
+  background: #e0f2fc;
+  border-color: #bfe0f2;
+  box-shadow: inset 0 0 0 1px #cde9f680;
 }
 
 .homepage-redesign .workflow-section .step .step-num {
-  width: 30px !important;
-  height: 30px !important;
-  color: #34398a !important;
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
+  flex-shrink: 0;
+  width: 24px;
+  height: auto;
+  color: #627da6;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  font-size: 11px;
+}
+
+.homepage-redesign .workflow-section .step-info {
+  flex: 1;
+  min-width: 0;
 }
 
 .homepage-redesign .workflow-section .step-info strong,
 .homepage-redesign .workflow-section .step.active .step-info strong {
-  color: #202449 !important;
+  display: block;
+  color: var(--workflow-ink);
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -.025em;
 }
 
 .homepage-redesign .workflow-section .step-info small,
 .homepage-redesign .workflow-section .step.active .step-info small {
-  color: #657087 !important;
+  margin-top: 6px;
+  color: var(--workflow-muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .homepage-redesign .workflow-section .step-arrow {
-  color: #009fe3 !important;
+  color: #627da6;
 }
 
 .homepage-redesign .workflow-section .workflow-panel {
-  gap: 18px !important;
-  justify-content: flex-start !important;
-  min-height: 0 !important;
-  padding: 28px !important;
-  background: #fff !important;
-  border: 1px solid #dce4ef !important;
-  border-radius: 12px !important;
-  box-shadow: 0 8px 24px rgba(32, 36, 73, 0.05) !important;
-  backdrop-filter: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+  min-height: 550px;
+  padding: 30px;
+  background: #ffffffd9;
+  border: 1px solid #fff;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px #254da808;
 }
 
 .homepage-redesign .workflow-section .panel-index {
-  margin-bottom: 0 !important;
-}
-
-.homepage-redesign .workflow-section .panel-chip,
-.homepage-redesign .workflow-section .panel-counter {
-  color: #34398a !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--workflow-muted);
 }
 
 .homepage-redesign .workflow-section .panel-chip {
-  padding: 4px 9px !important;
-  background: #e8f2fc !important;
-  border: 0 !important;
-  border-radius: 4px !important;
+  padding: 8px 14px;
+  color: var(--workflow-blue);
+  background: #e6effc;
+  border-radius: 30px;
+}
+
+.homepage-redesign .workflow-section .panel-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .homepage-redesign .workflow-section .panel-meta-row {
-  gap: 20px !important;
-  margin-bottom: 0 !important;
-  padding: 16px 0 !important;
-  border-color: #dce4ef !important;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.homepage-redesign .workflow-section .stage-owner,
+.homepage-redesign .workflow-section .stage-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #f0f4fa;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px #254da803;
 }
 
 .homepage-redesign .workflow-section .stage-owner strong {
-  color: #657087 !important;
+  color: var(--workflow-muted);
+  font-size: 10px;
+  font-weight: 600;
 }
 
-.homepage-redesign .workflow-section .stage-owner span {
-  color: #202449 !important;
+.homepage-redesign .workflow-section .stage-owner span,
+.homepage-redesign .workflow-section .stage-input p {
+  color: var(--workflow-ink);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .homepage-redesign .workflow-section .in-badge {
-  color: #34398a !important;
-  background: #e8f2fc !important;
-  border: 0 !important;
-}
-
-.homepage-redesign .workflow-section .stage-input p {
-  color: #657087 !important;
-}
-
-.homepage-redesign .workflow-section .panel-main {
-  gap: 16px !important;
-  margin-bottom: 0 !important;
+  padding: 0;
+  color: var(--workflow-blue);
+  background: none;
+  border: 0;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
 }
 
 .homepage-redesign .workflow-section .workflow-panel .panel-icon {
-  width: 40px !important;
-  height: 40px !important;
-  color: #009fe3 !important;
-  background: #e8f2fc !important;
-  border: 0 !important;
-  border-radius: 8px !important;
-  box-shadow: none !important;
+  width: 36px;
+  height: 36px;
+  margin: 0 0 14px;
+  color: var(--workflow-blue);
+  background: #eef4ff;
+  border: 0;
+  border-radius: 10px;
 }
 
 .homepage-redesign .workflow-section .workflow-panel h3 {
-  margin-bottom: 8px !important;
-  color: #202449 !important;
-  font-size: 22px !important;
+  margin-bottom: 14px;
+  color: var(--workflow-ink);
+  font-size: clamp(25px, 2.3vw, 34px);
+  font-weight: 650;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.homepage-redesign .workflow-section .panel-main p {
+  max-width: 720px;
+  color: var(--workflow-muted);
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 .homepage-redesign .workflow-section .outcome {
-  margin: 0 !important;
-  padding: 14px 16px !important;
-  background: #f5f8fc !important;
-  border: 0 !important;
-  border-left: 2px solid #009fe3 !important;
-  border-radius: 0 6px 6px 0 !important;
+  margin: 0;
+  padding: 22px 24px;
+  background: #edf2fd;
+  border: 0;
+  border-radius: 18px;
 }
 
 .homepage-redesign .workflow-section .output-label {
-  color: #34398a !important;
+  margin-bottom: 8px;
+  color: var(--workflow-blue);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
 }
 
 .homepage-redesign .workflow-section .outcome-text {
-  color: #202449 !important;
+  color: var(--workflow-ink);
+  font-size: 21px;
+  font-weight: 650;
+  line-height: 1.35;
+  letter-spacing: -.025em;
 }
 
 .homepage-redesign .workflow-section .journey-navigation {
-  justify-content: space-between !important;
-  margin-top: 0 !important;
-  padding-top: 14px !important;
-  border-color: #dce4ef !important;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0;
 }
 
-.homepage-redesign .workflow-section .workflow-note {
-  max-width: 780px !important;
-  margin: 24px 0 0 !important;
-  color: #657087 !important;
-  text-align: left !important;
+@media (max-width: 1100px) {
+  .homepage-redesign .workflow-section .workflow {
+    grid-template-columns: minmax(260px, .85fr) minmax(0, 1.5fr);
+    gap: 18px;
+  }
+
 }
 
 @media (max-width: 760px) {
-  .homepage-redesign .dark-section.workflow-section {
-    padding: 64px 0 !important;
+  .homepage-redesign .workflow-section {
+    padding: 60px 0;
   }
 
-  .homepage-redesign .workflow-section .section-head {
-    display: block !important;
+  .homepage-redesign .workflow-section .wrap {
+    width: calc(100% - 32px);
   }
 
-  .homepage-redesign .workflow-section .section-head p {
-    max-width: none !important;
-    margin-top: 18px !important;
+  .homepage-redesign .workflow-section .workflow {
+    grid-template-columns: 1fr;
   }
 
   .homepage-redesign .workflow-section .tab-bar {
-    gap: 8px 16px !important;
-    padding-bottom: 8px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 24px;
   }
 
   .homepage-redesign .workflow-section .tab-bar button {
-    white-space: normal !important;
+    padding: 12px;
+    font-size: 13px;
+    border-radius: 14px;
+  }
+
+  .homepage-redesign .workflow-section .step {
+    min-height: 88px;
+    padding: 16px;
+    border-radius: 16px;
   }
 
   .homepage-redesign .workflow-section .workflow-panel {
-    padding: 22px !important;
+    min-height: 0;
+    padding: 22px;
+    border-radius: 20px;
   }
 
+  .homepage-redesign .workflow-section .journey-button {
+    padding: 10px 12px;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .homepage-redesign .workflow-section .outcome {
+    padding: 18px;
+  }
+
+  .homepage-redesign .workflow-section .outcome-text {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 480px) {
   .homepage-redesign .workflow-section .panel-meta-row {
-    gap: 12px !important;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -2202,7 +2264,7 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   }
 }
 
-/* Documentation: simpler card, balanced columns, and restrained brand accents */
+/* Documentation: centered introduction with the evidence card underneath. */
 .homepage-redesign .docs-evidence-section {
   padding: 88px 0;
   background: #f5f8fc;
@@ -2215,71 +2277,40 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 
 .homepage-redesign .docs-evidence-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(40px, 6vw, 80px);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 40px;
+  padding: 0 !important;
+}
+
+.homepage-redesign .docs-copy-col {
+  width: 100%;
+  max-width: 940px;
+  min-width: 0;
+  text-align: center;
+}
+
+.homepage-redesign .docs-card-col {
+  width: 100%;
+  max-width: 840px;
+  min-width: 0;
 }
 
 .homepage-redesign .docs-card {
-  border-color: #dce4ef;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(32, 36, 73, 0.06);
-}
-
-.homepage-redesign .docs-card:hover {
-  box-shadow: 0 10px 28px rgba(32, 36, 73, 0.08);
-  transform: none;
-}
-
-.homepage-redesign .docs-card-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
+  overflow: hidden;
   background: #fff;
-  border-color: #dce4ef;
-}
-
-.homepage-redesign .docs-card-header-left {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex: 0 0 auto;
-}
-
-.homepage-redesign .docs-card-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.homepage-redesign .docs-card-dot--red,
-.homepage-redesign .docs-card-dot--yellow,
-.homepage-redesign .docs-card-dot--green {
-  background: #dce4ef;
-}
-
-.homepage-redesign .docs-card-title-label {
-  flex: 1;
-  text-align: left;
-  color: #202449;
-  font-size: 10px;
-  letter-spacing: 0.08em;
-}
-
-.homepage-redesign .docs-card-counter {
-  color: #34398a;
-  background: #e8f2fc;
-  border: 0;
-  border-radius: 4px;
+  border: 1px solid #dce4ef;
+  border-radius: 22px;
+  box-shadow: 0 16px 48px rgba(32, 36, 73, 0.06);
 }
 
 .homepage-redesign .docs-tab-pills {
-  display: flex;
-  gap: 0;
-  padding: 12px 20px 0;
-  border-bottom: 1px solid #dce4ef;
-  border-color: #dce4ef;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 16px 24px;
+  background: #f9fbfe;
+  border-bottom: 1px solid #e7edf6;
 }
 
 .homepage-redesign .docs-tab-pill {
@@ -2287,51 +2318,65 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 10px 14px;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 12px;
   color: #657087;
   background: transparent;
   border: 0;
-  border-bottom: 2px solid transparent;
-  font-size: 12px;
+  border-radius: 12px;
+  font-size: 14px;
   font-weight: 600;
-  white-space: nowrap;
+  line-height: 1.4;
+  white-space: normal;
+  transition: background .2s, color .2s;
 }
 
-.homepage-redesign .docs-tab-pill,
-.homepage-redesign .docs-tab-pill.active {
-  color: #34398a;
+.homepage-redesign .docs-tab-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.homepage-redesign .docs-tab-pill:hover {
+  background: #eaf1fc;
 }
 
 .homepage-redesign .docs-tab-pill.active {
-  border-bottom-color: #009fe3;
+  color: #fff;
+  background: #34398a;
 }
 
 .homepage-redesign .docs-panel {
   min-height: 0;
-  padding: 24px;
+  padding: 30px;
 }
 
 .homepage-redesign .docs-panel-title {
   margin: 0 0 10px;
   color: #202449;
-  font-size: 20px;
+  font-size: 25px;
   line-height: 1.3;
 }
 
 .homepage-redesign .docs-panel-desc {
   margin: 0 0 18px;
   color: #657087;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.65;
 }
 
 .homepage-redesign .docs-panel-kicker,
 .homepage-redesign .docs-check-icon {
-  color: #009fe3;
+  color: #007eBA;
 }
 
-.homepage-redesign .docs-panel-title,
-.homepage-redesign .docs-feature-item strong {
+.homepage-redesign .docs-panel-kicker {
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.homepage-redesign .docs-panel-title {
   color: #202449 !important;
 }
 
@@ -2355,8 +2400,7 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   border-radius: 0;
 }
 
-.homepage-redesign .docs-check-icon,
-.homepage-redesign .docs-feature-icon {
+.homepage-redesign .docs-check-icon {
   display: grid;
   width: 24px;
   height: 24px;
@@ -2371,13 +2415,20 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   display: flex;
   align-items: center;
   gap: 7px;
-  padding: 12px 18px;
-  background: #fff;
-  border-color: #dce4ef;
+  padding: 16px 24px;
+  background: #f9fbfe;
+  border-top: 1px solid #e7edf6;
   color: #657087;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.homepage-redesign .docs-card-footer svg {
+  flex-shrink: 0;
 }
 
 .homepage-redesign .docs-copy-col .eyebrow {
+  justify-content: center;
   color: #34398a;
 }
 
@@ -2390,47 +2441,20 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   color: #009fe3 !important;
 }
 
-.homepage-redesign .docs-lead,
-.homepage-redesign .docs-feature-item span {
+.homepage-redesign .docs-lead {
   color: #657087;
+  font-size: 15px;
+  line-height: 1.65;
 }
 
-.homepage-redesign .docs-features {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin: 24px 0;
-}
-
-.homepage-redesign .docs-feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 14px 0;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid #dce4ef;
-  border-radius: 0;
-}
-
-.homepage-redesign .docs-feature-item > div:last-child {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.homepage-redesign .docs-feature-item:hover {
-  box-shadow: none;
-}
-
-.homepage-redesign .docs-feature-icon {
-  flex: 0 0 36px;
+.homepage-redesign .docs-lead {
+  max-width: 740px;
+  margin-inline: auto;
 }
 
 .homepage-redesign .docs-cta-btn {
   background: #34398a;
-  border-radius: 7px;
+  border-radius: 12px;
 }
 
 @media (max-width: 860px) {
@@ -2439,7 +2463,6 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   }
 
   .homepage-redesign .docs-evidence-grid {
-    grid-template-columns: 1fr;
     gap: 32px;
   }
 }
@@ -2451,6 +2474,15 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 
   .homepage-redesign .docs-panel {
     padding: 20px 18px;
+  }
+
+  .homepage-redesign .docs-tab-pills {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .homepage-redesign .docs-card-footer {
+    padding: 16px 18px;
   }
 }
 

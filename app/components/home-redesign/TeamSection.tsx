@@ -60,9 +60,6 @@ export const TeamSection: React.FC = () => {
             </h2>
           </div>
           <div className="team-head-right">
-            <p className="team-lead-text">
-              Our three co-founders bring nearly a decade of combined bench experience, with complementary strengths in analytical research, scientific coordination and molecular biology.
-            </p>
           </div>
         </div>
 

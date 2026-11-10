@@ -59,12 +59,10 @@ interface FaqSectionProps {
 }
 
 export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
-  const [openIds, setOpenIds] = useState<string[]>(['faq-1']);
+  const [openId, setOpenId] = useState<string | null>('faq-1');
 
   const toggleItem = (id: string) => {
-    setOpenIds((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
+    setOpenId((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -142,7 +140,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
         {/* Right Column: Redesigned Accordion Items */}
         <div className="faq-accordion-list reveal visible" role="region" aria-label="Frequently Asked Questions">
           {FAQ_ITEMS.map((item) => {
-            const isOpen = openIds.includes(item.id);
+            const isOpen = openId === item.id;
             return (
               <div
                 key={item.id}
