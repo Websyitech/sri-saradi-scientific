@@ -14,18 +14,12 @@ export const DivisionSection: React.FC = () => {
               your next scientific step.
             </h2>
           </div>
-          <p>
-            Supplies for the work you do.
-            <br />
-            Services for the material and insight you need.
-          </p>
         </div>
 
         <div className="division-grid">
           {/* 01 / Supplies */}
           <article className="division reveal visible">
             <div className="division-art">
-              <span className="division-label">01 / Supplies</span>
               <svg viewBox="0 0 580 250" aria-hidden="true">
                 <defs>
                   <linearGradient id="glass" x1="0" x2="1" y2="1">
@@ -80,7 +74,6 @@ export const DivisionSection: React.FC = () => {
           {/* 02 / Scientific services */}
           <article className="division reveal visible">
             <div className="division-art">
-              <span className="division-label">02 / Scientific services</span>
               <svg viewBox="0 0 500 420" aria-hidden="true">
                 <defs>
                   <linearGradient id="service-dna" x1="0" x2="1" y2="1">

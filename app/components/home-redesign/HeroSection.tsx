@@ -30,7 +30,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, motionP
       <div className="wrap hero-reference-wrap">
         <div className="hero-copy-wrap">
           <div className="hero-copy">
-            <div className="eyebrow">Scientist-led sourcing. Integrated logistics.</div>
             <h1>
               From scientific need
               <br />

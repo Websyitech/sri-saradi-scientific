@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaBars, FaTimes } from 'react-icons/fa';
 import '../solarbio.css';
 
 export default function ThankYouContent() {
@@ -15,6 +15,7 @@ export default function ThankYouContent() {
   const email = searchParams.get('email') || '';
   const qty = searchParams.get('qty') || '1 kit';
   const paid = searchParams.get('paid') === '1' && !!ref;
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   // Activate standalone header/footer mode
   React.useEffect(() => {
@@ -57,11 +58,77 @@ export default function ThankYouContent() {
                 <span>+917207607444</span>
               </a>
             </div>
-            <Link className="sb-btn blue sb-nav-cta" href="/genomic#enquire">
-              Request a quotation →
-            </Link>
+            <div className="sb-nav-actions-row">
+              <Link className="sb-btn blue sb-nav-cta" href="/genomic#enquire">
+                Request a quotation →
+              </Link>
+              <button
+                type="button"
+                className="sb-mobile-menu-toggle"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Navigation Dropdown */}
+        {mobileMenuOpen && (
+          <div className="sb-mobile-menu">
+            <div className="sb-wrap sb-mobile-menu-in">
+              <nav className="sb-mobile-links" aria-label="Mobile product navigation">
+                <Link href="/genomic#overview" onClick={() => setMobileMenuOpen(false)}>
+                  Overview
+                </Link>
+                <Link href="/genomic#evidence" onClick={() => setMobileMenuOpen(false)}>
+                  Experimental evidence
+                </Link>
+                <Link href="/genomic#quality" onClick={() => setMobileMenuOpen(false)}>
+                  Quality records
+                </Link>
+                <Link href="/genomic#research" onClick={() => setMobileMenuOpen(false)}>
+                  Publications
+                </Link>
+                <Link href="/genomic#purchase" onClick={() => setMobileMenuOpen(false)}>
+                  Online purchase
+                </Link>
+              </nav>
+
+              <div className="sb-mobile-menu-footer">
+                <Link
+                  className="sb-btn blue sb-mobile-quote-btn"
+                  href="/genomic#enquire"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Request a quotation →
+                </Link>
+                <div className="sb-mobile-contact-list">
+                  <a href="mailto:info@srisaradiscientific.com" className="sb-contact-link">
+                    <FaEnvelope className="sb-contact-icon" />
+                    <span>info@srisaradiscientific.com</span>
+                  </a>
+                  <a href="tel:+917207607444" className="sb-contact-link">
+                    <FaPhoneAlt className="sb-contact-icon" />
+                    <span>+91 7207607444</span>
+                  </a>
+                  <a
+                    href="https://wa.me/917207607444?text=Hi%2C%20I%20have%20submitted%20a%20quotation%20request%20for%20Solarbio%20D1800"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="sb-contact-link"
+                    style={{ color: '#25d366' }}
+                  >
+                    <FaWhatsapp className="sb-contact-icon" style={{ color: '#25d366' }} />
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="sb-thank-you-page">

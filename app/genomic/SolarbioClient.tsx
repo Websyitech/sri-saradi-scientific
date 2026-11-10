@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaBars, FaTimes } from 'react-icons/fa';
 import './solarbio.css';
 import { useZohoCheckout } from '../components/checkout/useZohoCheckout';
 
@@ -21,8 +21,10 @@ interface EnquiryFormState {
 
 export default function SolarbioClient() {
   const router = useRouter();
+  const navRef = React.useRef<HTMLElement | null>(null);
 
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lightboxAlt, setLightboxAlt] = useState<string>('');
   const [quantity, setQuantity] = useState<number>(1);
   const checkout = useZohoCheckout();
@@ -53,6 +55,29 @@ export default function SolarbioClient() {
     document.body.classList.add('solarbio-page-active');
     return () => {
       document.body.classList.remove('solarbio-page-active');
+    };
+  }, []);
+
+  // Measure navbar height dynamically to keep the sticky TOC bar flush with 0px gap
+  useEffect(() => {
+    const updateNavHeight = () => {
+      if (navRef.current) {
+        const height = navRef.current.offsetHeight;
+        document.documentElement.style.setProperty('--sb-nav-height', `${height}px`);
+      }
+    };
+
+    updateNavHeight();
+    window.addEventListener('resize', updateNavHeight);
+    let ro: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined' && navRef.current) {
+      ro = new ResizeObserver(updateNavHeight);
+      ro.observe(navRef.current);
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateNavHeight);
+      ro?.disconnect();
     };
   }, []);
 
@@ -185,7 +210,7 @@ export default function SolarbioClient() {
   return (
     <div className="solarbio-page" id="top">
       {/* Dedicated Navbar for Genomic Page */}
-      <header className="sb-nav">
+      <header className="sb-nav" ref={navRef}>
         <div className="sb-wrap sb-nav-in">
           <div className="sb-brand" title="Sri Saradi Scientific">
             <img
@@ -215,11 +240,77 @@ export default function SolarbioClient() {
                 <span>+917207607444</span>
               </a>
             </div>
-            <a className="sb-btn blue sb-nav-cta" href="#enquire">
-              Request a quotation →
-            </a>
+            <div className="sb-nav-actions-row">
+              <a className="sb-btn blue sb-nav-cta" href="#enquire">
+                Request a quotation →
+              </a>
+              <button
+                type="button"
+                className="sb-mobile-menu-toggle"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Navigation Dropdown */}
+        {mobileMenuOpen && (
+          <div className="sb-mobile-menu">
+            <div className="sb-wrap sb-mobile-menu-in">
+              <nav className="sb-mobile-links" aria-label="Mobile product navigation">
+                <a href="#overview" onClick={() => setMobileMenuOpen(false)}>
+                  Overview
+                </a>
+                <a href="#evidence" onClick={() => setMobileMenuOpen(false)}>
+                  Experimental evidence
+                </a>
+                <a href="#quality" onClick={() => setMobileMenuOpen(false)}>
+                  Quality records
+                </a>
+                <a href="#research" onClick={() => setMobileMenuOpen(false)}>
+                  Publications
+                </a>
+                <a href="#purchase" onClick={() => setMobileMenuOpen(false)}>
+                  Online purchase
+                </a>
+              </nav>
+
+              <div className="sb-mobile-menu-footer">
+                <a
+                  className="sb-btn blue sb-mobile-quote-btn"
+                  href="#enquire"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Request a quotation →
+                </a>
+                <div className="sb-mobile-contact-list">
+                  <a href="mailto:info@srisaradiscientific.com" className="sb-contact-link">
+                    <FaEnvelope className="sb-contact-icon" />
+                    <span>info@srisaradiscientific.com</span>
+                  </a>
+                  <a href="tel:+917207607444" className="sb-contact-link">
+                    <FaPhoneAlt className="sb-contact-icon" />
+                    <span>+91 7207607444</span>
+                  </a>
+                  <a
+                    href="https://wa.me/917207607444?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20Solarbio%20D1800"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="sb-contact-link"
+                    style={{ color: '#25d366' }}
+                  >
+                    <FaWhatsapp className="sb-contact-icon" style={{ color: '#25d366' }} />
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Hero Section */}
