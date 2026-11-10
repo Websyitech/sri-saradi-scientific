@@ -4,7 +4,6 @@ import "./globals.css";
 import TopHeader from "./components/TopHeader";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import CookiesPopup from "./components/CookiesPopup";
 import DisclaimerModal from "./components/DisclaimerModal";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import prisma from "@/app/lib/prisma";
@@ -91,7 +90,6 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
-        <CookiesPopup />
         <DisclaimerModal />
         <GoogleAnalytics />
       </body>

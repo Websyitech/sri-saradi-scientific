@@ -1,20 +1,17 @@
 import type { Metadata } from 'next';
-import HeroSlider from "./components/HeroSlider";
-import OmniSearchFeature from "./components/OmniSearchFeature";
-import TopCategories from "./components/TopCategories";
-import KitProducts from "./components/KitProducts";
+import HomeRedesign from "./components/home-redesign/HomeRedesign";
 
 export const metadata: Metadata = {
-  title: 'Sri Saradi Scientific | Integrated Solutions for Life Science Research',
-  description: 'Empower your workflows with Solarbio\'s expansive portfolio of premium research reagents. Featuring rigorously validated antibodies, ELISA kits, recombinant proteins, and biochemical assay kits.',
+  title: 'Sri Saradi Scientific | From scientific need to global supply',
+  description: 'Scientist-led product sourcing, evidence support and integrated worldwide logistics for laboratories, industries and dealers.',
   openGraph: {
-    title: 'Sri Saradi Scientific | Integrated Solutions for Life Science Research',
-    description: 'Empower your workflows with Solarbio\'s expansive portfolio of premium research reagents. Featuring rigorously validated antibodies, ELISA kits, recombinant proteins, and biochemical assay kits.',
+    title: 'Sri Saradi Scientific | From scientific need to global supply',
+    description: 'Scientist-led product sourcing, evidence support and integrated worldwide logistics for laboratories, industries and dealers.',
     url: 'https://srisaradiscientific.com',
     siteName: 'Sri Saradi Scientific',
     images: [
       {
-        url: 'https://srisaradiscientific.com/uploads/1772435096175-logo.png',
+        url: 'https://srisaradiscientific.com/assets/sri-saradi-logo.png',
         width: 1200,
         height: 630,
         alt: 'Sri Saradi Scientific Research Solutions',
@@ -27,11 +24,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
-      <HeroSlider />
-      <OmniSearchFeature />
-      <TopCategories />
-      <KitProducts />
+    <main id="main">
+      <HomeRedesign />
     </main>
   );
 }
