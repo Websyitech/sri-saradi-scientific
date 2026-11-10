@@ -39,7 +39,7 @@ export default function Header() {
 
   const handleSearchInputChange = () => undefined;
   const handleKeyPress = () => undefined;
-  const handleSelectResult = () => undefined;
+  const handleSelectResult = (_slug?: string) => undefined;
   useEffect(() => {
     fetch("/api/settings")
       .then((r) => r.json())
