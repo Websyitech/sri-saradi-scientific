@@ -2842,7 +2842,7 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 .homepage-redesign .audience-tabs-bar {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-bottom: 24px;
 }
 
