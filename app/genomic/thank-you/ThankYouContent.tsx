@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 import '../solarbio.css';
 
 export default function ThankYouContent() {
@@ -15,43 +16,11 @@ export default function ThankYouContent() {
   const qty = searchParams.get('qty') || '1 kit';
   const paid = searchParams.get('paid') === '1' && !!ref;
 
-  // Set Solarbio Favicon and activate standalone header/footer mode
+  // Activate standalone header/footer mode
   React.useEffect(() => {
     document.body.classList.add('solarbio-page-active');
-
-    const iconLinks = Array.from(
-      document.querySelectorAll<HTMLLinkElement>("link[rel*='icon']")
-    );
-
-    const prevIcons = iconLinks.map((el) => ({
-      el,
-      href: el.getAttribute('href') || '',
-      type: el.getAttribute('type') || '',
-    }));
-
-    if (iconLinks.length === 0) {
-      const newIcon = document.createElement('link');
-      newIcon.rel = 'icon';
-      newIcon.type = 'image/webp';
-      newIcon.href = '/assets/solarbio/solarbio-favicon.webp';
-      document.head.appendChild(newIcon);
-    } else {
-      iconLinks.forEach((el) => {
-        el.href = '/assets/solarbio/solarbio-favicon.webp';
-        el.type = 'image/webp';
-      });
-    }
-
     return () => {
       document.body.classList.remove('solarbio-page-active');
-      prevIcons.forEach(({ el, href, type }) => {
-        el.href = href;
-        if (type) {
-          el.type = type;
-        } else {
-          el.removeAttribute('type');
-        }
-      });
     };
   }, []);
 
@@ -64,9 +33,9 @@ export default function ThankYouContent() {
             <img
               src="/assets/sri-saradi-logo.png"
               alt="Sri Saradi Scientific"
-              width={160}
-              height={50}
-              style={{ height: '48px', width: 'auto', display: 'block' }}
+              width={192}
+              height={60}
+              style={{ height: '60px', width: 'auto', display: 'block' }}
             />
           </div>
           <nav className="sb-nav-links" aria-label="Primary navigation">
@@ -75,9 +44,23 @@ export default function ThankYouContent() {
             <Link href="/genomic#quality">Quality records</Link>
             <Link href="/genomic#research">Publications</Link>
           </nav>
-          <Link className="sb-btn blue sb-nav-cta" href="/genomic#enquire">
-            Request a quotation →
-          </Link>
+          <div className="sb-nav-right">
+            <div className="sb-nav-contact">
+              <a href="mailto:info@srisaradiscientific.com" className="sb-contact-link" title="Email Sri Saradi Scientific">
+                <FaEnvelope className="sb-contact-icon" />
+                <span className="sb-email-full">info@srisaradiscientific.com</span>
+                <span className="sb-email-short">Email</span>
+              </a>
+              <span className="sb-contact-sep">|</span>
+              <a href="tel:+917207607444" className="sb-contact-link" title="Call Sri Saradi Scientific">
+                <FaPhoneAlt className="sb-contact-icon" />
+                <span>+917207607444</span>
+              </a>
+            </div>
+            <Link className="sb-btn blue sb-nav-cta" href="/genomic#enquire">
+              Request a quotation →
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -217,9 +200,9 @@ export default function ThankYouContent() {
             <img
               src="/assets/sri-saradi-logo.png"
               alt="Sri Saradi Scientific"
-              width={160}
-              height={50}
-              style={{ height: '48px', width: 'auto', display: 'block' }}
+              width={166}
+              height={52}
+              style={{ height: '52px', width: 'auto', display: 'block' }}
             />
           </div>
         </div>
@@ -243,11 +226,32 @@ export default function ThankYouContent() {
         </div>
 
         <div className="sb-footer-right">
-          <div className="sb-footer-product">Solarbio D1800 · 100T · Research Use Only</div>
-          <p className="sb-footer-copy">© {new Date().getFullYear()} Sri Saradi Scientific Pvt. Ltd.</p>
+          <div className="sb-footer-contact">
+            <a href="mailto:info@srisaradiscientific.com" className="sb-contact-link" title="Email Sri Saradi Scientific">
+              <FaEnvelope className="sb-contact-icon" />
+              <span>info@srisaradiscientific.com</span>
+            </a>
+            <span className="sb-contact-sep">|</span>
+            <a href="tel:+917207607444" className="sb-contact-link" title="Call Sri Saradi Scientific">
+              <FaPhoneAlt className="sb-contact-icon" />
+              <span>+917207607444</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>
+
+    {/* Floating WhatsApp Action Button */}
+    <a
+      href="https://wa.me/917207607444?text=Hi%2C%20I%20have%20submitted%20a%20quotation%20request%20for%20Solarbio%20D1800%20and%20would%20like%20to%20connect"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="sb-whatsapp-float"
+      aria-label="Chat on WhatsApp"
+      title="Chat with our scientific team on WhatsApp"
+    >
+      <FaWhatsapp />
+    </a>
   </div>
   );
 }

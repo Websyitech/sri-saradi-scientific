@@ -7,14 +7,9 @@ export const metadata: Metadata = {
   description:
     'Thank you for your quotation request for the Solarbio D1800 Blood Genomic DNA Extraction Kit (100T). Our scientific support team will be in touch shortly.',
   icons: {
-    icon: [
-      {
-        url: '/assets/solarbio/solarbio-favicon.webp',
-        type: 'image/webp',
-      },
-    ],
-    shortcut: '/assets/solarbio/solarbio-favicon.webp',
-    apple: '/assets/solarbio/solarbio-favicon.webp',
+    icon: '/uploads/1774236052207-favicon-32x32.png',
+    shortcut: '/uploads/1774236052207-favicon-32x32.png',
+    apple: '/uploads/1774236052207-favicon-32x32.png',
   },
   robots: {
     index: false,
