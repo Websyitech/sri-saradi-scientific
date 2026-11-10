@@ -2832,13 +2832,18 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   line-height: 1.7;
 }
 
-/* Pair the Audience tabs and enquiry action into a responsive control row. */
-.homepage-redesign .audience-actions-wrap {
+.homepage-redesign .audience-benefits-col {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+}
+
+.homepage-redesign .audience-tabs-bar {
+  display: flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 26px;
+  justify-content: flex-start;
+  margin-bottom: 24px;
 }
 
 .homepage-redesign .audience-tabs {
@@ -2858,6 +2863,7 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   border-radius: 7px;
   font-size: 13px;
   font-weight: 600;
+  margin-top: 28px;
 }
 
 .homepage-redesign .audience-enquiry-btn:hover {
@@ -2968,12 +2974,7 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 }
 
 .homepage-redesign .logistics-eyebrow::before {
-  width: 8px;
-  height: 8px;
-  content: '';
-  flex: 0 0 auto;
-  background: #ad2e49;
-  border-radius: 50%;
+  display: none !important;
 }
 
 .homepage-redesign .logistics-heading h2 {

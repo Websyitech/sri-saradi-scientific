@@ -40,5 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+<<<<<<< HEAD
 /app/generated/prisma
+=======
+>>>>>>> 640dab6432f8a362593a6a1a5ff3ddc283b5f4a2
 /public

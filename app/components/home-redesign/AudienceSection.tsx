@@ -28,7 +28,18 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
             Your scientists keep the application decisions. Your procurement team gets a clearer requirement and supply proposal. We coordinate product questions, evidence and logistics so both teams can move forward together.
           </p>
 
-          <div className="audience-actions-wrap">
+          <button
+            type="button"
+            className="audience-enquiry-btn"
+            onClick={() => onOpenEnquiry(activeAudience === 'dealer' ? 'dealer' : 'product')}
+          >
+            <span>{activeAudience === 'dealer' ? 'Discuss dealer collaboration' : 'Discuss your requirement'}</span>
+            <span className="arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+
+        <div className="audience-benefits-col">
+          <div className="audience-tabs-bar">
             <div className="tab-bar audience-tabs" role="tablist" aria-label="Benefits for your organisation">
               <button
                 id="audience-tab-enduser"
@@ -51,36 +62,27 @@ export const AudienceSection: React.FC<AudienceSectionProps> = ({ onOpenEnquiry 
                 Dealers
               </button>
             </div>
-
-            <button
-              type="button"
-              className="audience-enquiry-btn"
-              onClick={() => onOpenEnquiry(activeAudience === 'dealer' ? 'dealer' : 'product')}
-            >
-              <span>{activeAudience === 'dealer' ? 'Discuss dealer collaboration' : 'Discuss your requirement'}</span>
-              <span className="arrow" aria-hidden="true">↗</span>
-            </button>
           </div>
-        </div>
 
-        <div
-          className="audience-benefits"
-          id="audience-panel"
-          role="tabpanel"
-          aria-labelledby={`audience-tab-${activeAudience}`}
-          aria-live="polite"
-        >
-          {benefits.map((b, i) => (
-            <article key={i} className="benefit-card">
-              <div className="benefit-icon-wrap" aria-hidden="true">
-                <SvgIcon name={b.icon} />
-              </div>
-              <div className="benefit-content">
-                <h3>{b.title}</h3>
-                <p>{b.description}</p>
-              </div>
-            </article>
-          ))}
+          <div
+            className="audience-benefits"
+            id="audience-panel"
+            role="tabpanel"
+            aria-labelledby={`audience-tab-${activeAudience}`}
+            aria-live="polite"
+          >
+            {benefits.map((b, i) => (
+              <article key={i} className="benefit-card">
+                <div className="benefit-icon-wrap" aria-hidden="true">
+                  <SvgIcon name={b.icon} />
+                </div>
+                <div className="benefit-content">
+                  <h3>{b.title}</h3>
+                  <p>{b.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
 
