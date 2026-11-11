@@ -1801,3 +1801,12 @@ div::-webkit-scrollbar {
     padding: 8px 12px;
   }
 }
+
+/* Legal / policy pages */
+.policy-content h1 { font-size: 1.25rem; font-weight: 700; color: #2D2B7F; margin: 2rem 0 0.75rem; }
+.policy-content h2 { font-size: 1.05rem; font-weight: 600; color: #1a1a2e; margin: 1.5rem 0 0.5rem; }
+.policy-content p { margin: 0 0 0.85rem; text-align: justify; }
+.policy-content > p:first-child, .policy-content > p:nth-child(2) { text-align: center; color: #6b7280; font-size: 0.85rem; margin-bottom: 0.25rem; }
+.policy-content table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; display: block; overflow-x: auto; }
+.policy-content td { border: 1px solid #e5e7eb; padding: 0.5rem 0.75rem; vertical-align: top; }
+.policy-content tr:first-child td { background: #f3f4f8; font-weight: 600; }
