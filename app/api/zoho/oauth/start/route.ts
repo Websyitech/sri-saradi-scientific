@@ -1,14 +1,18 @@
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import { adminAuth } from "@/app/lib/adminAuth";
 import { buildAuthorizeUrl, oauthRedirectUri } from "@/app/lib/zohoPayments";
 import { requestOrigin } from "../origin";
 
-// One-time setup: an admin opens this URL to grant the site access to Zoho Payments.
+// One-time setup: open /api/zoho/oauth/start?key=<ZOHO_PAY_SETUP_KEY> to grant the site access to Zoho Payments.
 export async function GET(request: NextRequest) {
-  const auth = adminAuth(request);
-  if (auth instanceof NextResponse) {
-    return NextResponse.json({ error: "Log in at /admin/login first, then open this URL again." }, { status: 401 });
+  const setupKey = process.env.ZOHO_PAY_SETUP_KEY;
+  const given = request.nextUrl.searchParams.get("key") || "";
+  if (
+    !setupKey ||
+    given.length !== setupKey.length ||
+    !crypto.timingSafeEqual(Buffer.from(given), Buffer.from(setupKey))
+  ) {
+    return NextResponse.json({ error: "Set ZOHO_PAY_SETUP_KEY in .env, then open this URL with ?key=<that value>." }, { status: 401 });
   }
 
   const missing = ["ZOHO_PAY_ACCOUNT_ID", "ZOHO_PAY_CLIENT_ID", "ZOHO_PAY_CLIENT_SECRET"].filter((k) => !process.env[k]);

@@ -26,34 +26,21 @@ const footerLinks = {
     links: [
       { label: "Home", href: "/" },
       { label: "About Us", href: "/about" },
-      { label: "CRO Services", href: "/cro-services" },
-      { label: "Signaling Pathways", href: "/signaling-pathways" },
-      { label: "FAQ", href: "/faq" },
-      { label: "Certificates", href: "/certificates" },
-      { label: "Careers", href: "/careers" },
+      { label: "Services", href: "/services" },
+      { label: "Omni-Search", href: "/omni-search" },
       { label: "Contact", href: "/contact" },
     ],
   },
   solarbioCataegories: {
     title: "Products",
     links: [
-      { label: "Analytical Standards", href: "/products?brand=Solarbio&category=analytical-standards" },
-      { label: "Molecular Biology", href: "/products?brand=Solarbio&category=molecular-biology" },
-      { label: "Protein & Immunity", href: "/products?brand=Solarbio&category=protein-immunity" },
-      { label: "ELISA Kit", href: "/products?brand=Solarbio&category=elisa-kit" },
-      { label: "Cell Culture Media", href: "/products?brand=Solarbio&category=cell-culture-media" },
-      { label: "Antibody", href: "/products?brand=Solarbio&category=antibody" },
+      { label: "Solarbio DNA/RNA Extraction Kit", href: "/genomic" },
+      { label: "Request a product", href: "/contact" },
     ],
   },
   products2: {
-    title: "More Products",
-    links: [
-      { label: "Biochemical Assay Kit", href: "/products?brand=Solarbio&category=biochemical-assay-kit" },
-      { label: "Recombinant Protien", href: "/products?brand=Solarbio&category=recombinant-protien" },
-      { label: "Peptide", href: "/products?brand=Solarbio&category=peptide" },
-      { label: "Cell Biology", href: "/products?brand=Solarbio&category=cell-biology" },
-      { label: "Biochemical Reagent", href: "/products?brand=Solarbio&category=biochemical-reagent" },
-    ],
+    title: "",
+    links: [] as { label: string; href: string }[],
   },
   // labConsumables will be dynamically loaded
   legal: {
@@ -72,7 +59,7 @@ const footerLinks = {
 
 export default function Footer() {
   const [settings, setSettings] = useState<SiteSettings>({});
-  const [labConsumables, setLabConsumables] = useState<KitProduct[]>([]);
+  const labConsumables: KitProduct[] = [];
 
   useEffect(() => {
     // Fetch settings
@@ -89,15 +76,6 @@ export default function Footer() {
       })
       .catch(() => {});
 
-    // Fetch lab consumables
-    fetch("/api/kit-products")
-      .then((r) => r.json())
-      .then((data: KitProduct[]) => {
-        if (Array.isArray(data)) {
-          setLabConsumables(data.filter(product => product.isActive));
-        }
-      })
-      .catch(() => {});
   }, []);
 
   return (

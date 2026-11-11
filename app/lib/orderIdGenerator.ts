@@ -1,39 +1,9 @@
-import prisma from "./prisma";
+import crypto from "crypto";
 
-/**
- * Generates a custom order ID in the format SSS-001
- * SSS = Sri Saradi Scientific
- * 001 = Sequential number
- */
+/** Order reference like SSS-261111-7K3QD (date + random), no database needed. */
 export async function generateOrderId(): Promise<string> {
-  try {
-    // Get the count of existing orders to determine the next number
-    const orderCount = await prisma.quoteRequest.count();
-    
-    // Add 1 to get the next sequential number
-    const nextNumber = orderCount + 1;
-    
-    // Format as SSS-XXX with zero padding (3 digits minimum)
-    const formattedNumber = nextNumber.toString().padStart(3, '0');
-    
-    const orderId = `SSS-${formattedNumber}`;
-    
-    // Check if this orderId already exists (in case of race conditions)
-    const existingOrder = await prisma.quoteRequest.findUnique({
-      where: { orderId }
-    });
-    
-    if (existingOrder) {
-      // If it exists, recursively try the next number
-      // This handles race conditions where two orders are created simultaneously
-      return generateOrderId();
-    }
-    
-    return orderId;
-  } catch (error) {
-    console.error('Error generating order ID:', error);
-    // Fallback to timestamp-based ID if database query fails
-    const timestamp = Date.now().toString().slice(-6);
-    return `SSS-${timestamp}`;
-  }
+  const d = new Date();
+  const date = `${String(d.getFullYear()).slice(2)}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}`;
+  const rand = crypto.randomBytes(4).readUInt32BE(0).toString(36).toUpperCase().padStart(5, "0").slice(-5);
+  return `SSS-${date}-${rand}`;
 }

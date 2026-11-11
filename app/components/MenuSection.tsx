@@ -13,8 +13,6 @@ const leftMenuItems = [
   // { label: "Products", href: "/products", hasMegaMenu: true },
   // { label: "Lab Consumables", href: "#", hasDropdown: true },
   { label: "Services", href: "/services" },
-  { label: "CRO Services", href: "/cro-services", hasDropdown: true },
-  { label: "Resources", href: "/resources", hasDropdown: true },
 ];
 
 const rightMenuItems = [
@@ -122,70 +120,15 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
     }
   }, [isMenuOpen, mobileMenuStack.length]);
   
-  const [categories, setCategories] = useState<Level2Category[]>([]);
-  const [applications, setApplications] = useState<ApplicationCategory[]>([]);
-  const [kitProducts, setKitProducts] = useState<KitProduct[]>([]);
-  const [croServices, setCroServices] = useState<CROService[]>([]);
-  const [signalingPathways, setSignalingPathways] = useState<SignalingPathway[]>([]);
-  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  // Menu content used to come from the database; the site no longer has one.
+  const categories: Level2Category[] = [];
+  const applications: ApplicationCategory[] = [];
+  const kitProducts: KitProduct[] = [];
+  const croServices: CROService[] = [];
+  const signalingPathways: SignalingPathway[] = [];
+  const faqs: FAQ[] = [];
   const [menuTop, setMenuTop] = useState(0);
   const menuContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    fetch("/api/solarbio/categories-hierarchical")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setCategories(data);
-        }
-      })
-      .catch(() => {});
-
-    fetch("/api/applications")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setApplications(data);
-        }
-      })
-      .catch(() => {});
-
-    fetch("/api/kit-products")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setKitProducts(data);
-        }
-      })
-      .catch(() => {});
-
-    fetch("/api/cro-services")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setCroServices(data);
-        }
-      })
-      .catch(() => {});
-
-    fetch("/api/signaling-pathways")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setSignalingPathways(data);
-        }
-      })
-      .catch(() => {});
-
-    fetch("/api/faqs")
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setFaqs(data);
-        }
-      })
-      .catch(() => {});
-  }, []);
 
   useEffect(() => {
     if (menuContainerRef.current && showMegaMenu) {

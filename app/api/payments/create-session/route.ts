@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/app/lib/prisma";
+import { saveOrder } from "@/app/lib/orderStore";
 import { generateOrderId } from "@/app/lib/orderIdGenerator";
 import { computeOrderTotal, getPayableProduct } from "@/app/lib/payableProducts";
 import { createPaymentSession, missingConfig, widgetConfig, ZohoPayError } from "@/app/lib/zohoPayments";
@@ -53,22 +53,21 @@ export async function POST(request: NextRequest) {
       .filter(Boolean)
       .join("\n");
 
-    const order = await prisma.quoteRequest.create({
-      data: {
-        id: crypto.randomUUID(),
-        orderId,
-        name,
-        email,
-        phone,
-        company: company || null,
-        notes,
-        status: STATUS_PAYMENT_PENDING,
-        updatedAt: new Date(),
-      },
-    });
-    await prisma.quoteItem.create({
-      data: { id: crypto.randomUUID(), quoteId: order.id, sku: product.sku, name: product.name, quantity },
-    });
+    const order = {
+      orderId,
+      status: STATUS_PAYMENT_PENDING,
+      name,
+      email,
+      phone,
+      company: company || undefined,
+      notes,
+      sku: product.sku,
+      productName: product.name,
+      quantity,
+      amount: amount.toFixed(2),
+      createdAt: new Date().toISOString(),
+    } as const;
+    await saveOrder({ ...order });
 
     const session = await createPaymentSession({
       amount,
@@ -80,10 +79,7 @@ export async function POST(request: NextRequest) {
       ],
     });
 
-    await prisma.quoteRequest.update({
-      where: { id: order.id },
-      data: { notes: `${notes}\n[Payment] Zoho session ID: ${session.payments_session_id}`, updatedAt: new Date() },
-    });
+    await saveOrder({ ...order, paymentSessionId: session.payments_session_id });
 
     return NextResponse.json({
       orderId,

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { adminAuth } from "@/app/lib/adminAuth";
 import { exchangeAuthCode, oauthRedirectUri } from "@/app/lib/zohoPayments";
 import { requestOrigin } from "../origin";
 
@@ -22,11 +21,6 @@ const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
  * refresh token, which is shown once so it can be saved as ZOHO_PAY_REFRESH_TOKEN.
  */
 export async function GET(request: NextRequest) {
-  const auth = adminAuth(request);
-  if (auth instanceof NextResponse) {
-    return page("Admin login required", "<p>Log in at <code>/admin/login</code>, then start again from <code>/api/zoho/oauth/start</code>.</p>", 401);
-  }
-
   const params = request.nextUrl.searchParams;
   const error = params.get("error");
   if (error) return page("Zoho declined the request", `<p>Zoho returned: <code>${esc(error)}</code></p>`, 400);

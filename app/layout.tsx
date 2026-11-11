@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import DisclaimerModal from "./components/DisclaimerModal";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import Script from "next/script";
-import prisma from "@/app/lib/prisma";
+import { SITE_SETTINGS } from "@/app/lib/siteSettings";
 
 const googleSans = Inter({
   variable: "--font-google-sans",
@@ -15,18 +15,8 @@ const googleSans = Inter({
   display: 'swap',
 });
 
-// Fetch settings for metadata
-async function getSettings() {
-  try {
-    const settings = await prisma.siteSetting.findMany();
-    const settingsMap: Record<string, string> = {};
-    settings.forEach((s) => {
-      settingsMap[s.key] = s.value;
-    });
-    return settingsMap;
-  } catch {
-    return {};
-  }
+async function getSettings(): Promise<Record<string, string>> {
+  return SITE_SETTINGS;
 }
 
 export async function generateMetadata(): Promise<Metadata> {

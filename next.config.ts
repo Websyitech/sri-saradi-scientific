@@ -3,14 +3,16 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   basePath: '',
   async redirects() {
-    return [
-      // Redirect /kit-products/* to /lab-consumables/*
-      {
-        source: '/kit-products/:slug*',
-        destination: '/lab-consumables/:slug*',
-        permanent: true,
-      },
+    // These sections were database-driven and have been removed; send old links home.
+    const removed = [
+      'products', 'kit-products', 'lab-consumables', 'applications', 'cro-services',
+      'signaling-pathways', 'faq', 'careers', 'certificates', 'catalogues',
+      'publications', 'pages', 'track-order', 'login', 'admin',
     ];
+    return removed.flatMap((p) => [
+      { source: `/${p}`, destination: '/', permanent: false },
+      { source: `/${p}/:path*`, destination: '/', permanent: false },
+    ]);
   },
   experimental: {
     serverActions: {

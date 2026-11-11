@@ -38,8 +38,9 @@ Copy the Client ID and Client Secret into `.env` and restart.
 
 ## 3. Authorize (one time)
 
-1. Log in at `/admin/login`.
-2. Open `/api/zoho/oauth/start` in the same browser and click **Accept** on Zoho.
+1. Add a long random value as `ZOHO_PAY_SETUP_KEY` in `.env` and restart
+   (for example the output of `openssl rand -hex 24`).
+2. Open `/api/zoho/oauth/start?key=<that value>` and click **Accept** on Zoho.
 3. The callback page shows a `ZOHO_PAY_REFRESH_TOKEN=...` line. Paste it into `.env` and restart.
 
 ## 4. Webhook
