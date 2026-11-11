@@ -81,6 +81,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-PXTC9W9L"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            `,
+          }}
+        />
         <meta charSet="utf-8" />
       </head>
       <body

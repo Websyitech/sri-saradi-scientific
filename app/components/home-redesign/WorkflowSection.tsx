@@ -98,12 +98,10 @@ export const WorkflowSection: React.FC = () => {
                   aria-controls="flow-panel"
                   onClick={() => setCurrentStep(i)}
                 >
-                  <span className="step-num">0{i + 1}</span>
                   <span className="step-info">
                     <strong>{s.title}</strong>
                     <small>{s.subtitle}</small>
                   </span>
-                  <span className="step-arrow" aria-hidden="true">→</span>
                 </button>
               ))}
             </div>

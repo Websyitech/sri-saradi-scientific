@@ -720,11 +720,23 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
 .homepage-redesign .division {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .homepage-redesign .division-art {
+  height: 220px;
+  overflow: hidden;
   border-bottom: 1px solid var(--line);
   background: #f4f7fb;
+}
+
+.homepage-redesign .division-art img,
+.homepage-redesign .division-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .homepage-redesign .division-copy {
@@ -1884,7 +1896,7 @@ button.text-link{background:none;border:0;border-bottom:1px solid #b9c6d6;paddin
   gap: 12px;
   width: 100%;
   min-height: 96px;
-  padding: 20px 18px;
+  padding: 20px 24px;
   text-align: left;
   background: #ffffffb8;
   border: 1px solid #ffffffd9;

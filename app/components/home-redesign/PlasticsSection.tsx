@@ -69,21 +69,15 @@ export const PlasticsSection: React.FC<PlasticsSectionProps> = ({ onOpenEnquiry 
             <div className="specialist-card-header">
               <span className="specialist-number">SPECIALIST FORMATS</span>
             </div>
-            <div className="specialist-image-wrap specialist-custom-spec">
-              <div className="custom-spec-canvas">
-                <div className="custom-spec-icon-ring" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="9" />
-                    <circle cx="12" cy="12" r="5" />
-                    <circle cx="12" cy="12" r="1.5" />
-                    <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
-                  </svg>
-                </div>
-                <div className="custom-spec-badge">
-                  <span className="spec-dot" aria-hidden="true" />
-                  <span>On-demand custom specs</span>
-                </div>
-              </div>
+            <div className="specialist-image-wrap">
+              <img
+                src="/assets/specialist_formats.webp"
+                alt="Customised biological labware and specialist formats"
+                className="specialist-img"
+                loading="lazy"
+                width={500}
+                height={500}
+              />
             </div>
             <h3>Customised biological labware</h3>
             <p>

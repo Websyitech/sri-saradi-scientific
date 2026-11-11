@@ -106,7 +106,7 @@ export default function Footer() {
       <div
         style={{
           background: "#f5f5f5",
-          padding: "50px 0 40px",
+          padding: "32px 0 28px",
           borderTop: "1px solid #e0e0e0",
         }}
       >
@@ -118,50 +118,120 @@ export default function Footer() {
           }}
           className="footer-main-grid"
         >
-          {/* Quick Links */}
-          <div>
-            <h4
+          {/* Left: Brand & Description */}
+          <div className="footer-brand-col">
+            <a href="/" style={{ display: "inline-block", marginBottom: "16px" }}>
+              <img
+                src="/assets/sri_saradi_scientific_transparent.webp"
+                alt="Sri Saradi Scientific"
+                style={{ height: "66px", width: "auto", objectFit: "contain", display: "block" }}
+              />
+            </a>
+            <p
               style={{
-                fontSize: "14px",
-                fontWeight: 700,
-                color: "#171717",
-                margin: "0 0 20px 0",
-                letterSpacing: "0.5px",
-              }}
-            >
-              {footerLinks.quickLinks.title}
-            </h4>
-            <ul
-              style={{
-                listStyle: "none",
+                fontSize: "13px",
+                lineHeight: "1.65",
+                color: "#666",
                 margin: 0,
-                padding: 0,
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
               }}
             >
-              {footerLinks.quickLinks.links.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    style={{
-                      textDecoration: "none",
-                      color: "#666",
-                      fontSize: "13px",
-                      transition: "color 0.2s",
-                    }}
-                    className="footer-link"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+              <strong style={{ color: "#202449", fontWeight: 600 }}>Sri Saradi Scientific</strong> is an India-based life sciences company specializing in high-quality scientific research products, laboratory equipment, and consumables. Partnering with leading international manufacturers, the company provides research reagents, ELISA kits, antibodies, molecular biology products, filtration solutions, and laboratory instruments. With a focus on quality, affordability, and technical expertise, Sri Saradi Scientific supports academic institutions, pharmaceutical companies, and research laboratories across India.
+            </p>
           </div>
 
-          {/* Solarbio Categories */}
-          <div>
+          {/* Right: Quick Links & Legal */}
+          <div className="footer-links-wrap">
+            {/* Quick Links */}
+            <div style={{ minWidth: "160px" }}>
+              <h4
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 700,
+                  color: "#171717",
+                  margin: "0 0 12px 0",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                {footerLinks.quickLinks.title}
+              </h4>
+              <ul
+                style={{
+                  listStyle: "none",
+                  margin: 0,
+                  padding: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                }}
+              >
+                {footerLinks.quickLinks.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      style={{
+                        textDecoration: "none",
+                        color: "#666",
+                        fontSize: "13px",
+                        lineHeight: "1.4",
+                        display: "inline-block",
+                        transition: "color 0.2s",
+                      }}
+                      className="footer-link"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div style={{ minWidth: "160px" }}>
+              <h4
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 700,
+                  color: "#171717",
+                  margin: "0 0 12px 0",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                {footerLinks.legal.title}
+              </h4>
+              <ul
+                style={{
+                  listStyle: "none",
+                  margin: 0,
+                  padding: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                }}
+              >
+                {footerLinks.legal.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      style={{
+                        textDecoration: "none",
+                        color: "#666",
+                        fontSize: "13px",
+                        lineHeight: "1.4",
+                        display: "inline-block",
+                        transition: "color 0.2s",
+                      }}
+                      className="footer-link"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Products (Solarbio Categories) - Hidden */}
+          {/* <div>
             <h4
               style={{
                 fontSize: "14px",
@@ -200,10 +270,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
-          {/* More Products */}
-          <div>
+          {/* More Products - Hidden */}
+          {/* <div>
             <h4
               style={{
                 fontSize: "14px",
@@ -242,10 +312,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
-          {/* Lab Consumables */}
-          <div>
+          {/* Lab Consumables - Hidden */}
+          {/* <div>
             <h4
               style={{
                 fontSize: "14px",
@@ -287,49 +357,7 @@ export default function Footer() {
                 );
               })}
             </ul>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4
-              style={{
-                fontSize: "14px",
-                fontWeight: 700,
-                color: "#171717",
-                margin: "0 0 20px 0",
-                letterSpacing: "0.5px",
-              }}
-            >
-              {footerLinks.legal.title}
-            </h4>
-            <ul
-              style={{
-                listStyle: "none",
-                margin: 0,
-                padding: 0,
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-              }}
-            >
-              {footerLinks.legal.links.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    style={{
-                      textDecoration: "none",
-                      color: "#666",
-                      fontSize: "13px",
-                      transition: "color 0.2s",
-                    }}
-                    className="footer-link"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </div> */}
         </div>
       </div>
 

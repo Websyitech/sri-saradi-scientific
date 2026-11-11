@@ -88,20 +88,8 @@ export default function TopHeader() {
   return (
     <div className="top-header">
       <div className="top-header-container">
-        {/* Left - Contact Info */}
-        <div className="top-header-left">
-          <a href={`mailto:${contactInfo.contact_email}`} className="top-header-item">
-            <FaEnvelope className="top-header-icon" />
-            <span>{contactInfo.contact_email}</span>
-          </a>
-          <a href={`tel:${contactInfo.contact_phone?.replace(/\s+/g, '')}`} className="top-header-item">
-            <FaPhoneAlt className="top-header-icon" />
-            <span>{contactInfo.contact_phone}</span>
-          </a>
-        </div>
-
         {/* Right - Login & Track Order */}
-        <div className="top-header-right">
+        {/* <div className="top-header-right">
           <button 
             onClick={() => setShowProductInquiry(true)}
             className="top-header-link"
@@ -111,6 +99,19 @@ export default function TopHeader() {
           </button>
           <span className="top-header-divider">|</span>
           <a href="/track-order" className="top-header-link">Track Order</a>
+        </div> */}
+
+        {/* Right - Contact Info (email + phone) */}
+        <div className="top-header-right">
+          <a href={`mailto:${contactInfo.contact_email}`} className="top-header-item">
+            <FaEnvelope className="top-header-icon" />
+            <span>{contactInfo.contact_email}</span>
+          </a>
+          <span className="top-header-divider">|</span>
+          <a href={`tel:${contactInfo.contact_phone?.replace(/\s+/g, '')}`} className="top-header-item">
+            <FaPhoneAlt className="top-header-icon" />
+            <span>{contactInfo.contact_phone}</span>
+          </a>
         </div>
       </div>
 
