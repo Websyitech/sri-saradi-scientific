@@ -1,13 +1,26 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { FaBars, FaTimes, FaChevronDown } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cleanText } from "../utils/textUtils";
 import { getImageUrl } from "../utils/getImageUrl";
 
-const leftMenuItems = [
+interface MainMenuItem {
+  label: string;
+  href: string;
+  active?: boolean;
+  hasMegaMenu?: boolean;
+  hasDropdown?: boolean;
+}
+
+interface ResourceMenuItem {
+  label: string;
+  href: string;
+}
+
+const leftMenuItems: MainMenuItem[] = [
   { label: "Home", href: "/", active: true },
   { label: "Omni-Search", href: "/omni-search" },
   // { label: "Products", href: "/products", hasMegaMenu: true },
@@ -15,7 +28,7 @@ const leftMenuItems = [
   { label: "Services", href: "/services" },
 ];
 
-const rightMenuItems = [
+const rightMenuItems: MainMenuItem[] = [
   { label: "About us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -87,38 +100,324 @@ interface MenuSectionProps {
   setMobileMenuOpen?: (open: boolean) => void;
 }
 
+type MobileMenuLevel =
+  | { title: string; type: "main"; items: MainMenuItem[] }
+  | { title: string; type: "products"; items: Level2Category[] }
+  | { title: string; type: "level2"; items: Level3Category[]; parentId?: string }
+  | { title: string; type: "labconsumables"; items: KitProduct[] }
+  | { title: string; type: "croservices"; items: CROService[] }
+  | { title: string; type: "resources"; items: ResourceMenuItem[] };
+
+const mobileNavLinkStyle: React.CSSProperties = {
+  display: "block",
+  padding: "16px 20px",
+  color: "#fff",
+  textDecoration: "none",
+  fontSize: "15px",
+  borderBottom: "1px solid #3a3d4e",
+};
+
+const mobileNavTriggerStyle: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "16px 20px",
+  color: "#fff",
+  cursor: "pointer",
+  borderBottom: "1px solid #3a3d4e",
+};
+
+interface MobileMenuDrawerProps {
+  categories: Level2Category[];
+  kitProducts: KitProduct[];
+  croServices: CROService[];
+  onClose: () => void;
+}
+
+function MobileMenuDrawer({
+  categories,
+  kitProducts,
+  croServices,
+  onClose,
+}: MobileMenuDrawerProps) {
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const [mobileMenuLevel, setMobileMenuLevel] = useState(0);
+  const [mobileMenuStack, setMobileMenuStack] = useState<MobileMenuLevel[]>(() => [
+    {
+      title: "Menu",
+      type: "main",
+      items: [...leftMenuItems, ...rightMenuItems],
+    },
+  ]);
+
+  useLayoutEffect(() => {
+    const updatePosition = () => {
+      if (window.innerWidth > 1320) {
+        onClose();
+        return;
+      }
+      const el = drawerRef.current;
+      if (!el) return;
+      const headerEl = document.querySelector(".main-header");
+      const top = headerEl
+        ? Math.max(0, Math.round(headerEl.getBoundingClientRect().bottom))
+        : 0;
+      el.style.top = `${top}px`;
+    };
+
+    const prevOverflow = document.body.style.overflow;
+    if (window.innerWidth <= 1320) {
+      document.body.style.overflow = "hidden";
+    }
+    updatePosition();
+
+    window.addEventListener("resize", updatePosition, { passive: true });
+    window.addEventListener("scroll", updatePosition, { passive: true });
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition);
+    };
+  }, [onClose]);
+
+  const navigateToLevel = (level: MobileMenuLevel) => {
+    setMobileMenuStack((prev) => [...prev, level]);
+    setMobileMenuLevel((prev) => prev + 1);
+  };
+
+  const navigateBack = () => {
+    if (mobileMenuLevel > 0) {
+      setMobileMenuStack((prev) => prev.slice(0, -1));
+      setMobileMenuLevel((prev) => prev - 1);
+    }
+  };
+
+  const renderMobileMenuItems = (menuLevel: MobileMenuLevel) => {
+    switch (menuLevel.type) {
+      case "main":
+        return menuLevel.items.map((item) => (
+          <div key={item.label}>
+            {item.hasMegaMenu ? (
+              <div
+                onClick={() =>
+                  navigateToLevel({
+                    title: item.label,
+                    type: "products",
+                    items: categories,
+                  })
+                }
+                style={mobileNavTriggerStyle}
+              >
+                <span style={{ fontSize: "15px" }}>{cleanText(item.label)}</span>
+                <span style={{ color: "#888", fontSize: "14px" }}>→</span>
+              </div>
+            ) : item.hasDropdown ? (
+              <div
+                onClick={() => {
+                  if (item.label === "Lab Consumables") {
+                    navigateToLevel({
+                      title: item.label,
+                      type: "labconsumables",
+                      items: kitProducts,
+                    });
+                  } else if (item.label === "CRO Services") {
+                    navigateToLevel({
+                      title: item.label,
+                      type: "croservices",
+                      items: croServices,
+                    });
+                  } else if (item.label === "Resources") {
+                    navigateToLevel({
+                      title: item.label,
+                      type: "resources",
+                      items: [
+                        { label: "Catalogues", href: "/catalogues" },
+                        { label: "Signaling Pathways", href: "/signaling-pathways" },
+                        { label: "Publications", href: "/publications" },
+                        { label: "FAQ", href: "/faq" },
+                      ],
+                    });
+                  }
+                }}
+                style={mobileNavTriggerStyle}
+              >
+                <span style={{ fontSize: "15px" }}>{cleanText(item.label)}</span>
+                <span style={{ color: "#888", fontSize: "14px" }}>→</span>
+              </div>
+            ) : (
+              <Link href={item.href} onClick={onClose} style={mobileNavLinkStyle}>
+                {cleanText(item.label)}
+              </Link>
+            )}
+          </div>
+        ));
+      case "products":
+        return menuLevel.items.map((level2) => (
+          <div key={level2.id}>
+            {level2.children && level2.children.length > 0 ? (
+              <div
+                onClick={() =>
+                  navigateToLevel({
+                    title: level2.name,
+                    type: "level2",
+                    items: level2.children,
+                    parentId: level2.id,
+                  })
+                }
+                style={mobileNavTriggerStyle}
+              >
+                <span style={{ fontSize: "15px" }}>{cleanText(level2.name)}</span>
+                <span style={{ color: "#888", fontSize: "14px" }}>→</span>
+              </div>
+            ) : (
+              <Link
+                href={`/products?brand=Solarbio&category=${level2.slug}`}
+                onClick={onClose}
+                style={mobileNavLinkStyle}
+              >
+                {cleanText(level2.name)}
+              </Link>
+            )}
+          </div>
+        ));
+      case "level2":
+        return menuLevel.items.map((level3) => (
+          <Link
+            key={level3.id}
+            href={`/products?brand=Solarbio&category=${level3.slug}`}
+            onClick={onClose}
+            style={mobileNavLinkStyle}
+          >
+            {cleanText(level3.name)}
+          </Link>
+        ));
+      case "labconsumables":
+        return menuLevel.items.map((product) => (
+          <Link
+            key={product.id}
+            href={`/lab-consumables/${product.slug}`}
+            onClick={onClose}
+            style={mobileNavLinkStyle}
+          >
+            {cleanText(product.title)}
+          </Link>
+        ));
+      case "croservices":
+        return (
+          <>
+            <Link href="/cro-services" onClick={onClose} style={mobileNavLinkStyle}>
+              All CRO Services
+            </Link>
+            {menuLevel.items.map((service) => (
+              <Link
+                key={service.id}
+                href={`/cro-services/${service.slug}`}
+                onClick={onClose}
+                style={mobileNavLinkStyle}
+              >
+                {cleanText(service.title)}
+              </Link>
+            ))}
+          </>
+        );
+      case "resources":
+        return menuLevel.items.map((item) => (
+          <Link key={item.label} href={item.href} onClick={onClose} style={mobileNavLinkStyle}>
+            {cleanText(item.label)}
+          </Link>
+        ));
+    }
+  };
+
+  return (
+    <div ref={drawerRef} className="mobile-menu">
+      <div
+        style={{
+          position: "relative",
+          height: "100%",
+          overflow: "hidden",
+          background: "#2a2d3e",
+        }}
+      >
+        {mobileMenuStack.map((menuLevel, index) => {
+          const isActive = index === mobileMenuLevel;
+          const translateX = (index - mobileMenuLevel) * 100;
+
+          return (
+            <div
+              key={`${menuLevel.type}-${index}`}
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                overflowY: "auto",
+                transform: `translateX(${translateX}%)`,
+                transition: "transform 0.3s ease-in-out",
+                background: "#2a2d3e",
+                zIndex: isActive ? 20 : 15,
+              }}
+            >
+              {/* Header with back button and title */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "16px 20px",
+                  borderBottom: "1px solid #3a3d4e",
+                  background: "#242736",
+                }}
+              >
+                {index > 0 && (
+                  <button
+                    onClick={navigateBack}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#fff",
+                      fontSize: "18px",
+                      marginRight: "12px",
+                      cursor: "pointer",
+                      padding: "4px",
+                    }}
+                  >
+                    ←
+                  </button>
+                )}
+                <h3
+                  style={{
+                    margin: 0,
+                    color: "#fff",
+                    fontSize: "16px",
+                    fontWeight: 600,
+                  }}
+                >
+                  {menuLevel.title}
+                </h3>
+              </div>
+
+              {/* Menu Items */}
+              <div style={{ padding: "8px 0" }}>{renderMobileMenuItems(menuLevel)}</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen }: MenuSectionProps = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
-  
+
   // Use external mobile menu state if provided
   const isMenuOpen = setMobileMenuOpen ? mobileMenuOpen : mobileOpen;
   const toggleMenu = setMobileMenuOpen || setMobileOpen;
+  const closeMenu = useCallback(() => toggleMenu(false), [toggleMenu]);
   const [showMegaMenu, setShowMegaMenu] = useState<string | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
-  const [mobileSubmenu, setMobileSubmenu] = useState<string | null>(null);
-  
-  // Multi-level mobile menu state
-  const [mobileMenuLevel, setMobileMenuLevel] = useState(0);
-  const [mobileMenuStack, setMobileMenuStack] = useState<Array<{
-    title: string;
-    items: any[];
-    type: 'main' | 'products' | 'level2' | 'labconsumables' | 'croservices' | 'resources';
-    parentId?: string;
-  }>>([]);
-
-  // Initialize mobile menu stack when menu opens
-  useEffect(() => {
-    if (isMenuOpen && mobileMenuStack.length === 0) {
-      setMobileMenuStack([{
-        title: 'Menu',
-        items: [...leftMenuItems, ...rightMenuItems],
-        type: 'main'
-      }]);
-      setMobileMenuLevel(0);
-    }
-  }, [isMenuOpen, mobileMenuStack.length]);
   
   // Menu content used to come from the database; the site no longer has one.
   const categories: Level2Category[] = [];
@@ -145,40 +444,6 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
     setShowMegaMenu(null);
   };
 
-  // Multi-level mobile menu functions
-  const initializeMobileMenu = () => {
-    setMobileMenuLevel(0);
-    setMobileMenuStack([{
-      title: "Menu",
-      type: 'main',
-      items: [
-        ...leftMenuItems.map(item => ({ ...item, type: 'main' })),
-        ...rightMenuItems.map(item => ({ ...item, type: 'main' }))
-      ]
-    }]);
-  };
-
-  const navigateToLevel = (level: {
-    title: string;
-    items: any[];
-    type: 'main' | 'products' | 'level2' | 'labconsumables' | 'croservices' | 'resources';
-    parentId?: string;
-  }) => {
-    setMobileMenuStack(prev => [...prev, level]);
-    setMobileMenuLevel(prev => prev + 1);
-  };
-
-  const navigateBack = () => {
-    if (mobileMenuLevel > 0) {
-      setMobileMenuStack(prev => prev.slice(0, -1));
-      setMobileMenuLevel(prev => prev - 1);
-    }
-  };
-
-  const getCurrentMenuLevel = () => {
-    return mobileMenuStack[mobileMenuLevel] || mobileMenuStack[0];
-  };
-
   const handleViewAllProducts = () => {
     // If we're already on the products page, just update the URL parameters
     if (window.location.pathname === '/products') {
@@ -196,211 +461,6 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
     
     // Close the mega menu
     handleMouseLeave();
-  };
-
-  const renderMobileMenuItems = (menuLevel: any) => {
-    if (menuLevel.type === 'main') {
-      return menuLevel.items.map((item: any) => (
-        <div key={item.label}>
-          {item.hasMegaMenu ? (
-            <div
-              onClick={() => navigateToLevel({
-                title: item.label,
-                type: 'products',
-                items: categories
-              })}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '16px 20px',
-                color: '#fff',
-                cursor: 'pointer',
-                borderBottom: '1px solid #3a3d4e'
-              }}
-            >
-              <span style={{ fontSize: '15px' }}>{cleanText(item.label)}</span>
-              <span style={{ color: '#888', fontSize: '14px' }}>→</span>
-            </div>
-          ) : item.hasDropdown ? (
-            <div
-              onClick={() => {
-                let nextLevel;
-                if (item.label === 'Lab Consumables') {
-                  nextLevel = {
-                    title: item.label,
-                    type: 'labconsumables' as const,
-                    items: kitProducts
-                  };
-                } else if (item.label === 'CRO Services') {
-                  nextLevel = {
-                    title: item.label,
-                    type: 'croservices' as const,
-                    items: croServices
-                  };
-                } else if (item.label === 'Resources') {
-                  nextLevel = {
-                    title: item.label,
-                    type: 'resources' as const,
-                    items: [
-                      { label: 'Catalogues', href: '/catalogues' },
-                      { label: 'Signaling Pathways', href: '/signaling-pathways' },
-                      { label: 'Publications', href: '/publications' },
-                      { label: 'FAQ', href: '/faq' }
-                    ]
-                  };
-                }
-                if (nextLevel) {
-                  navigateToLevel(nextLevel);
-                }
-              }}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '16px 20px',
-                color: '#fff',
-                cursor: 'pointer',
-                borderBottom: '1px solid #3a3d4e'
-              }}
-            >
-              <span style={{ fontSize: '15px' }}>{cleanText(item.label)}</span>
-              <span style={{ color: '#888', fontSize: '14px' }}>→</span>
-            </div>
-          ) : (
-            <a
-              href={item.href}
-              onClick={() => toggleMenu(false)}
-              style={{
-                display: 'block',
-                padding: '16px 20px',
-                color: '#fff',
-                textDecoration: 'none',
-                fontSize: '15px',
-                borderBottom: '1px solid #3a3d4e'
-              }}
-            >
-              {cleanText(item.label)}
-            </a>
-          )}
-        </div>
-      ));
-    } else if (menuLevel.type === 'products') {
-      return menuLevel.items.map((level2: Level2Category) => (
-        <div key={level2.id}>
-          {level2.children && level2.children.length > 0 ? (
-            <div
-              onClick={() => navigateToLevel({
-                title: level2.name,
-                type: 'level2',
-                items: level2.children,
-                parentId: level2.id
-              })}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '16px 20px',
-                color: '#fff',
-                cursor: 'pointer',
-                borderBottom: '1px solid #3a3d4e'
-              }}
-            >
-              <span style={{ fontSize: '15px' }}>{cleanText(level2.name)}</span>
-              <span style={{ color: '#888', fontSize: '14px' }}>→</span>
-            </div>
-          ) : (
-            <a
-              href={`/products?brand=Solarbio&category=${level2.slug}`}
-              onClick={() => toggleMenu(false)}
-              style={{
-                display: 'block',
-                padding: '16px 20px',
-                color: '#fff',
-                textDecoration: 'none',
-                fontSize: '15px',
-                borderBottom: '1px solid #3a3d4e'
-              }}
-            >
-              {cleanText(level2.name)}
-            </a>
-          )}
-        </div>
-      ));
-    } else if (menuLevel.type === 'level2') {
-      return menuLevel.items.map((level3: Level3Category) => (
-        <a
-          key={level3.id}
-          href={`/products?brand=Solarbio&category=${level3.slug}`}
-          onClick={() => setMobileOpen(false)}
-          style={{
-            display: 'block',
-            padding: '16px 20px',
-            color: '#fff',
-            textDecoration: 'none',
-            fontSize: '15px',
-            borderBottom: '1px solid #3a3d4e'
-          }}
-        >
-          {cleanText(level3.name)}
-        </a>
-      ));
-    } else if (menuLevel.type === 'labconsumables') {
-      return menuLevel.items.map((product: KitProduct) => (
-        <a
-          key={product.id}
-          href={`/lab-consumables/${product.slug}`}
-          onClick={() => setMobileOpen(false)}
-          style={{
-            display: 'block',
-            padding: '16px 20px',
-            color: '#fff',
-            textDecoration: 'none',
-            fontSize: '15px',
-            borderBottom: '1px solid #3a3d4e'
-          }}
-        >
-          {cleanText(product.title)}
-        </a>
-      ));
-    } else if (menuLevel.type === 'croservices') {
-      return menuLevel.items.map((service: CROService) => (
-        <a
-          key={service.id}
-          href={`/cro-services/${service.slug}`}
-          onClick={() => setMobileOpen(false)}
-          style={{
-            display: 'block',
-            padding: '16px 20px',
-            color: '#fff',
-            textDecoration: 'none',
-            fontSize: '15px',
-            borderBottom: '1px solid #3a3d4e'
-          }}
-        >
-          {cleanText(service.title)}
-        </a>
-      ));
-    } else if (menuLevel.type === 'resources') {
-      return menuLevel.items.map((item: any) => (
-        <a
-          key={item.label}
-          href={item.href}
-          onClick={() => setMobileOpen(false)}
-          style={{
-            display: 'block',
-            padding: '16px 20px',
-            color: '#fff',
-            textDecoration: 'none',
-            fontSize: '15px',
-            borderBottom: '1px solid #3a3d4e'
-          }}
-        >
-          {cleanText(item.label)}
-        </a>
-      ));
-    }
-    return null;
   };
 
   return (
@@ -881,92 +941,23 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
         {/* Mobile Toggle */}
         <button
           className="menu-mobile-toggle"
-          onClick={() => {
-            const newState = !isMenuOpen;
-            toggleMenu(newState);
-            if (newState) {
-              initializeMobileMenu();
-            }
-          }}
+          onClick={() => toggleMenu(!isMenuOpen)}
           aria-label="Toggle menu"
         >
           {isMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
       </div>
-
-      {/* Multi-Level Mobile Menu */}
-      {isMenuOpen && (
-        <div className="mobile-menu">
-          <div style={{ 
-            position: 'relative', 
-            height: '100%', 
-            overflow: 'hidden',
-            background: '#2a2d3e'
-          }}>
-            {mobileMenuStack.map((menuLevel, index) => {
-              const isActive = index === mobileMenuLevel;
-              const translateX = (index - mobileMenuLevel) * 100;
-              
-              return (
-                <div
-                  key={`${menuLevel.type}-${index}`}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    transform: `translateX(${translateX}%)`,
-                    transition: 'transform 0.3s ease-in-out',
-                    background: '#2a2d3e',
-                    zIndex: isActive ? 20 : 15
-                  }}
-                >
-                  {/* Header with back button and title */}
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    padding: '16px 20px',
-                    borderBottom: '1px solid #3a3d4e',
-                    background: '#242736'
-                  }}>
-                    {index > 0 && (
-                      <button
-                        onClick={navigateBack}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          color: '#fff',
-                          fontSize: '18px',
-                          marginRight: '12px',
-                          cursor: 'pointer',
-                          padding: '4px'
-                        }}
-                      >
-                        ←
-                      </button>
-                    )}
-                    <h3 style={{
-                      margin: 0,
-                      color: '#fff',
-                      fontSize: '16px',
-                      fontWeight: 600
-                    }}>
-                      {menuLevel.title}
-                    </h3>
-                  </div>
-
-                  {/* Menu Items */}
-                  <div style={{ padding: '8px 0' }}>
-                    {renderMobileMenuItems(menuLevel)}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
       </nav>
+
+      {/* Multi-Level Mobile Menu (outside .menu-section so @media max-width: 1320px does not hide it) */}
+      {isMenuOpen && (
+        <MobileMenuDrawer
+          categories={categories}
+          kitProducts={kitProducts}
+          croServices={croServices}
+          onClose={closeMenu}
+        />
+      )}
     </>
   );
 }

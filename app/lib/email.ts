@@ -63,7 +63,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
 // Send contact form notification
 export async function sendContactFormNotification(data: ContactFormData): Promise<boolean> {
   const subject = `New Contact Form Message${data.subject ? `: ${data.subject}` : ''}`;
-  
+
   const html = `
     <h2>New Contact Form Message</h2>
     <p><strong>From:</strong> ${data.name}</p>
@@ -108,7 +108,7 @@ export async function sendContactFormNotification(data: ContactFormData): Promis
 // Send confirmation email to customer
 export async function sendContactConfirmation(data: ContactFormData): Promise<boolean> {
   const subject = 'Thank you for contacting Sri Saradi Scientific';
-  
+
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #2D2B7F;">Thank you for your message!</h2>
@@ -128,7 +128,7 @@ export async function sendContactConfirmation(data: ContactFormData): Promise<bo
       
       <p>Our team typically responds within 24 hours during business hours (Monday - Friday, 9:00 AM - 6:00 PM IST).</p>
       
-      <p>If you have any urgent inquiries, please feel free to call us at <a href="tel:+919742443809">+91 97424 43809</a>.</p>
+      <p>If you have any urgent inquiries, please feel free to call us at <a href="tel:+919742443809">+91 72076 07444</a>.</p>
       
       <p>Best regards,<br>
       <strong>Sri Saradi Scientific Team</strong></p>
@@ -139,7 +139,7 @@ export async function sendContactConfirmation(data: ContactFormData): Promise<bo
         <p>Sri Saradi Scientific<br>
         Hyderabad, Telangana, India<br>
         Email: info@srisaradiscientific.com<br>
-        Phone: +91 97424 43809</p>
+        Phone: +91 72076 07444</p>
       </div>
     </div>
   `;
@@ -157,7 +157,7 @@ export async function sendContactConfirmation(data: ContactFormData): Promise<bo
 
     Our team typically responds within 24 hours during business hours (Monday - Friday, 9:00 AM - 6:00 PM IST).
 
-    If you have any urgent inquiries, please feel free to call us at +91 97424 43809.
+    If you have any urgent inquiries, please feel free to call us at +91 72076 07444.
 
     Best regards,
     Sri Saradi Scientific Team
@@ -166,7 +166,7 @@ export async function sendContactConfirmation(data: ContactFormData): Promise<bo
     Sri Saradi Scientific
     Hyderabad, Telangana, India
     Email: info@srisaradiscientific.com
-    Phone: +91 97424 43809
+    Phone: +91 72076 07444
   `;
 
   return sendEmail({
@@ -200,9 +200,9 @@ interface QuoteFormData {
 // Send quote request notification to admin
 export async function sendQuoteNotification(data: QuoteFormData): Promise<boolean> {
   const subject = `New Quote Request - ${data.orderId}`;
-  
+
   const showQuantity = data.items && data.items.some(item => item.quantity > 0);
-  const itemsHtml = data.items && data.items.length > 0 
+  const itemsHtml = data.items && data.items.length > 0
     ? `
       <h3>Requested Items:</h3>
       <table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
@@ -223,7 +223,7 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
           `).join('')}
         </tbody>
       </table>
-    ` 
+    `
     : '';
 
   const html = `
@@ -285,9 +285,9 @@ export async function sendQuoteNotification(data: QuoteFormData): Promise<boolea
 // Send quote confirmation email to customer
 export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolean> {
   const subject = `Quote Request Confirmation - ${data.orderId}`;
-  
+
   const showQuantityCustomer = data.items && data.items.some(item => item.quantity > 0);
-  const itemsHtml = data.items && data.items.length > 0 
+  const itemsHtml = data.items && data.items.length > 0
     ? `
       <div style="background: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
         <h3 style="margin-top: 0; color: #2D2B7F;">Your Requested Items:</h3>
@@ -310,7 +310,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
           </tbody>
         </table>
       </div>
-    ` 
+    `
     : '';
 
   const html = `
@@ -344,7 +344,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
       <p>If you have any urgent questions or need to modify your request, please feel free to contact us:</p>
       <ul>
         <li>Email: <a href="mailto:info@srisaradiscientific.com">info@srisaradiscientific.com</a></li>
-        <li>Phone: <a href="tel:+919742443809">+91 97424 43809</a></li>
+        <li>Phone: <a href="tel:+919742443809">+91 72076 07444</a></li>
       </ul>
       
       <p>Thank you for choosing Sri Saradi Scientific!</p>
@@ -358,7 +358,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
         <p>Sri Saradi Scientific<br>
         Hyderabad, Telangana, India<br>
         Email: info@srisaradiscientific.com<br>
-        Phone: +91 97424 43809</p>
+        Phone: +91 72076 07444</p>
       </div>
     </div>
   `;
@@ -389,7 +389,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
 
     If you have any urgent questions or need to modify your request, please feel free to contact us:
     - Email: info@srisaradiscientific.com
-    - Phone: +91 97424 43809
+    - Phone: +91 72076 07444
 
     Thank you for choosing Sri Saradi Scientific!
 
@@ -400,7 +400,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
     Sri Saradi Scientific
     Hyderabad, Telangana, India
     Email: info@srisaradiscientific.com
-    Phone: +91 97424 43809
+    Phone: +91 72076 07444
   `;
 
   return sendEmail({
@@ -513,7 +513,7 @@ export async function sendPaymentConfirmation(data: PaymentEmailData): Promise<b
       ${paymentItemsHtml(data.items)}
       <p>Our team will contact you with dispatch details and the tax invoice. For any questions, write to
       <a href="mailto:info@srisaradiscientific.com">info@srisaradiscientific.com</a> or call
-      <a href="tel:+919742443809">+91 97424 43809</a> and quote your Order ID.</p>
+      <a href="tel:+919742443809">+91 72076 07444</a> and quote your Order ID.</p>
       <p>Best regards,<br><strong>Sri Saradi Scientific Team</strong></p>
     </div>
   `;
@@ -531,7 +531,7 @@ Items:
 ${data.items.map(i => `- ${i.name} x ${i.quantity}`).join('\n')}
 
 Our team will contact you with dispatch details and the tax invoice.
-Email: info@srisaradiscientific.com | Phone: +91 97424 43809
+Email: info@srisaradiscientific.com | Phone: +91 72076 07444
 
 Sri Saradi Scientific Team`;
 

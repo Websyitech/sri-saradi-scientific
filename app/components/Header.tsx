@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useRef, Suspense } from "react";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import MenuSection from "./MenuSection";
 
-interface SiteSettings {
-  site_name?: string;
-  site_logo?: string;
-}
+const SITE_NAME = "Sri Saradi Scientific";
+const SITE_LOGO = "/assets/sri_saradi_scientific_transparent.webp";
 
 interface SearchResult {
   id: string;
@@ -18,7 +16,6 @@ interface SearchResult {
 }
 
 export default function Header() {
-  const [settings, setSettings] = useState<SiteSettings>({});
   const [showResearchModal, setShowResearchModal] = useState(false);
   const [showMobileSearchModal, setShowMobileSearchModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,17 +37,6 @@ export default function Header() {
   const handleSearchInputChange = () => undefined;
   const handleKeyPress = () => undefined;
   const handleSelectResult = (_slug?: string) => undefined;
-  useEffect(() => {
-    fetch("/api/settings")
-      .then((r) => r.json())
-      .then((data) => {
-        setSettings({
-          site_name: data.site_name || "",
-          site_logo: data.site_logo || "",
-        });
-      })
-      .catch(() => {});
-  }, []);
 
   const handleResearchFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -104,15 +90,13 @@ export default function Header() {
       <div className="main-header-container">
         {/* Logo */}
         <Link href="/" className="header-logo-section" style={{ textDecoration: "none" }}>
-          {settings.site_logo && (
-            <div className="header-logo-icon">
-              <img
-                src={settings.site_logo}
-                alt={settings.site_name || "Logo"}
-                style={{ height: "100px", maxWidth: "250px", objectFit: "contain" }}
-              />
-            </div>
-          )}
+          <div className="header-logo-icon">
+            <img
+              src={SITE_LOGO}
+              alt={SITE_NAME}
+              style={{ height: "100px", maxWidth: "250px", objectFit: "contain" }}
+            />
+          </div>
         </Link>
 
         {/* Mobile Icons Container */}
@@ -139,8 +123,8 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Right - Request Research Product Button */}
-        <div className="header-action-section">
+        {/* Right - Request Research Product Button (Hidden) */}
+        {/* <div className="header-action-section">
           <button 
             onClick={() => setShowResearchModal(true)}
             style={{
@@ -166,7 +150,7 @@ export default function Header() {
           >
             Request a Research Product
           </button>
-        </div>
+        </div> */}
 
         {/* Research Product Modal */}
         {showResearchModal && (

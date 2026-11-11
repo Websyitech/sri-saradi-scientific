@@ -48,7 +48,7 @@ export default function TermsOfServicePage() {
     },
     {
       title: "12. Contact Information",
-      content: `If you have any questions about these Terms of Service, please contact us:\n\nSri Saradi Scientific\nEmail: info@srisaradiscientific.com\nPhone: +91 97424 43809\nAddress: Hyderabad, Telangana, India`,
+      content: `If you have any questions about these Terms of Service, please contact us:\n\nSri Saradi Scientific\nEmail: info@srisaradiscientific.com\nPhone: +91 72076 07444\nAddress: Hyderabad, Telangana, India`,
     },
   ];
 

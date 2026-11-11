@@ -19,9 +19,6 @@ export const PlasticsSection: React.FC<PlasticsSectionProps> = ({ onOpenEnquiry 
               the plasticware.
             </h2>
           </div>
-          <p>
-            Our focus is specialist consumables for advanced biological work. Ask for the specifications of the exact product your application needs.
-          </p>
         </div>
 
         <div className="specialist-grid">

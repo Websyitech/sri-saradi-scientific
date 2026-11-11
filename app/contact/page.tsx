@@ -8,9 +8,8 @@ interface ContactPageData {
   description: string;
   email: string;
   phone: string;
-  address: string;
+  offices: { name: string; address: string; mapEmbedUrl: string }[];
   businessHours: string;
-  mapEmbedUrl: string;
   isActive: boolean;
 }
 
@@ -21,9 +20,8 @@ export default function ContactPage() {
     description: "",
     email: "",
     phone: "",
-    address: "",
+    offices: [],
     businessHours: "",
-    mapEmbedUrl: "",
     isActive: true,
   });
 
@@ -141,7 +139,7 @@ export default function ContactPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
               gap: "60px",
               marginBottom: "60px",
             }}
@@ -160,7 +158,7 @@ export default function ContactPage() {
               </h2>
 
               {/* Contact Info Cards */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {contactData.email && (
                   <div className="contact-info-card">
                     <h3
@@ -211,8 +209,8 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                {contactData.address && (
-                  <div className="contact-info-card">
+                {contactData.offices.map((office) => (
+                  <div className="contact-info-card" key={office.name}>
                     <h3
                       style={{
                         fontSize: "16px",
@@ -221,7 +219,7 @@ export default function ContactPage() {
                         margin: "0 0 8px 0",
                       }}
                     >
-                      Address
+                      {office.name}
                     </h3>
                     <p
                       style={{
@@ -232,10 +230,10 @@ export default function ContactPage() {
                         whiteSpace: "pre-wrap",
                       }}
                     >
-                      {contactData.address}
+                      {office.address}
                     </p>
                   </div>
-                )}
+                ))}
 
                 {contactData.businessHours && (
                   <div className="contact-info-card">
@@ -263,6 +261,24 @@ export default function ContactPage() {
                   </div>
                 )}
               </div>
+
+              {contactData.offices.map((office) => (
+                <div key={office.name} style={{ marginTop: "24px" }}>
+                  <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "12px" }}>
+                    {office.name} Location
+                  </h3>
+                  <iframe
+                    title={`${office.name} location on Google Maps`}
+                    src={office.mapEmbedUrl}
+                    width="100%"
+                    height="320"
+                    style={{ border: 0, borderRadius: "8px", display: "block" }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Right - Contact Form */}
@@ -480,29 +496,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Map Section */}
-          {contactData.mapEmbedUrl && (
-            <div style={{ marginTop: "60px" }}>
-              <h2
-                style={{
-                  fontSize: "28px",
-                  fontWeight: 700,
-                  color: "#1a1a2e",
-                  marginBottom: "30px",
-                }}
-              >
-                Our Location
-              </h2>
-              <div
-                style={{
-                  borderRadius: "8px",
-                  overflow: "hidden",
-                  height: "400px",
-                }}
-                dangerouslySetInnerHTML={{ __html: contactData.mapEmbedUrl }}
-              />
-            </div>
-          )}
         </div>
       </section>
     </main>

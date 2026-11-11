@@ -12,7 +12,7 @@ export const SITE_SETTINGS: Record<string, string> = {
   seo_keywords: "scientific products, laboratory equipment, research supplies",
   seo_og_image: "",
   contact_email: "info@srisaradiscientific.com",
-  contact_phone: "+91 97424 43809",
+  contact_phone: "+91 72076 07444",
   contact_address: "Hyderabad, Telangana, India",
   social_facebook: "",
   social_linkedin: "",
