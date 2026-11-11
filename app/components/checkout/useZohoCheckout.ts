@@ -165,6 +165,7 @@ export function useZohoCheckout() {
           name: customer.name,
           email: customer.email,
           qty: `${quantity} kit${quantity > 1 ? 's' : ''}`,
+          amt: String(order.amount),
         });
         if (customer.company) query.set('org', customer.company);
         window.location.assign(`${order.thankYouPath}?${query.toString()}`);
