@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaBars, FaTimes } from 'react-icons/fa';
 import '../solarbio.css';
+import { reportAdsConversion } from '@/app/lib/adsConversion';
 
 export default function ThankYouContent() {
   const searchParams = useSearchParams();
@@ -15,6 +16,17 @@ export default function ThankYouContent() {
   const email = searchParams.get('email') || '';
   const qty = searchParams.get('qty') || '1 kit';
   const paid = searchParams.get('paid') === '1' && !!ref;
+  const amount = Number(searchParams.get('amt')) || undefined;
+
+  // Google Ads conversion: online order (paid) or quotation enquiry.
+  React.useEffect(() => {
+    if (!ref) return;
+    reportAdsConversion(
+      paid
+        ? { label: process.env.NEXT_PUBLIC_GOOGLE_ADS_PURCHASE_LABEL, transactionId: ref, value: amount, currency: 'INR' }
+        : { label: process.env.NEXT_PUBLIC_GOOGLE_ADS_LEAD_LABEL, transactionId: ref },
+    );
+  }, [ref, paid, amount]);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   // Activate standalone header/footer mode
