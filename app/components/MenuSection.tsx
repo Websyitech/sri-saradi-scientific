@@ -26,6 +26,7 @@ const leftMenuItems: MainMenuItem[] = [
   // { label: "Products", href: "/products", hasMegaMenu: true },
   // { label: "Lab Consumables", href: "#", hasDropdown: true },
   { label: "Services", href: "/services" },
+  { label: "Catalogues", href: "/catalogue" },
 ];
 
 const rightMenuItems: MainMenuItem[] = [
@@ -231,7 +232,7 @@ function MobileMenuDrawer({
                       title: item.label,
                       type: "resources",
                       items: [
-                        { label: "Catalogues", href: "/catalogues" },
+                        { label: "Catalogues", href: "/catalogue" },
                         { label: "Signaling Pathways", href: "/signaling-pathways" },
                         { label: "Publications", href: "/publications" },
                         { label: "FAQ", href: "/faq" },
@@ -795,7 +796,7 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
                   ) : item.label === "Resources" ? (
                     <>
                       <Link
-                        href="/catalogues"
+                        href="/catalogue"
                         onClick={() => handleMouseLeave()}
                         style={{
                           display: "block",

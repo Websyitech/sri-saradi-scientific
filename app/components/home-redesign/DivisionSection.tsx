@@ -39,7 +39,7 @@ export const DivisionSection: React.FC = () => {
                 <span>Pharma & biopharma</span>
                 <span>Food & beverage</span>
               </div>
-              <Link className="text-link" href="/catalogues">
+              <Link className="text-link" href="/catalogue">
                 Explore catalogues <span aria-hidden="true">↗</span>
               </Link>
             </div>

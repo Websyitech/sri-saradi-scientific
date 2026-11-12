@@ -6,13 +6,16 @@ const nextConfig: NextConfig = {
     // These sections were database-driven and have been removed; send old links home.
     const removed = [
       'products', 'kit-products', 'lab-consumables', 'applications', 'cro-services',
-      'signaling-pathways', 'faq', 'careers', 'certificates', 'catalogues',
+      'signaling-pathways', 'faq', 'careers', 'certificates',
       'publications', 'pages', 'track-order', 'login', 'admin',
     ];
-    return removed.flatMap((p) => [
-      { source: `/${p}`, destination: '/', permanent: false },
-      { source: `/${p}/:path*`, destination: '/', permanent: false },
-    ]);
+    return [
+      { source: '/catalogues', destination: '/catalogue', permanent: true },
+      ...removed.flatMap((p) => [
+        { source: `/${p}`, destination: '/', permanent: false },
+        { source: `/${p}/:path*`, destination: '/', permanent: false },
+      ]),
+    ];
   },
   experimental: {
     serverActions: {
