@@ -29,7 +29,18 @@ export const PAYABLE_PRODUCTS: Record<string, PayableProduct> = {
   },
 };
 
+/** ₹1 item for checking live payments end to end. Only sold while ZOHO_PAY_TEST_ITEM=1. */
+const TEST_PRODUCT: PayableProduct = {
+  sku: "payment-test-1-inr",
+  name: "Payment test (Rs 1)",
+  unitPrice: 1,
+  gstRate: 0,
+  maxQuantity: 1,
+  thankYouPath: "/genomic/thank-you",
+};
+
 export function getPayableProduct(sku: string): PayableProduct | null {
+  if (sku === TEST_PRODUCT.sku) return process.env.ZOHO_PAY_TEST_ITEM === "1" ? TEST_PRODUCT : null;
   return Object.prototype.hasOwnProperty.call(PAYABLE_PRODUCTS, sku) ? PAYABLE_PRODUCTS[sku] : null;
 }
 
