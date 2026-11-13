@@ -70,10 +70,6 @@ export default function CataloguesContent() {
               </article>
             ))}
           </div>
-          <aside className={shared.notice}>Already have a catalogue number? Include it with the application, quantity and required date for a more precise discussion.</aside>
-          <div className={shared.actions}>
-            <a className={`${shared.button} ${styles.outline}`} href="/assets/services-catalogue.pdf" target="_blank" rel="noopener noreferrer">Download scientific services catalogue <span aria-hidden="true">↗</span><span className={shared.srOnly}> (PDF, opens in a new tab)</span></a>
-          </div>
         </div>
       </section>
 
