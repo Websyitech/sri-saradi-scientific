@@ -2,46 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { catalogues } from "./catalogue-data";
 import { DocumentationSection } from "../components/home-redesign/DocumentationSection";
 import { EnquiryModal } from "../components/home-redesign/EnquiryModal";
 import shared from "../services/services.module.css";
 import styles from "./catalogues.module.css";
-
-const catalogues = [
-  {
-    brand: "Solarbio",
-    subtitle: "Life Sciences",
-    title: "Reagents, antibodies & kits",
-    description: "Molecular biology, biochemical research and assay products. Ask for the datasheet, relevant COA and available product citations.",
-    action: "Discuss a reagent or kit",
-    category: "molecular",
-    color: "#34398a",
-    pdfUrl: "/assets/solarbio-catalogue.pdf",
-    pdfName: "Solarbio",
-  },
-  {
-    brand: "Orient",
-    subtitle: "Filtr",
-    title: "Lab & process filtration",
-    description: "Discuss sample preparation or process conditions before selecting a membrane, syringe filter, capsule or cartridge.",
-    action: "Discuss filtration",
-    category: "filter",
-    color: "#006fab",
-    pdfUrl: "/assets/orientfiltr-catalogue.pdf",
-    pdfName: "Orient Filtr",
-  },
-  {
-    brand: "Galactics",
-    subtitle: "",
-    title: "Specialist biological plasticware",
-    description: "Application-specific pipette tips, molecular biology consumables, cell culture formats and harder-to-source biological labware. Review the exact product’s compatibility and quality specifications for your experiment.",
-    action: "Discuss biological plasticware",
-    category: "plasticware",
-    color: "#446e37",
-    pdfUrl: "/assets/galactics-catalogue.pdf",
-    pdfName: "GenFollower",
-  },
-];
 
 export default function CataloguesContent() {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
@@ -71,28 +36,36 @@ export default function CataloguesContent() {
           <div className={styles.grid}>
             {catalogues.map((catalogue) => (
               <article className={styles.card} key={catalogue.category}>
-                <div className={styles.book} style={{ background: catalogue.color }}>
-                  <small>Principal</small>
-                  {catalogue.brand}<br />{catalogue.subtitle}
-                </div>
+                {/* Book cover opens PDF directly */}
+                {catalogue.pdfUrl ? (
+                  <a
+                    href={catalogue.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.bookLink}
+                    aria-label={`View ${catalogue.brand} catalogue PDF`}
+                  >
+                    <div className={styles.book} style={{ background: catalogue.color }}>
+                      <small>Principal</small>
+                      {catalogue.brand}<br />{catalogue.subtitle}
+                    </div>
+                  </a>
+                ) : (
+                  <div className={styles.book} style={{ background: catalogue.color }}>
+                    <small>Principal</small>
+                    {catalogue.brand}<br />{catalogue.subtitle}
+                  </div>
+                )}
                 <h2>{catalogue.title}</h2>
                 <p>{catalogue.description}</p>
                 <div className={styles.cardActions}>
+                  <Link className={shared.textLink} href={`/catalogue/${catalogue.slug}`}>
+                    Explore all {catalogue.pdfName} catalogues <span aria-hidden="true">→</span>
+                  </Link>
+                  {/* Enquire */}
                   <button className={shared.textLink} onClick={() => openEnquiry(catalogue.category)}>
                     {catalogue.action} <span aria-hidden="true">↗</span>
                   </button>
-                  {catalogue.pdfUrl && (
-                    <a
-                      className={shared.textLink}
-                      href={catalogue.pdfUrl}
-                      download={`${catalogue.pdfName} Catalogue.pdf`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Download {catalogue.pdfName} catalogue <span aria-hidden="true">↓</span>
-                      <span className={shared.srOnly}> (PDF)</span>
-                    </a>
-                  )}
                 </div>
               </article>
             ))}
@@ -109,10 +82,10 @@ export default function CataloguesContent() {
       <section className={shared.cta} aria-labelledby="catalogues-cta-heading">
         <div className={shared.wrap}>
           <div>
-            <h2 id="catalogues-cta-heading">Bring us the requirement.<br />We’ll help connect the next steps.</h2>
+            <h2 id="catalogues-cta-heading">Bring us the requirement.<br />We&apos;ll help connect the next steps.</h2>
             <p>A protocol, a process condition or a project brief is a good place to start.</p>
           </div>
-          <button className={`${shared.button} ${shared.lightButton}`} onClick={() => openEnquiry()}>Let’s discuss it <span aria-hidden="true">↗</span></button>
+          <button className={`${shared.button} ${shared.lightButton}`} onClick={() => openEnquiry()}>Let&apos;s discuss it <span aria-hidden="true">↗</span></button>
         </div>
       </section>
 

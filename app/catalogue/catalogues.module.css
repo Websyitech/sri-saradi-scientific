@@ -9,8 +9,10 @@
 .card h2 { margin-bottom: 15px; font-size: 24px; }
 .card p { flex: 1; margin-bottom: 24px; font-size: 14px; }
 .card button { align-self: flex-start; }
+.bookLink { display: block; text-decoration: none; }
+.bookLink:hover .book { opacity: .88; }
 .cardActions { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
-.cardActions a { align-self: flex-start; }
+.cardActions a, .cardActions button { align-self: flex-start; }
 .page .outline { background: #fff; color: var(--indigo); }
 .page .outline:hover { background: #eef4fb; }
 
