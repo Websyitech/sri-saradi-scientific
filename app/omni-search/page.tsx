@@ -2,7 +2,9 @@ import "./omni-search.css";
 import CalendarWidget from "../components/CalendarWidget";
 
 export const metadata = {
+  alternates: { canonical: '/omni-search' },
   title: "Omni-Search | Sri Saradi Scientific",
+  description: "Tell us what you need and our scientists will source it: reagents, kits, antibodies and lab equipment from trusted global manufacturers.",
 };
 
 export default function OmniSearchPage() {

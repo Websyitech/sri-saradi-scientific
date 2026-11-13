@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = settings.seo_title || "Sri Saradi Scientific - Laboratory & Scientific Equipment Suppliers";
   const description = settings.seo_description || "Sri Saradi Scientific - Leading suppliers of scientific and laboratory equipment in Hyderabad, Telangana.";
   const keywords = settings.seo_keywords || "scientific products, laboratory equipment, research supplies";
-  const ogImage = settings.seo_og_image || "";
+  const ogImage = settings.seo_og_image || "/assets/sri-saradi-logo.png";
   const siteUrl = settings.site_url || "https://srisaradiscientific.com";
   const siteName = settings.site_name || "Sri Saradi Scientific";
   const favicon = settings.site_favicon || "/favicon.ico";
@@ -91,6 +91,21 @@ export default function RootLayout({
       <body
         className={`${googleSans.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Sri Saradi Scientific Private Limited",
+              url: "https://srisaradiscientific.com",
+              logo: "https://srisaradiscientific.com/assets/sri-saradi-logo.png",
+              email: "info@srisaradiscientific.com",
+              telephone: "+91 97424 43809",
+              address: { "@type": "PostalAddress", addressLocality: "Hyderabad", addressRegion: "Telangana", addressCountry: "IN" },
+            }),
+          }}
+        />
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

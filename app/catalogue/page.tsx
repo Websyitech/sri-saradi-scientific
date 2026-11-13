@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CataloguesContent from "./CataloguesContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/catalogue' },
   title: "Catalogues & Product Documentation | Sri Saradi Scientific",
   description:
     "Explore Solarbio, Orient Filtr and Galactics product scope. Request manufacturer datasheets, certificates of analysis and product citations through Sri Saradi.",

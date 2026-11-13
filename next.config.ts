@@ -12,8 +12,8 @@ const nextConfig: NextConfig = {
     return [
       { source: '/catalogues', destination: '/catalogue', permanent: true },
       ...removed.flatMap((p) => [
-        { source: `/${p}`, destination: '/', permanent: false },
-        { source: `/${p}/:path*`, destination: '/', permanent: false },
+        { source: `/${p}`, destination: '/', permanent: true },
+        { source: `/${p}/:path*`, destination: '/', permanent: true },
       ]),
     ];
   },

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import HomeRedesign from "./components/home-redesign/HomeRedesign";
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/' },
   title: 'Sri Saradi Scientific | From scientific need to global supply',
   description: 'Scientist-led product sourcing, evidence support and integrated worldwide logistics for laboratories, industries and dealers.',
   openGraph: {

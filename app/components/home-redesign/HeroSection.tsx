@@ -18,7 +18,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, motionP
       <div className="hero-reference-background" aria-hidden="true">
         <Image
           src="/assets/laboratory_banner_2.webp"
-          alt=""
+          alt="Scientist working in a laboratory"
           fill
           priority
           sizes="100vw"
