@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaBars, FaTimes } from 'react-icons/fa';
 import './solarbio.css';
 import { useZohoCheckout } from '../components/checkout/useZohoCheckout';
+import { reportAdsConversion } from '@/app/lib/adsConversion';
 
 const CHECKOUT_SKU = 'solarbio-d1800-100t';
 
@@ -56,6 +57,20 @@ export default function SolarbioClient() {
     return () => {
       document.body.classList.remove('solarbio-page-active');
     };
+  }, []);
+
+  // Google Ads: count clicks on any WhatsApp link on this page as a contact conversion
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const link = (e.target as Element | null)?.closest?.('a[href*="wa.me/"]');
+      if (!link) return;
+      reportAdsConversion({
+        label: process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_LABEL,
+        transactionId: `wa-${Date.now()}`,
+      });
+    };
+    document.addEventListener('click', onClick, true);
+    return () => document.removeEventListener('click', onClick, true);
   }, []);
 
   // Measure navbar height dynamically to keep the sticky TOC bar flush with 0px gap
