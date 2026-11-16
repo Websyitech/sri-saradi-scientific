@@ -717,6 +717,69 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
                             </div>
                           </div>
                         )}
+
+                        {/* Category with no sub-categories: link straight to its products */}
+                        {(() => {
+                          const active = categories.find((c) => c.id === activeSubmenu);
+                          if (!active || (active.children?.length ?? 0) > 0) return null;
+                          return (
+                            <div style={{ flex: 1, minWidth: "400px" }}>
+                              <Link
+                                href={`/products?brand=Solarbio&category=${active.slug}`}
+                                onClick={() => handleMouseLeave()}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "20px",
+                                  maxWidth: "520px",
+                                  padding: "16px",
+                                  background: "#f9f9f9",
+                                  border: "1px solid #e0e0e0",
+                                  borderRadius: "6px",
+                                  textDecoration: "none",
+                                  color: "#333",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    width: "120px",
+                                    height: "120px",
+                                    flex: "0 0 auto",
+                                    borderRadius: "4px",
+                                    overflow: "hidden",
+                                    background: active.color ? `${active.color}15` : "#e0e0e0",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  {active.image ? (
+                                    <img
+                                      src={getImageUrl(active.image) || ""}
+                                      alt={cleanText(active.name)}
+                                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                                    />
+                                  ) : (
+                                    <span style={{ fontSize: "28px", fontWeight: 700, color: active.color || "var(--primary)" }}>
+                                      {cleanText(active.name).charAt(0)}
+                                    </span>
+                                  )}
+                                </div>
+                                <div>
+                                  <div style={{ fontSize: "16px", fontWeight: 700, color: "var(--primary)", marginBottom: "6px" }}>
+                                    {cleanText(active.name)}
+                                  </div>
+                                  <div style={{ fontSize: "13px", color: "#666", marginBottom: "12px" }}>
+                                    Browse all Solarbio {cleanText(active.name)} products.
+                                  </div>
+                                  <span style={{ fontSize: "13px", fontWeight: 600, color: "var(--primary)" }}>
+                                    View products →
+                                  </span>
+                                </div>
+                              </Link>
+                            </div>
+                          );
+                        })()}
                       </div>
                       <div style={{ marginTop: "12px", paddingTop: "12px", borderTop: "1px solid #eee" }}>
                         <button
