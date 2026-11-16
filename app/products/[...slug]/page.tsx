@@ -12,7 +12,9 @@ const stripTags = (s: string | null | undefined) =>
   (s || "").replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
 
 /** One product by catalogue number (exact match first, same shape as /api/products). */
-const getProduct = cache(async (catalogNumber: string): Promise<Product | null> => {
+type Loaded = { product: Product; raw: { name: string; description: string | null } };
+
+const getProduct = cache(async (catalogNumber: string): Promise<Loaded | null> => {
   try {
     const include = {
       category: true,
@@ -30,8 +32,12 @@ const getProduct = cache(async (catalogNumber: string): Promise<Product | null> 
       });
     }
     if (!row) return null;
-    // Plain JSON (Decimal/Date to strings), as the API would send it.
-    return JSON.parse(JSON.stringify(transformProductsForDisplay([row])[0])) as Product;
+    // Plain JSON (Decimal/Date to strings), as the API would send it. The display
+    // transform turns symbols into HTML entities, so titles/JSON-LD use the raw text.
+    return {
+      product: JSON.parse(JSON.stringify(transformProductsForDisplay([row])[0])) as Product,
+      raw: { name: row.name, description: row.description },
+    };
   } catch (error) {
     console.error("Product lookup failed:", error);
     return null;
@@ -54,9 +60,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title, alternates: { canonical: path }, openGraph: { title, url: path } };
   }
 
-  const p = await productFor(slug);
-  if (!p) return { title: "Product not found | Sri Saradi Scientific", robots: { index: false } };
+  const loaded = await productFor(slug);
+  if (!loaded) return { title: "Product not found | Sri Saradi Scientific", robots: { index: false } };
 
+  const p = { ...loaded.product, name: loaded.raw.name, description: loaded.raw.description };
   const canonical = `/products/${encodeURIComponent(p.catalogNumber)}`;
   const brand = p.brand || p.manufacturer || "";
   const title = `${stripTags(p.name)} (${p.catalogNumber})${brand ? ` – ${brand}` : ""} | Sri Saradi Scientific`;
@@ -78,7 +85,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = await productFor(slug);
+  const loaded = await productFor(slug);
+  const product = loaded ? { ...loaded.product, name: loaded.raw.name, description: loaded.raw.description } : null;
 
   const jsonLd = product
     ? (() => {
@@ -122,7 +130,7 @@ export default async function ProductPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
         />
       )}
-      <ProductDetailClient initialProduct={product} />
+      <ProductDetailClient initialProduct={loaded?.product ?? null} />
     </>
   );
 }
