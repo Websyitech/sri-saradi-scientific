@@ -1,12 +1,15 @@
 "use client";
 
 import { useState, useRef, Suspense } from "react";
-import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import { FaSearch, FaBars, FaTimes, FaEnvelope, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
 import MenuSection from "./MenuSection";
 
 const SITE_NAME = "Sri Saradi Scientific";
 const SITE_LOGO = "/assets/sri_saradi_scientific_transparent.webp";
+const CONTACT_EMAIL = "info@srisaradiscientific.com";
+const CONTACT_PHONE = "+91 72076 07444";
+const WHATSAPP_URL = "https://wa.me/917207607444?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20your%20products";
 
 interface SearchResult {
   id: string;
@@ -98,6 +101,22 @@ export default function Header() {
             />
           </div>
         </Link>
+
+        {/* Contact: email, phone, WhatsApp (desktop) */}
+        <div className="header-contact">
+          <a href={`mailto:${CONTACT_EMAIL}`} className="header-contact-item">
+            <FaEnvelope className="header-contact-icon" />
+            <span>{CONTACT_EMAIL}</span>
+          </a>
+          <a href={`tel:${CONTACT_PHONE.replace(/\s+/g, "")}`} className="header-contact-item">
+            <FaPhoneAlt className="header-contact-icon" />
+            <span>{CONTACT_PHONE}</span>
+          </a>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="header-whatsapp">
+            <FaWhatsapp />
+            <span>WhatsApp</span>
+          </a>
+        </div>
 
         {/* Mobile Icons Container */}
         <div className="mobile-icons-container" style={{ display: "none" }}>

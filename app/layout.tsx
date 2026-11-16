@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import TopHeader from "./components/TopHeader";
+import WhatsAppFloat from "./components/WhatsAppFloat";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import DisclaimerModal from "./components/DisclaimerModal";
@@ -125,10 +125,10 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <TopHeader />
         <Header />
         {children}
         <Footer />
+        <WhatsAppFloat />
         <DisclaimerModal />
         <GoogleAnalytics />
       </body>

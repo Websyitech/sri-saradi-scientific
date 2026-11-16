@@ -1810,3 +1810,20 @@ div::-webkit-scrollbar {
 .policy-content table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-size: 0.9rem; display: block; overflow-x: auto; }
 .policy-content td { border: 1px solid #e5e7eb; padding: 0.5rem 0.75rem; vertical-align: top; }
 .policy-content tr:first-child td { background: #f3f4f8; font-weight: 600; }
+
+/* Header contact (email, phone, WhatsApp) — replaces the old top bar */
+.header-contact { display: flex; align-items: center; gap: 28px; }
+.header-contact-item { display: flex; align-items: center; gap: 8px; color: #2D2B7F; font-size: 15px; font-weight: 500; text-decoration: none; white-space: nowrap; }
+.header-contact-item:hover { text-decoration: underline; }
+.header-contact-icon { font-size: 15px; }
+.header-whatsapp { display: flex; align-items: center; gap: 8px; background: #25d366; color: #fff; padding: 9px 18px; border-radius: 999px; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+.header-whatsapp:hover { background: #20ba5a; color: #fff; }
+.header-whatsapp svg { font-size: 19px; }
+@media (max-width: 1200px) { .header-contact { gap: 18px; } .header-contact-item { font-size: 14px; } }
+@media (max-width: 1024px) { .header-contact { display: none; } }
+
+/* Floating WhatsApp button (all pages except /genomic, which has its own) */
+.wa-float { position: fixed; bottom: 26px; right: 26px; z-index: 9999; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff !important; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45); text-decoration: none !important; transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.2s ease; }
+.wa-float:hover { background: #20ba5a; transform: scale(1.1) translateY(-3px); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6); }
+.wa-float svg { font-size: 32px; color: #fff; }
+@media (max-width: 600px) { .wa-float { bottom: 18px; right: 18px; width: 48px; height: 48px; } .wa-float svg { font-size: 26px; } }
