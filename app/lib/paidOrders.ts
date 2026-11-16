@@ -1,19 +1,24 @@
-import { claimPaid, loadOrder, saveOrder, StoredOrder } from "@/app/lib/orderStore";
+import prisma from "@/app/lib/prisma";
 import { computeOrderTotal, getPayableProduct } from "@/app/lib/payableProducts";
 import { getPayment, getPaymentSession, ZohoPayment } from "@/app/lib/zohoPayments";
 import { sendPaymentNotification, sendPaymentConfirmation } from "@/app/lib/email";
 
-export const STATUS_PAYMENT_PENDING = "payment_pending" as const;
-export const STATUS_PAID = "paid" as const;
+export const STATUS_PAYMENT_PENDING = "payment_pending";
+export const STATUS_PAID = "paid";
 
 export type SettleResult =
   | { ok: true; orderId: string; alreadyPaid: boolean }
   | { ok: false; reason: string; pending?: boolean };
 
-function expectedAmount(order: StoredOrder): number | null {
-  const product = getPayableProduct(order.sku);
-  if (!product) return null;
-  return computeOrderTotal(product, order.quantity);
+async function loadOrder(orderId: string) {
+  return prisma.quoteRequest.findUnique({ where: { orderId }, include: { items: true } });
+}
+
+function expectedAmount(order: NonNullable<Awaited<ReturnType<typeof loadOrder>>>): number | null {
+  const item = order.items[0];
+  const product = item?.sku ? getPayableProduct(item.sku) : null;
+  if (!item || !product) return null;
+  return computeOrderTotal(product, item.quantity);
 }
 
 /**
@@ -39,15 +44,18 @@ export async function settlePayment(payment: ZohoPayment, expectOrderId?: string
     return { ok: false, reason: "Paid amount does not match the order total" };
   }
 
-  if (order.status !== STATUS_PAYMENT_PENDING || !(await claimPaid(orderId))) {
+  if (order.status !== STATUS_PAYMENT_PENDING) {
     return { ok: true, orderId, alreadyPaid: true };
   }
 
   const stamp =
     `\n[Payment] PAID ₹${payment.amount} via ${payment.payment_method?.type || "online"}` +
     ` | Zoho payment ID: ${payment.payment_id}`;
-  order.notes = `${order.notes}${stamp}`;
-  await saveOrder({ ...order, status: STATUS_PAID, paymentId: payment.payment_id, paidAt: new Date().toISOString() });
+  const updated = await prisma.quoteRequest.updateMany({
+    where: { orderId, status: STATUS_PAYMENT_PENDING },
+    data: { status: STATUS_PAID, notes: `${order.notes || ""}${stamp}`, updatedAt: new Date() },
+  });
+  if (updated.count === 0) return { ok: true, orderId, alreadyPaid: true };
 
   try {
     const emailData = {
@@ -59,7 +67,7 @@ export async function settlePayment(payment: ZohoPayment, expectOrderId?: string
       notes: order.notes || undefined,
       amount: payment.amount,
       paymentId: payment.payment_id,
-      items: [{ name: order.productName, quantity: order.quantity }],
+      items: order.items.map((i) => ({ name: i.name, quantity: i.quantity })),
     };
     await Promise.all([sendPaymentNotification(emailData), sendPaymentConfirmation(emailData)]);
   } catch (err) {
