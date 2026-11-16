@@ -494,12 +494,17 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
     }
   }, [showMegaMenu]);
 
+  // First category that has sub-categories, so the mega menu never opens with an empty right side.
+  const defaultSubmenu = (categories.find((c) => (c.children?.length ?? 0) > 0) ?? categories[0])?.id ?? null;
+
   const handleMouseEnter = (itemLabel: string) => {
     setShowMegaMenu(itemLabel);
+    setActiveSubmenu((current) => current ?? defaultSubmenu);
   };
 
   const handleMouseLeave = () => {
     setShowMegaMenu(null);
+    setActiveSubmenu(null);
   };
 
   const handleViewAllProducts = () => {
@@ -580,7 +585,6 @@ export default function MenuSection({ mobileMenuOpen = false, setMobileMenuOpen 
                       </h4>
                       <div 
                         style={{ display: "flex", gap: "30px", maxHeight: "400px", overflowY: "auto" }}
-                        onMouseLeave={() => setActiveSubmenu(null)}
                       >
                         {/* Left Vertical List - Level 2 Categories */}
                         <div style={{ width: "200px", flex: "0 0 auto", overflowY: "auto" }}>
