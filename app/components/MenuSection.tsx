@@ -23,7 +23,7 @@ interface ResourceMenuItem {
 const leftMenuItems: MainMenuItem[] = [
   { label: "Home", href: "/", active: true },
   { label: "Omni-Search", href: "/omni-search" },
-  // { label: "Products", href: "/products", hasMegaMenu: true },
+  { label: "Products", href: "/products", hasMegaMenu: true },
   // { label: "Lab Consumables", href: "#", hasDropdown: true },
   { label: "Services", href: "/services" },
   { label: "CRO Services", href: "/cro-services", hasDropdown: true },

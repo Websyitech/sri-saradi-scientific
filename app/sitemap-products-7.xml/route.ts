@@ -26,18 +26,18 @@ export async function GET() {
 
     const urls: { loc: string; lastmod: string; changefreq: string; priority: string }[] = [];
 
-    // Add products for page 7 (skip 30000, take 5000)
+    // Add products for page 7 (skip 42000, take 7000)
     const products = await prisma.product.findMany({
       where: { isActive: true },
       select: { catalogNumber: true, updatedAt: true },
-      skip: 30000,
-      take: 5000,
+      skip: 42000,
+      take: 7000,
       orderBy: { catalogNumber: 'asc' }
     });
 
     for (const prod of products) {
       urls.push({
-        loc: `${siteUrl}/product/${prod.catalogNumber}`,
+        loc: `${siteUrl}/products/${encodeURIComponent(prod.catalogNumber)}`,
         lastmod: prod.updatedAt.toISOString().split("T")[0],
         changefreq: changeFreq,
         priority: priority,

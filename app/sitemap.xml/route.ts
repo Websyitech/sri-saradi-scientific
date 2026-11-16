@@ -34,13 +34,13 @@ export async function GET() {
         where: { isActive: true }
       });
 
-      const productsPerSitemap = 5000;
+      const productsPerSitemap = 7000; // must match the sitemap-products-N routes
       const numberOfProductSitemaps = Math.ceil(productCount / productsPerSitemap);
 
       // Only include sitemaps that will have content (max 10 sitemaps)
       for (let i = 1; i <= Math.min(numberOfProductSitemaps, 10); i++) {
         // Check if this sitemap would have any products
-        const productsInThisSitemap = Math.min(5000, productCount - (i - 1) * 5000);
+        const productsInThisSitemap = Math.min(productsPerSitemap, productCount - (i - 1) * productsPerSitemap);
         if (productsInThisSitemap > 0) {
           sitemapEntries.push(`  <sitemap>
     <loc>${siteUrl}/sitemap-products-${i}.xml</loc>

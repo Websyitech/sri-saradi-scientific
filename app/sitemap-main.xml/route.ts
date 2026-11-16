@@ -26,10 +26,22 @@ export async function GET() {
     const staticPages = [
       { path: "/", priority: "1.0" },
       { path: "/products", priority: "0.9" },
+      { path: "/genomic", priority: "0.9" },
+      { path: "/omni-search", priority: "0.8" },
+      { path: "/services", priority: "0.8" },
+      { path: "/lab-consumables", priority: "0.7" },
+      { path: "/cro-services", priority: "0.7" },
+      { path: "/catalogue", priority: "0.7" },
       { path: "/about", priority: "0.7" },
       { path: "/contact", priority: "0.7" },
-      { path: "/careers", priority: "0.6" },
-      { path: "/quote", priority: "0.6" },
+      { path: "/faq", priority: "0.5" },
+      { path: "/careers", priority: "0.5" },
+      { path: "/privacy-policy", priority: "0.3" },
+      { path: "/terms-and-conditions", priority: "0.3" },
+      { path: "/cancellation-policy", priority: "0.3" },
+      { path: "/shipping-and-delivery-policy", priority: "0.3" },
+      { path: "/return-policy", priority: "0.3" },
+      { path: "/refund-policy", priority: "0.3" },
     ];
 
     for (const page of staticPages) {
@@ -57,6 +69,23 @@ export async function GET() {
           priority: "0.7",
         });
       }
+    }
+
+    // CRO services and signaling pathways
+    const [croServices, pathways] = await Promise.all([
+      prisma.cROService.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } }),
+      prisma.signalingPathway.findMany({ where: { isActive: true }, select: { slug: true, updatedAt: true } }),
+    ]);
+    for (const item of [
+      ...croServices.map((c) => ({ ...c, base: "/cro-services" })),
+      ...pathways.map((p) => ({ ...p, base: "/signaling-pathways" })),
+    ]) {
+      urls.push({
+        loc: `${siteUrl}${item.base}/${item.slug}`,
+        lastmod: item.updatedAt.toISOString().split("T")[0],
+        changefreq: changeFreq,
+        priority: "0.6",
+      });
     }
 
     // Generate XML
