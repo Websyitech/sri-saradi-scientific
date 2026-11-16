@@ -760,6 +760,9 @@ export default function ProductsPage() {
         </nav>
       )}
 
+      {/* Main heading for the full catalogue (the category hero below has its own) */}
+      {!selectedCategoryName && <h1 className="sr-only">Research Products: Reagents, Antibodies and ELISA Kits</h1>}
+
       {/* Category Hero - Only show if a category is selected */}
       {selectedCategoryName && (
         <>

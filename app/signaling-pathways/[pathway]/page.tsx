@@ -1,261 +1,37 @@
-"use client";
+import type { Metadata } from "next";
+import { cache } from "react";
+import { notFound } from "next/navigation";
+import prisma from "@/app/lib/prisma";
+import Client, { type PathwayContent } from "./PathwayClient";
 
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+type Props = { params: Promise<{ pathway: string }> };
 
-interface PathwayContent {
-  id: string;
-  slug: string;
-  title: string;
-  heading?: string;
-  subheading?: string;
-  banner?: string;
-  content?: string;
-  isActive: boolean;
-  sortOrder: number;
+const load = cache(async (slug: string): Promise<PathwayContent | null> => {
+  try {
+    const row = await prisma.signalingPathway.findUnique({ where: { slug } });
+    return row && row.isActive !== false ? (JSON.parse(JSON.stringify(row)) as PathwayContent) : null;
+  } catch (error) {
+    console.error("Lookup failed:", error);
+    return null;
+  }
+});
+
+const plain = (s?: string | null) => (s || "").replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { pathway } = await params;
+  const item = await load(decodeURIComponent(pathway));
+  if (!item) return { title: "Not found | Sri Saradi Scientific", robots: { index: false } };
+  const name = plain(item.heading) || plain(item.title);
+  const title = `${name} | Signaling Pathways | Sri Saradi Scientific`;
+  const description = (plain(item.subheading) || plain(item.content).slice(0, 200) || `${name} from Sri Saradi Scientific, Hyderabad.`).slice(0, 160);
+  const url = `/signaling-pathways/${item.slug}`;
+  return { title, description, alternates: { canonical: url }, openGraph: { title, description, url, images: ["/assets/sri-saradi-logo.png"] } };
 }
 
-const breadcrumbs = [
-  { label: "Home", href: "/" },
-  { label: "Signaling Pathways", href: "/signaling-pathways" },
-];
-
-export default function PathwayDetailPage() {
-  const params = useParams();
-  const pathwaySlug = params?.pathway as string;
-  const [pathway, setPathway] = useState<PathwayContent | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPathway = async () => {
-      try {
-        const res = await fetch(`/api/signaling-pathways?slug=${pathwaySlug}`);
-        if (res.ok) {
-          const data = await res.json();
-          setPathway(data);
-        }
-      } catch (error) {
-        console.error("Error fetching pathway:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (pathwaySlug) {
-      fetchPathway();
-    }
-  }, [pathwaySlug]);
-
-  if (loading) {
-    return <div style={{ padding: "40px", textAlign: "center" }}>Loading...</div>;
-  }
-
-  if (!pathway) {
-    return (
-      <div style={{ padding: "40px", textAlign: "center", color: "#999" }}>
-        Pathway not found. Please go to{" "}
-        <a href="/signaling-pathways" style={{ color: "var(--primary)" }}>
-          Signaling Pathways
-        </a>
-        .
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ minHeight: "100vh", background: "#fff" }}>
-      {/* BREADCRUMB */}
-      <div
-        style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          padding: "16px 40px",
-          display: "flex",
-          alignItems: "center",
-          gap: "6px",
-          flexWrap: "wrap",
-          fontSize: "13px",
-        }}
-      >
-        {breadcrumbs.map((crumb, i) => (
-          <span key={i} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-            {i > 0 && <span style={{ color: "#999" }}>{">"}</span>}
-            <a
-              href={crumb.href}
-              style={{
-                color: "var(--primary)",
-                textDecoration: "none",
-                fontWeight: "500",
-              }}
-            >
-              {crumb.label}
-            </a>
-          </span>
-        ))}
-        <span style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <span style={{ color: "#999" }}>{">"}</span>
-          <span style={{ color: "#666" }}>{pathway.title}</span>
-        </span>
-      </div>
-
-      <hr style={{ border: "none", borderTop: "1px solid #e0e0e0", margin: "0" }} />
-
-      {/* HEADER SECTION */}
-      <section style={{ width: "100%", padding: "50px 40px", background: "#f5f5f5" }}>
-        <div style={{ maxWidth: "1400px", margin: "0 auto" }}>
-          <h1
-            style={{
-              fontSize: "40px",
-              fontWeight: "800",
-              color: "#171717",
-              margin: "0 0 16px 0",
-            }}
-          >
-            {pathway.heading || pathway.title}
-          </h1>
-          <p
-            style={{
-              fontSize: "16px",
-              lineHeight: "1.7",
-              color: "#555",
-              margin: "0",
-              maxWidth: "700px",
-            }}
-          >
-            {pathway.subheading || pathway.title}
-          </p>
-        </div>
-      </section>
-
-      <hr style={{ border: "none", borderTop: "1px solid #e0e0e0", margin: "0" }} />
-
-      {/* CONTENT SECTION */}
-      <section
-        style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          padding: "50px 40px",
-        }}
-      >
-        {pathway.banner && (
-          <div
-            style={{
-              marginBottom: "40px",
-              borderRadius: "8px",
-             
-            }}
-          >
-            <img
-              src={pathway.banner}
-              alt={pathway.title}
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "contain",
-              }}
-            />
-          </div>
-        )}
-
-        {pathway.content ? (
-          <>
-            <div
-              style={{
-                fontSize: "15px",
-                lineHeight: "1.8",
-                color: "#555",
-              }}
-              dangerouslySetInnerHTML={{ __html: pathway.content }}
-            />
-            <style>{`
-              table, th, td {
-                border: 1px solid #999 !important;
-                border-collapse: collapse;
-              }
-              table {
-                width: 100%;
-                margin: 20px 0;
-              }
-              th, td {
-                padding: 12px 16px;
-                text-align: left;
-              }
-              th {
-                background-color: #f5f5f5;
-                font-weight: 600;
-              }
-            `}</style>
-          </>
-        ) : (
-          <div style={{ textAlign: "center", color: "#999", padding: "40px" }}>
-            No content available for this pathway. Please check back later or contact us for more information.
-          </div>
-        )}
-      </section>
-
-      {/* CTA SECTION */}
-      <section
-        style={{
-          maxWidth: "1400px",
-          margin: "50px auto 0",
-          padding: "50px 40px",
-        }}
-      >
-        <div
-          style={{
-            background: "linear-gradient(135deg, #2D2B7F 0%, #1a1a4d 100%)",
-            padding: "50px",
-            borderRadius: "8px",
-            textAlign: "center",
-            color: "#fff",
-          }}
-        >
-          <h2
-            style={{
-              fontSize: "28px",
-              fontWeight: "700",
-              margin: "0 0 16px 0",
-            }}
-          >
-            Ready to Get Started?
-          </h2>
-          <p
-            style={{
-              fontSize: "16px",
-              lineHeight: "1.6",
-              margin: "0 0 24px 0",
-              opacity: "0.9",
-            }}
-          >
-            Contact our team to discuss your project requirements and receive a custom quote
-          </p>
-          <a
-            href="/contact"
-            style={{
-              display: "inline-block",
-              padding: "12px 32px",
-              background: "#fff",
-              color: "var(--primary)",
-              textDecoration: "none",
-              fontWeight: "700",
-              borderRadius: "4px",
-              transition: "all 0.3s",
-              fontSize: "14px",
-              cursor: "pointer",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.15)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            Contact Us
-          </a>
-        </div>
-      </section>
-    </div>
-  );
+export default async function Page({ params }: Props) {
+  const { pathway } = await params;
+  const item = await load(decodeURIComponent(pathway));
+  if (!item) notFound();
+  return <Client initial={item} />;
 }
