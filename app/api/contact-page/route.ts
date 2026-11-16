@@ -1,6 +1,17 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
 
+// Offices shown (with a map) on the contact page.
+const OFFICES = [
+  {
+    name: "Corporate Office",
+    address: "319, VM Towers, 3rd Floor, Suchitra Rd, Green Park, Kompally, New Jeedimetla, Jeedimetla - Malkajgiri, Hyderabad, Telangana, 500067",
+  },
+].map((office) => ({
+  ...office,
+  mapEmbedUrl: `https://www.google.com/maps?q=${encodeURIComponent(office.address)}&output=embed`,
+}));
+
 export async function GET() {
   try {
     // First try to get contact page data
@@ -20,6 +31,7 @@ export async function GET() {
         email: contactPage.email || settingsMap.contact_email || "info@srisaradiscientific.com",
         phone: contactPage.phone || settingsMap.contact_phone || "+91 97424 43809",
         address: contactPage.address || settingsMap.contact_address || "Hyderabad, Telangana, India",
+        offices: OFFICES,
       });
     }
     
@@ -34,6 +46,7 @@ export async function GET() {
       address: settingsMap.contact_address || "Hyderabad, Telangana, India",
       businessHours: "Monday - Friday: 9:00 AM - 6:00 PM",
       mapEmbedUrl: "",
+      offices: OFFICES,
       isActive: true,
     });
   } catch (error) {
@@ -48,6 +61,7 @@ export async function GET() {
       address: "Hyderabad, Telangana, India",
       businessHours: "Monday - Friday: 9:00 AM - 6:00 PM",
       mapEmbedUrl: "",
+      offices: OFFICES,
       isActive: true,
     });
   }

@@ -209,7 +209,7 @@ export default function ContactPage() {
                   </div>
                 )}
 
-                {contactData.offices.map((office) => (
+                {(contactData.offices ?? []).map((office) => (
                   <div className="contact-info-card" key={office.name}>
                     <h3
                       style={{
@@ -262,7 +262,7 @@ export default function ContactPage() {
                 )}
               </div>
 
-              {contactData.offices.map((office) => (
+              {(contactData.offices ?? []).map((office) => (
                 <div key={office.name} style={{ marginTop: "24px" }}>
                   <h3 style={{ fontSize: "18px", fontWeight: 700, marginBottom: "12px" }}>
                     {office.name} Location
