@@ -18,23 +18,13 @@ export const metadata: Metadata = {
     title: "Products - Solarbio Reagents & Antibodies",
     description: "High-quality Solarbio Life Sciences products for research and diagnostics",
     type: "website",
-    url: "http://localhost:3000/products",
-    images: [
-      {
-        url: "http://localhost:3000/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Solarbio Products",
-      },
-    ],
+    url: "/products",
+    images: [{ url: "/assets/sri-saradi-logo.png", alt: "Sri Saradi Scientific" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Solarbio Products",
     description: "Research reagents, antibodies, and ELISA kits from Solarbio Life Sciences",
-  },
-  alternates: {
-    canonical: "http://localhost:3000/products",
   },
 };
 

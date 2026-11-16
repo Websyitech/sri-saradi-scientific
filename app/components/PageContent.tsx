@@ -14,14 +14,17 @@ interface PageData {
 
 interface PageContentProps {
   slug: string;
+  /** Page loaded on the server, so the content is in the HTML search engines read. */
+  initialPage?: PageData | null;
 }
 
-export default function PageContent({ slug }: PageContentProps) {
-  const [page, setPage] = useState<PageData | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function PageContent({ slug, initialPage = null }: PageContentProps) {
+  const [page, setPage] = useState<PageData | null>(initialPage);
+  const [loading, setLoading] = useState(!initialPage);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (initialPage) return;
     const fetchPage = async () => {
       try {
         const response = await fetch(`/api/pages?slug=${slug}`);
@@ -42,7 +45,7 @@ export default function PageContent({ slug }: PageContentProps) {
     };
 
     fetchPage();
-  }, [slug]);
+  }, [slug, initialPage]);
 
   if (loading) {
     return (
@@ -98,6 +101,10 @@ export default function PageContent({ slug }: PageContentProps) {
   } else if (typeof page.content === 'string') {
     htmlContent = page.content;
   }
+  // The page title is the only <h1>; headings inside the body move down one level.
+  htmlContent = htmlContent
+    .replace(/<(\/?)h2(\s|>)/gi, '<$1h3$2')
+    .replace(/<(\/?)h1(\s|>)/gi, '<$1h2$2');
 
   return (
     <div style={{ 

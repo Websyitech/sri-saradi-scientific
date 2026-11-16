@@ -1,63 +1,49 @@
+import type { Metadata } from 'next';
+import { cache } from 'react';
 import { notFound } from 'next/navigation';
 import PageContent from '../components/PageContent';
 import { prisma } from '@/app/lib/prisma';
 
 interface PageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
 }
 
-// Generate metadata for the page
-export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
-  
+const getPage = cache(async (slug: string) => {
   try {
     const page = await prisma.page.findFirst({
-      where: {
-        slug: slug,
-        isActive: true
-      },
-      select: {
-        title: true,
-        subtitle: true
-      }
+      where: { slug, isActive: true },
+      select: { id: true, slug: true, title: true, subtitle: true, content: true, createdAt: true, updatedAt: true },
     });
-
-    if (!page) {
-      return {
-        title: 'Page Not Found',
-        description: 'The requested page could not be found.'
-      };
-    }
-
-    return {
-      title: page.title,
-      description: page.subtitle || `${page.title} - Sri Saradi Scientific`,
-    };
+    return page ? JSON.parse(JSON.stringify(page)) : null;
   } catch (error) {
-    return {
-      title: 'Error',
-      description: 'An error occurred while loading the page.'
-    };
+    console.error('Error loading page:', error);
+    return null;
   }
+});
+
+const titleCase = (s: string) => s.trim().toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\bAnd\b/g, 'and');
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const page = await getPage(slug);
+  if (!page) return { title: 'Page Not Found | Sri Saradi Scientific', robots: { index: false } };
+
+  const title = `${titleCase(page.title)} | Sri Saradi Scientific`;
+  const description = page.subtitle
+    ? `${page.subtitle.trim()} at Sri Saradi Scientific Private Limited, Hyderabad.`
+    : `${titleCase(page.title)} - Sri Saradi Scientific`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/${page.slug}` },
+    openGraph: { title, description, url: `/${page.slug}`, images: ['/assets/sri-saradi-logo.png'] },
+  };
 }
 
-// Generate static params for static generation (optional - for better performance)
 export async function generateStaticParams() {
   try {
-    const pages = await prisma.page.findMany({
-      where: {
-        isActive: true
-      },
-      select: {
-        slug: true
-      }
-    });
-
-    return pages.map((page) => ({
-      slug: page.slug,
-    }));
+    const pages = await prisma.page.findMany({ where: { isActive: true }, select: { slug: true } });
+    return pages.map((page) => ({ slug: page.slug }));
   } catch (error) {
     console.error('Error generating static params:', error);
     return [];
@@ -66,27 +52,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  
-  // Check if page exists (this is for the server-side check)
-  try {
-    const page = await prisma.page.findFirst({
-      where: {
-        slug: slug,
-        isActive: true
-      },
-      select: {
-        id: true
-      }
-    });
-
-    if (!page) {
-      notFound();
-    }
-  } catch (error) {
-    console.error('Error checking page existence:', error);
-    notFound();
-  }
-
-  // Render the page content using the client component
-  return <PageContent slug={slug} />;
+  const page = await getPage(slug);
+  if (!page) notFound();
+  return <PageContent slug={slug} initialPage={page} />;
 }
