@@ -411,10 +411,6 @@ export default function SolarbioClient() {
                   <small>Elution volume</small>
                 </div>
               </div>
-
-              <p className="sb-quiet-line">
-                Manufactured by Solarbio · Supplied by Sri Saradi Scientific Pvt. Ltd.
-              </p>
             </div>
 
             {/* Hero Right Column: Product Image Card */}
