@@ -495,23 +495,23 @@ export default function SolarbioClient() {
           </div>
 
           <div className="sb-three-grid">
-            <div className="sb-card sb-accent">
-              <span className="sb-tile-number">01 / INPUT</span>
+            <div className="sb-card">
+              <span className="sb-tile-number">INPUT</span>
               <h3>Defined sample input</h3>
               <p style={{ marginTop: '8px' }}>
                 The manufacturer's protocol describes a 100–500 µL whole-blood sample range, including fresh or
                 anticoagulated samples.
               </p>
             </div>
-            <div className="sb-card sb-accent">
-              <span className="sb-tile-number">02 / PURIFICATION</span>
+            <div className="sb-card">
+              <span className="sb-tile-number">PURIFICATION</span>
               <h3>Spin-column isolation</h3>
               <p style={{ marginTop: '8px' }}>
                 A silica-based adsorption column binds DNA during purification, followed by washing and elution.
               </p>
             </div>
-            <div className="sb-card sb-accent">
-              <span className="sb-tile-number">03 / DOWNSTREAM</span>
+            <div className="sb-card">
+              <span className="sb-tile-number">DOWNSTREAM</span>
               <h3>Downstream research</h3>
               <p style={{ marginTop: '8px' }}>
                 The manufacturer lists PCR, restriction digestion, library construction and Southern hybridization
