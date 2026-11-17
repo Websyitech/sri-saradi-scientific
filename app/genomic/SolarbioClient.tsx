@@ -1089,16 +1089,6 @@ export default function SolarbioClient() {
                   <strong style={{ color: 'var(--ink)' }}>Sri Saradi Scientific Private Limited</strong>
                   <br />
                   Hyderabad, India
-                  <br />
-                  <a
-                    href="https://www.srisaradiscientific.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="sb-text-indigo"
-                    style={{ fontWeight: 600 }}
-                  >
-                    www.srisaradiscientific.com ↗
-                  </a>
                 </p>
               </div>
 
