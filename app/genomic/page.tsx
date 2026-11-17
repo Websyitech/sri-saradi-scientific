@@ -55,7 +55,10 @@ const productJsonLd = {
 export default function SolarBioPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      {/* Google rejects Product data without a price, so it is left out while the price is on request. */}
+      {!PRICE_ON_REQUEST && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
+      )}
       <SolarbioClient />
     </>
   );
