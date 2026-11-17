@@ -337,24 +337,6 @@ export default function SolarbioClient() {
         <div className="sb-wrap">
           <div className="sb-hero-grid">
             <div className="sb-hero-left">
-              <div className="sb-brand-row">
-                <span className="sb-sol-logo">
-                  <img
-                    src="/assets/solarbio/solarbio-favicon.webp"
-                    alt="Solarbio Logo"
-                    width={28}
-                    height={28}
-                    style={{ borderRadius: '50%', display: 'inline-block', verticalAlign: 'middle' }}
-                  />{' '}
-                  Solarbio
-                </span>
-                <span className="sb-eyebrow red" style={{ marginBottom: 0 }}>
-                  LIFE SCIENCES
-                </span>
-              </div>
-              <div className="sb-eyebrow">
-                D1800 &nbsp; / &nbsp; 100 TESTS &nbsp; / &nbsp; RESEARCH USE ONLY
-              </div>
               <h1 className="sb-hero-h1">
                 Genomic DNA extraction from <span className="sb-text-indigo">whole blood.</span>
               </h1>
