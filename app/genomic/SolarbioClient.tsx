@@ -7,6 +7,7 @@ import { FaWhatsapp, FaPhoneAlt, FaEnvelope, FaBars, FaTimes } from 'react-icons
 import './solarbio.css';
 import { useZohoCheckout } from '../components/checkout/useZohoCheckout';
 import { reportAdsConversion } from '@/app/lib/adsConversion';
+import { PRICE_ON_REQUEST, PRICE_WHATSAPP_URL } from './priceMode';
 
 const CHECKOUT_SKU = 'solarbio-d1800-100t';
 
@@ -289,9 +290,11 @@ export default function SolarbioClient() {
                 <a href="#research" onClick={() => setMobileMenuOpen(false)}>
                   Publications
                 </a>
-                <a href="#purchase" onClick={() => setMobileMenuOpen(false)}>
-                  Online purchase
-                </a>
+                {!PRICE_ON_REQUEST && (
+                  <a href="#purchase" onClick={() => setMobileMenuOpen(false)}>
+                    Online purchase
+                  </a>
+                )}
               </nav>
 
               <div className="sb-mobile-menu-footer">
@@ -359,9 +362,15 @@ export default function SolarbioClient() {
                 protocol, batch-specific quality records and published research references.
               </p>
               <div className="sb-hero-actions">
-                <a className="sb-btn blue" href="#purchase">
-                  Buy now  ₹22,420 →
-                </a>
+                {PRICE_ON_REQUEST ? (
+                  <a className="sb-btn blue" href={PRICE_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                    <FaWhatsapp style={{ verticalAlign: 'middle' }} /> Get price on WhatsApp →
+                  </a>
+                ) : (
+                  <a className="sb-btn blue" href="#purchase">
+                    Buy now  ₹22,420 →
+                  </a>
+                )}
                 <a
                   className="sb-btn outline"
                   href="/assets/solarbio/D1800_Protocol.pdf"
@@ -374,10 +383,20 @@ export default function SolarbioClient() {
 
               {/* Price Banner */}
               <div className="sb-price-banner">
-                <div className="sb-price-banner-row">
-                  <span className="sb-price-banner-main">₹22,420</span>
-                  <span className="sb-price-banner-sub">₹19,000 + ₹3,420 GST (18%) · per kit (100T)</span>
-                </div>
+                {PRICE_ON_REQUEST ? (
+                  <div className="sb-price-banner-row">
+                    <span className="sb-price-banner-main">Price on request</span>
+                    <span className="sb-price-banner-sub">
+                      Get it on <a href={PRICE_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a> in
+                      5 minutes · institutional &amp; bulk pricing available
+                    </span>
+                  </div>
+                ) : (
+                  <div className="sb-price-banner-row">
+                    <span className="sb-price-banner-main">₹22,420</span>
+                    <span className="sb-price-banner-sub">₹19,000 + ₹3,420 GST (18%) · per kit (100T)</span>
+                  </div>
+                )}
                 <div className="sb-price-banner-note">
                   ✓ Free shipping across India · Temperature-controlled cold chain handling
                 </div>
@@ -450,9 +469,11 @@ export default function SolarbioClient() {
             <a className="sb-toc-link" href="#research">
               Published Research
             </a>
-            <a className="sb-toc-link" href="#purchase">
-              Purchase
-            </a>
+            {!PRICE_ON_REQUEST && (
+              <a className="sb-toc-link" href="#purchase">
+                Purchase
+              </a>
+            )}
             <a className="sb-toc-link" href="#enquire">
               Formal Quotation
             </a>
@@ -994,7 +1015,8 @@ export default function SolarbioClient() {
         </div>
       </section>
 
-      {/* Section 7: Purchase */}
+      {/* Section 7: Purchase (hidden while the price-on-request test runs) */}
+      {!PRICE_ON_REQUEST && (
       <section id="purchase" className="sb-section sb-tint">
         <div className="sb-wrap">
           <div className="sb-heading">
@@ -1151,6 +1173,7 @@ export default function SolarbioClient() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Section 8: Technical & Commercial Enquiries */}
       <section id="enquire" className="sb-section">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import SolarbioClient from './SolarbioClient';
+import { PRICE_ON_REQUEST } from './priceMode';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/genomic' },
@@ -36,14 +37,15 @@ const productJsonLd = {
   image: "https://srisaradiscientific.com/assets/solarbio/hero-product.webp",
   description:
     "Spin-column kit for extracting genomic DNA from whole blood, 100 preparations. Supplied in India by Sri Saradi Scientific.",
-  offers: {
+  // While the price-on-request test runs the page shows no price, so the structured data must not either.
+  ...(PRICE_ON_REQUEST ? {} : { offers: {
     "@type": "Offer",
     url: "https://srisaradiscientific.com/genomic",
     priceCurrency: "INR",
     price: "22420.00",
     availability: "https://schema.org/InStock",
     seller: { "@type": "Organization", name: "Sri Saradi Scientific Private Limited" },
-  },
+  } }),
 };
 
 export default function SolarBioPage() {
