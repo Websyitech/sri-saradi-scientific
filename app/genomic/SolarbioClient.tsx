@@ -856,10 +856,6 @@ export default function SolarbioClient() {
             </div>
           </div>
 
-          <p className="sb-fine" style={{ marginTop: '20px' }}>
-            The COA accompanying any particular order should correspond to the actual lot shipped. A certificate is
-            evidence of the listed manufacturer tests; it is not an independent claim of quantified DNA yield or purity.
-          </p>
         </div>
       </section>
 
