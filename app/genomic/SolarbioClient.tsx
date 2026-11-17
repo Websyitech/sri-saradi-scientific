@@ -63,7 +63,7 @@ export default function SolarbioClient() {
     email: '',
     phone: '',
     request: 'Formal quotation / purchase order',
-    quantity: '1 kit',
+    quantity: '1',
     message: '',
   });
 
@@ -198,7 +198,7 @@ export default function SolarbioClient() {
           email: formState.email,
           phone: formState.phone,
           company: formState.organization,
-          notes: `Request Type: ${formState.request} | Quantity: ${formState.quantity} | Details: ${formState.message}`,
+          notes: `Request Type: ${formState.request} | Quantity: ${formState.quantity} kit(s) | Details: ${formState.message}`,
           pageUrl: typeof window !== 'undefined' ? window.location.href : 'https://srisaradiscientific.com/genomic',
           items: [
             {
@@ -1171,13 +1171,39 @@ export default function SolarbioClient() {
 
               <div className="sb-form-field">
                 <label htmlFor="quantity">Estimated quantity</label>
-                <input
-                  id="quantity"
-                  name="quantity"
-                  placeholder="e.g. 2 kits"
-                  value={formState.quantity}
-                  onChange={handleFormChange}
-                />
+                <div className="sb-qty-stepper">
+                  <button
+                    type="button"
+                    aria-label="Decrease quantity"
+                    onClick={() =>
+                      setFormState((prev) => ({
+                        ...prev,
+                        quantity: String(Math.max(1, (parseInt(prev.quantity) || 1) - 1)),
+                      }))
+                    }
+                  >
+                    −
+                  </button>
+                  <input
+                    id="quantity"
+                    name="quantity"
+                    type="number"
+                    min={1}
+                    inputMode="numeric"
+                    value={formState.quantity}
+                    onChange={handleFormChange}
+                  />
+                  <button
+                    type="button"
+                    aria-label="Increase quantity"
+                    onClick={() =>
+                      setFormState((prev) => ({ ...prev, quantity: String((parseInt(prev.quantity) || 0) + 1) }))
+                    }
+                  >
+                    +
+                  </button>
+                  <span className="sb-qty-unit">kit(s)</span>
+                </div>
               </div>
 
               <div className="sb-form-field full">

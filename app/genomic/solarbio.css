@@ -2088,3 +2088,45 @@ html:has(.solarbio-page) {
     display: none !important;
   }
 }
+
+/* Quantity stepper in the enquiry form */
+.solarbio-page .sb-qty-stepper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.solarbio-page .sb-qty-stepper button {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border: 1.5px solid #2f3e8f;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #2f3e8f;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+.solarbio-page .sb-qty-stepper input {
+  width: 80px !important;
+  flex: 0 0 80px;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+.solarbio-page .sb-qty-stepper input::-webkit-outer-spin-button,
+.solarbio-page .sb-qty-stepper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.solarbio-page .sb-qty-unit {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* WhatsApp bubble sits well clear of the sticky bar and the hero slider arrows on mobile */
+@media (max-width: 768px) {
+  .solarbio-page .sb-whatsapp-float {
+    bottom: 150px !important;
+  }
+}
