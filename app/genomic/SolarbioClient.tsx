@@ -639,10 +639,6 @@ export default function SolarbioClient() {
                   alt="Original supplied agarose gel image, molecular marker at left and three genomic DNA sample lanes"
                 />
               </div>
-              <p className="sb-fine" style={{ marginTop: '12px' }}>
-                Supplied agarose gel image: marker lane at left and three sample lanes. The bright DNA signals are
-                visible, but this photograph alone does not establish precise yield, purity or DNA fragment sizes.
-              </p>
             </div>
 
             <div className="sb-card">
@@ -913,11 +909,6 @@ export default function SolarbioClient() {
             </div>
           </div>
 
-          <p className="sb-fine" style={{ marginTop: '16px' }}>
-            Publication associations are supplied by the distributor; access to full-text methods may be required to
-            independently check exact D1800 usage and experimental conditions. Citations do not imply journal
-            endorsement or independently establish this product's performance.
-          </p>
         </div>
       </section>
 
