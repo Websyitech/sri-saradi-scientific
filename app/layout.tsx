@@ -51,10 +51,16 @@ export async function generateMetadata(): Promise<Metadata> {
     title,
     description,
     keywords,
+    // Google Search and Ads need a square icon of at least 48px (multiples of 48 preferred); the admin
+    // favicon is only 32px, so larger brand icons are listed too.
     icons: {
-      icon: favicon,
+      icon: [
+        { url: favicon },
+        { url: '/assets/brand/icon-192.png', sizes: '192x192', type: 'image/png' },
+        { url: '/assets/brand/icon-512.png', sizes: '512x512', type: 'image/png' },
+      ],
       shortcut: favicon,
-      apple: favicon,
+      apple: '/assets/brand/icon-192.png',
     },
     openGraph: {
       title: ogTitle,
