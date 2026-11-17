@@ -2032,3 +2032,51 @@ html:has(.solarbio-page) {
 }
 .solarbio-page .sb-hero-dots button.active { background: #2f3e8f; }
 .solarbio-page .sb-hero-img-card img { aspect-ratio: 4 / 3; }
+
+/* Mobile sticky action bar */
+.solarbio-page .sb-mobile-cta {
+  display: none;
+}
+@media (max-width: 768px) {
+  .solarbio-page .sb-mobile-cta {
+    display: flex;
+    gap: 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: #ffffff;
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -6px 18px rgba(32, 56, 103, 0.08);
+  }
+  .solarbio-page .sb-mobile-cta a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+  }
+  .solarbio-page .sb-mobile-cta-quote {
+    background: #2f3e8f;
+    color: #ffffff !important;
+  }
+  .solarbio-page .sb-mobile-cta-call {
+    flex: 0 0 34% !important;
+    border: 1.5px solid #2f3e8f;
+    color: #2f3e8f !important;
+  }
+  /* keep the WhatsApp bubble and page end clear of the bar */
+  .solarbio-page .sb-whatsapp-float {
+    bottom: 84px !important;
+  }
+  .solarbio-page {
+    padding-bottom: 72px;
+  }
+}

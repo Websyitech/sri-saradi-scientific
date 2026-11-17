@@ -1274,6 +1274,15 @@ export default function SolarbioClient() {
 
       {/* Floating WhatsApp Action Button */}
       <DownloadGate />
+      {/* Mobile-only sticky action bar */}
+      <div className="sb-mobile-cta">
+        <a href="#enquire" className="sb-mobile-cta-quote">
+          Request quotation
+        </a>
+        <a href="tel:+917207607444" className="sb-mobile-cta-call">
+          <FaPhoneAlt /> Call
+        </a>
+      </div>
       <a
         href="https://wa.me/917207607444?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20Solarbio%20D1800%20Blood%20Genomic%20DNA%20Extraction%20Kit"
         target="_blank"
