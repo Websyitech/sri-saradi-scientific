@@ -8,6 +8,7 @@ import './solarbio.css';
 import { useZohoCheckout } from '../components/checkout/useZohoCheckout';
 import { reportAdsConversion } from '@/app/lib/adsConversion';
 import { PRICE_ON_REQUEST, PRICE_WHATSAPP_URL } from './priceMode';
+import DownloadGate from './DownloadGate';
 
 const CHECKOUT_SKU = 'solarbio-d1800-100t';
 
@@ -1386,6 +1387,7 @@ export default function SolarbioClient() {
       )}
 
       {/* Floating WhatsApp Action Button */}
+      <DownloadGate />
       <a
         href="https://wa.me/917207607444?text=Hi%2C%20I%20would%20like%20to%20enquire%20about%20Solarbio%20D1800%20Blood%20Genomic%20DNA%20Extraction%20Kit"
         target="_blank"
