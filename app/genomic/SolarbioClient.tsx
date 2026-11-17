@@ -382,26 +382,19 @@ export default function SolarbioClient() {
                 </a>
               </div>
 
-              {/* Price Banner */}
+              {/* Price Banner (hidden while the price is on request) */}
+              {!PRICE_ON_REQUEST && (
               <div className="sb-price-banner">
-                {PRICE_ON_REQUEST ? (
-                  <div className="sb-price-banner-row">
-                    <span className="sb-price-banner-main">Price on request</span>
-                    <span className="sb-price-banner-sub">
-                      Get it on <a href={PRICE_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a> in
-                      5 minutes · institutional &amp; bulk pricing available
-                    </span>
-                  </div>
-                ) : (
-                  <div className="sb-price-banner-row">
-                    <span className="sb-price-banner-main">₹22,420</span>
-                    <span className="sb-price-banner-sub">₹19,000 + ₹3,420 GST (18%) · per kit (100T)</span>
-                  </div>
-                )}
+                <div className="sb-price-banner-row">
+                  <span className="sb-price-banner-main">₹22,420</span>
+                  <span className="sb-price-banner-sub">₹19,000 + ₹3,420 GST (18%) · per kit (100T)</span>
+                </div>
                 <div className="sb-price-banner-note">
                   ✓ Free shipping across India · Temperature-controlled cold chain handling
                 </div>
               </div>
+
+              )}
 
               {/* Micro Stats */}
               <div className="sb-micro">
