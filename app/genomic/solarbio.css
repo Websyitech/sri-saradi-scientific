@@ -498,10 +498,19 @@ html:has(.solarbio-page) {
     padding: 32px 0 24px !important;
   }
   .solarbio-page .sb-micro {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
     margin-top: 18px;
     padding-top: 14px;
+  }
+  .solarbio-page .sb-micro > div {
+    padding-left: 8px;
+  }
+  .solarbio-page .sb-micro strong {
+    font-size: 14px;
+  }
+  .solarbio-page .sb-micro small {
+    font-size: 11px;
   }
   .solarbio-page .sb-hero-img-card {
     padding: 18px 14px;
