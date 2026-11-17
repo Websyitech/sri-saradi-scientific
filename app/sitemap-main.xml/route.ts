@@ -27,6 +27,7 @@ export async function GET() {
       { path: "/", priority: "1.0" },
       { path: "/products", priority: "0.9" },
       { path: "/genomic", priority: "0.9" },
+      { path: "/solarbio", priority: "0.9" },
       { path: "/omni-search", priority: "0.8" },
       { path: "/services", priority: "0.8" },
       { path: "/lab-consumables", priority: "0.7" },
@@ -69,6 +70,12 @@ export async function GET() {
           priority: "0.7",
         });
       }
+    }
+
+    // Solarbio brand landing pages, one per category
+    const { getBrandCategories } = await import("@/app/solarbio/brandData");
+    for (const c of await getBrandCategories()) {
+      urls.push({ loc: `${siteUrl}/solarbio/${c.slug}`, lastmod: today, changefreq: changeFreq, priority: "0.8" });
     }
 
     // CRO services and signaling pathways
