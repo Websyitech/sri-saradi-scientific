@@ -2080,3 +2080,11 @@ html:has(.solarbio-page) {
     padding-bottom: 72px;
   }
 }
+
+/* On mobile the sticky bottom bar carries quote + call, so the header keeps only logo and menu */
+@media (max-width: 768px) {
+  .solarbio-page .sb-nav-contact,
+  .solarbio-page .sb-nav-cta {
+    display: none !important;
+  }
+}
