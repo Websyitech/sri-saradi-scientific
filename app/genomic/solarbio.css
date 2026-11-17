@@ -1988,3 +1988,38 @@ html:has(.solarbio-page) {
     font-size: 26px;
   }
 }
+
+/* Hero photo slider */
+.solarbio-page .sb-hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: #1e2a55;
+}
+.solarbio-page .sb-hero-arrow.prev { left: 10px; }
+.solarbio-page .sb-hero-arrow.next { right: 10px; }
+.solarbio-page .sb-hero-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 14px;
+}
+.solarbio-page .sb-hero-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #cfd6e4;
+  cursor: pointer;
+}
+.solarbio-page .sb-hero-dots button.active { background: #2f3e8f; }
+.solarbio-page .sb-hero-img-card img { aspect-ratio: 4 / 3; }

@@ -12,6 +12,14 @@ import DownloadGate from './DownloadGate';
 
 const CHECKOUT_SKU = 'solarbio-d1800-100t';
 
+const HERO_SLIDES = [
+  { src: '/assets/solarbio/hero-product.webp', alt: 'Solarbio D1800 100T kit, front package and label' },
+  { src: '/assets/solarbio/product-red.webp', alt: 'Red side of Solarbio product packaging' },
+  { src: '/assets/solarbio/product-white.webp', alt: 'White side of product packaging' },
+  { src: '/assets/solarbio/product-side.webp', alt: 'Product box side panel' },
+  { src: '/assets/solarbio/product-top.webp', alt: 'Solarbio box top panel' },
+];
+
 interface EnquiryFormState {
   name: string;
   organization: string;
@@ -29,6 +37,14 @@ export default function SolarbioClient() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [lightboxAlt, setLightboxAlt] = useState<string>('');
+  const [heroSlide, setHeroSlide] = useState(0);
+  const [heroPaused, setHeroPaused] = useState(false);
+
+  useEffect(() => {
+    if (heroPaused) return;
+    const t = setInterval(() => setHeroSlide((i) => (i + 1) % HERO_SLIDES.length), 4000);
+    return () => clearInterval(t);
+  }, [heroPaused]);
   const [quantity, setQuantity] = useState<number>(1);
   const checkout = useZohoCheckout();
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
@@ -399,20 +415,55 @@ export default function SolarbioClient() {
             <div className="sb-hero-art">
               <div
                 className="sb-hero-img-card"
-                onClick={() =>
-                  openLightbox(
-                    '/assets/solarbio/hero-product.webp',
-                    'Actual photographed Solarbio D1800 100T Blood Genomic DNA Extraction Kit packaging'
-                  )
-                }
+                onMouseEnter={() => setHeroPaused(true)}
+                onMouseLeave={() => setHeroPaused(false)}
+                onClick={() => openLightbox(HERO_SLIDES[heroSlide].src, HERO_SLIDES[heroSlide].alt)}
+                style={{ position: 'relative' }}
               >
                 <img
-                  src="/assets/solarbio/hero-product.webp"
-                  alt="Actual photographed Solarbio D1800 100T Blood Genomic DNA Extraction Kit packaging"
+                  key={HERO_SLIDES[heroSlide].src}
+                  src={HERO_SLIDES[heroSlide].src}
+                  alt={HERO_SLIDES[heroSlide].alt}
                   width={1024}
                   height={768}
                   loading="eager"
                 />
+                <button
+                  type="button"
+                  className="sb-hero-arrow prev"
+                  aria-label="Previous photo"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setHeroSlide((i) => (i - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+                  }}
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  className="sb-hero-arrow next"
+                  aria-label="Next photo"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setHeroSlide((i) => (i + 1) % HERO_SLIDES.length);
+                  }}
+                >
+                  ›
+                </button>
+                <div className="sb-hero-dots">
+                  {HERO_SLIDES.map((slide, i) => (
+                    <button
+                      key={slide.src}
+                      type="button"
+                      aria-label={`Show photo ${i + 1}`}
+                      className={i === heroSlide ? 'active' : ''}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setHeroSlide(i);
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -425,9 +476,6 @@ export default function SolarbioClient() {
           <nav className="sb-toc-list" aria-label="Page navigation">
             <a className="sb-toc-link" href="#overview">
               Overview
-            </a>
-            <a className="sb-toc-link" href="#photographs">
-              Packaging
             </a>
             <a className="sb-toc-link" href="#evidence">
               Gel Evidence
@@ -559,116 +607,6 @@ export default function SolarbioClient() {
         </div>
       </section>
 
-      {/* Section 2: Product Photographs */}
-      <section id="photographs" className="sb-section sb-tint">
-        <div className="sb-wrap">
-          <div className="sb-heading">
-            <div className="sb-eyebrow">Original product photography</div>
-            <h2>Inspect the actual packaging.</h2>
-            <p>
-              Multiple views of the supplied Solarbio D1800 kit. The product label and batch identifiers are presented
-              as photographed.
-            </p>
-          </div>
-
-          <div className="sb-gallery-grid">
-            <div
-              className="sb-gallery-item"
-              onClick={() =>
-                openLightbox(
-                  '/assets/solarbio/hero-product.webp',
-                  'D1800 product front package and label'
-                )
-              }
-              role="button"
-              tabIndex={0}
-              title="Click to enlarge front label"
-            >
-              <img
-                src="/assets/solarbio/hero-product.webp"
-                alt="D1800 product front package and label"
-              />
-            </div>
-
-            <div
-              className="sb-gallery-item"
-              onClick={() =>
-                openLightbox(
-                  '/assets/solarbio/product-red.webp',
-                  'Red side of Solarbio product packaging'
-                )
-              }
-              role="button"
-              tabIndex={0}
-              title="Click to enlarge manufacturer panel"
-            >
-              <img
-                src="/assets/solarbio/product-red.webp"
-                alt="Red side of Solarbio product packaging"
-              />
-            </div>
-
-            <div
-              className="sb-gallery-item"
-              onClick={() =>
-                openLightbox(
-                  '/assets/solarbio/product-white.webp',
-                  'White side of product packaging'
-                )
-              }
-              role="button"
-              tabIndex={0}
-              title="Click to enlarge white panel"
-            >
-              <img
-                src="/assets/solarbio/product-white.webp"
-                alt="White side of product packaging"
-              />
-            </div>
-
-            <div
-              className="sb-gallery-item"
-              onClick={() =>
-                openLightbox(
-                  '/assets/solarbio/product-side.webp',
-                  'Product box side panel'
-                )
-              }
-              role="button"
-              tabIndex={0}
-              title="Click to enlarge package side"
-            >
-              <img
-                src="/assets/solarbio/product-side.webp"
-                alt="Product box side panel"
-              />
-            </div>
-
-            <div
-              className="sb-gallery-item"
-              onClick={() =>
-                openLightbox(
-                  '/assets/solarbio/product-top.webp',
-                  'Solarbio box top panel'
-                )
-              }
-              role="button"
-              tabIndex={0}
-              title="Click to enlarge top panel"
-            >
-              <img
-                src="/assets/solarbio/product-top.webp"
-                alt="Solarbio box top panel"
-              />
-            </div>
-          </div>
-
-          <p className="sb-fine" style={{ marginTop: '16px' }}>
-            Photos are based on the actual package supplied for this page; white framing and contrast have been adjusted
-            for consistency. Lot details must be confirmed for the shipment supplied to each customer.
-          </p>
-        </div>
-      </section>
 
       {/* Section 3: Experimental Evidence */}
       <section id="evidence" className="sb-section">
