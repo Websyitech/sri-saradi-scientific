@@ -35,7 +35,7 @@ export default async function SolarbioBrandPage() {
       ]}
       faqs={[
         { q: `Where can I buy ${BRAND} products in India?`, a: `Sri Saradi Scientific in Hyderabad supplies the ${BRAND} catalogue across India. Search a catalogue number on this site or send us your list for a quotation.` },
-        { q: `Is there a ${BRAND} supplier in Hyderabad?`, a: `Yes. Sri Saradi Scientific Private Limited is based in Hyderabad, Telangana, and supplies ${BRAND} products to labs in Hyderabad, Secunderabad, Genome Valley and across India. Call +91 97424 43809.` },
+        { q: `Is there a ${BRAND} supplier in Hyderabad?`, a: `Yes. Sri Saradi Scientific Private Limited is based in Hyderabad, Telangana, and supplies ${BRAND} products to labs in Hyderabad, Secunderabad, Genome Valley and across India. Call +91 72076 07444.` },
         { q: `How long does delivery of ${BRAND} reagents take?`, a: 'Delivery time depends on the product and current stock. Our team confirms the timeline and storage conditions with every quotation.' },
         { q: 'Do you provide GST invoices and support for institutional purchases?', a: 'Yes. We quote and invoice in INR with GST and work with university, government and company purchase processes.' },
         { q: `Can I get datasheets and protocols for ${BRAND} products?`, a: 'Yes. Product pages list key specifications, and we can share manufacturer datasheets, protocols and certificates on request.' },

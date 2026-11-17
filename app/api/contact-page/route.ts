@@ -29,7 +29,7 @@ export async function GET() {
       return NextResponse.json({
         ...contactPage,
         email: contactPage.email || settingsMap.contact_email || "info@srisaradiscientific.com",
-        phone: contactPage.phone || settingsMap.contact_phone || "+91 97424 43809",
+        phone: contactPage.phone || settingsMap.contact_phone || "+91 72076 07444",
         address: contactPage.address || settingsMap.contact_address || "Hyderabad, Telangana, India",
         offices: OFFICES,
       });
@@ -42,7 +42,7 @@ export async function GET() {
       subtitle: "Get in touch with us",
       description: "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
       email: settingsMap.contact_email || "info@srisaradiscientific.com",
-      phone: settingsMap.contact_phone || "+91 97424 43809",
+      phone: settingsMap.contact_phone || "+91 72076 07444",
       address: settingsMap.contact_address || "Hyderabad, Telangana, India",
       businessHours: "Monday - Friday: 9:00 AM - 6:00 PM",
       mapEmbedUrl: "",
@@ -57,7 +57,7 @@ export async function GET() {
       subtitle: "Get in touch with us",
       description: "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
       email: "info@srisaradiscientific.com",
-      phone: "+91 97424 43809",
+      phone: "+91 72076 07444",
       address: "Hyderabad, Telangana, India",
       businessHours: "Monday - Friday: 9:00 AM - 6:00 PM",
       mapEmbedUrl: "",

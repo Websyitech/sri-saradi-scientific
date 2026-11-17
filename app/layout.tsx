@@ -112,13 +112,25 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": ["Organization", "LocalBusiness"],
+              "@id": "https://srisaradiscientific.com/#organization",
               name: "Sri Saradi Scientific Private Limited",
               url: "https://srisaradiscientific.com",
               logo: "https://srisaradiscientific.com/assets/sri-saradi-logo.png",
+              image: "https://srisaradiscientific.com/assets/sri-saradi-logo.png",
               email: "info@srisaradiscientific.com",
-              telephone: "+91 97424 43809",
-              address: { "@type": "PostalAddress", addressLocality: "Hyderabad", addressRegion: "Telangana", addressCountry: "IN" },
+              telephone: "+91 72076 07444",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "319, 3rd Floor, VM Towers, Green Park Road, Suchitra, Kompally",
+                addressLocality: "Secunderabad",
+                addressRegion: "Telangana",
+                postalCode: "500067",
+                addressCountry: "IN",
+              },
+              hasMap: "https://maps.google.com/?cid=18331745998023802070",
+              areaServed: [{ "@type": "City", name: "Hyderabad" }, { "@type": "State", name: "Telangana" }, { "@type": "Country", name: "India" }],
+              openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "09:00", closes: "18:00" }],
             }),
           }}
         />

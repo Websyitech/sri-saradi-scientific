@@ -128,7 +128,7 @@ export async function sendContactConfirmation(data: ContactFormData): Promise<bo
       
       <p>Our team typically responds within 24 hours during business hours (Monday - Friday, 9:00 AM - 6:00 PM IST).</p>
       
-      <p>If you have any urgent inquiries, please feel free to call us at <a href="tel:+919742443809">+91 72076 07444</a>.</p>
+      <p>If you have any urgent inquiries, please feel free to call us at <a href="tel:+917207607444">+91 72076 07444</a>.</p>
       
       <p>Best regards,<br>
       <strong>Sri Saradi Scientific Team</strong></p>
@@ -344,7 +344,7 @@ export async function sendQuoteConfirmation(data: QuoteFormData): Promise<boolea
       <p>If you have any urgent questions or need to modify your request, please feel free to contact us:</p>
       <ul>
         <li>Email: <a href="mailto:info@srisaradiscientific.com">info@srisaradiscientific.com</a></li>
-        <li>Phone: <a href="tel:+919742443809">+91 72076 07444</a></li>
+        <li>Phone: <a href="tel:+917207607444">+91 72076 07444</a></li>
       </ul>
       
       <p>Thank you for choosing Sri Saradi Scientific!</p>
@@ -513,7 +513,7 @@ export async function sendPaymentConfirmation(data: PaymentEmailData): Promise<b
       ${paymentItemsHtml(data.items)}
       <p>Our team will contact you with dispatch details and the tax invoice. For any questions, write to
       <a href="mailto:info@srisaradiscientific.com">info@srisaradiscientific.com</a> or call
-      <a href="tel:+919742443809">+91 72076 07444</a> and quote your Order ID.</p>
+      <a href="tel:+917207607444">+91 72076 07444</a> and quote your Order ID.</p>
       <p>Best regards,<br><strong>Sri Saradi Scientific Team</strong></p>
     </div>
   `;
