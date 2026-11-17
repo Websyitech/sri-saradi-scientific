@@ -420,14 +420,19 @@ export default function SolarbioClient() {
                 onClick={() => openLightbox(HERO_SLIDES[heroSlide].src, HERO_SLIDES[heroSlide].alt)}
                 style={{ position: 'relative' }}
               >
-                <img
-                  key={HERO_SLIDES[heroSlide].src}
-                  src={HERO_SLIDES[heroSlide].src}
-                  alt={HERO_SLIDES[heroSlide].alt}
-                  width={1024}
-                  height={768}
-                  loading="eager"
-                />
+                {/* All slides are rendered (and so preloaded); only the active one is shown. */}
+                {HERO_SLIDES.map((slide, i) => (
+                  <img
+                    key={slide.src}
+                    src={slide.src}
+                    alt={slide.alt}
+                    width={1024}
+                    height={768}
+                    loading="eager"
+                    aria-hidden={i !== heroSlide}
+                    style={{ display: i === heroSlide ? 'block' : 'none' }}
+                  />
+                ))}
                 <button
                   type="button"
                   className="sb-hero-arrow prev"
