@@ -74,6 +74,9 @@ export const displayCategory = (name: string) => name.replace(/Protiens/i, 'Prot
 
 type Row = { v: string | null; n: bigint | number };
 const fmt = (n: number) => n.toLocaleString('en-IN');
+/** Lower-case plain words but keep acronyms and mixed case (ELISA, DNA, qPCR). */
+const soft = (t: string) => t.replace(/\b([A-Z][a-z]+)\b/g, (w) => w.toLowerCase());
+const cap = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 const listJoin = (xs: string[]) => (xs.length <= 1 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`);
 
 // Column names are fixed literals below, never user input.
@@ -108,7 +111,7 @@ function tempBucket(s: string) {
 
 export const getCategoryFaqs = cache(async (slug: string, name: string, total: number) => {
   const faqs: { q: string; a: string }[] = [];
-  const lower = name.toLowerCase();
+  const lower = soft(name) + (/s$/i.test(name) ? '' : ' products');
   try {
     const [subs, storage, purity] = await Promise.all([top(slug, 'subCategory'), top(slug, 'storage', 40), top(slug, 'purity', 40)]);
 
@@ -117,7 +120,7 @@ export const getCategoryFaqs = cache(async (slug: string, name: string, total: n
     if (realSubs.length >= 2) {
       faqs.push({
         q: `What types of ${BRAND} ${lower} are available?`,
-        a: `The range of ${fmt(total)} products includes ${listJoin(realSubs.map((s) => `${s.v.toLowerCase()} (${fmt(s.n)})`))}. Each product has its own page with catalogue number and pack sizes.`,
+        a: `The range of ${fmt(total)} products includes ${listJoin(realSubs.map((s) => `${soft(s.v)} (${fmt(s.n)})`))}. Each product has its own page with catalogue number and pack sizes.`,
       });
     }
 
@@ -128,7 +131,7 @@ export const getCategoryFaqs = cache(async (slug: string, name: string, total: n
       for (const a of apps) for (const k of a.v.split(/[;,/]\s*/)) if (k) appCount.set(k.trim(), (appCount.get(k.trim()) ?? 0) + a.n);
       const label: Record<string, string> = { WB: 'western blot (WB)', 'IHC-P': 'IHC on paraffin sections (IHC-P)', FCM: 'flow cytometry (FCM)', ELISA: 'ELISA', IF: 'immunofluorescence (IF)', ICC: 'ICC', IP: 'IP' };
       const topApps = [...appCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
-      if (hosts.length) faqs.push({ q: `Which host species are ${BRAND} antibodies raised in?`, a: `${listJoin(hosts.map((h) => `${h.v.toLowerCase()} (${fmt(h.n)})`))}. ${clones.length ? `By type there are ${listJoin(clones.map((c) => `${fmt(c.n)} ${c.v.toLowerCase().replace(/ antibody$/, '')}`))} antibodies.` : ''}`.trim() });
+      if (hosts.length) faqs.push({ q: `Which host species are ${BRAND} antibodies raised in?`, a: `${cap(listJoin(hosts.map((h) => `${h.v.toLowerCase()} (${fmt(h.n)})`)))}. ${clones.length ? `By type there are ${listJoin(clones.map((c) => `${fmt(c.n)} ${c.v.toLowerCase().replace(/ antibody$/, '')}`))} antibodies.` : ''}`.trim() });
       if (topApps.length) faqs.push({ q: `Which applications are ${BRAND} antibodies validated for?`, a: `Validated applications include ${listJoin(topApps.map(([k, n]) => `${label[k] ?? k} (${fmt(n)})`))}. Recommended dilutions are listed on each antibody's page.` });
     }
 
@@ -136,19 +139,19 @@ export const getCategoryFaqs = cache(async (slug: string, name: string, total: n
       const [species, samples] = await Promise.all([firstWordOfName(slug, 0, 10), top(slug, 'elisaSampleType', 3)]);
       const sp = species.filter((s) => SPECIES.has(s.v)).slice(0, 5);
       if (sp.length) faqs.push({ q: `Which species do ${BRAND} ELISA kits cover?`, a: `Kits are available for ${listJoin(sp.map((s) => `${s.v.toLowerCase()} (${fmt(s.n)})`))} samples, among others. Sensitivity and detection range are listed on each kit's page.` });
-      if (samples.length) faqs.push({ q: `What sample types can ${BRAND} ELISA kits test?`, a: `Most kits (${fmt(samples[0].n)}) are validated for ${samples[0].v.toLowerCase()}. Check the kit page or ask us to confirm a specific sample type.` });
+      if (samples.length) faqs.push({ q: `What sample types can ${BRAND} ELISA kits test?`, a: `Most kits (${fmt(samples[0].n)}) are validated for ${soft(samples[0].v)}. Check the kit page or ask us to confirm a specific sample type.` });
     }
 
     if (slug === 'recombinant-protiens') {
       const species = (await firstWordOfName(slug, 1, 10)).filter((s) => SPECIES.has(s.v)).slice(0, 5);
-      if (species.length) faqs.push({ q: `Which species are ${BRAND} recombinant proteins available for?`, a: `${listJoin(species.map((s) => `${s.v} (${fmt(s.n)})`))}. Expression host, tag and purity are shared with the quotation.` });
+      if (species.length) faqs.push({ q: `Which species are ${BRAND} recombinant proteins available for?`, a: `${species[0].n >= 0.9 * species.reduce((t, x) => t + x.n, 0) ? `Nearly all are ${species[0].v.toLowerCase()} proteins (${fmt(species[0].n)})${species.length > 1 ? `, with a few ${listJoin(species.slice(1).map((x) => x.v.toLowerCase()))} proteins` : ''}` : cap(listJoin(species.map((x) => `${x.v.toLowerCase()} (${fmt(x.n)})`)))}. Expression host, tag and purity are shared with the quotation.` });
     }
 
     // Purity
     let numeric = 0;
     const purityTop = new Map<string, number>();
     for (const p of purity) {
-      const v = p.v === '0.98' ? '≥98%' : p.v.replace(/\s+/g, '');
+      const v = p.v === '0.98' ? '≥98%' : p.v.replace(/\s+/g, '').replace(/(\d)\.0%/, '$1%');
       if (/\d\s*%|≥/.test(v)) { numeric += p.n; purityTop.set(v, (purityTop.get(v) ?? 0) + p.n); }
     }
     if (numeric >= total * 0.1) {
