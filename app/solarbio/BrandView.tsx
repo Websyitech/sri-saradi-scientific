@@ -41,7 +41,7 @@ export default function BrandView({ heading, intro, path, total, categories, pro
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-        { '@type': 'ListItem', position: 2, name: `${BRAND} in Hyderabad & India`, item: `${SITE}/solarbio` },
+        { '@type': 'ListItem', position: 2, name: `${BRAND} in India`, item: `${SITE}/solarbio` },
         ...(currentSlug ? [{ '@type': 'ListItem', position: 3, name: heading, item: `${SITE}${path}` }] : []),
       ],
     },
@@ -60,7 +60,7 @@ export default function BrandView({ heading, intro, path, total, categories, pro
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <nav aria-label="Breadcrumb" style={{ fontSize: 14, opacity: 0.85, marginBottom: 16 }}>
             <Link href="/" style={{ color: '#fff' }}>Home</Link> /{' '}
-            {currentSlug ? <Link href="/solarbio" style={{ color: '#fff' }}>{BRAND} in Hyderabad & India</Link> : <span>{BRAND} in Hyderabad & India</span>}
+            {currentSlug ? <Link href="/solarbio" style={{ color: '#fff' }}>{BRAND} in India</Link> : <span>{BRAND} in India</span>}
             {currentSlug && <> / <span>{heading}</span></>}
           </nav>
           <h1 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700, margin: '0 0 16px', lineHeight: 1.2 }}>{heading}</h1>
@@ -88,7 +88,7 @@ export default function BrandView({ heading, intro, path, total, categories, pro
         {products.length > 0 && (
           <section style={{ marginTop: 40 }}>
             <h2 style={{ fontSize: 26, color: NAVY, margin: '0 0 20px' }}>
-              {currentSlug ? `Popular ${heading.replace(/ in Hyderabad & India$/, '')}` : `Popular ${BRAND} products`}
+              {currentSlug ? `Popular ${heading.replace(/ in India$/, '')}` : `Popular ${BRAND} products`}
             </h2>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 14 }}>
               {products.map((p) => (

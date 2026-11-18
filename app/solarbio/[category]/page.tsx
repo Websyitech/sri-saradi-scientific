@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = await getBrandCategory(category);
   if (!cat) return { title: 'Page Not Found | Sri Saradi Scientific', robots: { index: false } };
   const name = displayCategory(cat.name);
-  const title = `${BRAND} ${name} Supplier in Hyderabad & India | Sri Saradi Scientific`;
-  const description = `Buy ${cat.count.toLocaleString('en-IN')} ${BRAND} ${name.toLowerCase()} in Hyderabad and across India. Catalogue numbers, pack sizes, quotations with GST invoice and pan-India delivery from Sri Saradi Scientific, Hyderabad.`;
+  const title = `${BRAND} ${name} Supplier in India | Sri Saradi Scientific`;
+  const description = `Buy ${cat.count.toLocaleString('en-IN')} ${BRAND} ${name.toLowerCase()} across India. Catalogue numbers, pack sizes, quotations with GST invoice and pan-India delivery from Sri Saradi Scientific, Hyderabad.`;
   return {
     title,
     description,
@@ -35,7 +35,7 @@ export default async function SolarbioCategoryPage({ params }: Props) {
 
   return (
     <BrandView
-      heading={`${BRAND} ${name} in Hyderabad & India`}
+      heading={`${BRAND} ${name} in India`}
       path={`/solarbio/${cat.slug}`}
       total={cat.count}
       categories={categories}

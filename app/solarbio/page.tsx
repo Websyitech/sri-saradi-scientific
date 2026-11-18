@@ -4,7 +4,7 @@ import { BRAND, displayCategory, getBrandCategories, getBrandProducts, getBrandT
 
 export const revalidate = 3600;
 
-const title = `${BRAND} Distributor in Hyderabad & India | Antibodies, ELISA Kits, Reagents | Sri Saradi Scientific`;
+const title = `${BRAND} Distributor in India | Antibodies, ELISA Kits, Reagents | Sri Saradi Scientific`;
 const description = `Buy ${BRAND} antibodies, recombinant proteins, ELISA kits, peptides, biochemical reagents and DNA extraction kits in India. Quotations, GST invoices and pan-India delivery from Sri Saradi Scientific, Hyderabad.`;
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default async function SolarbioBrandPage() {
 
   return (
     <BrandView
-      heading={`${BRAND} Distributor in Hyderabad & India`}
+      heading={`${BRAND} Distributor in India`}
       path="/solarbio"
       total={total}
       categories={categories}

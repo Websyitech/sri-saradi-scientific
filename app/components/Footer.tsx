@@ -28,7 +28,7 @@ const footerLinks = {
       { label: "About Us", href: "/about" },
       { label: "CRO Services", href: "/cro-services" },
       { label: "Signaling Pathways", href: "/signaling-pathways" },
-      { label: "Solarbio in Hyderabad & India", href: "/solarbio" },
+      { label: "Solarbio in India", href: "/solarbio" },
       { label: "FAQ", href: "/faq" },
       { label: "Certificates", href: "/certificates" },
       { label: "Careers", href: "/careers" },
