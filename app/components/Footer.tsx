@@ -103,7 +103,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer>
+    <footer data-nosnippet>
       {/* Main Footer */}
       <div
         style={{
