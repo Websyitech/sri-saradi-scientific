@@ -62,6 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const loaded = await productFor(slug);
+  if (!loaded && slug?.length === 1) notFound(); // resolved before the response starts, so bots get a real 404
   if (!loaded) return { title: "Product not found | Sri Saradi Scientific", robots: { index: false } };
 
   const p = { ...loaded.product, name: loaded.raw.name, description: loaded.raw.description };
