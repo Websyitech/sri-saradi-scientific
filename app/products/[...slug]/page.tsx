@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { cache } from "react";
+import { notFound } from "next/navigation";
 import prisma from "@/app/lib/prisma";
 import { transformProductsForDisplay } from "@/lib/character-transformer";
 import ProductDetailClient, { type Product } from "./ProductDetailClient";
@@ -86,6 +87,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const loaded = await productFor(slug);
+  // A single-segment URL that matches no product is a real 404 (not a 200 "not found" page).
+  if (!loaded && slug?.length === 1) notFound();
   const product = loaded ? { ...loaded.product, name: loaded.raw.name, description: loaded.raw.description } : null;
 
   const jsonLd = product
