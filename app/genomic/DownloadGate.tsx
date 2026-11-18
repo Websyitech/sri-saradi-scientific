@@ -15,6 +15,21 @@ function isUnlocked() {
   }
 }
 
+// Records a document request in GA4 (event "document_request") and sends Google Ads a virtual page view of
+// /genomic/document-unlocked, so a Google Ads audience can target people who downloaded the protocol / COA.
+function trackDocumentRequest(label: string) {
+  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+  if (!gtag) return;
+  gtag('event', 'document_request', { document: label, page_path: '/genomic' });
+  const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
+  if (adsId) {
+    gtag('event', 'page_view', {
+      send_to: adsId,
+      page_location: `${window.location.origin}/genomic/document-unlocked`,
+    });
+  }
+}
+
 export default function DownloadGate() {
   const [file, setFile] = useState<{ href: string; label: string } | null>(null);
   const [done, setDone] = useState(false);
@@ -65,6 +80,7 @@ export default function DownloadGate() {
       try {
         localStorage.setItem(STORAGE_KEY, '1');
       } catch {}
+      trackDocumentRequest(file.label);
       setDone(true);
     } catch {
       setError('Could not send your details. Please try again or contact us on WhatsApp.');
