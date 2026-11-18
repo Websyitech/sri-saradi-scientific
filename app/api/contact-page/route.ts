@@ -5,7 +5,7 @@ import prisma from "@/app/lib/prisma";
 const OFFICES = [
   {
     name: "Corporate Office",
-    address: "319, VM Towers, 3rd Floor, Suchitra Rd, Green Park, Kompally, New Jeedimetla, Jeedimetla - Malkajgiri, Hyderabad, Telangana, 500067",
+    address: "3rd floor, VM towers, Green Park Road, Suchitra, Kompally, Secunderabad, Telangana 500067",
   },
 ].map((office) => ({
   ...office,
