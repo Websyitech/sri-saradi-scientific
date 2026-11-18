@@ -58,11 +58,12 @@ export async function GET() {
     if (includeCategories) {
       const categories = await prisma.category.findMany({
         where: { isActive: true },
-        select: { slug: true, updatedAt: true },
+        select: { slug: true, updatedAt: true, _count: { select: { products: { where: { isActive: true } } } } },
         orderBy: { slug: 'asc' }
       });
 
-      for (const cat of categories) {
+      // Categories with products are listed as /solarbio/<slug> below (their canonical); skip the duplicates here.
+      for (const cat of categories.filter((c) => c._count.products === 0)) {
         urls.push({
           loc: `${siteUrl}/products?category=${cat.slug}`,
           lastmod: cat.updatedAt.toISOString().split("T")[0],
