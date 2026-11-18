@@ -31,8 +31,8 @@ function RenderBlock({ b }: { b: Block }) {
   if ('p' in b) return <p style={{ lineHeight: 1.75, margin: '0 0 16px' }}>{b.p}</p>;
   if ('h3' in b) return <h3 style={{ fontSize: 19, margin: '20px 0 8px' }}>{b.h3}</h3>;
   if ('note' in b) return <p style={{ background: '#eef0fb', borderLeft: `4px solid ${NAVY}`, padding: '12px 16px', borderRadius: 6, lineHeight: 1.6, margin: '0 0 16px' }}>{b.note}</p>;
-  if ('ul' in b) return <ul style={{ lineHeight: 1.7, margin: '0 0 16px', paddingLeft: 22 }}>{b.ul.map((x) => <li key={x} style={{ marginBottom: 6 }}>{x}</li>)}</ul>;
-  if ('ol' in b) return <ol style={{ lineHeight: 1.7, margin: '0 0 16px', paddingLeft: 22 }}>{b.ol.map((x) => <li key={x} style={{ marginBottom: 6 }}>{x}</li>)}</ol>;
+  if ('ul' in b) return <ul style={{ lineHeight: 1.7, margin: '0 0 16px', paddingLeft: 22, listStyle: 'disc' }}>{b.ul.map((x) => <li key={x} style={{ marginBottom: 6 }}>{x}</li>)}</ul>;
+  if ('ol' in b) return <ol style={{ lineHeight: 1.7, margin: '0 0 16px', paddingLeft: 22, listStyle: 'decimal' }}>{b.ol.map((x) => <li key={x} style={{ marginBottom: 6 }}>{x}</li>)}</ol>;
   return (
     <div style={{ overflowX: 'auto', margin: '0 0 18px' }}>
       <table style={{ borderCollapse: 'collapse', width: '100%', background: '#fff', fontSize: 15 }}>
@@ -114,7 +114,7 @@ export default async function GuidePage({ params }: Props) {
 
         <aside style={{ background: '#f7f8fc', border: '1px solid #e5e7eb', borderRadius: 12, padding: 22, marginBottom: 28 }}>
           <h2 style={{ fontSize: 20, color: NAVY, margin: '0 0 12px' }}>Products for this guide</h2>
-          <ul style={{ margin: '0 0 14px', paddingLeft: 20, lineHeight: 1.9 }}>
+          <ul style={{ margin: '0 0 14px', paddingLeft: 20, lineHeight: 1.9, listStyle: 'disc' }}>
             {a.related.map((r) => <li key={r.href}><Link href={r.href} style={{ color: NAVY, fontWeight: 600 }}>{r.label}</Link></li>)}
           </ul>
           <p style={{ margin: 0 }}>
@@ -125,7 +125,7 @@ export default async function GuidePage({ params }: Props) {
         {others.length > 0 && (
           <nav aria-label="More guides" style={{ marginBottom: 40 }}>
             <h2 style={{ fontSize: 20, margin: '0 0 10px' }}>More guides</h2>
-            <ul style={{ paddingLeft: 20, lineHeight: 1.9, margin: 0 }}>
+            <ul style={{ paddingLeft: 20, lineHeight: 1.9, margin: 0, listStyle: 'disc' }}>
               {others.map((o) => <li key={o.slug}><Link href={`/guides/${o.slug}`} style={{ color: NAVY }}>{o.title}</Link></li>)}
             </ul>
           </nav>
