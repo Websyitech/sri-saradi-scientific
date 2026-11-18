@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // robots.txt is defined in code (the old Admin → Settings "robots_txt" value is no longer used).
-const blocked = ["/admin/", "/api/", "/login", "/pay-test", "/track-order", "/thank-you", "/solarbio/thank-you"];
+const blocked = ["/admin/", "/api/", "/login", "/pay-test", "/thank-you", "/solarbio/thank-you"];
 
 // AI assistants and answer engines are welcome: they cite and link the pages they read.
 const aiBots = [
