@@ -12,11 +12,12 @@ type Props = {
   browseHref: string;
   browseLabel: string;
   faqs: { q: string; a: string }[];
+  guide?: { title: string; href: string };
 };
 
 const NAVY = '#2D2B7F';
 
-export default function BrandView({ heading, intro, path, total, categories, products, currentSlug, browseHref, browseLabel, faqs }: Props) {
+export default function BrandView({ heading, intro, path, total, categories, products, currentSlug, browseHref, browseLabel, faqs, guide }: Props) {
   const jsonLd = [
     {
       '@context': 'https://schema.org',
@@ -83,6 +84,11 @@ export default function BrandView({ heading, intro, path, total, categories, pro
           {intro.map((p, i) => (
             <p key={i} style={{ fontSize: 17, lineHeight: 1.7, margin: '0 0 16px' }}>{p}</p>
           ))}
+          {guide && (
+            <p style={{ background: '#eef0fb', borderLeft: `4px solid ${NAVY}`, padding: '12px 16px', borderRadius: 6, margin: '8px 0 0' }}>
+              Buyer’s guide: <Link href={guide.href} style={{ color: NAVY, fontWeight: 600 }}>{guide.title}</Link>
+            </p>
+          )}
         </section>
 
         {products.length > 0 && (

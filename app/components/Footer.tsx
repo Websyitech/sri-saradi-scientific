@@ -29,6 +29,7 @@ const footerLinks = {
       { label: "CRO Services", href: "/cro-services" },
       { label: "Signaling Pathways", href: "/signaling-pathways" },
       { label: "Solarbio in India", href: "/solarbio" },
+      { label: "Product Guides", href: "/guides" },
       { label: "FAQ", href: "/faq" },
       { label: "Certificates", href: "/certificates" },
       { label: "Careers", href: "/careers" },

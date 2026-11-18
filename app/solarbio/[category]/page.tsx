@@ -1,6 +1,16 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import BrandView from '../BrandView';
+import { getArticle } from '../../guides/articles';
+
+const GUIDE_FOR: Record<string, string> = {
+  'elisa-kits': 'how-to-choose-an-elisa-kit',
+  'biochemical-assay-kits': 'how-to-choose-an-elisa-kit',
+  antibodies: 'polyclonal-vs-monoclonal-vs-recombinant-antibodies',
+  'protein-immunity': 'polyclonal-vs-monoclonal-vs-recombinant-antibodies',
+  peptides: 'polyclonal-vs-monoclonal-vs-recombinant-antibodies',
+  'molecular-biology': 'blood-genomic-dna-extraction-spin-column',
+};
 import { BRAND, fitTitle, displayCategory, getBrandCategories, getBrandCategory, getBrandProducts, getCategoryFaqs } from '../brandData';
 
 export const revalidate = 3600;
@@ -50,6 +60,7 @@ export default async function SolarbioCategoryPage({ params }: Props) {
         `Send us catalogue numbers or add products to an enquiry for a quotation in INR with GST invoice. We handle import and delivery to your lab anywhere in India.`,
       ]}
       faqs={faqs}
+      guide={(() => { const g = getArticle(GUIDE_FOR[cat.slug] ?? ''); return g ? { title: g.title, href: `/guides/${g.slug}` } : undefined; })()}
     />
   );
 }
