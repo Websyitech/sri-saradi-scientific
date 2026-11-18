@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import BrandView from '../BrandView';
-import { BRAND, displayCategory, getBrandCategories, getBrandCategory, getBrandProducts, getCategoryFaqs } from '../brandData';
+import { BRAND, fitTitle, displayCategory, getBrandCategories, getBrandCategory, getBrandProducts, getCategoryFaqs } from '../brandData';
 
 export const revalidate = 3600;
 
@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = await getBrandCategory(category);
   if (!cat) return { title: 'Page Not Found | Sri Saradi Scientific', robots: { index: false } };
   const name = displayCategory(cat.name);
-  const title = `${BRAND} ${name} Supplier in India | Sri Saradi Scientific`;
-  const description = `Buy ${cat.count.toLocaleString('en-IN')} ${BRAND} ${name} in India. Catalogue numbers, pack sizes, quotations with GST invoice and pan-India delivery from Sri Saradi Scientific, Hyderabad.`;
+  const title = fitTitle(`${BRAND} ${name}`);
+  const description = `Buy ${cat.count.toLocaleString('en-IN')} ${BRAND} ${name} in India: catalogue numbers, pack sizes, GST quotations and pan-India delivery from Sri Saradi Scientific.`;
   return {
     title,
     description,

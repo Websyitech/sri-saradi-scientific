@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Products - Solarbio Reagents, Antibodies & ELISA Kits | Sri Saradi Scientific",
-  description: "Browse Solarbio Life Sciences products including antibodies, ELISA kits, biochemicals, and reagents for research and diagnostics. High-quality products directly from manufacturer.",
+  title: "Solarbio Reagents, Antibodies & ELISA Kits | Sri Saradi Scientific",
+  description: "Browse 62,000+ Solarbio antibodies, ELISA kits, biochemicals and reagents for research in India, with GST quotations from Sri Saradi Scientific.",
   keywords: [
     "Solarbio products",
     "antibodies",

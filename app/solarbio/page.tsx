@@ -4,8 +4,8 @@ import { BRAND, displayCategory, getBrandCategories, getBrandProducts, getBrandT
 
 export const revalidate = 3600;
 
-const title = `${BRAND} Distributor in India | Antibodies, ELISA Kits, Reagents | Sri Saradi Scientific`;
-const description = `Buy ${BRAND} antibodies, recombinant proteins, ELISA kits, peptides, biochemical reagents and DNA extraction kits in India. Quotations, GST invoices and pan-India delivery from Sri Saradi Scientific, Hyderabad.`;
+const title = `${BRAND} Distributor in India | Sri Saradi Scientific`;
+const description = `Buy ${BRAND} antibodies, ELISA kits, recombinant proteins, peptides and reagents in India. GST quotations and pan-India delivery from Hyderabad.`;
 
 export const metadata: Metadata = {
   title,

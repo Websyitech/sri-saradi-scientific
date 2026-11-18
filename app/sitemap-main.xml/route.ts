@@ -62,8 +62,9 @@ export async function GET() {
         orderBy: { slug: 'asc' }
       });
 
-      // Categories with products are listed as /solarbio/<slug> below (their canonical); skip the duplicates here.
-      for (const cat of categories.filter((c) => c._count.products === 0)) {
+      // Categories with products are listed as /solarbio/<slug> below; empty or wrapper categories are noindex or
+      // canonicalised there, so no /products?category= URL is listed.
+      for (const cat of categories.filter(() => false)) {
         urls.push({
           loc: `${siteUrl}/products?category=${cat.slug}`,
           lastmod: cat.updatedAt.toISOString().split("T")[0],

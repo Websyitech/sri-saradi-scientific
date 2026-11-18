@@ -2,6 +2,11 @@ import { cache } from 'react';
 import { prisma } from '@/app/lib/prisma';
 
 export const BRAND = 'Solarbio';
+
+/** "Solarbio X Supplier in India | Sri Saradi Scientific", shortened until it fits Google's ~60-char title width. */
+export const fitTitle = (subject: string) =>
+  [`${subject} Supplier in India | Sri Saradi Scientific`, `${subject} in India | Sri Saradi Scientific`, `${subject} in India | Sri Saradi`, `${subject} in India`].find((t) => t.length <= 62) ??
+  `${subject} in India`;
 export const SITE = 'https://srisaradiscientific.com';
 
 export const stripTags = (s: string) =>

@@ -4,9 +4,9 @@ import { PRICE_ON_REQUEST } from './priceMode';
 
 export const metadata: Metadata = {
   alternates: { canonical: '/genomic' },
-  title: 'Solarbio D1800 | Blood Genomic DNA Extraction Kit 100T | Sri Saradi Scientific',
+  title: 'Solarbio D1800 Blood Genomic DNA Extraction Kit (100T)',
   description:
-    'Explore Solarbio D1800 Blood Genomic DNA Extraction Kit (100T): specifications, real gel image, protocol, batch certificates, published research, and India quotation support.',
+    'Solarbio D1800 Blood Genomic DNA Extraction Kit (100T): specifications, real gel image, protocol, batch certificates and quotations in India.',
   icons: {
     icon: [
       { url: '/uploads/1774236052207-favicon-32x32.png' },
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     apple: '/assets/brand/icon-192.png',
   },
   openGraph: {
-    title: 'Solarbio D1800 | Blood Genomic DNA Extraction Kit 100T | Sri Saradi Scientific',
+    title: 'Solarbio D1800 Blood Genomic DNA Extraction Kit (100T)',
     description:
-      'Explore Solarbio D1800 Blood Genomic DNA Extraction Kit (100T): specifications, real gel image, protocol, batch certificates, published research, and India quotation support.',
+      'Solarbio D1800 Blood Genomic DNA Extraction Kit (100T): specifications, real gel image, protocol, batch certificates and quotations in India.',
     images: [
       {
         url: '/assets/solarbio/hero-product.webp',
