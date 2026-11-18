@@ -42,7 +42,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     const name = cat.name.replace(/Protiens/i, "Proteins");
     const canonical = brandPagePath(cat) ?? `/products?category=${encodeURIComponent(cat.slug)}`;
     const title = `Solarbio ${name} Supplier in India | Sri Saradi Scientific`;
-    const description = `Buy Solarbio ${name.toLowerCase()} across India. Catalogue numbers, pack sizes, quotations with GST invoice and pan-India delivery from Sri Saradi Scientific.`;
+    const description = `Buy Solarbio ${name} in India. Catalogue numbers, pack sizes, quotations with GST invoice and pan-India delivery from Sri Saradi Scientific.`;
     return { title, description, alternates: { canonical }, openGraph: { title, description, url: canonical, images: ["/assets/sri-saradi-logo.png"] } };
   }
 

@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!cat) return { title: 'Page Not Found | Sri Saradi Scientific', robots: { index: false } };
   const name = displayCategory(cat.name);
   const title = `${BRAND} ${name} Supplier in India | Sri Saradi Scientific`;
-  const description = `Buy ${cat.count.toLocaleString('en-IN')} ${BRAND} ${name.toLowerCase()} across India. Catalogue numbers, pack sizes, quotations with GST invoice and pan-India delivery from Sri Saradi Scientific, Hyderabad.`;
+  const description = `Buy ${cat.count.toLocaleString('en-IN')} ${BRAND} ${name} in India. Catalogue numbers, pack sizes, quotations with GST invoice and pan-India delivery from Sri Saradi Scientific, Hyderabad.`;
   return {
     title,
     description,
