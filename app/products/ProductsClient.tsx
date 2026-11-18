@@ -53,13 +53,13 @@ interface FilterItem {
   options: FilterOption[];
 }
 
-export default function ProductsPage() {
+export default function ProductsPage({ initialCategoryName }: { initialCategoryName?: string } = {}) {
   const searchParams = useSearchParams();
   const categoryParam = searchParams?.get("category") || "";
   const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || "";
 
   const [categories, setCategories] = useState<Category[]>([]);
-  const [selectedCategoryName, setSelectedCategoryName] = useState(categoryParam);
+  const [selectedCategoryName, setSelectedCategoryName] = useState(initialCategoryName || categoryParam);
   const [selectedCategoryImage, setSelectedCategoryImage] = useState<string | null>(null);
   const [selectedCategoryDescription, setSelectedCategoryDescription] = useState<string | null>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
