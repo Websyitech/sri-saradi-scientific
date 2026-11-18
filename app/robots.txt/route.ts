@@ -7,10 +7,13 @@ export async function GET() {
       where: { key: "robots_txt" },
     });
 
-    const defaultRobots = `User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /api/
+    const blocked = ["/admin/", "/api/", "/login", "/pay-test", "/track-order", "/thank-you", "/solarbio/thank-you"];
+    // AI assistants and answer engines are welcome: they cite and link the pages they read.
+    const aiBots = ["GPTBot", "OAI-SearchBot", "ChatGPT-User", "Google-Extended", "PerplexityBot", "Perplexity-User", "ClaudeBot", "Claude-SearchBot", "Claude-User", "Applebot-Extended", "Bingbot", "CCBot"];
+    const group = (agent: string) => [`User-agent: ${agent}`, "Allow: /", ...blocked.map((p) => `Disallow: ${p}`)].join("\n");
+
+    const defaultRobots = `${[group("*"), ...aiBots.map(group)].join("\n\n")}
+
 Sitemap: https://srisaradiscientific.com/sitemap.xml`;
 
     const content = robotsSetting?.value || defaultRobots;
