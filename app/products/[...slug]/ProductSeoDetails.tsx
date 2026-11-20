@@ -102,16 +102,15 @@ const GUIDES: Record<string, { title: string; href: string }> = {
   "molecular-biology": { title: "Blood genomic DNA extraction with spin columns", href: "/guides/blood-genomic-dna-extraction-spin-column" },
 };
 
-const lowerFirst = (s: string) => (/^[A-Z][a-z]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s);
 
 function overview(p: Row, name: string, brand: string, categoryName: string) {
   const v = (k: string) => clean(p[k] as string | null);
   const parts: string[] = [];
-  const kind = v("subCategory") && !/uncategori|general/i.test(v("subCategory")) ? lowerFirst(v("subCategory")) : categoryName ? lowerFirst(categoryName) : "research product";
-  parts.push(`${name} (catalogue no. ${p.catalogNumber}) is ${/^[aeiou]/i.test(kind) ? "an" : "a"} ${kind}${brand ? ` from ${brand}` : ""}, supplied in India by Sri Saradi Scientific, Hyderabad.`);
+  const range = v("subCategory") && !/uncategori|general/i.test(v("subCategory")) ? v("subCategory") : "";
+  parts.push(`${name} (catalogue no. ${p.catalogNumber}) is ${brand ? `a ${brand} product` : "a research product"}${categoryName ? ` in our ${categoryName.toLowerCase()} range` : ""}${range && range.toLowerCase() !== categoryName.toLowerCase() ? ` (${range})` : ""}, supplied in India by Sri Saradi Scientific, Hyderabad.`);
   if (v("abHost") || v("abCloneType")) {
     parts.push(
-      `It is ${[v("abHost") && `raised in ${v("abHost").toLowerCase()}`, v("abCloneType") && lowerFirst(v("abCloneType"))].filter(Boolean).join(", ")}${v("abReactivity") ? ` and reacts with ${v("abReactivity")} samples` : ""}.`,
+      `It is ${[v("abHost") && `raised in ${v("abHost").toLowerCase()}`, v("abCloneType") && `${v("abCloneType").toLowerCase().replace(/ antibody$/, "")} antibody`].filter(Boolean).join(", ")}${v("abReactivity") ? ` and reacts with ${v("abReactivity")} samples` : ""}.`,
     );
   }
   if (v("abApplicationType")) parts.push(`Validated applications: ${v("abApplicationType")}${v("abDilutionRatio") ? ` (recommended dilution ${v("abDilutionRatio")})` : ""}.`);
@@ -123,9 +122,9 @@ function overview(p: Row, name: string, brand: string, categoryName: string) {
     );
   }
   if (v("casNumber") || v("purity")) parts.push([v("casNumber") && `CAS number ${v("casNumber")}.`, v("purity") && `Purity: ${v("purity")}.`].filter(Boolean).join(" "));
-  if (v("storage")) parts.push(`Store at ${v("storage").replace(/^store\s*(at)?\s*/i, "")}.`);
+  if (v("storage")) parts.push(`Storage: ${v("storage").replace(/^store\s*(at)?\s*/i, "")}`);
   parts.push("A datasheet and certificate of analysis are available on request. We quote in INR with a GST invoice and deliver across India, with cold-chain shipping where required.");
-  return parts;
+  return parts.map((t) => t.replace(/\.{2,}/g, ".").replace(/([^.!?])$/, "$1."));
 }
 
 const td = { border: "1px solid #e5e7eb", padding: "10px 12px", verticalAlign: "top" as const, textAlign: "left" as const, fontSize: 14 };
