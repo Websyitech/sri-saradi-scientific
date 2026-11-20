@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import prisma from "@/app/lib/prisma";
 import { transformProductsForDisplay } from "@/lib/character-transformer";
 import ProductDetailClient, { type Product } from "./ProductDetailClient";
+import ProductSeoDetails from "./ProductSeoDetails";
 
 type Props = { params: Promise<{ slug: string[] }> };
 
@@ -135,6 +136,7 @@ export default async function ProductPage({ params }: Props) {
         />
       )}
       <ProductDetailClient initialProduct={loaded?.product ?? null} />
+      {product && <ProductSeoDetails catalogNumber={product.catalogNumber} />}
     </>
   );
 }
