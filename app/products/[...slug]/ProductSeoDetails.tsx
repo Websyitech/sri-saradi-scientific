@@ -107,10 +107,10 @@ function overview(p: Row, name: string, brand: string, categoryName: string) {
   const v = (k: string) => clean(p[k] as string | null);
   const parts: string[] = [];
   const range = v("subCategory") && !/uncategori|general/i.test(v("subCategory")) ? v("subCategory") : "";
-  parts.push(`${name} (catalogue no. ${p.catalogNumber}) is ${brand ? `a ${brand} product` : "a research product"}${categoryName ? ` in our ${categoryName.toLowerCase()} range` : ""}${range && range.toLowerCase() !== categoryName.toLowerCase() ? ` (${range})` : ""}, supplied in India by Sri Saradi Scientific, Hyderabad.`);
+  parts.push(`${name} (catalogue no. ${p.catalogNumber}) is ${brand ? `a ${brand} product` : "a research product"}${categoryName ? ` in our ${categoryName.replace(/\b([A-Z][a-z]+)\b/g, (w) => w.toLowerCase())} range` : ""}${range && range.toLowerCase() !== categoryName.toLowerCase() ? ` (${range})` : ""}, supplied in India by Sri Saradi Scientific, Hyderabad.`);
   if (v("abHost") || v("abCloneType")) {
     parts.push(
-      `It is ${[v("abHost") && `raised in ${v("abHost").toLowerCase()}`, v("abCloneType") && `${v("abCloneType").toLowerCase().replace(/ antibody$/, "")} antibody`].filter(Boolean).join(", ")}${v("abReactivity") ? ` and reacts with ${v("abReactivity")} samples` : ""}.`,
+      `It is a ${[v("abHost").toLowerCase(), v("abCloneType").toLowerCase().replace(/ antibody$/, "")].filter(Boolean).join(" ")} antibody${v("abReactivity") ? ` that reacts with ${v("abReactivity")} samples` : ""}.`,
     );
   }
   if (v("abApplicationType")) parts.push(`Validated applications: ${v("abApplicationType")}${v("abDilutionRatio") ? ` (recommended dilution ${v("abDilutionRatio")})` : ""}.`);
