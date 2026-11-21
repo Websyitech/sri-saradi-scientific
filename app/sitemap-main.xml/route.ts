@@ -34,6 +34,7 @@ export async function GET() {
       { path: "/omni-search", priority: "0.8" },
       { path: "/services", priority: "0.8" },
       { path: "/lab-consumables", priority: "0.7" },
+      { path: "/us-lab-filters", priority: "0.8" },
       { path: "/cro-services", priority: "0.7" },
       { path: "/catalogue", priority: "0.7" },
       { path: "/about", priority: "0.7" },

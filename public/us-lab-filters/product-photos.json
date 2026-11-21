@@ -1,0 +1,30 @@
+{
+  "hero": {
+    "file": "",
+    "alt": ""
+  },
+  "syringe": {
+    "file": "",
+    "alt": ""
+  },
+  "sterile": {
+    "file": "",
+    "alt": ""
+  },
+  "disc": {
+    "file": "",
+    "alt": ""
+  },
+  "grid": {
+    "file": "",
+    "alt": ""
+  },
+  "lab-range": {
+    "file": "",
+    "alt": ""
+  },
+  "industrial-range": {
+    "file": "",
+    "alt": ""
+  }
+}
