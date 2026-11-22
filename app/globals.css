@@ -1827,3 +1827,8 @@ div::-webkit-scrollbar {
 .wa-float:hover { background: #20ba5a; transform: scale(1.1) translateY(-3px); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6); }
 .wa-float svg { font-size: 32px; color: #fff; }
 @media (max-width: 600px) { .wa-float { bottom: 18px; right: 18px; width: 48px; height: 48px; } .wa-float svg { font-size: 26px; } }
+
+/* Minimal header for standalone landing pages */
+.header-quote-button { display: inline-flex; align-items: center; background: #2D2B7F; color: #fff; padding: 10px 20px; border-radius: 999px; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.header-quote-button:hover { background: #1f1d5e; color: #fff; }
+@media (max-width: 1024px) { .landing-contact { display: flex; } .landing-contact .header-contact-item { display: none; } }

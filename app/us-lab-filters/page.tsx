@@ -43,12 +43,11 @@ export default function UsLabFiltersPage() {
             <div className="hero-copy">
               <div className="kicker"><i></i> Orient Filtr · US business supply</div>
               <h1 id="hero-title">Lab &amp; industrial <em>filters.</em></h1>
-              <p id="hero-copy">Syringe filters and membranes for the lab. Capsules, cartridges, and housings for the plant. Made in China by Orient Filtr and supplied by Sri Saradi Scientific, its authorized US sales partner in India.</p>
+              <p id="hero-copy">Syringe filters and membranes for the lab. Capsules, cartridges, and housings for the plant. Manufactured by Orient Filtr and sold in the US by Sri Saradi Scientific, its authorized sales partner. Lot certificates and ISO 9001 documents available before you order.</p>
               <p className="delivery-promise"><strong>US delivery within 6 days</strong> for confirmed in-stock items.</p>
               <div className="hero-actions">
-                <a className="button" href="#products">Lab filters</a>
-                <a className="button outline" href="#industrial">Industrial filters</a>
-                <a className="under" href="#oem" data-open-oem="">Request an OEM call</a>
+                <a className="button" href="#quote">Get US pricing</a>
+                <a className="button outline" href="#products">Browse lab filters</a>
               </div>
             </div>
             <figure className="product-shot">
@@ -60,7 +59,6 @@ export default function UsLabFiltersPage() {
                   <span className="micro">Orient Filtr</span>
                   <strong>Laboratory &amp; process filtration</strong>
                 </span>
-                <a className="under" href="#quote">Get US pricing</a>
               </figcaption>
             </figure>
           </div>
@@ -249,19 +247,16 @@ export default function UsLabFiltersPage() {
             <div className="trust-columns">
               <article>
                 <h3>Verify who supplies your filters.</h3>
-                <p>Orientfiltr Technology Co., Ltd. manufactures the filters in China. Sri Saradi Scientific Private Limited in Hyderabad, India, is authorized to sell Orient Filtr in the US. Request our authorization letter before placing a PO.</p>
+                <p>Authorized to sell Orient Filtr in the US. Ask for our authorization letter before you raise a PO.</p>
               </article>
               <article>
                 <h3>Talk to a scientist about your method.</h3>
-                <p>Our founder, Praveen Gadde, worked in analytical R&amp;D at Novartis. Tell us your sample or process conditions and we’ll review the filter specification with you.</p>
-                <a className="under" href="https://srisaradiscientific.com/about">Meet Sri Saradi Scientific</a>
+                <p>Our founder worked in analytical R&amp;D at Novartis. Share your method and we’ll check the filter fits.</p>
               </article>
               <article>
                 <h3>Reach the team handling your order.</h3>
-                <p>One Sri Saradi contact handles your quote, documents, and shipment. We share tracking after dispatch and follow up with the manufacturer on lot-specific questions.</p>
-                <a className="under" href="mailto:info@srisaradiscientific.com">Email our team</a>{" "}
-                <span className="contact-sep">·</span>{" "}
-                <a className="under" href="tel:+917207607444">+91 72076 07444</a>
+                <p>One contact handles your quote, documents and shipment, with tracking after dispatch.</p>
+                <a className="under" href="mailto:info@srisaradiscientific.com">Email our team</a>
               </article>
             </div>
           </div>
@@ -271,9 +266,9 @@ export default function UsLabFiltersPage() {
             <div>
               <div className="kicker"><i></i> Quality documentation</div>
               <h2>See what your lab<br />can verify.</h2>
-              <p>Review a manufacturer-issued certificate for IPES1322N, a 13 mm, 0.22 µm nonsterile PES syringe filter, lot 381208032. Ask which lot and documents are available for your order.</p>
-              <a className="button light" href="/us-lab-filters/media/IPES1322N-sample.pdf" target="_blank" rel="noopener">View PES lot certificate (PDF)</a>
-              <p className="cert-note">The manufacturer’s ISO 9001:2015 certificate covers the design, manufacture, and sale of microfiltration membranes, laboratory syringe filters, and industrial filters. This copy is dated December 21, 2023 through December 20, 2026. <a href="/us-lab-filters/media/manufacturer-iso9001.pdf" target="_blank" rel="noopener">View certificate (PDF)</a></p>
+              <p>Every lot ships with a manufacturer certificate. See a real one before you order.</p>
+              <a className="under light-link" href="/us-lab-filters/media/IPES1322N-sample.pdf" target="_blank" rel="noopener">View PES lot certificate (PDF)</a>
+              <p className="cert-note">Manufactured under ISO 9001:2015. <a href="/us-lab-filters/media/manufacturer-iso9001.pdf" target="_blank" rel="noopener">View certificate (PDF)</a></p>
               <details className="technical-docs">
                 <summary>Manufacturer guides and test reports</summary>
                 <ul>
@@ -282,7 +277,6 @@ export default function UsLabFiltersPage() {
                   <li><a href="/us-lab-filters/media/pes-33mm-report.pdf" target="_blank" rel="noopener">33 mm, 0.22 µm sterile PES comparison</a></li>
                   <li><a href="/us-lab-filters/media/pvdf-30mm-report.pdf" target="_blank" rel="noopener">30 mm, 0.22 µm sterile PVDF comparison</a></li>
                 </ul>
-                <p>The comparisons describe the specific filters tested. For the 13 mm or 25 mm sterile PES and PVDF items in this catalog, request the records for your chosen SKU.</p>
               </details>
             </div>
             <div className="evidence">
@@ -303,7 +297,6 @@ export default function UsLabFiltersPage() {
                 </div>
               </dl>
               <p><a href="/us-lab-filters/media/INY2545N-sample.pdf" target="_blank" rel="noopener">View this nylon certificate (PDF)</a></p>
-              <p>For sterile products, request the release or sterilization records for your selected SKU and lot.</p>
             </div>
           </div>
         </section>
@@ -311,28 +304,20 @@ export default function UsLabFiltersPage() {
           <div>
             <div className="kicker"><i></i> Cross-border purchasing</div>
             <h2>When will my<br />filters arrive?</h2>
-            <p>We promise US delivery within 6 days for confirmed in-stock items. Send the catalog number, quantity, and delivery ZIP code. We’ll confirm stock and give you the arrival date in writing before you order.</p>
+            <p>US delivery within 6 days for in-stock items. Send the catalog number, quantity and ZIP code, and we’ll confirm the arrival date in writing.</p>
           </div>
           <div className="faqs">
             <details open>
               <summary>Does the six-day promise apply to my entire order?</summary>
-              <p>We check availability for the quantity of each SKU you request. If a line is backordered, your quote will identify it and specify its lead time. OEM projects have a separate schedule agreed after the project call.</p>
+              <p>It applies to every in-stock line. Your quote flags any backordered line with its lead time.</p>
             </details>
             <details>
               <summary>How are freight and import costs handled?</summary>
-              <p>Your USD quote identifies the dispatch point, pack price, and handover location. For buyer-paid courier freight, request FCA at a named place. Ocean FOB quotes specify the port of loading. DHL or UPS freight, brokerage, duties, and taxes are separate unless expressly included.</p>
+              <p>Your USD quote shows the pack price and shipping terms. Freight, brokerage, duties and taxes are listed separately unless the quote includes them.</p>
             </details>
             <details>
               <summary>Can my lab evaluate one pack first?</summary>
-              <p>Request a paid evaluation pack and give us your US ZIP code so we can price the shipment. For a routine order, combine packs on one quote and tell us your expected reorder frequency.</p>
-            </details>
-            <details>
-              <summary>What can procurement confirm before ordering?</summary>
-              <p>Ask for the applicable product specification, manufacturer documentation, sales authorization, dispatch location, availability, lead time, and the process for a shipping or quality claim. Include your required arrival date and any vendor onboarding, PO, or payment-term requirements so we can address them on the quote.</p>
-            </details>
-            <details>
-              <summary>What if my order is delayed or arrives damaged?</summary>
-              <p>Email info@srisaradiscientific.com with the order reference and tracking number. For damage or a product discrepancy, include the catalog number, lot number, and photos of the packaging. We’ll review the issue with the carrier or manufacturer and advise the next step.</p>
+              <p>Yes. Request one evaluation pack with your ZIP code and we’ll quote it with shipping.</p>
             </details>
           </div>
         </section>

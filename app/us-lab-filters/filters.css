@@ -240,3 +240,4 @@
 .us-lab-filters .clear-filters { margin-top: 14px; align-self: flex-start; background: none; border: 0; padding: 0; font-size: 14px; cursor: pointer; }
 .us-lab-filters .clear-filters[hidden] { display: none; }
 .us-lab-filters .family-check > span { font-size: 15px; color: var(--ink); }
+.us-lab-filters .light-link { color: inherit; font-weight: 600; }

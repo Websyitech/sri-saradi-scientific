@@ -42,7 +42,7 @@
     if(extended[active]?.industrial){get('hero-title').innerHTML='Industrial <em>process filters.</em>';get('process-range').open=true}
     root.querySelectorAll('[data-range]').forEach(link=>link.addEventListener('click',()=>chooseFamily(link.dataset.range)));
     root.querySelectorAll('[data-open-oem]').forEach(link=>link.addEventListener('click',()=>{get('oem-booking').open=true}));
-    root.querySelector('a[href="#industrial"].outline').addEventListener('click',()=>{get('process-range').open=true});
+    root.querySelector('a[href="#industrial"].outline')?.addEventListener('click',()=>{get('process-range').open=true});
     chooseFamily(active);
     fetch('/us-lab-filters/skus.json').then(r=>{if(!r.ok)throw Error();return r.json()}).then(data=>{if(!form.isConnected)return;inventory=data;chooseFamily(active)}).catch(()=>{});
     catalog?.addEventListener('change',()=>{form.elements.sku.value=catalog.value});

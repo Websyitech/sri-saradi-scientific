@@ -3,6 +3,7 @@
 import { useState, useRef, Suspense } from "react";
 import { FaSearch, FaBars, FaTimes, FaEnvelope, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import MenuSection from "./MenuSection";
 
 const SITE_NAME = "Sri Saradi Scientific";
@@ -19,6 +20,7 @@ interface SearchResult {
 }
 
 export default function Header() {
+  const pathname = usePathname();
   const [showResearchModal, setShowResearchModal] = useState(false);
   const [showMobileSearchModal, setShowMobileSearchModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -86,6 +88,26 @@ export default function Header() {
       setSubmittingResearch(false);
     }
   };
+
+  // Standalone landing pages for US buyers get a minimal header: logo and one call to action.
+  if (pathname?.startsWith("/us-lab-filters")) {
+    return (
+      <header className="main-header">
+        <div className="main-header-container">
+          <Link href="/us-lab-filters" className="header-logo-section" style={{ textDecoration: "none" }}>
+            <img src={SITE_LOGO} alt={SITE_NAME} style={{ height: "80px", maxWidth: "220px", objectFit: "contain" }} />
+          </Link>
+          <div className="header-contact landing-contact">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="header-contact-item">
+              <FaEnvelope className="header-contact-icon" />
+              <span>{CONTACT_EMAIL}</span>
+            </a>
+            <a href="#quote" className="header-quote-button">Get US pricing</a>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <>
