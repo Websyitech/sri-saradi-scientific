@@ -195,10 +195,7 @@ export default function UsLabFiltersPage() {
             ].map((f) => (
               <label key={f.key} className="family-check">
                 <input type="checkbox" value={f.key} data-filter-group="family" />
-                <span>
-                  <strong>{f.name}</strong>
-                  <small>{f.info} · {skus.filter((s) => s.family === f.key).length} items</small>
-                </span>
+                <span>{f.name}</span>
               </label>
             ))}
             {SPEC_FILTERS.map((group) => (
