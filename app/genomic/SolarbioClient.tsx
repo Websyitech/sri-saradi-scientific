@@ -354,12 +354,18 @@ export default function SolarbioClient() {
           <div className="sb-hero-grid">
             <div className="sb-hero-left">
               <h1 className="sb-hero-h1">
-                Genomic DNA extraction from <span className="sb-text-indigo">whole blood.</span>
+                Genomic DNA extraction &amp; isolation kit for <span className="sb-text-indigo">whole blood.</span>
               </h1>
               <p className="sb-lead" style={{ marginTop: '14px' }}>
-                A spin-column workflow for isolating genomic DNA from whole-blood samples, supported by a detailed
-                protocol, batch-specific quality records and published research references.
+                A spin-column DNA isolation kit for extracting genomic DNA from whole-blood samples, supported by a
+                detailed protocol, batch-specific quality records and published research references.
               </p>
+              {PRICE_ON_REQUEST && (
+                <p className="sb-lead" style={{ marginTop: '8px', fontSize: '0.95em' }}>
+                  <strong>Price &amp; availability:</strong> in stock in India. Message us on WhatsApp for today&apos;s
+                  DNA isolation kit price; we reply during working hours and deliver across India.
+                </p>
+              )}
               <div className="sb-hero-actions">
                 {PRICE_ON_REQUEST ? (
                   <a className="sb-btn blue" href={PRICE_WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
