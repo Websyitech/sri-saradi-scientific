@@ -164,7 +164,9 @@ export default function UsLabFiltersPage() {
             </div>
             <p>Choose a membrane and format or search all 71 listed SKUs. A W prefix identifies a welded syringe filter.</p>
           </div>
-          <div className="family-filters" role="group" aria-label="Filter by product family">
+          <div className="finder-layout">
+          <div className="family-filters" role="group" aria-labelledby="family-filter-heading">
+            <h3 id="family-filter-heading" className="filter-heading">Product family</h3>
             {[
               { key: "syringe", name: "Nonsterile syringe", info: "13 or 25 mm · 100/pack" },
               { key: "sterile", name: "Sterile syringe", info: "13, 25 or 30 mm · 100/pack" },
@@ -208,6 +210,7 @@ export default function UsLabFiltersPage() {
                 </tbody>
               </table>
             </div>
+          </div>
           </div>
         </section>
         <section id="trust" className="trust">
