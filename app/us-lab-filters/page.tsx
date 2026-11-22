@@ -3,6 +3,26 @@ import skus from "../../public/us-lab-filters/skus.json";
 import FilterInteractions from "./FilterInteractions";
 import "./filters.css";
 
+// Material, diameter and pore size read from each SKU's description, for the finder's filters.
+const specOf = (description: string) => ({
+  material: description.match(/\b(Nylon|PES|PTFE|PVDF|CA|MCE)\b/)?.[1] ?? "",
+  diameter: description.match(/(\d+)\s*mm/)?.[1] ?? "",
+  pore: description.match(/(0\.\d+)\s*µm/)?.[1] ?? "",
+});
+const countBy = (key: "material" | "diameter" | "pore") => {
+  const counts = new Map<string, number>();
+  for (const sku of skus) {
+    const value = specOf(sku.description)[key];
+    if (value) counts.set(value, (counts.get(value) ?? 0) + 1);
+  }
+  return [...counts].sort((a, b) => (key === "material" ? a[0].localeCompare(b[0]) : Number(a[0]) - Number(b[0])));
+};
+const SPEC_FILTERS = [
+  { key: "material" as const, title: "Membrane material", unit: "" },
+  { key: "diameter" as const, title: "Diameter", unit: " mm" },
+  { key: "pore" as const, title: "Pore size", unit: " µm" },
+];
+
 const title = "Orient Filtr Lab & Industrial Filters | Sri Saradi Scientific";
 const description = "Explore lab and process filters, review lot documents, request US pricing, or arrange an OEM call. Six-day delivery for confirmed in-stock items.";
 
@@ -174,13 +194,25 @@ export default function UsLabFiltersPage() {
               { key: "grid", name: "Gridded membranes", info: "47 mm · sterile MCE · 100/pack" },
             ].map((f) => (
               <label key={f.key} className="family-check">
-                <input type="checkbox" value={f.key} data-family-filter="" defaultChecked />
+                <input type="checkbox" value={f.key} data-filter-group="family" />
                 <span>
                   <strong>{f.name}</strong>
                   <small>{f.info} · {skus.filter((s) => s.family === f.key).length} items</small>
                 </span>
               </label>
             ))}
+            {SPEC_FILTERS.map((group) => (
+              <div key={group.key} className="filter-group">
+                <h3 className="filter-heading">{group.title}</h3>
+                {countBy(group.key).map(([value, count]) => (
+                  <label key={value} className="family-check spec-check">
+                    <input type="checkbox" value={value} data-filter-group={group.key} />
+                    <span>{value}{group.unit} <small>({count})</small></span>
+                  </label>
+                ))}
+              </div>
+            ))}
+            <button type="button" className="under clear-filters" id="clear-filters">Clear filters</button>
           </div>
           <div className="catalog-panel" id="all-products">
             <label htmlFor="catalog-search">Search by catalog number, material, diameter, or pore size</label>
@@ -198,7 +230,7 @@ export default function UsLabFiltersPage() {
                 </thead>
                 <tbody>
                   {skus.map((sku) => (
-                    <tr key={sku.id} data-row-family={sku.family}>
+                    <tr key={sku.id} data-family={sku.family} data-material={specOf(sku.description).material} data-diameter={specOf(sku.description).diameter} data-pore={specOf(sku.description).pore}>
                       <th scope="row">{sku.id}</th>
                       <td>{sku.description}</td>
                       <td>{sku.pack}</td>

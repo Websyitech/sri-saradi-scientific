@@ -222,7 +222,7 @@
 
 /* Product family checkboxes (replace the family cards) */
 .us-lab-filters .finder-layout { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 28px; align-items: start; }
-.us-lab-filters .family-filters { display: flex; flex-direction: column; gap: 2px; position: sticky; top: 90px; padding-right: 20px; border-right: 1px solid var(--line); }
+.us-lab-filters .family-filters { display: flex; flex-direction: column; gap: 2px; padding-right: 20px; border-right: 1px solid var(--line); }
 .us-lab-filters .filter-heading { margin-bottom: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
 .us-lab-filters .family-check { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; cursor: pointer; }
 .us-lab-filters .family-check input { width: 17px; height: 17px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--indigo); }
@@ -233,3 +233,9 @@
   .us-lab-filters .finder-layout { grid-template-columns: 1fr; }
   .us-lab-filters .family-filters { position: static; padding-right: 0; border-right: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 }
+.us-lab-filters .filter-group { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.us-lab-filters .spec-check { padding: 5px 0; }
+.us-lab-filters .spec-check span { font-size: 14px; color: var(--ink); }
+.us-lab-filters .spec-check small { display: inline; color: var(--muted); }
+.us-lab-filters .clear-filters { margin-top: 14px; align-self: flex-start; background: none; border: 0; padding: 0; font-size: 14px; cursor: pointer; }
+.us-lab-filters .clear-filters[hidden] { display: none; }

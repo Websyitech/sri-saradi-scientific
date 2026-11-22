@@ -51,20 +51,25 @@
     get('choose')?.addEventListener('click',()=>{if(extended[active])chooseFamily('syringe');form.elements.sku.value=catalog.value;location.hash='quote';form.elements.name.focus({preventScroll:true})});
     const allRows=[...root.querySelectorAll('[data-pick]')];
     const normalize=text=>text.toLowerCase().replace(/[µμ]/g,'u').replace(/(\d)\s+(mm|um)/g,'$1$2');
-    const familyChecks=[...root.querySelectorAll('[data-family-filter]')];
+    const filterChecks=[...root.querySelectorAll('[data-filter-group]')];
     function applyFilters(){
       const words=normalize(get('catalog-search').value).trim().split(/\s+/).filter(Boolean);
-      const shown=new Set(familyChecks.filter(c=>c.checked).map(c=>c.value));
+      const chosen={};
+      for(const c of filterChecks){if(c.checked)(chosen[c.dataset.filterGroup]??=new Set()).add(c.value)}
       let matches=0;
       for(const link of allRows){
         const row=link.closest('tr');
-        row.hidden=!shown.has(row.dataset.rowFamily) || !words.every(w=>normalize(row.textContent).includes(w));
+        const ok=Object.entries(chosen).every(([group,values])=>values.has(row.dataset[group]));
+        row.hidden=!ok || !words.every(w=>normalize(row.textContent).includes(w));
         if(!row.hidden)matches++;
       }
-      get('catalog-count').textContent=!shown.size ? 'Select at least one product family.' : matches ? matches+' catalog number'+(matches===1?'':'s') : 'No matches. Try a catalog number or membrane material.';
+      get('catalog-count').textContent=matches ? matches+' catalog number'+(matches===1?'':'s') : 'No matches. Clear a filter or try another search.';
+      get('clear-filters').hidden=!Object.keys(chosen).length && !words.length;
     }
     get('catalog-search').addEventListener('input',applyFilters);
-    familyChecks.forEach(c=>c.addEventListener('change',applyFilters));
+    filterChecks.forEach(c=>c.addEventListener('change',applyFilters));
+    get('clear-filters').addEventListener('click',()=>{filterChecks.forEach(c=>{c.checked=false});get('catalog-search').value='';applyFilters()});
+    applyFilters();
     root.querySelector('.catalog-scroll').addEventListener('click',e=>{
       const link=e.target.closest('[data-pick]');if(!link)return;
       chooseFamily(link.dataset.group);
