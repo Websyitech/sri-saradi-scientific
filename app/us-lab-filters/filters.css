@@ -219,3 +219,14 @@
   .us-lab-filters .facts { gap: 8px; }
   .us-lab-filters .facts > div + div { padding-left: 8px; }
 }
+
+/* Product family checkboxes (replace the family cards) */
+.us-lab-filters .family-filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.us-lab-filters .family-check { display: flex; align-items: flex-start; gap: 12px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 10px; background: #fff; cursor: pointer; }
+.us-lab-filters .family-check:has(input:checked) { border-color: var(--indigo); box-shadow: 0 0 0 1px var(--indigo); }
+.us-lab-filters .family-check input { width: 18px; height: 18px; margin-top: 3px; flex: 0 0 auto; accent-color: var(--indigo); }
+.us-lab-filters .family-check strong { display: block; font-size: 16px; color: var(--ink); }
+.us-lab-filters .family-check small { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+.us-lab-filters .catalog-panel { margin-top: 24px; padding-top: 0; }
+@media (max-width: 900px) { .us-lab-filters .family-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .us-lab-filters .family-filters { grid-template-columns: 1fr; } }

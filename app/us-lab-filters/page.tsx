@@ -164,89 +164,51 @@ export default function UsLabFiltersPage() {
             </div>
             <p>Choose a membrane and format or search all 71 listed SKUs. A W prefix identifies a welded syringe filter.</p>
           </div>
-          <div className="family-grid">
-            <button type="button" className="family-card" data-family="syringe" aria-pressed="true">
-              <span className="photo-slot card-slot" data-photo-slot="syringe" aria-hidden="true">
-                <span className="frame-mark"></span>
-              </span>
-              <span className="tilebody">
-                <strong>Nonsterile syringe</strong>
-                <small>13 or 25 mm · 100/pack</small>
-              </span>
-            </button>
-            <button type="button" className="family-card" data-family="sterile" aria-pressed="false">
-              <span className="photo-slot card-slot" data-photo-slot="sterile" aria-hidden="true">
-                <span className="frame-mark"></span>
-              </span>
-              <span className="tilebody">
-                <strong>Sterile syringe</strong>
-                <small>13, 25 or 30 mm · 100/pack</small>
-              </span>
-            </button>
-            <button type="button" className="family-card" data-family="disc" aria-pressed="false">
-              <span className="photo-slot card-slot" data-photo-slot="disc" aria-hidden="true">
-                <span className="frame-mark"></span>
-              </span>
-              <span className="tilebody">
-                <strong>Plain membrane discs</strong>
-                <small>47 or 142 mm · 50 or 200/pack</small>
-              </span>
-            </button>
-            <button type="button" className="family-card" data-family="grid" aria-pressed="false">
-              <span className="photo-slot card-slot" data-photo-slot="grid" aria-hidden="true">
-                <span className="frame-mark"></span>
-              </span>
-              <span className="tilebody">
-                <strong>Gridded membranes</strong>
-                <small>47 mm · sterile MCE · 100/pack</small>
-              </span>
-            </button>
+          <div className="family-filters" role="group" aria-label="Filter by product family">
+            {[
+              { key: "syringe", name: "Nonsterile syringe", info: "13 or 25 mm · 100/pack" },
+              { key: "sterile", name: "Sterile syringe", info: "13, 25 or 30 mm · 100/pack" },
+              { key: "disc", name: "Plain membrane discs", info: "47 or 142 mm · 50 or 200/pack" },
+              { key: "grid", name: "Gridded membranes", info: "47 mm · sterile MCE · 100/pack" },
+            ].map((f) => (
+              <label key={f.key} className="family-check">
+                <input type="checkbox" value={f.key} data-family-filter="" defaultChecked />
+                <span>
+                  <strong>{f.name}</strong>
+                  <small>{f.info} · {skus.filter((s) => s.family === f.key).length} items</small>
+                </span>
+              </label>
+            ))}
           </div>
-          <div id="finder" className="finder">
-            <div className="finder-intro">
-              <h3 id="family-title">Nonsterile syringe filters</h3>
-              <p id="family-description">Nylon, PES, PTFE, and PVDF for analytical sample preparation. Specify wettability for PTFE and PVDF.</p>
-            </div>
-            <div className="find-controls">
-              <label htmlFor="catalog">Catalog number &amp; specification</label>
-              <select id="catalog">
-                <option value="">Help me choose a specification</option>
-              </select>
-              <button type="button" id="choose" className="under">Use this selection in my quote</button>
-            </div>
-          </div>
-          <details className="catalog-all" id="all-products">
-            <summary>Search all 71 lab catalog numbers</summary>
-            <div className="catalog-panel">
-              <label htmlFor="catalog-search">Search by catalog number, material, diameter, or pore size</label>
-              <input id="catalog-search" type="search" placeholder="e.g. 25 mm nylon or 0.45" />
-              <p id="catalog-count" role="status">71 catalog numbers</p>
-              <div className="catalog-scroll" role="region" tabIndex={0} aria-label="Complete filter catalog">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Catalog number</th>
-                      <th>Product specification</th>
-                      <th>Units per pack</th>
-                      <th>Inquiry</th>
+          <div className="catalog-panel" id="all-products">
+            <label htmlFor="catalog-search">Search by catalog number, material, diameter, or pore size</label>
+            <input id="catalog-search" type="search" placeholder="e.g. 25 mm nylon or 0.45" />
+            <p id="catalog-count" role="status">{skus.length} catalog numbers</p>
+            <div className="catalog-scroll" role="region" tabIndex={0} aria-label="Filter catalog">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Catalog number</th>
+                    <th>Product specification</th>
+                    <th>Units per pack</th>
+                    <th>Inquiry</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {skus.map((sku) => (
+                    <tr key={sku.id} data-row-family={sku.family}>
+                      <th scope="row">{sku.id}</th>
+                      <td>{sku.description}</td>
+                      <td>{sku.pack}</td>
+                      <td>
+                        <a className="pick-sku" href="#quote" data-pick={sku.id} data-group={sku.family} aria-label={`Request a quote for ${sku.id}`}>Quote</a>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {skus.map((sku) => (
-                      <tr key={sku.id}>
-                        <th scope="row">{sku.id}</th>
-                        <td>{sku.description}</td>
-                        <td>{sku.pack}</td>
-                        <td>
-                          <a className="pick-sku" href="#quote" data-pick={sku.id} data-group={sku.family} aria-label={`Request a quote for ${sku.id}`}>Quote</a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          </details>
+          </div>
         </section>
         <section id="trust" className="trust">
           <div className="shell">

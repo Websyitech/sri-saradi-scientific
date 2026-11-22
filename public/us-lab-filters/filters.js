@@ -31,10 +31,9 @@
       get('quote-sku').hidden=Boolean(extra);
       get('quantity-label').textContent=extra?.industrial?'Quantity (individual units)':'Number of packs';
       get('quote-notes').placeholder=extra?.industrial?'Fluid, flow rate, pressure, temperature, connection, existing part number, and required date':extra?'Catalog number, pack details, application, and required arrival date':'Required arrival date, application, additional SKUs, or documents needed';
-      root.querySelectorAll('[data-family]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.family===key)));
-      if(!extra){get('family-title').textContent=f.name;get('family-description').textContent=f.description}
       form.elements.family.value=key;
-      populate(catalog,rows,false); populate(form.elements.sku,rows,true);
+      if(catalog)populate(catalog,rows,false);
+      populate(form.elements.sku,rows,true);
     }
     if(Object.hasOwn(families,params.get('family'))){
       const f=families[active];get('hero-title').innerHTML=f.title;
@@ -45,29 +44,32 @@
     root.querySelectorAll('[data-open-oem]').forEach(link=>link.addEventListener('click',()=>{get('oem-booking').open=true}));
     root.querySelector('a[href="#industrial"].outline').addEventListener('click',()=>{get('process-range').open=true});
     chooseFamily(active);
-    fetch('/us-lab-filters/skus.json').then(r=>{if(!r.ok)throw Error();return r.json()}).then(data=>{if(!form.isConnected)return;inventory=data;chooseFamily(active)}).catch(()=>{if(form.isConnected)get('family-description').append(' Enter a catalog number in the quote notes if you already have one.')});
-    root.querySelectorAll('[data-family]').forEach(b=>b.addEventListener('click',()=>chooseFamily(b.dataset.family)));
-    catalog.addEventListener('change',()=>{form.elements.sku.value=catalog.value});
+    fetch('/us-lab-filters/skus.json').then(r=>{if(!r.ok)throw Error();return r.json()}).then(data=>{if(!form.isConnected)return;inventory=data;chooseFamily(active)}).catch(()=>{});
+    catalog?.addEventListener('change',()=>{form.elements.sku.value=catalog.value});
     form.elements.family.addEventListener('change',()=>chooseFamily(form.elements.family.value));
-    form.elements.sku.addEventListener('change',()=>{catalog.value=form.elements.sku.value});
-    get('choose').addEventListener('click',()=>{if(extended[active])chooseFamily('syringe');form.elements.sku.value=catalog.value;location.hash='quote';form.elements.name.focus({preventScroll:true})});
+    form.elements.sku.addEventListener('change',()=>{if(catalog)catalog.value=form.elements.sku.value});
+    get('choose')?.addEventListener('click',()=>{if(extended[active])chooseFamily('syringe');form.elements.sku.value=catalog.value;location.hash='quote';form.elements.name.focus({preventScroll:true})});
     const allRows=[...root.querySelectorAll('[data-pick]')];
     const normalize=text=>text.toLowerCase().replace(/[µμ]/g,'u').replace(/(\d)\s+(mm|um)/g,'$1$2');
-    get('catalog-search').addEventListener('input',e=>{
-      const words=normalize(e.target.value).trim().split(/\s+/);
+    const familyChecks=[...root.querySelectorAll('[data-family-filter]')];
+    function applyFilters(){
+      const words=normalize(get('catalog-search').value).trim().split(/\s+/).filter(Boolean);
+      const shown=new Set(familyChecks.filter(c=>c.checked).map(c=>c.value));
       let matches=0;
       for(const link of allRows){
         const row=link.closest('tr');
-        row.hidden=!words.every(w=>normalize(row.textContent).includes(w));
+        row.hidden=!shown.has(row.dataset.rowFamily) || !words.every(w=>normalize(row.textContent).includes(w));
         if(!row.hidden)matches++;
       }
-      get('catalog-count').textContent=matches ? matches+' catalog number'+(matches===1?'':'s') : 'No matches. Try a catalog number or membrane material.';
-    });
+      get('catalog-count').textContent=!shown.size ? 'Select at least one product family.' : matches ? matches+' catalog number'+(matches===1?'':'s') : 'No matches. Try a catalog number or membrane material.';
+    }
+    get('catalog-search').addEventListener('input',applyFilters);
+    familyChecks.forEach(c=>c.addEventListener('change',applyFilters));
     root.querySelector('.catalog-scroll').addEventListener('click',e=>{
       const link=e.target.closest('[data-pick]');if(!link)return;
       chooseFamily(link.dataset.group);
       if(!inventory.length){form.elements.notes.value=link.dataset.pick+' '+form.elements.notes.value}
-      else{form.elements.sku.value=link.dataset.pick;catalog.value=link.dataset.pick}
+      else{form.elements.sku.value=link.dataset.pick;if(catalog)catalog.value=link.dataset.pick}
     });
     fetch('/us-lab-filters/product-photos.json').then(r=>r.ok?r.json():{}).then(config=>{
       root.querySelectorAll('[data-photo-slot]').forEach(slot=>{
