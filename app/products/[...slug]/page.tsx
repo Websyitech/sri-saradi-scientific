@@ -69,13 +69,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = { ...loaded.product, name: loaded.raw.name, description: loaded.raw.description };
   const canonical = `/products/${encodeURIComponent(p.catalogNumber)}`;
   const brand = p.brand || p.manufacturer || "";
-  const title = `${stripTags(p.name)} (${p.catalogNumber})${brand ? ` – ${brand}` : ""} | Sri Saradi Scientific`;
+  const name = stripTags(p.name);
+  const cat = p.catalogNumber;
+  // Searchers type the catalogue number, so it leads; "Price in India" says who we serve.
+  const nameHasCat = name.toLowerCase().includes(cat.toLowerCase());
+  const head = nameHasCat ? name : `${cat} ${name}`;
+  const title =
+    [
+      `${head} | ${brand ? `${brand} ` : ""}Price in India`,
+      `${head} | Price in India`,
+      `${head} – Sri Saradi Scientific`,
+    ].find((t) => t.length <= 65) ?? (head.length > 62 ? `${head.slice(0, 60).trimEnd()}…` : head);
+  const packs = (p.variants || []).map((v) => v.packSize).filter(Boolean).slice(0, 4);
+  const prices = (p.variants || []).map((v) => Number(v.price)).filter((n) => Number.isFinite(n) && n > 0);
   const body = stripTags(p.description);
-  const description = (
-    body
-      ? `${stripTags(p.name)}, cat. no. ${p.catalogNumber}. ${body}`
-      : `Buy ${stripTags(p.name)} (cat. no. ${p.catalogNumber})${brand ? ` by ${brand}` : ""} in India. Request a quote from Sri Saradi Scientific, Hyderabad.`
-  ).slice(0, 160);
+  const description = [
+    `${brand ? `${brand} ` : ""}${cat} ${name} in India.`,
+    packs.length ? `Pack sizes: ${packs.join(", ")}.` : "",
+    prices.length ? `From ₹${Math.min(...prices).toLocaleString("en-IN")}.` : "Price in INR with GST invoice.",
+    "Delivery across India from Hyderabad. Request a quote.",
+    body,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .slice(0, 158);
   const images = p.image ? [{ url: p.image }] : undefined;
 
   return {
