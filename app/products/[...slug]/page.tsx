@@ -92,7 +92,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   ]
     .filter(Boolean)
     .join(" ")
-    .slice(0, 158);
+    .replace(/^(.{0,155})\s.*$/s, "$1");
   const images = p.image ? [{ url: p.image }] : undefined;
 
   return {
