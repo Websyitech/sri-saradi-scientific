@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/app/lib/prisma";
 import { ARTICLES } from "@/app/guides/articles";
+import { PAGES as FILTER_PAGES } from "@/app/filters/data";
 
 export async function GET() {
   try {
@@ -31,6 +32,8 @@ export async function GET() {
       { path: "/solarbio", priority: "0.9" },
       { path: "/guides", priority: "0.7" },
       ...ARTICLES.map((a) => ({ path: `/guides/${a.slug}`, priority: "0.7" })),
+      { path: "/filters", priority: "0.8" },
+      ...FILTER_PAGES.map((p) => ({ path: `/filters/${p.slug}`, priority: "0.8" })),
       { path: "/omni-search", priority: "0.8" },
       { path: "/services", priority: "0.8" },
       { path: "/lab-consumables", priority: "0.7" },
