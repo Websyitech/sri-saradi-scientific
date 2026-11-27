@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-const title = "Publications Citing Our Products | Sri Saradi Scientific";
-const description = "Research papers from Indian labs that used reagents, antibodies and kits supplied by Sri Saradi Scientific, Hyderabad.";
+const title = "Research Publications | Sri Saradi Scientific";
+const description = "Research papers and publications in life sciences, listed by Sri Saradi Scientific, Hyderabad, supplier of reagents, antibodies and kits in India.";
 
 export const metadata: Metadata = {
   title,
