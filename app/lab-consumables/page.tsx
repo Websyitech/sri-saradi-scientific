@@ -307,8 +307,9 @@ export default function LabConsumablesPage() {
 
         {/* Main Content */}
         <div style={{ flex: 1, minWidth: 0 }}>
+          <h1 style={{ fontSize: "14px", fontWeight: 700, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 6px 0" }}>Lab Consumables</h1>
           {/* Category Title */}
-          <h1
+          <h2
             style={{
               fontSize: "32px",
               fontWeight: 800,
@@ -317,7 +318,7 @@ export default function LabConsumablesPage() {
             }}
           >
             {cleanText(currentCategory?.title)}
-          </h1>
+          </h2>
 
           {/* Category Description */}
           <p

@@ -40,6 +40,7 @@ export default function CataloguesPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
+          <h1 style={{ fontSize: "32px", fontWeight: 700, marginBottom: "12px" }}>Product Catalogues</h1>
           <div className="animate-spin w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full mx-auto mb-4"></div>
           <p className="text-gray-600">Loading catalogues...</p>
         </div>

@@ -31,7 +31,12 @@ export default function SignalingPathwaysPage() {
   }, []);
 
   if (loading) {
-    return <div style={{ padding: "40px", textAlign: "center" }}>Loading...</div>;
+    return (
+      <div style={{ padding: "40px", textAlign: "center" }}>
+        <h1 style={{ fontSize: "32px", fontWeight: 800, margin: "0 0 12px" }}>Signaling Pathways</h1>
+        Loading...
+      </div>
+    );
   }
 
   return (

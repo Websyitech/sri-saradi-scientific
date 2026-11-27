@@ -3,11 +3,11 @@ import HomeRedesign from "./components/home-redesign/HomeRedesign";
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
-  title: 'Sri Saradi Scientific | From scientific need to global supply',
-  description: 'Scientist-led product sourcing, evidence support and integrated worldwide logistics for laboratories, industries and dealers.',
+  title: 'Solarbio Reagents & Lab Filters in India | Sri Saradi Scientific',
+  description: 'Solarbio antibodies, ELISA kits and reagents plus Orient Filtr lab filters, supplied across India from Hyderabad. INR quotes with GST invoice.',
   openGraph: {
-    title: 'Sri Saradi Scientific | From scientific need to global supply',
-    description: 'Scientist-led product sourcing, evidence support and integrated worldwide logistics for laboratories, industries and dealers.',
+    title: 'Solarbio Reagents & Lab Filters in India | Sri Saradi Scientific',
+    description: 'Solarbio antibodies, ELISA kits and reagents plus Orient Filtr lab filters, supplied across India from Hyderabad. INR quotes with GST invoice.',
     url: 'https://srisaradiscientific.com',
     siteName: 'Sri Saradi Scientific',
     images: [

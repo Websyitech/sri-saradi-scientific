@@ -169,7 +169,7 @@ const DISPLAY_FORMATTING_RULES = [
   
   // Antibody-specific patterns
   {
-    pattern: /\banti[\s-]?([A-Z][a-z]*\d*)/gi,
+    pattern: /\banti[\s-]?(?!bod(?:y|ies)\b)([A-Z][a-z]*\d*)/gi,
     replacement: 'Anti-$1',
     description: 'Antibody naming (anti-beta → Anti-β)'
   },
